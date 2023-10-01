@@ -52,12 +52,12 @@ function save(newItem, toAdd) {
 
     let deleteButton = document.createElement("button");
 
-    deleteButton.className = "btn-danger btn btn-sm float-right delete";
+    deleteButton.className = "btn-danger btn btn-sm float-right delete opacity";
     deleteButton.appendChild(document.createTextNode("Delete"));
 
     let editButton = document.createElement("button");
 
-    editButton.className = "btn-success btn btn-sm float-right edit";
+    editButton.className = "btn-success btn btn-sm float-right edit opacity";
     editButton.appendChild(document.createTextNode("Edit"));
 
     li.appendChild(document.createTextNode(newItem));
