@@ -58,6 +58,7 @@ function addItem(e) {
 			"btn-success btn btn-sm float-right edit";
 
 	editButton.appendChild(document.createTextNode("Edit"));
+	editButton.style.marginRight = "8px"; //its Actually Adjustable.
 
 	li.appendChild(document.createTextNode(newItem));
 	li.appendChild(deleteButton);
