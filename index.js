@@ -1,9 +1,20 @@
+
 function markAsComplete(e) {
     const li = e.target.parentElement;
     li.classList.toggle("completed");
 }
 
+function tasksCheck() {
+    // This function checks if ul contains children or not. According to that it add or removes hidden class
+    const tasksHeading = document.getElementById("heading-tasks");
+    const ulElement = document.querySelector("#items");
+    const children = ulElement.children;
 
+
+    if (children.length === 0) tasksHeading.classList.toggle("hidden")
+}
+
+document.addEventListener("DOMContentLoaded", tasksCheck);
 
 window.onload = () => {
     const form1 = document.querySelector("#addForm");
@@ -34,7 +45,7 @@ function addItem(e) {
         editItem = null;  // Reset editItem after editing
         return false;
     }
-
+    tasksCheck()
     const newItem = document.getElementById("item").value;
     if (newItem.trim() === "") return false;
     else document.getElementById("item").value = "";
@@ -73,6 +84,7 @@ function handleItemClick(e) {
     if (e.target.classList.contains("delete")) {
         const li = e.target.parentElement;
         li.parentElement.removeChild(li);
+        tasksCheck()
         displaySuccessMessage("Text deleted successfully");
     }
     if (e.target.classList.contains("edit")) {

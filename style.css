@@ -143,3 +143,7 @@ h3 {
     margin-left: 10px;
     margin-right: 5px;
 }
+
+.hidden {
+    display: none;
+}
