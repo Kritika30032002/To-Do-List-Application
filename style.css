@@ -20,6 +20,10 @@ body.dark-mode {
     background: #232323; 
     color: #fff; 
 }
+body.dark-mode .list-group-item {
+    background: #131313;
+    color: #fff;
+}
 .container-xl {
     position: relative;
     width: 100%;
