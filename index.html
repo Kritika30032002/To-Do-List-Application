@@ -1,30 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-	<link rel="stylesheet" href="style.css">
-	<script src="index.js"></script>
-
-	<title>To Do List</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <script src="index.js"></script>
+    <title>To Do List</title>
 </head>
-
 <body>
-	<div class="container-xl">
-		<header class="text-white p-5">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-12 col-md-12 col-sm-12 text-center">
-
-						<font size="11" color="white">
-							<strong>ToDo List</strong>
-						</font>
-						<svg id="toggleIcon" class="svg-img" xmlns="http://www.w3.org/2000/svg" version="1.0" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet">
+    <div class="container-xl">
+        <header class="text-white p-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                        <font size="11" color="white">
+                            <strong>ToDo List</strong>
+                        </font>
+                        <svg id="toggleIcon" class="svg-img" xmlns="http://www.w3.org/2000/svg" version="1.0" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet">
 
 							<g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill="currentcolor" stroke="none">
 							<path d="M495 5101 c-47 -22 -89 -64 -104 -104 -15 -40 -15 -4834 0 -4874 15 -40 57 -82 104 -104 39 -18 115 -19 2065 -19 1950 0 2026 1 2065 19 47 22 89 64 104 104 15 40 15 4834 0 4874 -15 40 -57 82 -104 104 -39 18 -115 19 -2065 19 -1950 0 -2026 -1 -2065 -19z m3855 -2541 l0 -2170 -1790 0 -1790 0 0 2170 0 2170 1790 0 1790 0 0 -2170z"/>
@@ -35,34 +29,120 @@
 							<path d="M1330 1610 l0 -360 360 0 360 0 -2 358 -3 357 -357 3 -358 2 0 -360z"/>
 							<path d="M2200 1610 l0 -200 825 0 825 0 -2 198 -3 197 -822 3 -823 2 0 -200z"/>
 							</g>
-							</svg>
-						<input type="checkbox" id="modeToggle">
-					</div>
-				</div>
-			</div>
-		</header>
+						</svg>
+                        <input type="checkbox" id="modeToggle">
+                    </div>
+                </div>
+            </div>
+        </header>
 
-		<div class="container main mt-3">
-			<h2 class="text-center mb-4">Add Items</h2>
 
-			<label id="lblsuccess" class="text-success" style="display: none;"></label>
+        <div class="container main mt-3">
+            <h2 class="text-center mb-4">Add Items</h2>
 
-			<form id="addForm" class="main_form">
-				<input type="text" onkeyup="toggleButton(this, 'submit')" id="item" placeholder="Write your task here">
+            <label id="lblsuccess" class="text-success" style="display: none;"></label>
 
-				<input type="submit" class="form_btn" id="submit" value="Submit" disabled />
-			</form>
 
-			<div class="text-center">
-				<h3 class="mt-4 text-center" id="heading-tasks">Tasks</h3>
 
-				<form id="addForm">
-					<ul class="list-group" id="items"></ul>
-				</form>
-			</div>
+            <form id="addForm" class="main_form">
+                <input type="text" onkeyup="toggleButton(this, 'submit')" id="item" placeholder="Write your task here">
+                <input type="submit" class="form_btn" id="submit" value="Submit" disabled />
+            </form>
+            <div class="text-center">
+                <h3 class="mt-4 text-center" id="heading-tasks">Tasks</h3>
 
-		</div>
-	</div>
+                <form id="taskForm">
+                    <ul class="list-group" id="items"></ul>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Function to save tasks to local storage
+        function saveTasksToLocalStorage() {
+            const tasks = document.querySelectorAll(".list-group-item");
+            const tasksArray = [];
+
+            tasks.forEach((task) => {
+                const taskText = task.childNodes[1].textContent;
+                const isCompleted = task.classList.contains("completed");
+                const taskObj = { text: taskText, completed: isCompleted };
+                tasksArray.push(taskObj);
+            });
+
+            localStorage.setItem("tasks", JSON.stringify(tasksArray));
+        }
+
+        // Function to retrieve tasks from local storage and display them
+        function loadTasksFromLocalStorage() {
+            const tasks = JSON.parse(localStorage.getItem("tasks"));
+
+            if (tasks) {
+                tasks.forEach((task) => {
+                    const li = document.createElement("li");
+                    li.className = "list-group-item";
+
+                    const completeCheckbox = document.createElement("input");
+                    completeCheckbox.type = "checkbox";
+                    completeCheckbox.className = "form-check-input";
+                    completeCheckbox.checked = task.completed;
+                    completeCheckbox.addEventListener("change", markAsComplete);
+
+
+
+                    const deleteButton = document.createElement("button");
+                    deleteButton.className = "btn btn-danger btn-sm float-right delete";
+                    deleteButton.appendChild(document.createTextNode("Delete"));
+
+                    const editButton = document.createElement("button");
+                    editButton.className = "btn btn-success btn-sm float-right edit";
+                    editButton.appendChild(document.createTextNode("Edit"));
+                    editButton.style.marginRight = "8px";
+
+                    // Create a click event listener for the edit button
+                    editButton.addEventListener("click", function (e) {
+                        handleEditClick(e);
+                    });
+
+                    const dateTimeParagraph = document.createElement("p");
+                    dateTimeParagraph.className = "text-muted";
+                    dateTimeParagraph.style.fontSize = "15px";
+                    dateTimeParagraph.style.margin = "0 19px";
+                    dateTimeParagraph.appendChild(document.createTextNode("Created: " + new Date().toLocaleString()));
+
+                    li.appendChild(completeCheckbox);
+                    li.appendChild(document.createTextNode(task.text));
+                    li.appendChild(deleteButton);
+                    li.appendChild(editButton);
+                    li.appendChild(dateTimeParagraph);
+
+                    items.appendChild(li);
+                });
+            }
+        }
+
+        // Event listener for saving tasks to local storage on form submit
+        const form1 = document.querySelector("#addForm");
+        form1.addEventListener("submit", (e) => {
+            addItem(e);
+            saveTasksToLocalStorage();
+        });
+
+        // Event listener for loading tasks from local storage on DOMContentLoaded
+        document.addEventListener("DOMContentLoaded", () => {
+            tasksCheck();
+            loadTasksFromLocalStorage();
+        });
+
+        // Event listener for deleting tasks and saving to local storage
+        const items = document.getElementById("items");
+        items.addEventListener("click", (e) => {
+            handleItemClick(e);
+            saveTasksToLocalStorage();
+        });
+
+        // Rest of your existing code
+
+    </script>
 </body>
-
 </html>
