@@ -163,6 +163,13 @@ h3 {
     height: 40px;
 } 
 
+#dueDate{
+    border-radius: 50px;
+    text-align: center;
+    width: 140px;
+    height: 40px;
+} 
+
 .hidden {
     display: none;
 }
@@ -198,4 +205,9 @@ input[type="checkbox"] {
   
   input[type="checkbox"]:checked {
     background: rgb(11, 11, 11);
+  }
+
+  .svg-img{
+    height:70px; 
+    margin-bottom:20px;
   }
