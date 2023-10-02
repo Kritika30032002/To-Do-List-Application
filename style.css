@@ -10,7 +10,7 @@ body {
     position: relative;
     width: 100%;
 /*     background: linear-gradient(to right, rgba(126, 64, 246, 1), rgba(80, 139, 252, 1)); */
-    background:black;
+    background-color:black;
 }
 
 .container-xl {
