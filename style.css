@@ -157,7 +157,13 @@ h3 {
     text-align: center;
     width: 140px;
     height: 40px;
-} 
+}
+
+#taskTypeDropdown{
+    border: none;
+    border-radius: 100px;
+    text-align: center;
+}
 
 .hidden {
     display: none;
