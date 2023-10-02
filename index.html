@@ -25,16 +25,18 @@
             </div>
         </header>
 
+
         <div class="container main mt-3">
             <h2 class="text-center mb-4">Add Items</h2>
 
             <label id="lblsuccess" class="text-success" style="display: none;"></label>
 
+
+
             <form id="addForm" class="main_form">
                 <input type="text" onkeyup="toggleButton(this, 'submit')" id="item" placeholder="Write your task here">
                 <input type="submit" class="form_btn" id="submit" value="Submit" disabled />
             </form>
-
             <div class="text-center">
                 <h3 class="mt-4 text-center" id="heading-tasks">Tasks</h3>
 
@@ -74,6 +76,8 @@
                     completeCheckbox.className = "form-check-input";
                     completeCheckbox.checked = task.completed;
                     completeCheckbox.addEventListener("change", markAsComplete);
+
+
 
                     const deleteButton = document.createElement("button");
                     deleteButton.className = "btn btn-danger btn-sm float-right delete";
