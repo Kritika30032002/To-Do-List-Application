@@ -1,3 +1,4 @@
+
 function markAsComplete(e) {
     const li = e.target.parentElement;
     li.classList.toggle("completed");
@@ -20,6 +21,32 @@ window.onload = () => {
         checkbox.addEventListener("change", markAsComplete);
     });
 };
+
+
+function filterTodo(e) {
+    const todos = todoList.childNodes;
+    todos.forEach(function(todo) {
+        switch(e.target.value) {
+            case "all": 
+                todo.style.display = "flex";
+                break;
+            case "completed": 
+                if(todo.classList.contains("completed")) {
+                    todo.style.display = "flex";
+                } else {
+                    todo.style.display = "none";
+                }
+                break;
+            case "incomplete":
+                if(!todo.classList.contains("completed")) {
+                    todo.style.display = "flex";
+                } else {
+                    todo.style.display = "none";
+                }
+                break;
+        }
+    });
+}
 
 let editItem = null;
 function addItem(e) {

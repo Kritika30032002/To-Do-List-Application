@@ -39,6 +39,13 @@
 				<input type="text" onkeyup="toggleButton(this, 'submit')" id="item" placeholder="Write your task here">
 
 				<input type="submit" class="form_btn" id="submit" value="Submit" disabled />
+				<div class="select">
+					<select name="todos" class="filter-todo">
+						<option value="all">All</option>
+						<option value="completed">Completed</option>
+						<option value="incomplete">Incomplete</option>
+					</select>
+				</div>
 			</form>
 
 			<div class="text-center">
