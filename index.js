@@ -169,6 +169,24 @@ function displaySuccessMessage(message) {
 
 
 
+function toggleMode() {
+    const body = document.body;
+    const svgIcon = document.getElementById('toggleIcon'); // Select the SVG element
+
+    if (body.classList.contains('light-mode')) {
+        body.classList.remove('light-mode');
+        body.classList.add('dark-mode');
+        svgIcon.querySelectorAll('path').forEach(path => {
+            path.style.fill = '#fff'; // Change the fill color to white for dark mode
+        });
+    } else {
+        body.classList.remove('dark-mode');
+        body.classList.add('light-mode');
+        svgIcon.querySelectorAll('path').forEach(path => {
+            path.style.fill = '#000'; // Change the fill color to black for light mode
+        });
+    }
+}
 //added local storage functionallity
 
 // Function to save tasks to local storage
@@ -249,3 +267,25 @@ items.addEventListener("click", (e) => {
     handleItemClick(e);
     saveTasksToLocalStorage();
 });
+
+
+
+
+function toggleMode() {
+    const body = document.body;
+    const svgIcon = document.getElementById('toggleIcon'); // Select the SVG element
+
+    if (body.classList.contains('light-mode')) {
+        body.classList.remove('light-mode');
+        body.classList.add('dark-mode');
+        svgIcon.querySelectorAll('path').forEach(path => {
+            path.style.fill = '#fff'; // Change the fill color to white for dark mode
+        });
+    } else {
+        body.classList.remove('dark-mode');
+        body.classList.add('light-mode');
+        svgIcon.querySelectorAll('path').forEach(path => {
+            path.style.fill = '#000'; // Change the fill color to black for light mode
+        });
+    }
+}

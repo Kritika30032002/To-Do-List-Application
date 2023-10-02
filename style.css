@@ -20,6 +20,10 @@ body.dark-mode {
     background: #232323; 
     color: #fff; 
 }
+body.dark-mode .list-group-item {
+    background: #131313;
+    color: #fff;
+}
 .container-xl {
     position: relative;
     width: 100%;
@@ -165,6 +169,13 @@ h3 {
     text-align: center;
 }
 
+#dueDate{
+    border-radius: 50px;
+    text-align: center;
+    width: 140px;
+    height: 40px;
+} 
+
 .hidden {
     display: none;
 }
@@ -200,4 +211,9 @@ input[type="checkbox"] {
   
   input[type="checkbox"]:checked {
     background: rgb(11, 11, 11);
+  }
+
+  .svg-img{
+    height:70px; 
+    margin-bottom:20px;
   }
