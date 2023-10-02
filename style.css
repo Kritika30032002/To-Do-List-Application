@@ -159,6 +159,13 @@ h3 {
     height: 40px;
 } 
 
+#dueDate{
+    border-radius: 50px;
+    text-align: center;
+    width: 140px;
+    height: 40px;
+} 
+
 .hidden {
     display: none;
 }
