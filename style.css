@@ -147,3 +147,10 @@ h3 {
 .hidden {
     display: none;
 }
+
+#dueDate{
+    border-radius: 50px;
+    text-align: center;
+    width: 140px;
+    height: 40px;
+} 
