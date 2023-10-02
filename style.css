@@ -11,7 +11,15 @@ body {
     width: 100%;
     background: linear-gradient(to right, rgba(126, 64, 246, 1), rgba(80, 139, 252, 1));
 }
-
+body.light-mode {
+    background: linear-gradient(to right, rgba(126, 64, 246, 1), rgba(80, 139, 252, 1));
+    color: #fff;
+}
+/* Dark mode styles */
+body.dark-mode {
+    background: #232323; 
+    color: #fff; 
+}
 .container-xl {
     position: relative;
     width: 100%;
@@ -147,3 +155,36 @@ h3 {
 .hidden {
     display: none;
 }
+input[type="checkbox"] {
+    position: relative;
+    width: 80px;
+    height: 40px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: black;
+    outline: none;
+    border-radius: 2rem;
+    cursor: pointer;
+    box-shadow: inset 0 0 5px rgb(0 0 0 / 50%);
+  }
+  
+  input[type="checkbox"]::before {
+    content: "";
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: 0.5s;
+  }
+  
+  input[type="checkbox"]:checked::before {
+    transform: translateX(100%);
+    background: #fff;
+  }
+  
+  input[type="checkbox"]:checked {
+    background: linear-gradient(to right, rgba(126, 64, 246, 1), rgba(80, 139, 252, 1));
+  }
