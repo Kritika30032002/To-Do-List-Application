@@ -17,6 +17,11 @@ function tasksCheck() {
 document.addEventListener("DOMContentLoaded", tasksCheck);
 
 window.onload = () => {
+    const dueDateInput = document.getElementById("dueDate");
+    flatpickr(dueDateInput, {
+        enableTime: false, // If you want to enable time selection as well
+        dateFormat: "Y-m-d", // Adjust the date format as needed
+    });
     const form1 = document.querySelector("#addForm");
     const items = document.getElementById("items");
     const submit = document.getElementById("submit");
@@ -59,6 +64,7 @@ function addItem(e) {
     }
     tasksCheck()
     const newItem = document.getElementById("item").value;
+    const dueDate = document.getElementById("dueDate").value;
     if (newItem.trim() === "") return false;
     else document.getElementById("item").value = "";
 
@@ -94,13 +100,28 @@ function addItem(e) {
     dateTimeParagraph.style.margin = "0 19px"; // Set margin
     dateTimeParagraph.appendChild(document.createTextNode("Created: " + creationDateTime));
 
+    // Create a paragraph element for the due date
+    const dueDateParagraph = document.createElement("p");
+    dueDateParagraph.className = "text-muted";
+    dueDateParagraph.style.fontSize = "15px";
+    dueDateParagraph.style.margin = "0 19px";
+    dueDateParagraph.appendChild(document.createTextNode("Due Date: "));
+
+    const dueDateSpan = document.createElement("span");
+    dueDateSpan.id = "dueDateSpan"; // You can add an ID to reference it later
+    dueDateSpan.style.fontWeight = "bold"; // Customize the styling as needed
+    dueDateParagraph.appendChild(document.createTextNode(dueDate));
+    dueDateParagraph.appendChild(dueDateSpan);
+
     li.appendChild(completeCheckbox);
     li.appendChild(document.createTextNode(newItem));
     li.appendChild(deleteButton);
     li.appendChild(editButton);
     li.appendChild(dateTimeParagraph);
+    li.appendChild(dueDateParagraph);
 
     items.appendChild(li);
+    document.getElementById("dueDate").value = "";
 }
 
 
@@ -114,6 +135,7 @@ function handleItemClick(e) {
     if (e.target.classList.contains("edit")) {
         e.preventDefault();
         document.getElementById("item").value = e.target.parentElement.childNodes[1].textContent.trim();
+        document.getElementById("dueDateSpan").textContent = document.getElementById("dueDate").value;
         submit.value = "EDIT";
         editItem = e;
     }
