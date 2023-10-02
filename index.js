@@ -24,7 +24,8 @@ window.onload = () => {
 
     form1.addEventListener("submit", addItem);
     items.addEventListener("click", handleItemClick);
-
+    const modeToggleBtn = document.getElementById('modeToggle');
+    modeToggleBtn.addEventListener('click', toggleMode);
     // Add event listener for checkboxes
     const checkboxes = document.querySelectorAll(".form-check-input");
     checkboxes.forEach(checkbox => {
@@ -32,6 +33,16 @@ window.onload = () => {
     });
 };
 
+function toggleMode() {
+    const body = document.body;
+    if (body.classList.contains('light-mode')) {
+        body.classList.remove('light-mode');
+        body.classList.add('dark-mode');
+    } else {
+        body.classList.remove('dark-mode');
+        body.classList.add('light-mode');
+    }
+}
 let editItem = null;
 
 function addItem(e) {
