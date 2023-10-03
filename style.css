@@ -13,6 +13,12 @@ body {
     background-color:black;
 }
 
+h1{
+    font-size: 32;
+    color: white;
+    font-weight: 700;
+    font-family: 'Montserrat';
+}
 .container-xl {
     position: relative;
     width: 100%;
@@ -25,7 +31,7 @@ body {
     height: 100%;
     text-align: center;
     padding: 2rem;
-    background: rgba(0, 0, 0, 0.2);
+    background: linear-gradient(to right, rgba(126, 64, 246, 1), rgba(80, 139, 252, 1));
     border-radius: 2em;
     backdrop-filter: blur(25px);
     border: 10px solid rgba(255, 255, 255, 0.05);
@@ -72,16 +78,18 @@ body {
     color: #fff;
     letter-spacing: .11rem;
     border: none;
-    background: linear-gradient(to right, rgba(126, 64, 246, 1), rgba(80, 139, 252, 1));
+    /* background: linear-gradient(to right, rgba(126, 64, 246, 1), rgba(80, 139, 252, 1)); */
     padding: .6rem 2rem;
+    background-color: black;
     border-radius: 5rem;
     cursor: pointer;
+    transition: 0.5s;
 }
 
 .form_btn:hover{
-    opacity:.8;
-    outline: auto;
-    border:3px solid rebeccapurple;
+    opacity: 0.8;
+    transition: 0.5s;
+    border:none
 }
 
 .opacity{
@@ -98,9 +106,11 @@ body {
 
 .main h2,
 h3 {
-    width: 12rem;
+    width: 15rem;
     margin: auto;
-    border-bottom: 2px solid #ffffff;
+    font-family: 'Montserrat';
+    font-weight: 700;
+    border-bottom: 2px solid black;
 }
 
 @media screen and (max-width:415px) {
