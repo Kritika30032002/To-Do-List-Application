@@ -1,3 +1,10 @@
+function DefaultDate(){
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = today.getMonth() + 1;
+    const day = today.getDate();
+    return `${year}-${month}-${day}`
+}
 
 function markAsComplete(e) {
     const li = e.target.parentElement;
@@ -64,6 +71,9 @@ function addItem(e) {
     }
     tasksCheck()
     const newItem = document.getElementById("item").value;
+    if (!document.getElementById("dueDate").value){
+        document.getElementById("dueDate").value = DefaultDate();
+    }
     const dueDate = document.getElementById("dueDate").value;
     if (newItem.trim() === "") return false;
     else document.getElementById("item").value = "";
