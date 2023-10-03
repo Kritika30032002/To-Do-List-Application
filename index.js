@@ -81,9 +81,10 @@ function addItem(e) {
     const li = document.createElement("li");
     li.className = "list-group-item";
 
+    dispatchEvent.className = "form-check"
     const completeCheckbox = document.createElement("input");
     completeCheckbox.type = "checkbox";
-    completeCheckbox.className = "form-check-input";
+    completeCheckbox.className = "form-check-input task-completed";
     completeCheckbox.addEventListener("change", markAsComplete);
 
     const deleteButton = document.createElement("button");
