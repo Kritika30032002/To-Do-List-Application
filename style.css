@@ -228,3 +228,10 @@ input[type="checkbox"]:checked::before {
 input[type="checkbox"]:checked {
   background: rgb(11, 11, 11);
 }
+
+#taskTypeDropdown{
+    border: none;
+    border-radius: 100px;
+    text-align: center;
+}
+

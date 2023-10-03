@@ -135,6 +135,7 @@ function addItem(e) {
 
     items.appendChild(li);
     document.getElementById("dueDate").value = "";
+    document.getElementById("taskTypeDropdown").selectedIndex = 0;
 }
 
 
