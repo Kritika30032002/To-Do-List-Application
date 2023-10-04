@@ -6,6 +6,8 @@ const taskSchema = new mongoose.Schema({
 //   completed: Boolean,
   dueDate: String,
   email:String,
+
+  category : String
   // You can also associate tasks with users if needed
   // user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
 });

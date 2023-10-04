@@ -137,12 +137,13 @@ const Task = require('../model/taskModel');
 
 router.post('/create', async (req, res) => {
     try {
-      const { text, dueDate } = req.body;
+      const { text, dueDate , category } = req.body;
       const email = req.query.email; 
   console.log(email);
       const newTask = new Task({
         text,
         dueDate,
+        category,
         email,
       });
   
@@ -179,14 +180,14 @@ router.get('/alltasks', async (req, res) => {
 
 
 router.put('/update/:taskId', async (req, res) => {
-  const { text, dueDate} = req.body;
+  const { text, dueDate ,category} = req.body;
   const email = req.query.email;
   const taskId = req.params.taskId;
 
   try {
     const updatedTask = await Task.findByIdAndUpdate(
       taskId,
-      { text, dueDate,email },
+      { text, dueDate,email,category },
       { new: true }
     );
 
