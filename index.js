@@ -1,3 +1,10 @@
+function DefaultDate(){
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = today.getMonth() + 1;
+    const day = today.getDate();
+    return `${year}-${month}-${day}`
+}
 
 function markAsComplete(e) {
     const li = e.target.parentElement;
@@ -64,6 +71,9 @@ function addItem(e) {
     }
     tasksCheck()
     const newItem = document.getElementById("item").value;
+    if (!document.getElementById("dueDate").value){
+        document.getElementById("dueDate").value = DefaultDate();
+    }
     const dueDate = document.getElementById("dueDate").value;
     const taskTypeDropdown = document.getElementById("taskTypeDropdown");
     const selectedIndex = taskTypeDropdown.selectedIndex;
@@ -75,9 +85,10 @@ function addItem(e) {
     const li = document.createElement("li");
     li.className = "list-group-item";
 
+    dispatchEvent.className = "form-check"
     const completeCheckbox = document.createElement("input");
     completeCheckbox.type = "checkbox";
-    completeCheckbox.className = "form-check-input";
+    completeCheckbox.className = "form-check-input task-completed";
     completeCheckbox.addEventListener("change", markAsComplete);
 
     const deleteButton = document.createElement("button");

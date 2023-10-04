@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap");
+/* App.css */
 
 * {
   margin: 0;
@@ -15,6 +15,7 @@ body {
     rgba(80, 139, 252, 1)
   );
 }
+
 body.light-mode {
   background: linear-gradient(
     to right,
@@ -22,19 +23,18 @@ body.light-mode {
     rgba(80, 139, 252, 1)
   );
 }
+
 /* Dark mode styles */
 body.dark-mode {
   background: #232323;
   color: #fff;
 }
+
 body.dark-mode .list-group-item {
   background: #131313;
   color: #fff;
 }
-body.dark-mode .list-group-item {
-    background: #131313;
-    color: #fff;
-}
+
 .container-xl {
   position: relative;
   width: 100%;
@@ -181,16 +181,10 @@ h3 {
   height: 40px;
 }
 
-#dueDate{
-    border-radius: 50px;
-    text-align: center;
-    width: 140px;
-    height: 40px;
-} 
-
 .hidden {
   display: none;
 }
+
 input[type="checkbox"]:not(.task-completed) {
   position: relative;
   width: 80px;
@@ -228,10 +222,3 @@ input[type="checkbox"]:not(.task-completed):checked::before {
 input[type="checkbox"]:not(.task-completed):checked {
   background: rgb(11, 11, 11);
 }
-
-#taskTypeDropdown{
-    border: none;
-    border-radius: 100px;
-    text-align: center;
-}
-
