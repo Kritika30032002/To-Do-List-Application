@@ -197,11 +197,7 @@ input[type="checkbox"]:not(.task-completed) {
   height: 40px;
   -webkit-appearance: none;
   appearance: none;
-  background: linear-gradient(
-    to right,
-    rgba(126, 64, 246, 1),
-    rgba(80, 139, 252, 1)
-  );
+  background: #000;
   outline: none;
   border-radius: 2rem;
   cursor: pointer;
@@ -226,8 +222,13 @@ input[type="checkbox"]:not(.task-completed):checked::before {
 }
 
 input[type="checkbox"]:not(.task-completed):checked {
-  background: rgb(11, 11, 11);
+    background: linear-gradient(
+        to right,
+        rgba(126, 64, 246, 1),
+        rgba(80, 139, 252, 1)
+      );
 }
+
 @media screen and (max-width: 768px) {
   .mode-toggle {
       margin-left: 20px; 
@@ -271,3 +272,4 @@ input[type="checkbox"]:not(.task-completed):checked {
       width: auto; 
   }
 }
+
