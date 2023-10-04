@@ -32,15 +32,9 @@
                 alt=""
                 style="height: 70px; margin-bottom: 20px"
               />
-              <font size="11" color="white">
-                <strong style="margin-left: 350px">ToDo List</strong>
-              </font>
+              <h1>To Do</h1>
 
-              <input
-                type="checkbox"
-                id="modeToggle"
-                style="margin-left: 300px"
-              />
+              <input type="checkbox" id="modeToggle" class="mode-toggle">
             </div>
           </div>
         </div>
@@ -57,20 +51,20 @@
 
         <form id="addForm" class="main_form">
           <input
-            type="text"
-            onkeyup="toggleButton(this, 'submit')"
-            id="item"
-            placeholder="Write your task here"
+              type="text"
+              onkeyup="toggleButton(this, 'submit')"
+              id="item"
+              placeholder="Write your task here"
           />
           <input type="text" id="dueDate" placeholder="Due Date" />
           <input
-            type="submit"
-            class="form_btn"
-            id="submit"
-            value="Submit"
-            disabled
+              type="submit"
+              class="form_btn"
+              id="submit"
+              value="Submit"
+              disabled
           />
-        </form>
+      </form>
 
         <div class="text-center">
           <h3 class="mt-4 text-center" id="heading-tasks">Tasks</h3>

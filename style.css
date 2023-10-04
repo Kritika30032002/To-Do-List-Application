@@ -228,3 +228,46 @@ input[type="checkbox"]:not(.task-completed):checked::before {
 input[type="checkbox"]:not(.task-completed):checked {
   background: rgb(11, 11, 11);
 }
+@media screen and (max-width: 768px) {
+  .mode-toggle {
+      margin-left: 20px; 
+  }
+}
+@media screen and (max-width: 768px) {
+  .form_btn {
+      font-size: 1rem; 
+      padding: 0.8rem 2rem; 
+  }
+}
+@media screen and (max-width: 768px) {
+  .main_form {
+      flex-direction: column; 
+  }
+  
+  .main_form input[type="text"] {
+      width: 100%; 
+      margin-bottom: 10px; 
+  }
+  
+  .form_btn {
+      font-size: 1rem; 
+      padding: 0.5rem 1rem; 
+      width: auto; 
+  }
+}
+@media screen and (max-width: 768px) {
+  .main_form {
+      flex-direction: column; /* Stack form elements vertically */
+  }
+  
+  .main_form input[type="text"] {
+      width: 100%; /* Full width for text inputs */
+      margin-bottom: 10px; /* Add spacing between inputs */
+  }
+  
+  .form_btn {
+      font-size: 1rem;
+      padding: 0.5rem 1rem; 
+      width: auto; 
+  }
+}
