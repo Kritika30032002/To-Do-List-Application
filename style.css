@@ -74,6 +74,8 @@ body.dark-mode .list-group-item {
   text-align: left;
   margin-right: 20px;
   border-radius: 5rem !important;
+  word-break: break-all;
+  word-wrap: break-word;
 }
 
 .list-group-item button {
