@@ -1,318 +1,305 @@
-function DefaultDate(){
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = today.getMonth() + 1;
-    const day = today.getDate();
-    return `${year}-${month}-${day}`
+// Function to get the current date in the format "YYYY-MM-DD"
+function DefaultDate() {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = today.getMonth() + 1;
+  const day = today.getDate();
+  return `${year}-${month}-${day}`;
 }
 
+// Function to toggle the "completed" class of a task
 function markAsComplete(e) {
-    const li = e.target.parentElement;
-    li.classList.toggle("completed");
+  const li = e.target.parentElement;
+  li.classList.toggle("completed");
 }
 
+// Function to check if there are tasks and toggle the "hidden" class of the heading
 function tasksCheck() {
-    // This function checks if ul contains children or not. According to that it add or removes hidden class
-    const tasksHeading = document.getElementById("heading-tasks");
-    const ulElement = document.getElementById("items");
-    const children = ulElement.children;
+  const tasksHeading = document.getElementById("heading-tasks");
+  const ulElement = document.getElementById("items");
+  const children = ulElement.children;
 
-
-    if (children.length === 0) tasksHeading.classList.toggle("hidden")
+  if (children.length === 0) {
+    tasksHeading.classList.toggle("hidden");
+  }
 }
 
+// Event listener for DOMContentLoaded to initially check tasks
 document.addEventListener("DOMContentLoaded", tasksCheck);
 
 window.onload = () => {
-    const dueDateInput = document.getElementById("dueDate");
-    flatpickr(dueDateInput, {
-        enableTime: false, // If you want to enable time selection as well
-        dateFormat: "Y-m-d", // Adjust the date format as needed
-    });
-    const form1 = document.querySelector("#addForm");
-    const items = document.getElementById("items");
-    const submit = document.getElementById("submit");
-    let editItem = null;
+  const dueDateInput = document.getElementById("dueDate");
+  flatpickr(dueDateInput, {
+    enableTime: false, // If you want to enable time selection as well
+    dateFormat: "Y-m-d", // Adjust the date format as needed
+  });
 
-    form1.addEventListener("submit", addItem);
-    items.addEventListener("click", handleItemClick);
-    const modeToggleBtn = document.getElementById('modeToggle');
-    modeToggleBtn.addEventListener('click', toggleMode);
-    // Add event listener for checkboxes
-    const checkboxes = document.querySelectorAll(".form-check-input");
-    checkboxes.forEach(checkbox => {
-        checkbox.addEventListener("change", markAsComplete);
-    });
+  const form1 = document.querySelector("#addForm");
+  const items = document.getElementById("items");
+  const submit = document.getElementById("submit");
+  let editItem = null;
+
+  form1.addEventListener("submit", addItem);
+  items.addEventListener("click", handleItemClick);
+
+  const modeToggleBtn = document.getElementById('modeToggle');
+  modeToggleBtn.addEventListener('click', toggleMode);
+
+  // Add event listener for checkboxes
+  const checkboxes = document.querySelectorAll(".form-check-input");
+  checkboxes.forEach(checkbox => {
+    checkbox.addEventListener("change", markAsComplete);
+  });
 };
 
+// Function to toggle between light and dark mode
 function toggleMode() {
-    const body = document.body;
-    if (body.classList.contains('dark-mode')) {
-        body.classList.remove('dark-mode');
-        body.classList.add('light-mode');
-    } else {
-        body.classList.remove('light-mode');
-        body.classList.add('dark-mode');
-    }
+  const body = document.body;
+  const svgIcon = document.getElementById('toggleIcon'); // Select the SVG element
+
+  if (body.classList.contains('light-mode')) {
+    body.classList.remove('light-mode');
+    body.classList.add('dark-mode');
+    svgIcon.querySelectorAll('path').forEach(path => {
+      path.style.fill = '#fff'; // Change the fill color to white for dark mode
+    });
+  } else {
+    body.classList.remove('dark-mode');
+    body.classList.add('light-mode');
+    svgIcon.querySelectorAll('path').forEach(path => {
+      path.style.fill = '#000'; // Change the fill color to black for light mode
+    });
+  }
 }
+
+// Variable to keep track of the item being edited
 let editItem = null;
 
+// Function to add a new task
 function addItem(e) {
-    e.preventDefault();
+  e.preventDefault();
 
-    if (submit.value !== "Submit") {
-        editItem.target.parentElement.childNodes[1].textContent = document.getElementById("item").value;
-        submit.value = "Submit";
-        document.getElementById("item").value = "";
+  if (submit.value !== "Submit") {
+    // Edit mode: update the text of the task
+    editItem.target.parentElement.childNodes[1].textContent = document.getElementById("item").value;
+    submit.value = "Submit";
+    document.getElementById("item").value = "";
 
-        displaySuccessMessage("Text edited successfully");
-        editItem = null;
-        return false;
-    }
-    tasksCheck()
-    const newItem = document.getElementById("item").value;
-    if (!document.getElementById("dueDate").value){
-        document.getElementById("dueDate").value = DefaultDate();
-    }
-    const dueDate = document.getElementById("dueDate").value;
+    displaySuccessMessage("Text edited successfully");
+    editItem = null;
+    return false;
+  }
 
-    // Check if the due date has already passed
-    const currentDate = new Date();
-    const dueDateObj = new Date(dueDate);
+  // Check if a due date is provided, and if not, use the default date
+  if (!document.getElementById("dueDate").value) {
+    document.getElementById("dueDate").value = DefaultDate();
+  }
 
-    const tasksHeading = document.getElementById("heading-tasks");
-    const ulElement = document.getElementById("items");
-    const children = ulElement.children;
+  const newItem = document.getElementById("item").value;
+  const dueDate = document.getElementById("dueDate").value;
 
-    if (dueDateObj < currentDate && children.length === 0) {
-        displayErrorMessage("Due date has already passed");
-        tasksHeading.classList.add("hidden");
-        return false;
-    }else if (dueDateObj < currentDate && children.length > 0){
-        displayErrorMessage("Due date has already passed");
-        return false;
-    }else{
-        tasksHeading.classList.remove("hidden");
-    }
+  // Check if the due date has already passed
+  const currentDate = new Date();
+  const dueDateObj = new Date(dueDate);
 
-    if (newItem.trim() === "") return false;
-    else document.getElementById("item").value = "";
+  const tasksHeading = document.getElementById("heading-tasks");
+  const ulElement = document.getElementById("items");
+  const children = ulElement.children;
 
-    const li = document.createElement("li");
-    li.className = "list-group-item";
+  if (dueDateObj < currentDate && children.length === 0) {
+    displayErrorMessage("Due date has already passed");
+    tasksHeading.classList.add("hidden");
+    return false;
+  } else if (dueDateObj < currentDate && children.length > 0) {
+    displayErrorMessage("Due date has already passed");
+    return false;
+  } else {
+    tasksHeading.classList.remove("hidden");
+  }
 
-    dispatchEvent.className = "form-check"
-    const completeCheckbox = document.createElement("input");
-    completeCheckbox.type = "checkbox";
-    completeCheckbox.className = "form-check-input task-completed";
-    completeCheckbox.addEventListener("change", markAsComplete);
+  if (newItem.trim() === "") return false;
+  else document.getElementById("item").value = "";
 
-    const deleteButton = document.createElement("button");
-    deleteButton.className = "btn btn-danger btn-sm float-right delete";
-    deleteButton.appendChild(document.createTextNode("Delete"));
+  // Create the task list item
+  const li = document.createElement("li");
+  li.className = "list-group-item";
 
-    const editButton = document.createElement("button");
-    editButton.className = "btn btn-success btn-sm float-right edit";
-    editButton.appendChild(document.createTextNode("Edit"));
-    editButton.style.marginRight = "8px";
+  dispatchEvent.className = "form-check";
+  const completeCheckbox = document.createElement("input");
+  completeCheckbox.type = "checkbox";
+  completeCheckbox.className = "form-check-input task-completed";
+  completeCheckbox.addEventListener("change", markAsComplete);
 
-    // Create a click event listener for the edit button
-    editButton.addEventListener("click", function (e) {
-        handleEditClick(e);
-    });
+  const deleteButton = document.createElement("button");
+  deleteButton.className = "btn btn-danger btn-sm float-right delete";
+  deleteButton.appendChild(document.createTextNode("Delete"));
 
-    // Get the current date and time
-    const creationDateTime = new Date().toLocaleString();
+  const editButton = document.createElement("button");
+  editButton.className = "btn btn-success btn-sm float-right edit";
+  editButton.appendChild(document.createTextNode("Edit"));
+  editButton.style.marginRight = "8px";
 
-    // Create a paragraph element to display the creation date and time
-    const dateTimeParagraph = document.createElement("p");
-    dateTimeParagraph.className = "text-muted";
-    dateTimeParagraph.style.fontSize = "15px"; // Set font size
-    dateTimeParagraph.style.margin = "0 19px"; // Set margin
-    dateTimeParagraph.appendChild(document.createTextNode("Created: " + creationDateTime));
+  // Create a click event listener for the edit button
+  editButton.addEventListener("click", function (e) {
+    handleEditClick(e);
+  });
 
-    // Create a paragraph element for the due date
-    const dueDateParagraph = document.createElement("p");
-    dueDateParagraph.className = "text-muted";
-    dueDateParagraph.style.fontSize = "15px";
-    dueDateParagraph.style.margin = "0 19px";
-    dueDateParagraph.appendChild(document.createTextNode("Due Date: "));
+  // Get the current date and time
+  const creationDateTime = new Date().toLocaleString();
 
-    const dueDateSpan = document.createElement("span");
-    dueDateSpan.id = "dueDateSpan"; // You can add an ID to reference it later
-    dueDateSpan.style.fontWeight = "bold"; // Customize the styling as needed
-    dueDateParagraph.appendChild(document.createTextNode(dueDate));
-    dueDateParagraph.appendChild(dueDateSpan);
+  // Create a paragraph element to display the creation date and time
+  const dateTimeParagraph = document.createElement("p");
+  dateTimeParagraph.className = "text-muted";
+  dateTimeParagraph.style.fontSize = "15px"; // Set font size
+  dateTimeParagraph.style.margin = "0 19px"; // Set margin
+  dateTimeParagraph.appendChild(document.createTextNode("Created: " + creationDateTime));
 
-    li.appendChild(completeCheckbox);
-    li.appendChild(document.createTextNode(newItem));
-    li.appendChild(deleteButton);
-    li.appendChild(editButton);
-    li.appendChild(dateTimeParagraph);
-    li.appendChild(dueDateParagraph);
+  // Create a paragraph element for the due date
+  const dueDateParagraph = document.createElement("p");
+  dueDateParagraph.className = "text-muted";
+  dueDateParagraph.style.fontSize = "15px";
+  dueDateParagraph.style.margin = "0 19px";
+  dueDateParagraph.appendChild(document.createTextNode("Due Date: "));
 
-    items.appendChild(li);
-    document.getElementById("dueDate").value = "";
+  const dueDateSpan = document.createElement("span");
+  dueDateSpan.id = "dueDateSpan"; // You can add an ID to reference it later
+  dueDateSpan.style.fontWeight = "bold"; // Customize the styling as needed
+  dueDateParagraph.appendChild(document.createTextNode(dueDate));
+  dueDateParagraph.appendChild(dueDateSpan);
+
+  // Append elements to the list item
+  li.appendChild(completeCheckbox);
+  li.appendChild(document.createTextNode(newItem));
+  li.appendChild(deleteButton);
+  li.appendChild(editButton);
+  li.appendChild(dateTimeParagraph);
+  li.appendChild(dueDateParagraph);
+
+  // Append the list item to the task list
+  items.appendChild(li);
+  document.getElementById("dueDate").value = "";
+
+  // Save tasks to local storage
+  saveTasksToLocalStorage();
 }
 
-
+// Function to handle clicks on task items
 function handleItemClick(e) {
-    if (e.target.classList.contains("delete")) {
-        const li = e.target.parentElement;
-        li.parentElement.removeChild(li);
-        tasksCheck()
-        displaySuccessMessage("Text deleted successfully");
-    }
-    if (e.target.classList.contains("edit")) {
-        e.preventDefault();
-        document.getElementById("item").value = e.target.parentElement.childNodes[1].textContent.trim();
-        document.getElementById("dueDateSpan").textContent = document.getElementById("dueDate").value;
-        submit.value = "EDIT";
-        editItem = e;
-    }
+  if (e.target.classList.contains("delete")) {
+    // Delete button clicked: remove the task
+    const li = e.target.parentElement;
+    li.parentElement.removeChild(li);
+    tasksCheck();
+    displaySuccessMessage("Text deleted successfully");
+  }
+  if (e.target.classList.contains("edit")) {
+    // Edit button clicked: populate the form with task details
+    e.preventDefault();
+    document.getElementById("item").value = e.target.parentElement.childNodes[1].textContent.trim();
+    document.getElementById("dueDateSpan").textContent = document.getElementById("dueDate").value;
+    submit.value = "EDIT";
+    editItem = e;
+  }
 }
 
-
+// Function to enable a disabled button
 function toggleButton(ref, btnID) {
-    document.getElementById(btnID).disabled = false;
+  document.getElementById(btnID).disabled = false;
 }
 
+// Function to display a success message
 function displaySuccessMessage(message) {
-    document.getElementById("lblsuccess").innerHTML = message;
-    document.getElementById("lblsuccess").style.display = "block";
-    setTimeout(function () {
-        document.getElementById("lblsuccess").style.display = "none";
-    }, 3000);
+  document.getElementById("lblsuccess").innerHTML = message;
+  document.getElementById("lblsuccess").style.display = "block";
+  setTimeout(function () {
+    document.getElementById("lblsuccess").style.display = "none";
+  }, 3000);
 }
 
+// Function to display an error message
 function displayErrorMessage(message) {
-    document.getElementById("lblerror").innerHTML = message;
-    document.getElementById("lblerror").style.display = "block";
-    setTimeout(function () {
-        document.getElementById("lblerror").style.display = "none";
-    }, 3000);
+  document.getElementById("lblerror").innerHTML = message;
+  document.getElementById("lblerror").style.display = "block";
+  setTimeout(function () {
+    document.getElementById("lblerror").style.display = "none";
+  }, 3000);
 }
-
-
-
-
-function toggleMode() {
-    const body = document.body;
-    const svgIcon = document.getElementById('toggleIcon'); // Select the SVG element
-
-    if (body.classList.contains('light-mode')) {
-        body.classList.remove('light-mode');
-        body.classList.add('dark-mode');
-        svgIcon.querySelectorAll('path').forEach(path => {
-            path.style.fill = '#fff'; // Change the fill color to white for dark mode
-        });
-    } else {
-        body.classList.remove('dark-mode');
-        body.classList.add('light-mode');
-        svgIcon.querySelectorAll('path').forEach(path => {
-            path.style.fill = '#000'; // Change the fill color to black for light mode
-        });
-    }
-}
-//added local storage functionallity
 
 // Function to save tasks to local storage
 function saveTasksToLocalStorage() {
-    const tasks = document.querySelectorAll(".list-group-item");
-    const tasksArray = [];
+  const tasks = document.querySelectorAll(".list-group-item");
+  const tasksArray = [];
 
-    tasks.forEach((task) => {
-        const taskText = task.childNodes[1].textContent;
-        const isCompleted = task.classList.contains("completed");
-        const taskObj = { text: taskText, completed: isCompleted };
-        tasksArray.push(taskObj);
-    });
+  tasks.forEach((task) => {
+    const taskText = task.childNodes[1].textContent;
+    const isCompleted = task.classList.contains("completed");
+    const taskObj = { text: taskText, completed: isCompleted };
+    tasksArray.push(taskObj);
+  });
 
-    localStorage.setItem("tasks", JSON.stringify(tasksArray));
+  localStorage.setItem("tasks", JSON.stringify(tasksArray));
 }
 
-// Function to retrieve tasks from local storage and display them
+// Function to load tasks from local storage and display them
 function loadTasksFromLocalStorage() {
-    const tasks = JSON.parse(localStorage.getItem("tasks"));
+  const tasks = JSON.parse(localStorage.getItem("tasks"));
 
-    if (tasks) {
-        tasks.forEach((task) => {
-            const li = document.createElement("li");
-            li.className = "list-group-item";
-            
-            const completeCheckbox = document.createElement("input");
-            completeCheckbox.type = "checkbox";
-            completeCheckbox.className = "form-check-input";
-            completeCheckbox.checked = task.completed;
-            completeCheckbox.addEventListener("change", markAsComplete);
+  if (tasks) {
+    tasks.forEach((task) => {
+      const li = document.createElement("li");
+      li.className = "list-group-item";
 
-            const deleteButton = document.createElement("button");
-            deleteButton.className = "btn btn-danger btn-sm float-right delete";
-            deleteButton.appendChild(document.createTextNode("Delete"));
+      const completeCheckbox = document.createElement("input");
+      completeCheckbox.type = "checkbox";
+      completeCheckbox.className = "form-check-input";
+      completeCheckbox.checked = task.completed;
+      completeCheckbox.addEventListener("change", markAsComplete);
 
-            const editButton = document.createElement("button");
-            editButton.className = "btn btn-success btn-sm float-right edit";
-            editButton.appendChild(document.createTextNode("Edit"));
-            editButton.style.marginRight = "8px";
+      const deleteButton = document.createElement("button");
+      deleteButton.className = "btn btn-danger btn-sm float-right delete";
+      deleteButton.appendChild(document.createTextNode("Delete"));
 
-            // Create a click event listener for the edit button
-            editButton.addEventListener("click", function (e) {
-                handleEditClick(e);
-            });
+      const editButton = document.createElement("button");
+      editButton.className = "btn btn-success btn-sm float-right edit";
+      editButton.appendChild(document.createTextNode("Edit"));
+      editButton.style.marginRight = "8px";
 
-            const dateTimeParagraph = document.createElement("p");
-            dateTimeParagraph.className = "text-muted";
-            dateTimeParagraph.style.fontSize = "15px";
-            dateTimeParagraph.style.margin = "0 19px";
-            dateTimeParagraph.appendChild(document.createTextNode("Created: " + new Date().toLocaleString()));
+      // Create a click event listener for the edit button
+      editButton.addEventListener("click", function (e) {
+        handleEditClick(e);
+      });
 
-            li.appendChild(completeCheckbox);
-            li.appendChild(document.createTextNode(task.text));
-            li.appendChild(deleteButton);
-            li.appendChild(editButton);
-            li.appendChild(dateTimeParagraph);
+      const dateTimeParagraph = document.createElement("p");
+      dateTimeParagraph.className = "text-muted";
+      dateTimeParagraph.style.fontSize = "15px";
+      dateTimeParagraph.style.margin = "0 19px";
+      dateTimeParagraph.appendChild(document.createTextNode("Created: " + new Date().toLocaleString()));
 
-            items.appendChild(li);
-        });
-    }
+      li.appendChild(completeCheckbox);
+      li.appendChild(document.createTextNode(task.text));
+      li.appendChild(deleteButton);
+      li.appendChild(editButton);
+      li.appendChild(dateTimeParagraph);
+
+      items.appendChild(li);
+    });
+  }
 }
 
 // Event listener for saving tasks to local storage on form submit
 form1.addEventListener("submit", (e) => {
-    addItem(e);
-    saveTasksToLocalStorage();
+  addItem(e);
+  saveTasksToLocalStorage();
 });
 
 // Event listener for loading tasks from local storage on DOMContentLoaded
 document.addEventListener("DOMContentLoaded", () => {
-    tasksCheck();
-    loadTasksFromLocalStorage();
+  tasksCheck();
+  loadTasksFromLocalStorage();
 });
 
 // Event listener for deleting tasks and saving to local storage
 items.addEventListener("click", (e) => {
-    handleItemClick(e);
-    saveTasksToLocalStorage();
-});
-
-
-
-
-function toggleMode() {
-    const body = document.body;
-    const svgIcon = document.getElementById('toggleIcon'); // Select the SVG element
-
-    if (body.classList.contains('light-mode')) {
-        body.classList.remove('light-mode');
-        body.classList.add('dark-mode');
-        svgIcon.querySelectorAll('path').forEach(path => {
-            path.style.fill = '#fff'; // Change the fill color to white for dark mode
-        });
-    } else {
-        body.classList.remove('dark-mode');
-        body.classList.add('light-mode');
-        svgIcon.querySelectorAll('path').forEach(path => {
-            path.style.fill = '#000'; // Change the fill color to black for light mode
-        });
-    }
-}
+  handleItemClick(e);
+  saveTasksToLocalStorage();
+};
