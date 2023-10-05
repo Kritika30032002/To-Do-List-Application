@@ -230,7 +230,11 @@ input[type="checkbox"]:not(.task-completed) {
   height: 40px;
   -webkit-appearance: none;
   appearance: none;
-  background: #000;
+  background: linear-gradient(
+        to right,
+        rgba(126, 64, 246, 1),
+        rgba(80, 139, 252, 1)
+      );
   outline: none;
   border-radius: 2rem;
   cursor: pointer;
@@ -255,11 +259,7 @@ input[type="checkbox"]:not(.task-completed):checked::before {
 }
 
 input[type="checkbox"]:not(.task-completed):checked {
-    background: linear-gradient(
-        to right,
-        rgba(126, 64, 246, 1),
-        rgba(80, 139, 252, 1)
-      );
+    background: #000;
 }
 
 @media screen and (max-width: 768px) {
