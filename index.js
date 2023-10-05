@@ -75,6 +75,26 @@ function addItem(e) {
         document.getElementById("dueDate").value = DefaultDate();
     }
     const dueDate = document.getElementById("dueDate").value;
+
+    // Check if the due date has already passed
+    const currentDate = new Date();
+    const dueDateObj = new Date(dueDate);
+
+    const tasksHeading = document.getElementById("heading-tasks");
+    const ulElement = document.getElementById("items");
+    const children = ulElement.children;
+
+    if (dueDateObj < currentDate && children.length === 0) {
+        displayErrorMessage("Due date has already passed");
+        tasksHeading.classList.add("hidden");
+        return false;
+    }else if (dueDateObj < currentDate && children.length > 0){
+        displayErrorMessage("Due date has already passed");
+        return false;
+    }else{
+        tasksHeading.classList.remove("hidden");
+    }
+
     if (newItem.trim() === "") return false;
     else document.getElementById("item").value = "";
 
@@ -162,6 +182,14 @@ function displaySuccessMessage(message) {
     document.getElementById("lblsuccess").style.display = "block";
     setTimeout(function () {
         document.getElementById("lblsuccess").style.display = "none";
+    }, 3000);
+}
+
+function displayErrorMessage(message) {
+    document.getElementById("lblerror").innerHTML = message;
+    document.getElementById("lblerror").style.display = "block";
+    setTimeout(function () {
+        document.getElementById("lblerror").style.display = "none";
     }, 3000);
 }
 
