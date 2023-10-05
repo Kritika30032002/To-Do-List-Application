@@ -40,6 +40,37 @@ body.dark-mode .list-group-item {
   width: 100%;
   height: 100%;
 }
+ .text {
+    width: 100%;
+    font-size: 50px;
+    color: rgb(255, 255, 255);
+    letter-spacing: 10px;
+    border-right: 5px solid black;
+    white-space: nowrap;
+    animation: typing 3s steps(10), cursor .4s step-end infinite alternate;
+    overflow: hidden;
+    animation-fill-mode: forwards;
+  }
+  
+  @keyframes cursor {
+    50% {
+      border-color: transparent;
+    }
+  }
+  
+  @keyframes typing {
+    from {
+      width: 0;
+    }
+    to {
+      width: 30%;
+    }
+    
+  }
+.text-center{
+    margin-left:  auto;
+    margin-right: auto ;
+}
 
 .main {
   position: relative;
