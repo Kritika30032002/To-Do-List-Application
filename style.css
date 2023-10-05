@@ -121,6 +121,7 @@ body.dark-mode .list-group-item {
   background: transparent;
   border: none;
   outline: none;
+  text-align: center;
 }
 
 .main_form .form_btn {
@@ -135,6 +136,7 @@ body.dark-mode .list-group-item {
   padding: 0.6rem 2rem;
   border-radius: 5rem;
   cursor: pointer;
+  margin: 1.5%;
 }
 
 .form_btn:hover {
@@ -168,8 +170,7 @@ h3 {
     border: none;
     background: linear-gradient(
       to right,
-      rgba(126, 64, 246, 1),
-      rgba(80, 139, 252, 1)
+      rgb(53 38 83), rgb(65 114 208)
     );
     padding: 0.8rem;
     border-radius: 5rem;
@@ -264,7 +265,7 @@ input[type="checkbox"]:not(.task-completed):checked {
 
 @media screen and (max-width: 768px) {
   .mode-toggle {
-      margin-left: 20px; 
+      margin-top: 10%; 
   }
 }
 @media screen and (max-width: 768px) {
@@ -304,5 +305,17 @@ input[type="checkbox"]:not(.task-completed):checked {
       padding: 0.5rem 1rem; 
       width: auto; 
   }
+  .text {
+    width: 100%;
+    color: rgb(255, 255, 255);
+    border-right: transparent;
+    white-space: nowrap;
+    letter-spacing: normal;
+    animation: none;
+}
+.main_form .form_btn {
+  margin-top: 15%;
+
+}
 }
 
