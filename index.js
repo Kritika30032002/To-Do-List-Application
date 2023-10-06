@@ -43,6 +43,9 @@ window.onload = () => {
     checkboxes.forEach(checkbox => {
         checkbox.addEventListener("change", markAsComplete);
     });
+
+    const body = document.getElementsByTagName('body')[0];
+    body.classList.add('light-mode');
 };
 
 function toggleMode() {
