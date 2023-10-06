@@ -43,6 +43,9 @@ window.onload = () => {
     checkboxes.forEach(checkbox => {
         checkbox.addEventListener("change", markAsComplete);
     });
+
+    const body = document.getElementsByTagName('body')[0];
+    body.classList.add('light-mode');
 };
 
 function toggleMode() {
@@ -75,9 +78,25 @@ function addItem(e) {
         document.getElementById("dueDate").value = DefaultDate();
     }
     const dueDate = document.getElementById("dueDate").value;
-    const taskTypeDropdown = document.getElementById("taskTypeDropdown");
-    const selectedIndex = taskTypeDropdown.selectedIndex;
-    const taskType = selectedIndex !== -1 ? taskTypeDropdown.options[selectedIndex].text : "No Type Selected";
+
+    // Check if the due date has already passed
+    const currentDate = new Date();
+    const dueDateObj = new Date(dueDate);
+
+    const tasksHeading = document.getElementById("heading-tasks");
+    const ulElement = document.getElementById("items");
+    const children = ulElement.children;
+
+    if (dueDateObj < currentDate && children.length === 0) {
+        displayErrorMessage("Due date has already passed");
+        tasksHeading.classList.add("hidden");
+        return false;
+    }else if (dueDateObj < currentDate && children.length > 0){
+        displayErrorMessage("Due date has already passed");
+        return false;
+    }else{
+        tasksHeading.classList.remove("hidden");
+    }
 
     if (newItem.trim() === "") return false;
     else document.getElementById("item").value = "";
@@ -128,25 +147,15 @@ function addItem(e) {
     dueDateParagraph.appendChild(document.createTextNode(dueDate));
     dueDateParagraph.appendChild(dueDateSpan);
 
-    // Create a paragraph element to display the task type
-    const taskTypeParagraph = document.createElement("p");
-    taskTypeParagraph.className = "text-muted";
-    taskTypeParagraph.style.fontSize = "15px";
-    taskTypeParagraph.style.margin = "0 19px";
-    taskTypeParagraph.appendChild(document.createTextNode("Type: " + taskType));
-
-
     li.appendChild(completeCheckbox);
     li.appendChild(document.createTextNode(newItem));
     li.appendChild(deleteButton);
     li.appendChild(editButton);
     li.appendChild(dateTimeParagraph);
     li.appendChild(dueDateParagraph);
-    li.appendChild(taskTypeParagraph);
 
     items.appendChild(li);
     document.getElementById("dueDate").value = "";
-    document.getElementById("taskTypeDropdown").selectedIndex = 0;
 }
 
 
@@ -176,6 +185,14 @@ function displaySuccessMessage(message) {
     document.getElementById("lblsuccess").style.display = "block";
     setTimeout(function () {
         document.getElementById("lblsuccess").style.display = "none";
+    }, 3000);
+}
+
+function displayErrorMessage(message) {
+    document.getElementById("lblerror").innerHTML = message;
+    document.getElementById("lblerror").style.display = "block";
+    setTimeout(function () {
+        document.getElementById("lblerror").style.display = "none";
     }, 3000);
 }
 
