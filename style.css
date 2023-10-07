@@ -359,3 +359,16 @@ input[type="checkbox"]:not(.task-completed):checked::before {
 }
 
 }
+/* Galaxy Fold Fixes */
+@media screen and (max-width: 768px) {
+  .text{
+    font-size: 30px;
+  }
+  .h2{
+    font-size: 1.2rem;
+  }
+  .main {
+    border: 0;
+  }
+
+}
