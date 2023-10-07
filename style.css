@@ -6,28 +6,34 @@
   box-sizing: border-box;
 }
 
-/* body {
+/*body {
   position: relative;
   width: 100%;
-  background-image: url('https://cdn.pixabay.com/photo/2022/07/31/08/03/to-do-7355222_1280.jpg'); 
-  
-  background: linear-gradient(to right, rgba(126, 64, 246, 1), rgba(80, 139, 252, 1));
-  font-family: 'Montserrat', sans-serif;
-} */
-
-body {
-  font-family: 'Young Serif';
-  font-weight: 400;
-  margin: 30px;
-  padding: 0;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  background: linear-gradient(to right, rgba(126, 64, 246, 1), rgba(80, 139, 252, 1));
-  /* background-image: url('https://cdn.pixabay.com/photo/2022/07/31/08/03/to-do-7355222_1280.jpg');  */
-  background-size: cover;
-  background-position: center;
+  background: linear-gradient(
+    to right,
+    rgba(126, 64, 246, 1),
+    rgba(80, 139, 252, 1)
+  ); 
+}*/
+body.light-mode {
+  background: linear-gradient(
+    to right,
+    rgba(126, 64, 246, 1),
+    rgba(80, 139, 252, 1)
+  );
+}
+/* Dark mode styles */
+body.dark-mode {
+  background: #232323;
+  color: #fff;
+}
+body.dark-mode .list-group-item {
+  background: #131313;
+  color: #fff;
+}
+body.dark-mode .list-group-item {
+    background: #131313;
+    color: #fff;
 }
 
 
@@ -67,6 +73,7 @@ body {
     margin-left:  auto;
     margin-right: auto ;
 }
+
 /* .container.main.mt-3{
   padding-top: 10%;
 } */
@@ -163,6 +170,7 @@ body.dark-mode::before {
   background: transparent;
   border: none;
   outline: none;
+  text-align: center;
 }
 
 .main_form .form_btn {
@@ -174,6 +182,7 @@ body.dark-mode::before {
   border-radius: 5rem;
   cursor: pointer;
   transition: opacity 0.3s;
+  margin: 1.5%;
 }
 
 .form_btn:hover {
@@ -203,7 +212,13 @@ body.dark-mode::before {
 
 @media screen and (max-width: 415px) {
   .main_form .form_btn {
-    font-size: 1rem;
+    color: #fff;
+    letter-spacing: 0.05rem;
+    border: none;
+    background: linear-gradient(
+      to right,
+      rgb(53 38 83), rgb(65 114 208)
+    );
     padding: 0.8rem;
   }
   .main {
@@ -281,7 +296,7 @@ input[type="checkbox"]:not(.task-completed):checked::before {
 
 @media screen and (max-width: 768px) {
   .mode-toggle {
-    margin-left: 20px;
+      margin-top: 10%; 
   }
 
   .form_btn {
@@ -303,4 +318,44 @@ input[type="checkbox"]:not(.task-completed):checked::before {
     padding: 0.5rem 1rem;
     width: auto;
   }
+}
+@media screen and (max-width: 768px) {
+  .main_form {
+      flex-direction: column; /* Stack form elements vertically */
+  }
+  
+  .main_form input[type="text"] {
+      width: 100%; /* Full width for text inputs */
+      margin-bottom: 10px; /* Add spacing between inputs */
+  }
+  
+  .form_btn {
+      font-size: 1rem;
+      padding: 0.5rem 1rem; 
+      width: auto; 
+  }
+  .text {
+    width: 100%;
+    color: rgb(255, 255, 255);
+    border-right: transparent;
+    white-space: nowrap;
+    letter-spacing: normal;
+    animation: none;
+}
+.main_form .form_btn {
+  margin-top: 15%;
+
+}
+#taskTypeDropdown{
+    border: none;
+    border-radius: 100px;
+    text-align: center;
+}
+.mt-4{
+  margin-top: 7.5rem!important;
+}
+.mt-5{
+  margin-top: 0rem!important;
+}
+
 }
