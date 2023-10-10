@@ -18,9 +18,8 @@
     <link rel="stylesheet" href="style.css" />
     <script src="index.js"></script>
 
-    <title>To Do List</title>
+    <title>To-Do List</title>
   </head>
-
   <body>
     <div class="container-xl">
       <header class="text-white p-5">
@@ -33,45 +32,42 @@
                 alt=""
                 style="height: 70px; margin-bottom: 20px"
               />
-              <h1 class="text text-center">To-Do List</h1>
+              <h1 class="text text-center">SimplyTasked</h1>
 
-              <input type="checkbox" id="modeToggle" class="mode-toggle">
+              <input type="checkbox" id="modeToggle" class="mode-toggle" />
             </div>
           </div>
         </div>
       </header>
 
       <div class="container main mt-5">
-        <h2 class="text-center mb-4">ADD ITEMS</h2>
+        <h2 class="text-center mb-4">Add your tasks below</h2>
 
         <label
           id="lblsuccess"
           class="text-success"
           style="display: none"
         ></label>
-        <label
-          id="lblerror"
-          class="text-danger"
-          style="display: none;"
-        ></label>
+        <label id="lblerror" class="text-danger" style="display: none"></label>
 
         <form id="addForm" class="main_form">
           <input
-              type="text"
-              onkeyup="toggleButton(this, 'submit')"
-              id="item"
-              placeholder="Write your task here"
+            type="text"
+            onkeyup="toggleButton(this, 'submit')"
+            id="item"
+            placeholder="Input your task"
           />
-          <input type="text" id="dueDate" placeholder="Due Date" />
+          <input type="text" id="dueDate" placeholder="Set your due date" />
           <input
-              type="submit"
-              class="form_btn"
-              id="submit"
-              value="Submit"
-              disabled
-              style="background-color: rgb(1,110,225); color: white;"
+            type="submit"
+            class="form_btn"
+            id="submit"
+            value="Add Task"
+            disabled
+          
+            style="background-color: rgb(1,110,225); color: white;"
           />
-      </form>
+        </form>
 
         <div class="text-center">
           <h3 class="mt-4 text-center" id="heading-tasks">Tasks</h3>
@@ -82,5 +78,15 @@
         </div>
       </div>
     </div>
+    <br> <br>
+          <h2 style="text-align: center; color: white;">Why SimplyTasked?</h2>
+          <p style="text-align: center; color: white;">Simply, because it is a SIMPLE To-Do List Tool to organize your tasks efficiently.</p>
+          <br>
+          <div  class='list' style="color: white; text-align: center;">
+            <p>=> Intuitive task management</p>
+            <p>=> Seamless due date tracking</p>
+            <p>=> Beautiful and user-friendly design</p>
+          </div>
+
   </body>
 </html>

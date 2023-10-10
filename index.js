@@ -63,9 +63,9 @@ let editItem = null;
 function addItem(e) {
     e.preventDefault();
 
-    if (submit.value !== "Submit") {
+    if (submit.value !== "Add Task") {
         editItem.target.parentElement.childNodes[1].textContent = document.getElementById("item").value;
-        submit.value = "Submit";
+        submit.value = "Add Task";
         document.getElementById("item").value = "";
 
         displaySuccessMessage("Text edited successfully");
