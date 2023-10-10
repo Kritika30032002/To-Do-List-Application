@@ -16,7 +16,7 @@
 } */
 
 body {
-  font-family: 'Young Serif';
+  font-family: "Young Serif";
   font-weight: 400;
   margin: 30px;
   padding: 0;
@@ -24,12 +24,15 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background: linear-gradient(to right, rgba(126, 64, 246, 1), rgba(80, 139, 252, 1));
+  background: linear-gradient(
+    to right,
+    rgba(126, 64, 246, 1),
+    rgba(80, 139, 252, 1)
+  );
   /* background-image: url('https://cdn.pixabay.com/photo/2022/07/31/08/03/to-do-7355222_1280.jpg');  */
   background-size: cover;
   background-position: center;
 }
-
 
 .container-xl {
   position: relative;
@@ -43,14 +46,19 @@ body {
   letter-spacing: 10px;
   border-right: 5px solid black;
   white-space: nowrap;
-  animation: typing 2.5s steps(9), cursor .55s step-end infinite alternate;
+  animation: typing 2.5s steps(9), cursor 0.55s step-end infinite alternate;
   overflow: hidden;
   animation-fill-mode: forwards;
 }
 
 @keyframes cursor {
-  from, to { border-color: transparent }
-  50% { border-color: rgb(0, 131, 201); }
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: rgb(0, 131, 201);
+  }
 }
 
 @keyframes typing {
@@ -60,26 +68,28 @@ body {
   to {
     width: 31%;
   }
-  
 }
-.text-center{
-    margin-left:  auto;
-    margin-right: auto ;
+.text-center {
+  margin-left: auto;
+  margin-right: auto;
 }
 /* .container.main.mt-3{
   padding-top: 10%;
 } */
 
 body.light-mode {
-  background: linear-gradient(to right, rgba(1,110,225), rgba(80, 139, 252, 1));
-  background-image: url('https://cdn.pixabay.com/photo/2022/07/31/08/03/to-do-7355222_1280.jpg'); /* Light mode background image */
+  background: linear-gradient(
+    to right,
+    rgba(1, 110, 225),
+    rgba(80, 139, 252, 1)
+  );
+  background-image: url("https://cdn.pixabay.com/photo/2022/07/31/08/03/to-do-7355222_1280.jpg"); /* Light mode background image */
 }
 
 body.dark-mode {
-  background-image: url('https://cdn.pixabay.com/photo/2022/07/31/08/03/to-do-7355222_1280.jpg'); /*Dark mode background image (same as light mode)*/
+  background-image: url("https://cdn.pixabay.com/photo/2022/07/31/08/03/to-do-7355222_1280.jpg"); /*Dark mode background image (same as light mode)*/
   color: #fff; /* Text color for dark mode */
 }
-
 
 body.dark-mode::before {
   content: "";
@@ -88,14 +98,18 @@ body.dark-mode::before {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.75); /* Adjust the alpha (last) value to control darkness */
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.75
+  ); /* Adjust the alpha (last) value to control darkness */
   z-index: -1;
 }
 
 /* Rest of your CSS styles remain unchanged */
 
 /* Rest of your CSS remains unchanged */
-
 
 /* body.light-mode {
   background: linear-gradient(to right, rgba(126, 64, 246, 1), rgba(80, 139, 252, 1));
@@ -191,17 +205,23 @@ body.dark-mode::before {
   color: #fff;
   letter-spacing: 0.11rem;
   border: none;
-  background: linear-gradient(to right, rgba(1,110,225), rgba(80, 139, 252, 1));
+  background: linear-gradient(
+    to right,
+    rgba(1, 110, 225),
+    rgba(80, 139, 252, 1)
+  );
   padding: 0.6rem 2rem;
   border-radius: 5rem;
+  text-transform: uppercase;
   cursor: pointer;
   transition: opacity 0.3s;
+  border: 2px solid transparent;
 }
 
-.form_btn:hover, .clear_btn:hover{
-  opacity: 0.8;
-  outline: auto;
-  border: 3px solid rebeccapurple;
+.form_btn:hover,
+.clear_btn:hover {
+  opacity: 0.9;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
 
 .clear_btn {
@@ -228,12 +248,12 @@ body.dark-mode::before {
   font-size: 1.2rem;
 }
 
-.main h2, h3 {
+.main h2,
+h3 {
   width: 12rem;
   margin: auto;
   border-bottom: 2px solid #ffffff;
   font-weight: 600;
-  
 }
 
 @media screen and (max-width: 415px) {
@@ -270,10 +290,24 @@ body.dark-mode::before {
 }
 
 #dueDate {
+  outline: none;
+  border: 2px solid rgba(0, 0, 0, 0.2);
   border-radius: 50px;
   text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
   width: 140px;
-  height: 40px;
+  height: 50px;
+  margin-right: 0.8rem;
+}
+
+#dueDate:hover {
+  border-color: rgba(1, 110, 225);
+}
+
+#dueDate:hover::placeholder {
+  color: rgba(1, 110, 225);
+  opacity: 1;
 }
 
 .hidden {
@@ -290,7 +324,7 @@ input[type="checkbox"]:not(.task-completed) {
   outline: none;
   border-radius: 2rem;
   cursor: pointer;
-  box-shadow: inset 0 0 5px rgba(1,110,225);
+  box-shadow: inset 0 0 5px rgba(1, 110, 225);
 }
 
 input[type="checkbox"]:not(.task-completed)::before {
