@@ -166,6 +166,7 @@ body.dark-mode::before {
   font-size: 1.3rem;
   margin-top: 0.4rem;
   text-align: left;
+  color: #000;
   margin-right: 20px;
   border-radius: 5rem !important;
   word-break: break-all;
