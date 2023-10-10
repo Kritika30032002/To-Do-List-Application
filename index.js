@@ -18,7 +18,10 @@ function tasksCheck() {
     const children = ulElement.children;
 
 
-    if (children.length === 0) tasksHeading.classList.toggle("hidden")
+    if (children.length === 0){
+        tasksHeading.classList.toggle("hidden")
+        document.querySelector(".clear_btn").style.display = "none";
+    }
 }
 
 document.addEventListener("DOMContentLoaded", tasksCheck);
@@ -29,6 +32,9 @@ window.onload = () => {
         enableTime: false, // If you want to enable time selection as well
         dateFormat: "Y-m-d", // Adjust the date format as needed
     });
+
+    loadTasksFromLocalStorage();
+
     const form1 = document.querySelector("#addForm");
     const items = document.getElementById("items");
     const submit = document.getElementById("submit");
@@ -70,6 +76,7 @@ function addItem(e) {
 
         displaySuccessMessage("Text edited successfully");
         editItem = null;
+        saveTasksToLocalStorage();
         return false;
     }
     tasksCheck()
@@ -134,6 +141,7 @@ function addItem(e) {
     // Create a paragraph element to display the creation date and time
     const dateTimeParagraph = document.createElement("p");
     dateTimeParagraph.className = "text-muted";
+    dateTimeParagraph.id = 'created-at';
     dateTimeParagraph.style.fontSize = "15px"; // Set font size
     dateTimeParagraph.style.margin = "0 19px"; // Set margin
     dateTimeParagraph.appendChild(document.createTextNode("Created: " + creationDateTime));
@@ -141,6 +149,7 @@ function addItem(e) {
     // Create a paragraph element for the due date
     const dueDateParagraph = document.createElement("p");
     dueDateParagraph.className = "text-muted";
+    dueDateParagraph.id = 'task-dueDate';
     dueDateParagraph.style.fontSize = "15px";
     dueDateParagraph.style.margin = "0 19px";
     dueDateParagraph.appendChild(document.createTextNode("Due Date: "));
@@ -159,6 +168,7 @@ function addItem(e) {
     li.appendChild(dueDateParagraph);
 
     items.appendChild(li);
+    saveTasksToLocalStorage();
     document.getElementById("dueDate").value = "";
 }
 
@@ -173,10 +183,11 @@ function handleItemClick(e) {
     if (e.target.classList.contains("edit")) {
         e.preventDefault();
         document.getElementById("item").value = e.target.parentElement.childNodes[1].textContent.trim();
-        document.getElementById("dueDateSpan").textContent = document.getElementById("dueDate").value;
+        const submit = document.getElementById("submit");
         submit.value = "EDIT";
         editItem = e;
     }
+    saveTasksToLocalStorage();
 }
 
 
@@ -231,7 +242,10 @@ function saveTasksToLocalStorage() {
     tasks.forEach((task) => {
         const taskText = task.childNodes[1].textContent;
         const isCompleted = task.classList.contains("completed");
-        const taskObj = { text: taskText, completed: isCompleted };
+        const createdAt = task.querySelector('#created-at').textContent;
+        const dueDate = task.querySelector('#task-dueDate').textContent;
+
+        const taskObj = { text: taskText, completed: isCompleted, createdAt: createdAt, dueDate: dueDate };
         tasksArray.push(taskObj);
     });
 
@@ -242,14 +256,20 @@ function saveTasksToLocalStorage() {
 function loadTasksFromLocalStorage() {
     const tasks = JSON.parse(localStorage.getItem("tasks"));
 
-    if (tasks) {
+    if (tasks && tasks.length > 0) {
+        const tasksHeading = document.getElementById("heading-tasks");
+        tasksHeading.classList.remove("hidden");
+        document.querySelector(".clear_btn").style.display = "inline";
         tasks.forEach((task) => {
             const li = document.createElement("li");
             li.className = "list-group-item";
-            
+            if (task.completed){
+                li.className = "list-group-item completed"
+            }
+            // dispatchEvent.className = "form-check"
             const completeCheckbox = document.createElement("input");
             completeCheckbox.type = "checkbox";
-            completeCheckbox.className = "form-check-input";
+            completeCheckbox.className = "form-check-input task-completed";
             completeCheckbox.checked = task.completed;
             completeCheckbox.addEventListener("change", markAsComplete);
 
@@ -264,20 +284,31 @@ function loadTasksFromLocalStorage() {
 
             // Create a click event listener for the edit button
             editButton.addEventListener("click", function (e) {
-                handleEditClick(e);
+                handleItemClick(li);
             });
 
             const dateTimeParagraph = document.createElement("p");
             dateTimeParagraph.className = "text-muted";
+            dateTimeParagraph.id = 'created-at';
             dateTimeParagraph.style.fontSize = "15px";
             dateTimeParagraph.style.margin = "0 19px";
-            dateTimeParagraph.appendChild(document.createTextNode("Created: " + new Date().toLocaleString()));
+            dateTimeParagraph.appendChild(document.createTextNode(task.createdAt));
+
+
+            // Create a paragraph element for the due date
+            const dueDateParagraph = document.createElement("p");
+            dueDateParagraph.className = "text-muted";
+            dueDateParagraph.id = 'task-dueDate';
+            dueDateParagraph.style.fontSize = "15px";
+            dueDateParagraph.style.margin = "0 19px";
+            dueDateParagraph.appendChild(document.createTextNode(task.dueDate));
 
             li.appendChild(completeCheckbox);
             li.appendChild(document.createTextNode(task.text));
             li.appendChild(deleteButton);
             li.appendChild(editButton);
             li.appendChild(dateTimeParagraph);
+            li.appendChild(dueDateParagraph);
 
             items.appendChild(li);
         });
@@ -343,4 +374,6 @@ function clearAllTasks() {
 
     const tasksHeading = document.getElementById("heading-tasks");
     tasksHeading.classList.add("hidden");
+
+    saveTasksToLocalStorage();
 }
