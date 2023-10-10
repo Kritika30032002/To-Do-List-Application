@@ -101,6 +101,10 @@ function addItem(e) {
     if (newItem.trim() === "") return false;
     else document.getElementById("item").value = "";
 
+    if(newItem.trim() !== "") {
+        document.querySelector(".clear_btn").style.display = "inline";
+    }
+
     const li = document.createElement("li");
     li.className = "list-group-item";
 
@@ -318,4 +322,25 @@ function toggleMode() {
             path.style.fill = '#000'; // Change the fill color to black for light mode
         });
     }
+}
+
+
+function clearAllTasks() {
+
+    const ulElement = document.getElementById("items");
+
+
+    // Removes all tasks from the task list
+    while (ulElement.firstChild) {
+        ulElement.removeChild(ulElement.firstChild);
+    }
+
+    // Hide the button after the task list is cleared
+    document.querySelector(".clear_btn").style.display = "none";
+    console.log("task cleared");
+
+    // Hide the tasks heading since there are no tasks left
+
+    const tasksHeading = document.getElementById("heading-tasks");
+    tasksHeading.classList.add("hidden");
 }
