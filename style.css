@@ -46,18 +46,17 @@ body {
   letter-spacing: 10px;
   border-right: 5px solid black;
   white-space: nowrap;
-  animation: typing 2.5s steps(9), cursor 0.55s step-end infinite alternate;
+
+  animation: typing 3s steps(10), cursor 0.4s step-end infinite alternate;
+
   overflow: hidden;
   animation-fill-mode: forwards;
 }
 
 @keyframes cursor {
-  from,
-  to {
-    border-color: transparent;
-  }
+
   50% {
-    border-color: rgb(0, 131, 201);
+    border-color: transparent;
   }
 }
 
@@ -66,7 +65,8 @@ body {
     width: 0;
   }
   to {
-    width: 31%;
+    width: 36%;
+
   }
 }
 .text-center {
@@ -87,7 +87,10 @@ body.light-mode {
 }
 
 body.dark-mode {
-  background-image: url("https://cdn.pixabay.com/photo/2022/07/31/08/03/to-do-7355222_1280.jpg"); /*Dark mode background image (same as light mode)*/
+
+  background: #0f0000; /* Dark mode background color */
+  background-image: url("https://cdn.pixabay.com/photo/2022/07/31/08/03/to-do-7355222_1280.jpg"); /* Dark mode background image (same as light mode) */
+
   color: #fff; /* Text color for dark mode */
 }
 
@@ -102,7 +105,8 @@ body.dark-mode::before {
     0,
     0,
     0,
-    0.75
+    0.9
+
   ); /* Adjust the alpha (last) value to control darkness */
   z-index: -1;
 }
@@ -248,9 +252,17 @@ body.dark-mode::before {
   font-size: 1.2rem;
 }
 
+
+.list{
+  display: flex;
+  flex-direction:row;
+  justify-content: space-evenly;
+  
+}
 .main h2,
 h3 {
-  width: 12rem;
+  width: 20rem;
+
   margin: auto;
   border-bottom: 2px solid #ffffff;
   font-weight: 600;
