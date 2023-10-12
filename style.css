@@ -46,14 +46,14 @@ body {
   border-right: 5px solid black;
   white-space: nowrap;
 
-  animation: typing 5s steps(12) infinite, cursor 0.4s step-end infinite alternate;
+  animation: typing 5s steps(12) infinite,
+    cursor 0.4s step-end infinite alternate;
 
   overflow: hidden;
   animation-fill-mode: forwards;
 }
 
 @keyframes cursor {
-
   50% {
     border-color: transparent;
   }
@@ -65,7 +65,6 @@ body {
   }
   to {
     width: 40%;
-
   }
 }
 .text-center {
@@ -86,7 +85,6 @@ body.light-mode {
 }
 
 body.dark-mode {
-
   background: #0f0000; /* Dark mode background color */
   background-image: url("https://cdn.pixabay.com/photo/2022/07/31/08/03/to-do-7355222_1280.jpg"); /* Dark mode background image (same as light mode) */
 
@@ -105,7 +103,6 @@ body.dark-mode::before {
     0,
     0,
     0.9
-
   ); /* Adjust the alpha (last) value to control darkness */
   z-index: -1;
 }
@@ -251,12 +248,10 @@ body.dark-mode::before {
   font-size: 1.2rem;
 }
 
-
-.list{
+.list {
   display: flex;
-  flex-direction:row;
+  flex-direction: row;
   justify-content: space-evenly;
-  
 }
 .main h2,
 h3 {
@@ -394,4 +389,3 @@ label {
 input[type="radio"] {
   margin-right: 5px;
 }
-
