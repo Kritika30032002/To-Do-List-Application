@@ -18,7 +18,6 @@
 body {
   font-family: "Young Serif";
   font-weight: 400;
-  margin: 30px;
   padding: 0;
   box-sizing: border-box;
   display: flex;
@@ -255,9 +254,25 @@ body.dark-mode::before {
 
 .list{
   display: flex;
-  flex-direction:row;
-  justify-content: space-evenly;
-  
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  background: #0f0000;
+  height: 100%;
+  width: 100%;
+  padding-top: 50px;
+}
+.list1{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  background-color: #0f0000;
+  padding-bottom: 15px;
+}
+.f-text{
+  font-family: sans-serif;
+  font-size: large;
 }
 .main h2,
 h3 {
