@@ -67,109 +67,135 @@ function toggleMode() {
 let editItem = null;
 
 function addItem(e) {
-    e.preventDefault();
+  e.preventDefault();
 
-    if (submit.value !== "Add Task") {
-        editItem.target.parentElement.childNodes[1].textContent = document.getElementById("item").value;
-        submit.value = "Add Task";
-        document.getElementById("item").value = "";
+  // Get priority level
+  const priority = document.querySelector('input[name="priority"]:checked');
+  if (!priority) {
+    displayErrorMessage("Please select a priority level");
+    return false;
+  }
 
-        displaySuccessMessage("Text edited successfully");
-        editItem = null;
-        saveTasksToLocalStorage();
-        return false;
-    }
-    tasksCheck()
-    const newItem = document.getElementById("item").value;
-    if (!document.getElementById("dueDate").value){
-        document.getElementById("dueDate").value = DefaultDate();
-    }
-    const dueDate = document.getElementById("dueDate").value;
+  if (submit.value !== "Add Task") {
+    editItem.target.parentElement.childNodes[1].textContent =
+      document.getElementById("item").value;
+    submit.value = "Add Task";
+    document.getElementById("item").value = "";
 
-    // Check if the due date has already passed
-    const currentDate = new Date();
-    const dueDateObj = new Date(dueDate);
-
-    const tasksHeading = document.getElementById("heading-tasks");
-    const ulElement = document.getElementById("items");
-    const children = ulElement.children;
-
-    if (dueDateObj < currentDate && children.length === 0) {
-        displayErrorMessage("Due date has already passed");
-        tasksHeading.classList.add("hidden");
-        return false;
-    }else if (dueDateObj < currentDate && children.length > 0){
-        displayErrorMessage("Due date has already passed");
-        return false;
-    }else{
-        tasksHeading.classList.remove("hidden");
-    }
-
-    if (newItem.trim() === "") return false;
-    else document.getElementById("item").value = "";
-
-    if(newItem.trim() !== "") {
-        document.querySelector(".clear_btn").style.display = "inline";
-    }
-
-    const li = document.createElement("li");
-    li.className = "list-group-item";
-
-    dispatchEvent.className = "form-check"
-    const completeCheckbox = document.createElement("input");
-    completeCheckbox.type = "checkbox";
-    completeCheckbox.className = "form-check-input task-completed";
-    completeCheckbox.addEventListener("change", markAsComplete);
-
-    const deleteButton = document.createElement("button");
-    deleteButton.className = "btn btn-danger btn-sm float-right delete";
-    deleteButton.appendChild(document.createTextNode("Delete"));
-
-    const editButton = document.createElement("button");
-    editButton.className = "btn btn-success btn-sm float-right edit";
-    editButton.appendChild(document.createTextNode("Edit"));
-    editButton.style.marginRight = "8px";
-
-    // Create a click event listener for the edit button
-    editButton.addEventListener("click", function (e) {
-        handleEditClick(e);
-    });
-
-    // Get the current date and time
-    const creationDateTime = new Date().toLocaleString();
-
-    // Create a paragraph element to display the creation date and time
-    const dateTimeParagraph = document.createElement("p");
-    dateTimeParagraph.className = "text-muted";
-    dateTimeParagraph.id = 'created-at';
-    dateTimeParagraph.style.fontSize = "15px"; // Set font size
-    dateTimeParagraph.style.margin = "0 19px"; // Set margin
-    dateTimeParagraph.appendChild(document.createTextNode("Created: " + creationDateTime));
-
-    // Create a paragraph element for the due date
-    const dueDateParagraph = document.createElement("p");
-    dueDateParagraph.className = "text-muted";
-    dueDateParagraph.id = 'task-dueDate';
-    dueDateParagraph.style.fontSize = "15px";
-    dueDateParagraph.style.margin = "0 19px";
-    dueDateParagraph.appendChild(document.createTextNode("Due Date: "));
-
-    const dueDateSpan = document.createElement("span");
-    dueDateSpan.id = "dueDateSpan"; // You can add an ID to reference it later
-    dueDateSpan.style.fontWeight = "bold"; // Customize the styling as needed
-    dueDateParagraph.appendChild(document.createTextNode(dueDate));
-    dueDateParagraph.appendChild(dueDateSpan);
-
-    li.appendChild(completeCheckbox);
-    li.appendChild(document.createTextNode(newItem));
-    li.appendChild(deleteButton);
-    li.appendChild(editButton);
-    li.appendChild(dateTimeParagraph);
-    li.appendChild(dueDateParagraph);
-
-    items.appendChild(li);
+    displaySuccessMessage("Text edited successfully");
+    editItem = null;
     saveTasksToLocalStorage();
-    document.getElementById("dueDate").value = "";
+    return false;
+  }
+
+  tasksCheck();
+  const newItem = document.getElementById("item").value;
+  if (!document.getElementById("dueDate").value) {
+    document.getElementById("dueDate").value = DefaultDate();
+  }
+  const dueDate = document.getElementById("dueDate").value;
+
+  // Check if the due date has already passed
+  const currentDate = new Date();
+  const dueDateObj = new Date(dueDate);
+
+  const tasksHeading = document.getElementById("heading-tasks");
+  const ulElement = document.getElementById("items");
+  const children = ulElement.children;
+
+  if (dueDateObj < currentDate && children.length === 0) {
+    displayErrorMessage("Due date has already passed");
+    tasksHeading.classList.add("hidden");
+    return false;
+  } else if (dueDateObj < currentDate && children.length > 0) {
+    displayErrorMessage("Due date has already passed");
+    return false;
+  } else {
+    tasksHeading.classList.remove("hidden");
+  }
+
+  if (newItem.trim() === "") return false;
+  else document.getElementById("item").value = "";
+
+  if (newItem.trim() !== "") {
+    document.querySelector(".clear_btn").style.display = "inline";
+  }
+
+  const li = document.createElement("li");
+  li.className = "list-group-item";
+
+  dispatchEvent.className = "form-check";
+  const completeCheckbox = document.createElement("input");
+  completeCheckbox.type = "checkbox";
+  completeCheckbox.className = "form-check-input task-completed";
+  completeCheckbox.addEventListener("change", markAsComplete);
+
+  const deleteButton = document.createElement("button");
+  deleteButton.className = "btn btn-danger btn-sm float-right delete";
+  deleteButton.appendChild(document.createTextNode("Delete"));
+
+  const editButton = document.createElement("button");
+  editButton.className = "btn btn-success btn-sm float-right edit";
+  editButton.appendChild(document.createTextNode("Edit"));
+  editButton.style.marginRight = "8px";
+
+  // Create a click event listener for the edit button
+  editButton.addEventListener("click", function (e) {
+    handleEditClick(e);
+  });
+
+  // Get the current date and time
+  const creationDateTime = new Date().toLocaleString();
+
+  // Create a paragraph element to display the creation date and time
+  const dateTimeParagraph = document.createElement("p");
+  dateTimeParagraph.className = "text-muted";
+  dateTimeParagraph.id = "created-at";
+  dateTimeParagraph.style.fontSize = "15px"; // Set font size
+  dateTimeParagraph.style.margin = "0 19px"; // Set margin
+  dateTimeParagraph.appendChild(
+    document.createTextNode("Created: " + creationDateTime)
+  );
+
+  // Create a paragraph element for the due date
+  const dueDateParagraph = document.createElement("p");
+  dueDateParagraph.className = "text-muted";
+  dueDateParagraph.id = "task-dueDate";
+  dueDateParagraph.style.fontSize = "15px";
+  dueDateParagraph.style.margin = "0 19px";
+  dueDateParagraph.appendChild(document.createTextNode("Due Date: "));
+
+  const dueDateSpan = document.createElement("span");
+  dueDateSpan.id = "dueDateSpan"; // You can add an ID to reference it later
+  dueDateSpan.style.fontWeight = "bold"; // Customize the styling as needed
+  dueDateParagraph.appendChild(document.createTextNode(dueDate));
+  dueDateParagraph.appendChild(dueDateSpan);
+
+  // Create a paragraph element for the priority
+  const priorityParagraph = document.createElement("p");
+  priorityParagraph.className = "text-muted priority-level";
+  priorityParagraph.id = "task-priority";
+  priorityParagraph.style.fontSize = "15px";
+  priorityParagraph.style.margin = "0 19px";
+  priorityParagraph.appendChild(document.createTextNode("Priority: "));
+
+  const prioritySpan = document.createElement("span");
+  prioritySpan.id = "prioritySpan";
+  prioritySpan.style.fontWeight = "bold";
+  prioritySpan.appendChild(document.createTextNode(priority.value));
+  priorityParagraph.appendChild(prioritySpan);
+
+  li.appendChild(completeCheckbox);
+  li.appendChild(document.createTextNode(newItem));
+  li.appendChild(deleteButton);
+  li.appendChild(editButton);
+  li.appendChild(dateTimeParagraph);
+  li.appendChild(dueDateParagraph);
+  li.appendChild(priorityParagraph); // Append the priority paragraph
+
+  items.appendChild(li);
+  saveTasksToLocalStorage();
+  document.getElementById("dueDate").value = "";
 }
 
 

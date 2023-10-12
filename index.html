@@ -58,18 +58,35 @@
             placeholder="Input your task"
           />
           <input type="text" id="dueDate" placeholder="Set due date" />
+          <input type="radio" name="priority" value="low" id="priorityLow" />
+          <label for="priorityLow">Low</label>
+          <input
+            type="radio"
+            name="priority"
+            value="medium"
+            id="priorityMedium"
+          />
+          <label for="priorityMedium">Medium</label>
+          <input type="radio" name="priority" value="high" id="priorityHigh" />
+          <label for="priorityHigh">High</label>
           <input
             type="submit"
             class="form_btn"
             id="submit"
             value="Add Task"
             disabled
-          
-            style="background-color: rgb(1,110,225); color: white;"
+            style="background-color: rgb(1, 110, 225); color: white"
           />
         </form>
 
-          <button id="clearAllTasks" class="btn btn-danger clear_btn" onclick="clearAllTasks();">Clear All Tasks</button>
+        <button
+          id="clearAllTasks"
+          class="btn btn-danger clear_btn"
+          onclick="clearAllTasks();"
+          type="button"
+        >
+          Clear All Tasks
+        </button>
 
         <div class="text-center">
           <h3 class="mt-4 text-center" id="heading-tasks">Tasks</h3>
@@ -80,15 +97,18 @@
         </div>
       </div>
     </div>
-    <br> <br>
-          <h2 style="text-align: center; color: white;">Why SimplyTasked?</h2>
-          <p style="text-align: center; color: white;">Simply, because it is a SIMPLE To-Do List Tool to organize your tasks efficiently.</p>
-          <br>
-          <div  class='list' style="color: white; text-align: center;">
-            <p>=> Intuitive task management</p>
-            <p>=> Seamless due date tracking</p>
-            <p>=> Beautiful and user-friendly design</p>
-          </div>
-
+    <br />
+    <br />
+    <h2 style="text-align: center; color: white">Why SimplyTasked?</h2>
+    <p style="text-align: center; color: white">
+      Simply, because it is a SIMPLE To-Do List Tool to organize your tasks
+      efficiently.
+    </p>
+    <br />
+    <div class="list" style="color: white; text-align: center">
+      <p>=> Intuitive task management</p>
+      <p>=> Seamless due date tracking</p>
+      <p>=> Beautiful and user-friendly design</p>
+    </div>
   </body>
 </html>
