@@ -40,14 +40,14 @@ body {
   flex: 1; /* Take remaining vertical space */
 }
 .text {
-  width: 100%;
   font-size: 50px;
   color: rgb(255, 255, 255);
   letter-spacing: 10px;
   border-right: 5px solid black;
   white-space: nowrap;
 
-  animation: typing 3s steps(10), cursor 0.4s step-end infinite alternate;
+  animation: typing 5s steps(12) infinite,
+    cursor 0.4s step-end infinite alternate;
 
   overflow: hidden;
   animation-fill-mode: forwards;
@@ -64,7 +64,7 @@ body {
     width: 0;
   }
   to {
-    width: 36%;
+    width: 40%;
   }
 }
 .text-center {
