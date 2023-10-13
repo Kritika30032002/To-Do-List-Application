@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <link rel="stylesheet" href="style.css" />
+    <script src="index.js"></script>
+
+    <title>To-Do List</title>
+  </head>
+  <body>
+    <div class="container-xl">
+      <header class="text-white p-5">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+              <img
+                id="todoImage"
+                src="images/todoWhite.png"
+                alt=""
+                style="height: 70px; margin-bottom: 20px"
+              />
+              <h1 class="text text-center">SimplyTasked</h1>
+
+              <input type="checkbox" id="modeToggle" class="mode-toggle" />
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div class="container main mt-5">
+        <h2 class="text-center mb-4">Add your tasks below</h2>
+
+        <label
+          id="lblsuccess"
+          class="text-success"
+          style="display: none"
+        ></label>
+        <label id="lblerror" class="text-danger" style="display: none"></label>
+
+        <form id="addForm" class="main_form">
+          <input
+            type="text"
+            onkeyup="toggleButton(this, 'submit')"
+            id="item"
+            placeholder="Input your task"
+          />
+          <input type="text" id="dueDate" placeholder="Set due date" />
+          <input
+            type="submit"
+            class="form_btn"
+            id="submit"
+            value="Add Task"
+            disabled
+          
+            style="background-color: rgb(1,110,225); color: white;"
+          />
+        </form>
+
+          <button id="clearAllTasks" class="btn btn-danger clear_btn" onclick="clearAllTasks();">Clear All Tasks</button>
+
+        <div class="text-center">
+          <h3 class="mt-4 text-center" id="heading-tasks">Tasks</h3>
+
+          <form id="addForm">
+            <ul class="list-group" id="items"></ul>
+          </form>
+        </div>
+      </div>
+    </div>
+    <br> <br>
+          <h2 style="text-align: center; color: white;">Why SimplyTasked?</h2>
+          <p style="text-align: center; color: white;">Simply, because it is a SIMPLE To-Do List Tool to organize your tasks efficiently.</p>
+          <br>
+          <div  class='list' style="color: white; text-align: center;">
+            <p>=> Intuitive task management</p>
+            <p>=> Seamless due date tracking</p>
+            <p>=> Beautiful and user-friendly design</p>
+          </div>
+
+  </body>
+</html>
