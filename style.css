@@ -336,7 +336,7 @@ input[type="checkbox"]:not(.task-completed) {
   outline: none;
   border-radius: 2rem;
   cursor: pointer;
-  box-shadow: inset 0 0 5px rgba(1, 110, 225);
+  box-shadow: inset 0 0 5px #0366cf;
 }
 
 input[type="checkbox"]:not(.task-completed)::before {
@@ -354,6 +354,29 @@ input[type="checkbox"]:not(.task-completed)::before {
 input[type="checkbox"]:not(.task-completed):checked::before {
   transform: translateX(100%);
   background: #fff;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 2px grey; 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgba(1, 110, 225);;
+  border: 3px solid white; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: ; 
 }
 
 /* input[type="checkbox"]:not(.task-completed):checked {
