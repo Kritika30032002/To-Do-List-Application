@@ -24,8 +24,6 @@ Thank you for considering contributing to our TODO List App. Your help is greatl
 
 Before you start contributing, ensure you have the following:
 
-- **Node.js**: You need Node.js (v14 or higher) installed. [Download Node.js](https://nodejs.org/).
-
 - **Git**: Make sure you have Git installed. [Download Git](https://git-scm.com/).
 
 - **GitHub Account**: You'll need a GitHub account to make contributions.
@@ -46,17 +44,7 @@ Before you start contributing, ensure you have the following:
    cd todo-list-app
    ```
 
-4. **Install Dependencies**: Install the project dependencies:
-
-   ```bash
-   npm install
-   ```
-
-5. **Start the Development Server**:
-
-   ```bash
-   Start it locally
-   ```
+4. Open the index.html file in your web browser to start using the application.
 
 Now, you have the TODO List App running locally.
 
