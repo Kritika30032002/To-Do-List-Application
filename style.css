@@ -141,9 +141,9 @@ body.dark-mode::before {
 }
 
 .light-mode .main {
-  background: rgba(0, 0, 0, 0.2);
-  box-shadow: 10px 10px 10px rgba(46, 54, 68, 0.03);
-  border: 10px solid rgba(0, 0, 0, 0.05);
+  background: rgb(8 87 174 / 19%);
+  box-shadow: 10px 10px 10px rgb(0 34 60 / 40%);
+  border: 5px solid rgb(0 20 75 / 4%);
 }
 
 .dark-mode .main {
@@ -215,7 +215,7 @@ body.dark-mode::before {
   text-transform: uppercase;
   cursor: pointer;
   transition: opacity 0.3s;
-  border: 2px solid transparent;
+  border: 1px solid #4687f9;
 }
 
 .form_btn:hover,
@@ -400,4 +400,20 @@ input[type="checkbox"]:not(.task-completed):checked::before {
     padding: 0.5rem 1rem;
     width: auto;
   }
+}
+
+body::-webkit-scrollbar {
+  width: 0.5em;
+  background-color:  rgba(255, 255, 255, 0.989);
+  
+}
+ 
+body::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(81, 81, 81, 0.95);
+}
+ 
+body::-webkit-scrollbar-thumb {
+  background: rgb(2,0,36);
+background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+  border-radius: 5px;
 }
