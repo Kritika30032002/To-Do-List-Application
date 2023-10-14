@@ -189,7 +189,7 @@ function toggleMode() {
 function clearAllTasks() {
     // Removes all tasks from the task list
     while (taskList.firstChild) {
-        ulElement.removeChild(taskList.firstChild);
+        taskList.removeChild(taskList.firstChild);
     }
 
     // Hide the button after the task list is cleared
