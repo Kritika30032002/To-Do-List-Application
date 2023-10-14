@@ -40,14 +40,14 @@ body {
   flex: 1; /* Take remaining vertical space */
 }
 .text {
-  width: 100%;
   font-size: 50px;
   color: rgb(255, 255, 255);
   letter-spacing: 10px;
   border-right: 5px solid black;
   white-space: nowrap;
 
-  animation: typing 3s steps(10), cursor 0.4s step-end infinite alternate;
+  animation: typing 5s steps(12) infinite,
+    cursor 0.4s step-end infinite alternate;
 
   overflow: hidden;
   animation-fill-mode: forwards;
@@ -64,7 +64,7 @@ body {
     width: 0;
   }
   to {
-    width: 65%;
+    width: 40%;
   }
 }
 .text-center {
@@ -141,9 +141,9 @@ body.dark-mode::before {
 }
 
 .light-mode .main {
-  background: rgba(0, 0, 0, 0.2);
-  box-shadow: 10px 10px 10px rgba(46, 54, 68, 0.03);
-  border: 10px solid rgba(0, 0, 0, 0.05);
+  background: rgb(8 87 174 / 19%);
+  box-shadow: 10px 10px 10px rgb(0 34 60 / 40%);
+  border: 5px solid rgb(0 20 75 / 4%);
 }
 
 .dark-mode .main {
@@ -215,7 +215,7 @@ body.dark-mode::before {
   text-transform: uppercase;
   cursor: pointer;
   transition: opacity 0.3s;
-  border: 2px solid transparent;
+  border: 1px solid #4687f9;
 }
 
 .form_btn:hover,
