@@ -217,18 +217,18 @@ function toggleMode() {
 function clearAllTasks() {
   // Removes all tasks from the task list
   //changing confirmation message
-  const confirmationBox = document.getElementById("custom-confirm");
-  document.getElementById("confirm-msg").style.backgroundColor = "Red";
-  document.getElementById("confirm-msg").style.color = "White";
-  document.getElementById("confirm-msg").innerText =
+  const confirmationBoxAll = document.getElementById("custom-confirm-all");
+  document.getElementById("confirm-msg-all").style.backgroundColor = "Red";
+  document.getElementById("confirm-msg-all").style.color = "White";
+  document.getElementById("confirm-msg-all").innerText =
     "Are you sure you want to delete all tasks?";
 
-  const confirmYesButton = document.getElementById("confirm-yes");
-  const confirmNoButton = document.getElementById("confirm-no");
-  const confirmCancelButton = document.getElementById("confirm-cancel");
+  const confirmYesButtonAll = document.getElementById("confirm-yes-all");
+  const confirmNoButtonAll = document.getElementById("confirm-no-all");
+  const confirmCancelButtonAll = document.getElementById("confirm-cancel-all");
 
-  confirmYesButton.addEventListener("click", () => {
-    confirmationBox.style.display = "none";
+  confirmYesButtonAll.addEventListener("click", () => {
+    confirmationBoxAll.style.display = "none";
     while (taskList.firstChild) {
       taskList.removeChild(taskList.firstChild);
     }
@@ -241,14 +241,14 @@ function clearAllTasks() {
     saveTasksToLocalStorage();
   });
 
-  confirmNoButton.addEventListener("click", () => {
-    confirmationBox.style.display = "none";
+  confirmNoButtonAll.addEventListener("click", () => {
+    confirmationBoxAll.style.display = "none";
   });
-  confirmCancelButton.addEventListener("click", () => {
-    confirmationBox.style.display = "none";
+  confirmCancelButtonAll.addEventListener("click", () => {
+    confirmationBoxAll.style.display = "none";
   });
 
-  confirmationBox.style.display = "flex";
+  confirmationBoxAll.style.display = "flex";
 }
 
 function createNewTask(taskTitle, createdDate, dueDate) {

@@ -375,7 +375,8 @@ input[type="checkbox"]:not(.task-completed):checked::before {
   background: #fff;
 }
 /* CSS for styling the confirmation dialog */
-.custom-confirm {
+.custom-confirm,
+.custom-confirm-all {
   display: none;
   position: fixed;
   top: 0;
@@ -388,7 +389,8 @@ input[type="checkbox"]:not(.task-completed):checked::before {
   justify-content: center;
 }
 
-.confirm-content {
+.confirm-content,
+.confirm-content-all {
   background-color: #fff;
   padding: 20px;
   top: 20px;
@@ -416,12 +418,15 @@ h4 {
   color: #000;
 }
 
-.confirm-content p {
+.confirm-content,
+.confirm-content-all p {
   margin-bottom: 20px;
 }
 
 #confirm-yes,
-#confirm-no {
+#confirm-no,
+#confirm-yes-all,
+#confirm-no-all {
   margin: 10px;
   padding: 10px 20px;
   border: none;
@@ -429,12 +434,14 @@ h4 {
   border-radius: 5px;
 }
 
-#confirm-yes {
+#confirm-yes,
+#confirm-yes-all {
   background-color: #5cb85c;
   color: #fff;
 }
 
-#confirm-no {
+#confirm-no,
+#confirm-no-all {
   background-color: #d9534f;
   color: #fff;
 }
