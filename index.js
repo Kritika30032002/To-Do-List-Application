@@ -138,10 +138,14 @@ function addItem(e) {
 
 function handleItemClick(e) {
     if (e.target.classList.contains("delete")) {
+        if(confirm("Are you sure you want to delte this todo item ?") == true){
         const li = e.target.parentElement;
         li.parentElement.removeChild(li);
         tasksCheck()
         displaySuccessMessage("Text deleted successfully");
+    }else{
+        e.preventDefault();
+    }
     }
     if (e.target.classList.contains("edit")) {
         e.preventDefault();
