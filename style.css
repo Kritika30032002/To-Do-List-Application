@@ -40,7 +40,7 @@ body {
   flex: 1; /* Take remaining vertical space */
 }
 .text {
-  font-size: 50px;
+  font-size: 40px;
   color: rgb(255, 255, 255);
   letter-spacing: 10px;
   border-right: 5px solid black;
@@ -174,21 +174,20 @@ body.dark-mode::before {
   background: #fff;
   border-radius: 5rem;
   display: flex;
-  height: 4.2rem;
   justify-content: space-between;
   align-items: center;
-  padding: 0 1rem;
+  padding: 1rem;
 }
 
 .list-group-item {
   font-size: 1.3rem;
-  margin-top: 0.4rem;
+  margin: 0.4rem;
   text-align: left;
   color: #000;
-  margin-right: 20px;
-  border-radius: 5rem !important;
+  border-radius: 1rem !important;
   word-break: break-all;
   word-wrap: break-word;
+  padding: 0.75rem;
 }
 
 .list-group-item button {
@@ -269,7 +268,7 @@ h3 {
 @media screen and (max-width: 415px) {
   .main_form .form_btn {
     font-size: 1rem;
-    padding: 0.8rem;
+    padding: 0.2rem 0.8rem;
   }
   .main {
     width: 100%;
@@ -390,19 +389,76 @@ input[type="checkbox"]:not(.task-completed):checked::before {
     padding: 0.8rem 2rem;
   }
 
-  .main_form {
-    flex-direction: column;
-  }
-
-  .main_form input[type="text"] {
-    width: 100%;
-    margin-bottom: 10px;
-  }
 
   .form_btn {
     font-size: 1rem;
     padding: 0.5rem 1rem;
     width: auto;
+  }
+}
+
+@media screen and (max-width: 570px) {
+  .form_btn {
+    font-size: 1rem;
+    padding: 0.8rem 2rem;
+  }
+
+  .main_form {
+    flex-direction: column;
+    border-radius: 2rem;
+  }
+
+  .main_form input[type="text"] {
+    width: 100%;
+    margin: 0.5rem;
+  }
+
+  .list-group {
+    margin-top: 1rem;
+  }
+}
+@media screen and (max-width: 424px) {
+
+  .main_form input[type="text"] {
+    width: 100%;
+  }
+
+  .list-group-item button {
+    margin: 0;
+    padding: 0.2rem 0.5rem;
+    border-radius: 1rem;
+  }
+
+  .form_btn{
+    padding: 0.7rem 1rem;
+    margin: 1rem;
+  }
+  .list-group {
+    margin-top: 1rem;
+  }
+  #dueDate {
+    padding: 0.7rem 1rem;
+    margin: auto;
+}
+}
+@media screen and (max-width: 390px) {
+
+  .list-group-item {
+    padding: 0.3rem;
+  }
+  .list-group {
+    margin-top: 1rem;
+  }
+  .main_form .form_btn {
+    font-size: 0.7rem;
+    padding: 0.7rem 1rem;
+  }
+  #dueDate {
+    font-size: smaller;
+    width: 120px;
+    height: 35px;
+    margin: auto;
+    padding: 0;
   }
 }
 
