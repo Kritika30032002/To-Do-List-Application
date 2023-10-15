@@ -112,15 +112,17 @@ function handleItemClick(e) {
     e.preventDefault();
     const li = e.target.parentElement;
     const confirmationBox = document.getElementById("custom-confirm");
-
+    document.getElementById("confirm-msg").style.backgroundColor = "White";
+    document.getElementById("confirm-msg").style.color = "Black";
+    document.getElementById("confirm-msg").innerText =
+      "Are you sure you want to delete this task?";
     const confirmYesButton = document.getElementById("confirm-yes");
     const confirmNoButton = document.getElementById("confirm-no");
     const confirmCancelButton = document.getElementById("confirm-cancel");
 
     confirmYesButton.addEventListener("click", () => {
       confirmationBox.style.display = "none";
-      //   li.parentElement.removeChild(li);
-      li.remove();
+      li.parentElement.removeChild(li);
       tasksCheck();
       displaySuccessMessage("Task deleted successfully");
       saveTasksToLocalStorage();
