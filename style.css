@@ -91,6 +91,8 @@ body.dark-mode {
   background-image: url("https://cdn.pixabay.com/photo/2022/07/31/08/03/to-do-7355222_1280.jpg"); /* Dark mode background image (same as light mode) */
 
   color: #fff; /* Text color for dark mode */
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 body.dark-mode::before {
