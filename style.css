@@ -374,6 +374,72 @@ input[type="checkbox"]:not(.task-completed):checked::before {
   transform: translateX(100%);
   background: #fff;
 }
+/* CSS for styling the confirmation dialog */
+.custom-confirm {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.confirm-content {
+  background-color: #fff;
+  padding: 20px;
+  top: 20px;
+  border-radius: 5px;
+  text-align: center;
+  position: relative;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 20px;
+  color: #333;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #000;
+}
+h4 {
+  color: #000;
+}
+
+.confirm-content p {
+  margin-bottom: 20px;
+}
+
+#confirm-yes,
+#confirm-no {
+  margin: 10px;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+#confirm-yes {
+  background-color: #5cb85c;
+  color: #fff;
+}
+
+#confirm-no {
+  background-color: #d9534f;
+  color: #fff;
+}
+
+/* Rest of your CSS styles remain unchanged */
 
 /* input[type="checkbox"]:not(.task-completed):checked {
     background: linear-gradient(to right, rgba(126, 64, 246, 1), rgba(80, 139, 252, 1));
@@ -388,7 +454,6 @@ input[type="checkbox"]:not(.task-completed):checked::before {
     font-size: 1rem;
     padding: 0.8rem 2rem;
   }
-
 
   .form_btn {
     font-size: 1rem;
@@ -418,7 +483,6 @@ input[type="checkbox"]:not(.task-completed):checked::before {
   }
 }
 @media screen and (max-width: 424px) {
-
   .main_form input[type="text"] {
     width: 100%;
   }
@@ -429,7 +493,7 @@ input[type="checkbox"]:not(.task-completed):checked::before {
     border-radius: 1rem;
   }
 
-  .form_btn{
+  .form_btn {
     padding: 0.7rem 1rem;
     margin: 1rem;
   }
@@ -439,10 +503,9 @@ input[type="checkbox"]:not(.task-completed):checked::before {
   #dueDate {
     padding: 0.7rem 1rem;
     margin: auto;
-}
+  }
 }
 @media screen and (max-width: 390px) {
-
   .list-group-item {
     padding: 0.3rem;
   }
