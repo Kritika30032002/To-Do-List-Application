@@ -46,14 +46,14 @@ body {
   border-right: 5px solid black;
   white-space: nowrap;
 
-  animation: typing 5s steps(12) infinite, cursor 0.4s step-end infinite alternate;
+  animation: typing 5s steps(12) infinite,
+    cursor 0.4s step-end infinite alternate;
 
   overflow: hidden;
   animation-fill-mode: forwards;
 }
 
 @keyframes cursor {
-
   50% {
     border-color: transparent;
   }
@@ -64,8 +64,7 @@ body {
     width: 0;
   }
   to {
-    width: 40%;
-
+    width: 65%;
   }
 }
 .text-center {
@@ -86,7 +85,6 @@ body.light-mode {
 }
 
 body.dark-mode {
-
   background: #0f0000; /* Dark mode background color */
   background-image: url("https://cdn.pixabay.com/photo/2022/07/31/08/03/to-do-7355222_1280.jpg"); /* Dark mode background image (same as light mode) */
 
@@ -105,7 +103,6 @@ body.dark-mode::before {
     0,
     0,
     0.9
-
   ); /* Adjust the alpha (last) value to control darkness */
   z-index: -1;
 }
@@ -251,12 +248,10 @@ body.dark-mode::before {
   font-size: 1.2rem;
 }
 
-
-.list{
+.list {
   display: flex;
-  flex-direction:row;
+  flex-direction: row;
   justify-content: space-evenly;
-  
 }
 .main h2,
 h3 {
@@ -292,6 +287,28 @@ h3 {
 
 .completed {
   text-decoration: line-through;
+}
+
+.message {
+  width: 300px;
+  padding: 15px;
+  border: 2px dashed white;
+  border-radius: 5px;
+  background-color: rgb(34, 148, 34);
+  color: white;
+  position: fixed;
+  z-index: 10;
+  top: 20px;
+  right: 20px;
+  font-size: 18px;
+}
+
+.success-message {
+  background-color: rgb(34, 148, 34);
+}
+
+.danger-message {
+  background-color: rgb(242, 27, 27);
 }
 
 .form-check-input {
@@ -387,16 +404,20 @@ input[type="checkbox"]:not(.task-completed):checked::before {
 
 body::-webkit-scrollbar {
   width: 0.5em;
-  background-color:  rgba(255, 255, 255, 0.989);
-  
+  background-color: rgba(255, 255, 255, 0.989);
 }
- 
+
 body::-webkit-scrollbar-track {
   box-shadow: inset 0 0 6px rgba(81, 81, 81, 0.95);
 }
- 
+
 body::-webkit-scrollbar-thumb {
-  background: rgb(2,0,36);
-background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(9, 9, 121, 1) 35%,
+    rgba(0, 212, 255, 1) 100%
+  );
   border-radius: 5px;
 }
