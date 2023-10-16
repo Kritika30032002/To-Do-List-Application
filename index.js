@@ -377,3 +377,23 @@ function clearAllTasks() {
 
     saveTasksToLocalStorage();
 }
+
+
+const searchButton = document.getElementById("search-button");
+const searchInput = document.querySelector(".form-control");
+
+searchButton.addEventListener("click", function () {
+  const filter = searchInput.value.toUpperCase();
+  const items = document.querySelectorAll(".list-group-item");
+
+  for (let i = 0; i < items.length; i++) {
+    const taskName = items[i].querySelector("label");
+    const taskNameText = taskName.textContent.toUpperCase();
+
+    if (taskNameText.indexOf(filter) > -1) {
+      items[i].style.display = "";
+    } else {
+      items[i].style.display = "none";
+    }
+  }
+});
