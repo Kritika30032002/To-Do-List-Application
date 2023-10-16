@@ -41,6 +41,7 @@ function tasksCheck() {
     tasksHeading.classList.toggle("hidden");
     document.querySelector(".clear_btn").style.display = "none";
     document.querySelector(".sort_btn").style.display = "none";
+
   }
 }
 
@@ -102,19 +103,41 @@ function addItem(e) {
   }
 
   const creationDateTime = new Date().toLocaleString();
-
   createNewTask(newTaskTitle, creationDateTime, dueDate);
-
   saveTasksToLocalStorage();
   document.getElementById("dueDate").value = "";
 }
 
 function handleItemClick(e) {
   if (e.target.classList.contains("delete")) {
+    e.preventDefault();
     const li = e.target.parentElement;
-    li.parentElement.removeChild(li);
-    tasksCheck();
-    displaySuccessMessage("Text deleted successfully");
+    const confirmationBox = document.getElementById("custom-confirm");
+    document.getElementById("confirm-msg").style.backgroundColor = "White";
+    document.getElementById("confirm-msg").style.color = "Black";
+    document.getElementById("confirm-msg").innerText =
+      "Are you sure you want to delete this task?";
+    const confirmYesButton = document.getElementById("confirm-yes");
+    const confirmNoButton = document.getElementById("confirm-no");
+    const confirmCancelButton = document.getElementById("confirm-cancel");
+
+    confirmYesButton.addEventListener("click", () => {
+      confirmationBox.style.display = "none";
+      li.parentElement.removeChild(li);
+      tasksCheck();
+      displaySuccessMessage("Task deleted successfully");
+      saveTasksToLocalStorage();
+    });
+
+    confirmNoButton.addEventListener("click", () => {
+      confirmationBox.style.display = "none";
+    });
+    confirmCancelButton.addEventListener("click", () => {
+      confirmationBox.style.display = "none";
+    });
+
+    confirmationBox.style.display = "flex";
+
   }
   saveTasksToLocalStorage();
 }
@@ -159,6 +182,7 @@ function saveTasksToLocalStorage() {
     const dueDate = task
       .querySelector("#task-dueDate")
       .textContent.split(":")[1];
+
     const taskObj = {
       text: taskText,
       completed: isCompleted,
@@ -180,6 +204,7 @@ function loadTasksFromLocalStorage() {
     tasksHeading.classList.remove("hidden");
     document.querySelector(".clear_btn").style.display = "inline";
     document.querySelector(".sort_btn").style.display = "inline";
+
     tasks.forEach((task) => {
       createNewTask(task.text, task.createdAt, task.dueDate);
     });
@@ -241,6 +266,41 @@ window.onclick = function (event) {
     }
   }
 };
+
+  //changing confirmation message
+  const confirmationBoxAll = document.getElementById("custom-confirm-all");
+  document.getElementById("confirm-msg-all").style.backgroundColor = "Red";
+  document.getElementById("confirm-msg-all").style.color = "White";
+  document.getElementById("confirm-msg-all").innerText =
+    "Are you sure you want to delete all tasks?";
+
+  const confirmYesButtonAll = document.getElementById("confirm-yes-all");
+  const confirmNoButtonAll = document.getElementById("confirm-no-all");
+  const confirmCancelButtonAll = document.getElementById("confirm-cancel-all");
+
+  confirmYesButtonAll.addEventListener("click", () => {
+    confirmationBoxAll.style.display = "none";
+    while (taskList.firstChild) {
+      taskList.removeChild(taskList.firstChild);
+    }
+    // Hide the button after the task list is cleared
+    document.querySelector(".clear_btn").style.display = "none";
+    console.log("task cleared");
+
+    // Hide the tasks heading since there are no tasks left
+    tasksHeading.classList.add("hidden");
+    saveTasksToLocalStorage();
+  });
+
+  confirmNoButtonAll.addEventListener("click", () => {
+    confirmationBoxAll.style.display = "none";
+  });
+  confirmCancelButtonAll.addEventListener("click", () => {
+    confirmationBoxAll.style.display = "none";
+  });
+
+  confirmationBoxAll.style.display = "flex";
+}
 
 function createNewTask(taskTitle, createdDate, dueDate) {
   const li = document.createElement("li");
