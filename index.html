@@ -74,7 +74,13 @@
       </form>
 
       <button id="clearAllTasks" class="btn btn-danger clear_btn" onclick="clearAllTasks();">Clear All Tasks</button>
-
+      <div class="dropdown">
+        <button onclick="myFunction()" class="btn sort_btn">Sort By</button>
+        <div id="myDropdown" class="dropdown-content">
+          <a onclick="sortByDueDate('Early');">Early To Do</a>
+          <a onclick="sortByDueDate('Late');">Lately To Do</a>
+        </div>
+      </div>
       <div class="text-center">
         <h3 class="mt-4 text-center" id="heading-tasks">Tasks</h3>
 
