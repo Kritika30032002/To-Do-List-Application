@@ -9,8 +9,8 @@
 /* body {
   position: relative;
   width: 100%;
-  background-image: url('https://cdn.pixabay.com/photo/2022/07/31/08/03/to-do-7355222_1280.jpg'); 
-  
+  background-image: url('https://cdn.pixabay.com/photo/2022/07/31/08/03/to-do-7355222_1280.jpg');
+
   background: linear-gradient(to right, rgba(126, 64, 246, 1), rgba(80, 139, 252, 1));
   font-family: 'Montserrat', sans-serif;
 } */
@@ -24,11 +24,9 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background: linear-gradient(
-    to right,
-    rgba(126, 64, 246, 1),
-    rgba(80, 139, 252, 1)
-  );
+  background: linear-gradient(to right,
+      rgba(126, 64, 246, 1),
+      rgba(80, 139, 252, 1));
   /* background-image: url('https://cdn.pixabay.com/photo/2022/07/31/08/03/to-do-7355222_1280.jpg');  */
   background-size: cover;
   background-position: center;
@@ -37,8 +35,10 @@ body {
 .container-xl {
   position: relative;
   width: 100%;
-  flex: 1; /* Take remaining vertical space */
+  flex: 1;
+  /* Take remaining vertical space */
 }
+
 .text {
   font-size: 40px;
   color: rgb(255, 255, 255);
@@ -63,34 +63,39 @@ body {
   from {
     width: 0;
   }
+
   to {
     width: 65%;
   }
 }
+
 .text-center {
   margin-left: auto;
   margin-right: auto;
 }
+
 /* .container.main.mt-3{
   padding-top: 10%;
 } */
 
 body.light-mode {
-  background: linear-gradient(
-    to right,
-    rgba(1, 110, 225),
-    rgba(80, 139, 252, 1)
-  );
-  background-image: url("https://cdn.pixabay.com/photo/2022/07/31/08/03/to-do-7355222_1280.jpg"); /* Light mode background image */
+  background: linear-gradient(to right,
+      rgba(1, 110, 225),
+      rgba(80, 139, 252, 1));
+  background-image: url("https://cdn.pixabay.com/photo/2022/07/31/08/03/to-do-7355222_1280.jpg");
+  /* Light mode background image */
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 body.dark-mode {
-  background: #0f0000; /* Dark mode background color */
-  background-image: url("https://cdn.pixabay.com/photo/2022/07/31/08/03/to-do-7355222_1280.jpg"); /* Dark mode background image (same as light mode) */
+  background: #0f0000;
+  /* Dark mode background color */
+  background-image: url("https://cdn.pixabay.com/photo/2022/07/31/08/03/to-do-7355222_1280.jpg");
+  /* Dark mode background image (same as light mode) */
 
-  color: #fff; /* Text color for dark mode */
+  color: #fff;
+  /* Text color for dark mode */
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -102,12 +107,11 @@ body.dark-mode::before {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(
-    0,
-    0,
-    0,
-    0.9
-  ); /* Adjust the alpha (last) value to control darkness */
+  background-color: rgba(0,
+      0,
+      0,
+      0.9);
+  /* Adjust the alpha (last) value to control darkness */
   z-index: -1;
 }
 
@@ -208,11 +212,9 @@ body.dark-mode::before {
   color: #fff;
   letter-spacing: 0.11rem;
   border: none;
-  background: linear-gradient(
-    to right,
-    rgba(1, 110, 225),
-    rgba(80, 139, 252, 1)
-  );
+  background: linear-gradient(to right,
+      rgba(1, 110, 225),
+      rgba(80, 139, 252, 1));
   padding: 0.6rem 2rem;
   border-radius: 5rem;
   text-transform: uppercase;
@@ -256,6 +258,7 @@ body.dark-mode::before {
   flex-direction: row;
   justify-content: space-evenly;
 }
+
 .main h2,
 h3 {
   width: 20rem;
@@ -270,11 +273,13 @@ h3 {
     font-size: 1rem;
     padding: 0.2rem 0.8rem;
   }
+
   .main {
     width: 100%;
     height: 380px;
     padding: 1rem;
   }
+
   .main_form #item {
     font-size: 1rem;
   }
@@ -327,9 +332,10 @@ h3 {
   text-align: center;
   text-transform: uppercase;
   font-weight: bold;
-  width: 140px;
+  width: 156px;
   height: 50px;
   margin-right: 0.8rem;
+  font-size: 14px;
 }
 
 #dueDate:hover {
@@ -374,6 +380,7 @@ input[type="checkbox"]:not(.task-completed):checked::before {
   transform: translateX(100%);
   background: #fff;
 }
+
 /* CSS for styling the confirmation dialog */
 .custom-confirm,
 .custom-confirm-all {
@@ -414,6 +421,7 @@ h2 {
   margin-bottom: 10px;
   color: #000;
 }
+
 h4 {
   color: #000;
 }
@@ -489,6 +497,7 @@ h4 {
     margin-top: 1rem;
   }
 }
+
 @media screen and (max-width: 424px) {
   .main_form input[type="text"] {
     width: 100%;
@@ -504,25 +513,31 @@ h4 {
     padding: 0.7rem 1rem;
     margin: 1rem;
   }
+
   .list-group {
     margin-top: 1rem;
   }
+
   #dueDate {
     padding: 0.7rem 1rem;
     margin: auto;
   }
 }
+
 @media screen and (max-width: 390px) {
   .list-group-item {
     padding: 0.3rem;
   }
+
   .list-group {
     margin-top: 1rem;
   }
+
   .main_form .form_btn {
     font-size: 0.7rem;
     padding: 0.7rem 1rem;
   }
+
   #dueDate {
     font-size: smaller;
     width: 120px;
@@ -543,11 +558,9 @@ body::-webkit-scrollbar-track {
 
 body::-webkit-scrollbar-thumb {
   background: rgb(2, 0, 36);
-  background: linear-gradient(
-    90deg,
-    rgba(2, 0, 36, 1) 0%,
-    rgba(9, 9, 121, 1) 35%,
-    rgba(0, 212, 255, 1) 100%
-  );
+  background: linear-gradient(90deg,
+      rgba(2, 0, 36, 1) 0%,
+      rgba(9, 9, 121, 1) 35%,
+      rgba(0, 212, 255, 1) 100%);
   border-radius: 5px;
 }
