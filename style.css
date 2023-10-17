@@ -360,6 +360,7 @@ input[type="checkbox"]:not(.task-completed) {
 
 input[type="checkbox"]:not(.task-completed)::before {
   content: "";
+  content: "🌙"; 
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -368,16 +369,17 @@ input[type="checkbox"]:not(.task-completed)::before {
   top: 0;
   left: 0;
   transition: 0.5s;
+  font-size: 25px; 
+  color: #000; 
+  transform: scale(1); 
+  transition: transform 0.5s;
 }
 
-input[type="checkbox"]:not(.task-completed):checked::before {
-  transform: translateX(100%);
-  background: #fff;
+input[type="checkbox"]:checked:not(.task-completed)::before {
+  transform: scale(0); 
 }
 
-/* input[type="checkbox"]:not(.task-completed):checked {
-    background: linear-gradient(to right, rgba(126, 64, 246, 1), rgba(80, 139, 252, 1));
-} */
+
 
 @media screen and (max-width: 768px) {
   .mode-toggle {
