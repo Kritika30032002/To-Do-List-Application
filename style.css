@@ -24,36 +24,38 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background: linear-gradient(
+  
+  
+  /*background: linear-gradient(
     to right,
     rgba(126, 64, 246, 1),
     rgba(80, 139, 252, 1)
-  );
+  ); */
+
   /* background-image: url('https://cdn.pixabay.com/photo/2022/07/31/08/03/to-do-7355222_1280.jpg');  */
-  background-size: cover;
-  background-position: center;
+  /* background-size: cover;
+  background-position: center; */
 }
 
-.container-xl {
-  position: relative;
-  width: 100%;
-  flex: 1; /* Take remaining vertical space */
-}
+
 .text {
-  font-size: 40px;
+  font-family: cursive;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 60px;
   color: rgb(255, 255, 255);
-  letter-spacing: 10px;
-  border-right: 5px solid black;
+  letter-spacing: 3px;
+  /* border-right: 5px solid black;
   white-space: nowrap;
 
-  animation: typing 5s steps(12) infinite,
+  animation: typing 5s steps(13) infinite,
     cursor 0.4s step-end infinite alternate;
 
   overflow: hidden;
-  animation-fill-mode: forwards;
+  animation-fill-mode: forwards; */
 }
 
-@keyframes cursor {
+/* @keyframes cursor {
   50% {
     border-color: transparent;
   }
@@ -66,33 +68,52 @@ body {
   to {
     width: 65%;
   }
-}
+} */
+
+
 .text-center {
   margin-left: auto;
   margin-right: auto;
 }
+
+
 /* .container.main.mt-3{
   padding-top: 10%;
 } */
 
 body.light-mode {
-  background: linear-gradient(
-    to right,
-    rgba(1, 110, 225),
-    rgba(80, 139, 252, 1)
-  );
-  background-image: url("https://cdn.pixabay.com/photo/2022/07/31/08/03/to-do-7355222_1280.jpg"); /* Light mode background image */
-  background-repeat: no-repeat;
-  background-size: cover;
+
+  
+  background: linear-gradient(300deg,deepskyblue,rgb(151, 53, 193),#4f69d2,#a1acd4);
+  background-size: 240% 240%;
+  animation: gradient-animation 8s ease infinite;
+
+
+  /* background-image: url("https://cdn.pixabay.com/photo/2022/07/31/08/03/to-do-7355222_1280.jpg"); Light mode background image */
+  /* background-repeat: no-repeat;
+  background-size: cover; */
 }
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 
 body.dark-mode {
   background: #0f0000; /* Dark mode background color */
-  background-image: url("https://cdn.pixabay.com/photo/2022/07/31/08/03/to-do-7355222_1280.jpg"); /* Dark mode background image (same as light mode) */
+  /* background-image: url("https://cdn.pixabay.com/photo/2022/07/31/08/03/to-do-7355222_1280.jpg"); Dark mode background image (same as light mode) */
 
   color: #fff; /* Text color for dark mode */
-  background-repeat: no-repeat;
-  background-size: cover;
+  /* background-repeat: no-repeat;
+  background-size: cover; */
 }
 
 body.dark-mode::before {
@@ -130,6 +151,11 @@ body.dark-mode::before {
   height: 100%;
 } */
 
+.logo{
+  margin:auto;
+}
+
+
 .main {
   position: relative;
   width: 48rem;
@@ -145,7 +171,8 @@ body.dark-mode::before {
 }
 
 .light-mode .main {
-  background: rgb(8 87 174 / 19%);
+  margin: auto;
+  background: rgba(8, 58, 112, 0.19);
   box-shadow: 10px 10px 10px rgb(0 34 60 / 40%);
   border: 5px solid rgb(0 20 75 / 4%);
 }
@@ -154,17 +181,6 @@ body.dark-mode::before {
   background: rgba(255, 255, 255, 0.2);
   box-shadow: 10px 10px 10px rgba(196, 204, 220, 0.03);
   border: 10px solid rgba(255, 255, 255, 0.05);
-}
-
-.main {
-  position: relative;
-  width: 48rem;
-  height: 100%;
-  text-align: center;
-  padding: 4rem;
-  border-radius: 2em;
-  backdrop-filter: blur(45px);
-  background-clip: padding-box;
 }
 
 .main_form {
@@ -248,7 +264,9 @@ body.dark-mode::before {
 .main_form #item::placeholder {
   color: #000000;
   letter-spacing: 0.11rem;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
+  font-style: italic;
+  padding-left: 30px;
 }
 
 .list {
@@ -256,13 +274,14 @@ body.dark-mode::before {
   flex-direction: row;
   justify-content: space-evenly;
 }
-.main h2,
-h3 {
-  width: 20rem;
-
+.main h2 {
+  font-family: cursive;
+  font-style: italic;
+  font-weight: 400;
+  color:azure;
+  width: 100%;
   margin: auto;
-  border-bottom: 2px solid #ffffff;
-  font-weight: 600;
+  /* border-bottom: 2px solid #ffffff; */
 }
 
 @media screen and (max-width: 415px) {
@@ -312,6 +331,39 @@ h3 {
 
 .danger-message {
   background-color: rgb(242, 27, 27);
+}
+
+
+.footer{
+  margin: auto;
+}
+
+.footer h2{
+  text-align: center;
+  color: #fff;
+  font-family: cursive;
+  font-style: italic;
+  font-weight: 400;
+  margin: 20px;
+  font-size: 40px;
+}
+
+.footer p{
+  text-align: center;
+  color: azure;
+  font-size: 20px;
+  font-family: cursive;
+  font-style: italic;
+
+}
+
+.footer ul{
+  text-align: left;
+  color: azure;
+  font-size: 20px;
+  font-family: cursive;
+  font-style: italic;
+  list-style-type: square;
 }
 
 .form-check-input {

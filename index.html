@@ -1,98 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="shortcut icon" href="images/todoWhite.png" type="image/x-icon">
-  <link
-    rel="stylesheet"
-    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-    crossorigin="anonymous"
-  />
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
-  />
+  <link rel="shortcut icon" href="images/todoWhite.png" type="image/x-icon" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <link rel="stylesheet" href="style.css" />
   <title>To-Do List</title>
 </head>
-<body>
-  <div
-    id="lblsuccess"
-    class="message success-message"
-    style="display: none"
-  ></div>
-  <div 
-    id="lblerror" 
-    class="message danger-message" 
-    style="display: none">
-  </div>
-  <div class="container-xl">
-    <header class="text-white p-5">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12 col-md-12 col-sm-12 text-center">
-            <img
-              id="todoImage"
-              src="images/todoWhite.png"
-              alt=""
-              style="height: 70px; margin-bottom: 20px"
-            />
-            <h1 class="text text-center">SimplyTasked</h1>
 
-            <input type="checkbox" id="modeToggle" class="mode-toggle" />
-          </div>
+<body>
+  <div id="lblsuccess" class="message success-message" style="display: none"></div>
+  <div id="lblerror" class="message danger-message" style="display: none"></div>
+
+      <div class="container-fluid logo">
+
+        <div class="row">
+          <div class="col-lg-1 col-md-2 col-sm-2 text-center"><img id="todoImage" src="images/todoWhite.png" alt="" style="height: 70px; width: 70px;" /></div>
+          <div class="col-lg-10 col-md-8 col-sm-8"><h1 class="text">SimplyTasked</h1></div>
+          <div class="col-lg-1 col-md-2 col-sm-2 text-center"><input type="checkbox" id="modeToggle" class="mode-toggle" /></div>
         </div>
       </div>
-    </header>
 
-    <div class="container main mt-5">
+    <div class="container-fluid main mt-2 p-5">
       <h2 class="text-center mb-4">Add your tasks below</h2>
 
       <form id="addForm" class="main_form">
-        <input
-          type="text"
-          onkeyup="enableSubmit(this, 'submitBtn')"
-          id="item"
-          placeholder="Input your task"
-        />
-        <input type="text" id="dueDate" placeholder="Set your due date" />
-        <input
-          type="submit"
-          class="form_btn"
-          id="submitBtn"
-          value="+ Add Task"
-          disabled
-        
-          style="background-color: rgb(1,110,225); color: white;"
-        />
-        <button id="editTask" class="form_btn" style="display: none;">
+        <input type="text" onkeyup="enableSubmit(this, 'submitBtn')" id="item" placeholder="Input your task" />
+        <input type="date" id="dueDate" placeholder="Due date" />
+        <input type="submit" class="form_btn" id="submitBtn" value="Add Task" disabled
+          style="background-color: rgb(1, 110, 225); color: white" />
+        <button id="editTask" class="form_btn" style="display: none">
           Edit
         </button>
       </form>
 
-      <button id="clearAllTasks" class="btn btn-danger clear_btn" onclick="clearAllTasks();">Clear All Tasks</button>
+      <button id="clearAllTasks" class="btn btn-danger clear_btn" onclick="clearAllTasks();">
+        Clear All Tasks
+      </button>
 
       <div class="text-center">
-        <h3 class="mt-4 text-center" id="heading-tasks">Tasks</h3>
+        <h2 class="mt-4 mb-4 text-center" id="heading-tasks">Tasks</h2>
 
         <form id="newTaskForm">
           <ul class="list-group" id="taskList"></ul>
         </form>
       </div>
     </div>
+  <div class="footer">
+    <h2>Why SimplyTasked?</h2>
+    <p>
+      Simply, because it is a simple To-Do List Tool to organize your tasks
+      efficiently.
+    </p>
+    <div class="list" >
+      <ul>
+        <li>Intuitive task management</li>
+        <li>Seamless due date tracking</li>
+        <li>Beautiful and user-friendly design</li>
+      </ul>
+    </div>
   </div>
-  <br><br>
-  <h2 style="text-align: center; color: white;">Why SimplyTasked?</h2>
-  <p style="text-align: center; color: white;">Simply, because it is a SIMPLE To-Do List Tool to organize your tasks efficiently.</p>
-  <br>
-  <div class='list' style="color: white; text-align: center;">
-    <p>=> Intuitive task management</p>
-    <p>=> Seamless due date tracking</p>
-    <p>=> Beautiful and user-friendly design</p>
-  </div>
-<script src="index.js"></script>
+
+  <script src="index.js"></script>
 </body>
+
 </html>
