@@ -3,6 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="shortcut icon" href="images/todoWhite.png" type="image/x-icon" />
     <link
       rel="stylesheet"
@@ -20,6 +22,8 @@
     />
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="green.css">
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
     <title>To-Do List</title>
   </head>
   <body>
@@ -71,8 +75,17 @@
                 alt=""
                 style="height: 70px; margin-bottom: 20px"
               />
-              <h1 class="text text-center">SimplyTasked</h1>
-
+              <!--typing animation correction-->
+              <section class="header" id="header">
+                <div class="max-width">
+                    <div class="header-content">
+                        <div class="text-3">Simply<span class="typo"></span></div>
+                    </div>
+                </div>
+            </section>
+             <!--typing animation correction end here-->
+  
+              <!-- <h1 class="text text-center" style="width: auto;">SimplyTasked</h1> -->
               <input type="checkbox" id="modeToggle" class="mode-toggle" />
             </div>
           </div>
@@ -122,17 +135,29 @@
     </div>
 
     <br /><br />
-    <h2 style="text-align: center; color: white;">Why SimplyTasked?</h2>
-    <p style="text-align: center; color: white;">
-      Simply, because it is a SIMPLE To-Do List Tool to organize your tasks
-      efficiently.
-    </p>
+      <h2 style="text-align: center; color: white;">Why SimplyTasked?</h2>
+      <p style="text-align: center; color: white;">
+        Simply, because it is a SIMPLE To-Do List Tool to organize your tasks
+        efficiently.
+      </p>
     <br />
     <div class="list" style="color: white; text-align: center;">
-      <p>=> Intuitive task management</p>
-      <p>=> Seamless due date tracking</p>
-      <p>=> Beautiful and user-friendly design</p>
+        <p>=> Intuitive task management</p>
+        <p>=> Seamless due date tracking</p>
+        <p>=> Beautiful and user-friendly design</p>
     </div>
     <script src="index.js"></script>
+
+     <!--typing animation correction-->
+    <script>
+      // typing text animation script
+      var typed1 = new Typed(".typo", {
+          strings: ["Tasked"],
+          typeSpeed: 100,
+          backSpeed: 60,
+          loop: true
+      });
+  </script>
+   <!--typing animation correction end here-->
   </body>
 </html>

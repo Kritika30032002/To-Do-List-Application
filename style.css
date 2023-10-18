@@ -64,7 +64,7 @@ body {
     width: 0;
   }
   to {
-    width: 65%;
+    width: 55%;
   }
 }
 .text-center {
@@ -88,13 +88,12 @@ body.light-mode {
 
 body.dark-mode {
   background: #0f0000; /* Dark mode background color */
-  background-image: url("https://cdn.pixabay.com/photo/2022/07/31/08/03/to-do-7355222_1280.jpg"); /* Dark mode background image (same as light mode) */
+  background-image: url("https://cdn.pixabay.com/photo/2022/07/31/08/03/to-do-7355222_1280.jpg") center center/cover no-repeat; /* Dark mode background image (same as light mode) */
 
   color: #fff; /* Text color for dark mode */
-  background-repeat: no-repeat;
-  background-size: cover;
+  /* background-repeat: no-repeat;
+  background-size: cover; */
 }
-
 body.dark-mode::before {
   content: "";
   position: fixed;
@@ -130,6 +129,16 @@ body.dark-mode::before {
   height: 100%;
 } */
 
+/*typing animation correction*/
+.header .header-content .text-3{
+  font-size: 70px;
+  margin: 5px 0;
+}
+.header .header-content .text-3 span{
+  color: #00ff2b;
+  font-weight: 500;
+}
+/*typing animation correction end here*/
 .main {
   position: relative;
   width: 48rem;
@@ -250,8 +259,8 @@ body.dark-mode::before {
   letter-spacing: 0.11rem;
   font-size: 1.2rem;
 }
-
 .list {
+  height: 60px;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -411,8 +420,9 @@ input[type="checkbox"]:not(.task-completed):checked::before {
 h2 {
   font-size: 24px;
   font-weight: bold;
-  margin-bottom: 10px;
-  color: #000;
+  margin-bottom: 0px;
+  color: #000
+
 }
 h4 {
   color: #000;
