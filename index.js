@@ -98,7 +98,7 @@ function addItem(e) {
   // Added new logic to check conditions whether Task and Date are entered
 
   if ( !newTaskTitle) {
-    displayErrorMessage("Enter text");
+    displayErrorMessage("Task not entered");
     taskeading.classList.add("hidden");
     return false;
   } else if (dueDateObj < currentDate) {
