@@ -81,12 +81,27 @@ function addItem(e) {
   const dueDateObj = new Date(dueDate);
 
   const tasks = taskList.children;
+  console.log(newTaskTitle);
 
-  if (dueDateObj < currentDate && tasks.length === 0) {
-    displayErrorMessage("Due date has already passed");
-    tasksHeading.classList.add("hidden");
+  
+  // if (dueDateObj < currentDate && tasks.length === 0) {
+  //   displayErrorMessage("Due date has already passed");
+  //   tasksHeading.classList.add("hidden");
+  //   return false;
+  // } else if (dueDateObj < currentDate && tasks.length > 0) {
+  //   displayErrorMessage("Due date has already passed");
+  //   return false;
+  // } else {
+  //   tasksHeading.classList.remove("hidden");
+  // }
+
+  // Added new logic to check conditions whether Task and Date are entered
+
+  if ( !newTaskTitle) {
+    displayErrorMessage("Enter text");
+    taskeading.classList.add("hidden");
     return false;
-  } else if (dueDateObj < currentDate && tasks.length > 0) {
+  } else if (dueDateObj < currentDate) {
     displayErrorMessage("Due date has already passed");
     return false;
   } else {
