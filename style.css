@@ -131,7 +131,7 @@ body.dark-mode::before {
 /*typing animation correction*/
 .text-3{
   text-align: center;
-  font-size: 70px;
+  font-size: 40px;
   margin: 5px 0;
 }
  .text-3 span{
@@ -267,7 +267,7 @@ body.dark-mode::before {
 }
 .main h2,
 h3 {
-  width: 20rem;
+  /* width: 20rem; */
 
   margin: auto;
   border-bottom: 2px solid #ffffff;
