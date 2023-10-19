@@ -136,6 +136,9 @@ function handleItemClick(e) {
     });
 
     confirmationBox.style.display = "flex";
+    li.parentElement.removeChild(li);
+    tasksCheck();
+    displaySuccessMessage("Text deleted successfully");
   }
   saveTasksToLocalStorage();
 }
@@ -249,11 +252,22 @@ function clearAllTasks() {
   });
 
   confirmationBoxAll.style.display = "flex";
+  while (taskList.firstChild) {
+    taskList.removeChild(taskList.firstChild);
+  }
+
+  // Hide the button after the task list is cleared
+  document.querySelector(".clear_btn").style.display = "none";
+  console.log("task cleared");
+
+  // Hide the tasks heading since there are no tasks left
+  tasksHeading.classList.add("hidden");
+  saveTasksToLocalStorage();
 }
 
 function createNewTask(taskTitle, createdDate, dueDate) {
   const li = document.createElement("li");
-  li.className = "list-group-item";
+  li.className = "list-group-item card shadow mb-4 bg-transparent";
 
   const completeCheckbox = document.createElement("input");
   completeCheckbox.type = "checkbox";
@@ -261,12 +275,16 @@ function createNewTask(taskTitle, createdDate, dueDate) {
   completeCheckbox.addEventListener("change", markAsComplete);
 
   const deleteButton = document.createElement("button");
-  deleteButton.className = "btn btn-danger btn-sm float-right delete";
-  deleteButton.appendChild(document.createTextNode("Delete"));
+  deleteButton.className = "btn btn-danger float-right delete";
+  // deleteButton.appendChild(document.createTextNode("Delete"));
+  deleteButton.innerHTML =
+    '<ion-icon name="trash-outline" style="font-size: 20px"></ion-icon>';
 
   const editButton = document.createElement("button");
   editButton.className = "btn btn-success btn-sm float-right edit";
-  editButton.appendChild(document.createTextNode("Edit"));
+  //   editButton.appendChild(document.createTextNode("Edit"));
+  editButton.innerHTML =
+    '<ion-icon name="create-outline" style="font-size: 20px"></ion-icon>';
   editButton.style.marginRight = "8px";
 
   // Create a click event listener for the edit button
