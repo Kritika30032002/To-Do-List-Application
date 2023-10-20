@@ -31,7 +31,7 @@
     ></div>
     <input type="checkbox" id="modeToggle" class="mode-toggle" />
     <!-- Confirmation dialog -->
-    <div id="custom-confirm" class="custom-confirm">
+    <div id="custom-confirm" class="custom-confirm prompt">
       <div class="confirm-content">
         <div>
           <i id="confirm-cancel" class="fas fa-times close-button"></i>
@@ -44,7 +44,7 @@
     </div>
     <!-- ------------------- -->
     <!-- Confirmation All- dialog -->
-    <div id="custom-confirm-all" class="custom-confirm-all">
+    <div id="custom-confirm-all" class="custom-confirm-all prompt">
       <div class="confirm-content-all">
         <div>
           <i id="confirm-cancel-all" class="fas fa-times close-button"></i>
@@ -66,31 +66,31 @@
           </div>
         </div>
       </header> -->
-      <h2 class="text-center text-primary">To Do List</h2>
-      <p class="text-center text-secondary">Simply add your tasks here</p>
+      <h1 class="heading">To Do List</h2>
+      <p class="subhead">Simply add your tasks here</p>
       <div class="container main mt-5 w-80">
-        <h3 class="text-center mb-4">Add your tasks below</h3>
+        <h3 class="text-center mb-4 boxtext">Add your tasks below</h3>
         <form
           id="addForm"
           class="row w-100 d-flex flex-wrap justify-content-between align-items-center"
         >
           <span class="col-md-10 col-sm-12 input-group mt-3">
             <input
-              class="col-10 form-control"
+              class="col-10 form-control inputbox"
               type="text"
               onkeyup="enableSubmit(this, 'submitBtn')"
               id="item"
               placeholder="Write your task here..."
             />
             <input
-              class="btn btn-warning text-light col-2"
+              class="btn btn-warning text-light col-2 addDate"
               id="dueDate"
               placeholder="Date"
             />
           </span>
           <input
             type="submit"
-            class="btn btn-success col-md-2 col-sm-12 mt-3"
+            class="btn btn-success col-md-2 col-sm-12 mt-3 addbtn"
             id="submitBtn"
             value="Add"
             disabled
@@ -104,15 +104,15 @@
           </button>
         </form>
 
-        <div class="text-center">
-          <h3 class="mt-4 text-center" id="heading-tasks">Tasks</h3>
+        <div class="text-center listbdr">
+          <h3 class="mt-5 text-center taskshead" id="heading-tasks">Tasks</h3>
 
           <form id="newTaskForm">
             <ul class="list-group" id="taskList"></ul>
           </form>
           <button
             id="clearAllTasks"
-            class="btn btn-danger clear_btn"
+            class="btn btn-danger clear_btn clearallbtn"
             onclick="clearAllTasks();"
           >
             <span class="d-flex align-items-center">
@@ -127,13 +127,13 @@
       </div>
     </div>
     <br /><br />
-    <h2 style="text-align: center" class="mb-3">Why SimplyTasked?</h2>
-    <p style="text-align: center" class="mb-5">
+    <h2 style="text-align: center" class="mb-3 h2text">Why SimplyTasked?</h2>
+    <p style="text-align: center" class="mb-5 ptext">
       Simply, because it is a SIMPLE To-Do List Tool to organize your tasks
       efficiently.
     </p>
     <br />
-    <div class="list" style="text-align: center">
+    <div class="list subtext" style="text-align: center">
       <p>=> Intuitive task management</p>
       <p>=> Seamless due date tracking</p>
       <p>=> Beautiful and user-friendly design</p>

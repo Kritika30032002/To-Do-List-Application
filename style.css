@@ -74,10 +74,49 @@ body {
     width: 65%;
   }
 }
-
+.heading{
+  text-align: center;
+  color: rgb(25, 47, 114);
+  font-weight: 400;
+}
 .text-center {
   margin-left: auto;
   margin-right: auto;
+}
+.dark-mode .heading{
+  color: #fff;
+  text-shadow:
+      0 0 7px #fff,
+      0 0 10px #fff,
+      0 0 21px #fff,
+      0 0 42px #0fa,
+      0 0 82px #0fa,
+      0 0 92px #0fa,
+      0 0 102px #0fa,
+      0 0 151px #0fa;
+  animation: flicker 1.5s infinite alternate;   
+
+}
+/* Flickering animation */
+@keyframes flicker {
+    
+  0%, 18%, 22%, 25%, 53%, 57%, 100% {
+
+      text-shadow:
+      0 0 4px #fff,
+      0 0 11px #fff,
+      0 0 19px #fff,
+      0 0 40px #0fa,
+      0 0 80px #0fa,
+      0 0 90px #0fa,
+      0 0 100px #0fa,
+      0 0 150px #0fa;
+  
+  }
+  
+  20%, 24%, 55% {        
+      text-shadow: none;
+  }    
 }
 
 /* .container.main.mt-3{
@@ -96,8 +135,10 @@ body {
 /* } */
 
 body.dark-mode {
-  background: #0f0000;
-
+  background: url('images/backdark.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   /* background-image: url("https://cdn.pixabay.com/photo/2022/07/31/08/03/to-do-7355222_1280.jpg"); Dark mode background image (same as light mode) */
 
   color: #fff;
@@ -139,6 +180,20 @@ body.dark-mode::before {
   width: 100%;
   height: 100%;
 } */
+.subhead{
+  text-align: center;
+}
+.dark-mode .subhead{
+  text-shadow:
+  0 0 7px #fff,
+  0 0 10px #fff,
+  0 0 21px #fff,
+  0 0 42px #5271ff,
+  0 0 82px #5271ff,
+  0 0 92px #5271ff,
+  0 0 102px #5271ff,
+  0 0 151px #5271ff;
+}
 
 .main {
   position: relative;
@@ -164,9 +219,12 @@ body.dark-mode::before {
 }
 
 .dark-mode .main {
-  background: rgba(255, 255, 255, 0.25);
+  background: transparent;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(4px);
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
@@ -181,6 +239,9 @@ body.dark-mode::before {
   border-radius: 2em;
   backdrop-filter: blur(45px);
   background-clip: padding-box;
+}
+.dark-mode .inputbox{
+  background-color: transparent;
 }
 
 /* .main_form {
@@ -205,7 +266,9 @@ body.dark-mode::before {
   word-wrap: break-word;
   padding: 0.75rem;
 }
-
+.dark-mode .list-group-item{
+  color: #fff;
+}
 .list-group-item button {
   margin: 0 0.2rem;
   padding: 0.4rem 1rem;
@@ -390,6 +453,15 @@ input[type="checkbox"]:not(.task-completed)::before {
   left: 0;
   transition: 0.5s;
 }
+.dark-mode .addDate{
+  background-color: transparent;
+  box-shadow: 0 0 .2rem #fff,
+  0 0 .2rem #fff,
+  0 0 2rem #fe8513,
+  0 0 0.8rem #fe8513,
+  0 0 2.8rem #fe8513,
+  inset 0 0 1.3rem #fe8513 ;
+}
 
 input[type="checkbox"]:not(.task-completed):checked::before {
   transform: translateX(100%);
@@ -435,10 +507,30 @@ h2 {
   font-weight: bold;
   margin-bottom: 10px;
   color: #000;
+  
+}
+.dark-mode h2{
+  color: white;
+  text-shadow:
+  0 0 2px #fff,
+  0 0 10px #bc13fe,
+  0 0 45px #bc13fe,
+  0 0 55px #bc13fe,
+  0 0 70px #bc13fe,
+  0 0 80px #bc13fe;
 }
 
 h4 {
   color: #000;
+}
+.dark-mode h4{
+  text-shadow:
+  0 0 2px #fff,
+  0 0 10px #bc13fe,
+  0 0 45px #bc13fe,
+  0 0 55px #bc13fe,
+  0 0 70px #bc13fe,
+  0 0 80px #bc13fe;
 }
 
 .confirm-content,
@@ -580,4 +672,81 @@ body::-webkit-scrollbar-thumb {
     rgba(0, 212, 255, 1) 100%
   );
   border-radius: 5px;
+}
+.dark-mode .main{
+  box-shadow: 0 0 .2rem #fff,
+  0 0 .2rem #fff,
+  0 0 2rem #bc13fe,
+  0 0 0.8rem #bc13fe,
+  0 0 2.8rem #bc13fe,
+  inset 0 0 1.3rem #bc13fe; 
+}
+.dark-mode .boxtext{
+  text-shadow:
+  0 0 7px #fff,
+  0 0 10px #fff,
+  0 0 21px #fff,
+  0 0 42px #5271ff,
+  0 0 82px #5271ff,
+  0 0 92px #5271ff,
+  0 0 102px #5271ff,
+  0 0 151px #5271ff;
+}
+.dark-mode .addbtn{
+  background-color: transparent;
+  box-shadow: 0 0 .2rem #fff,
+  0 0 .2rem #fff,
+  0 0 2rem #02b216,
+  0 0 0.8rem #02b216,
+  0 0 2.8rem #02b216,
+  inset 0 0 1.3rem #02b216;
+}
+.dark-mode .clearallbtn{
+  background: none;
+  color: #fff;
+  box-shadow: 0 0 .2rem #fff,
+  0 0 .2rem #fff,
+  0 0 2rem #d10202,
+  0 0 0.8rem #d10202,
+  0 0 2.8rem #d10202,
+  inset 0 0 1.3rem #d10202;
+}
+.dark-mode .taskList{
+  color: #fff;
+}
+
+.dark-mode .listbdr{
+  box-shadow: 0 0 .2rem #fff,
+  0 0 .2rem #fff,
+  0 0 2rem #0fa,
+  0 0 0.8rem #0fa,
+  0 0 2rem #0fa,
+  inset 0 0 1.3rem #0fa;
+}
+.dark-mode .taskshead{
+  text-shadow:
+  0 0 2px #fff,
+  0 0 4px #fff,
+  0 0 21px #fff,
+  0 0 32px #0fa,
+  0 0 62px #0fa,
+  0 0 72px #0fa,
+  0 0 82px #0fa,
+  0 0 121px #0fa;
+}
+.dark-mode .h2text,.ptext,.subtext{
+  text-shadow:
+  0 0 7px #fff,
+  0 0 10px #fff,
+  0 0 21px #fff,
+  0 0 42px #5271ff,
+  0 0 82px #5271ff,
+  0 0 92px #5271ff,
+  0 0 102px #5271ff,
+  0 0 151px #5271ff;
+}
+.dark-mode .prompt{
+  background:  transparent;
+  color: #fff;
+
 }
