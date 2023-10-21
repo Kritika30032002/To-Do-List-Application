@@ -136,20 +136,34 @@ function handleItemClick(e) {
     const confirmNoButton = document.getElementById("confirm-no");
     const confirmCancelButton = document.getElementById("confirm-cancel");
 
-    confirmYesButton.addEventListener("click", () => {
+    const handleYesClick = () => {
       confirmationBox.style.display = "none";
       li.parentElement.removeChild(li);
       tasksCheck();
       displaySuccessMessage("Task deleted successfully");
       saveTasksToLocalStorage();
-    });
+       confirmYesButton.removeEventListener("click", handleYesClick);
+      confirmNoButton.removeEventListener("click", handleNoClick);
+      confirmCancelButton.removeEventListener("click", handleCancelClick);
+    };
 
-    confirmNoButton.addEventListener("click", () => {
+     const handleNoClick = () => {
       confirmationBox.style.display = "none";
-    });
-    confirmCancelButton.addEventListener("click", () => {
+      confirmYesButton.removeEventListener("click", handleYesClick);
+      confirmNoButton.removeEventListener("click", handleNoClick);
+      confirmCancelButton.removeEventListener("click", handleCancelClick);
+    };
+
+    const handleCancelClick = () => {
       confirmationBox.style.display = "none";
-    });
+      confirmYesButton.removeEventListener("click", handleYesClick);
+      confirmNoButton.removeEventListener("click", handleNoClick);
+      confirmCancelButton.removeEventListener("click", handleCancelClick);
+    };
+
+    confirmYesButton.addEventListener("click", handleYesClick);
+    confirmNoButton.addEventListener("click", handleNoClick);
+    confirmCancelButton.addEventListener("click", handleCancelClick);
 
     confirmationBox.style.display = "flex";
   }
