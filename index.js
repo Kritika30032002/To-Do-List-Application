@@ -84,7 +84,6 @@ function addItem(e) {
   const tasks = taskList.children;
   console.log(newTaskTitle);
 
-  
   // if (dueDateObj < currentDate && tasks.length === 0) {
   //   displayErrorMessage("Due date has already passed");
   //   tasksHeading.classList.add("hidden");
@@ -98,7 +97,7 @@ function addItem(e) {
 
   // Added new logic to check conditions whether Task and Date are entered
 
-  if ( !newTaskTitle) {
+  if (!newTaskTitle) {
     displayErrorMessage("Task not entered");
     taskeading.classList.add("hidden");
     return false;
@@ -153,9 +152,6 @@ function handleItemClick(e) {
     });
 
     confirmationBox.style.display = "flex";
-    li.parentElement.removeChild(li);
-    tasksCheck();
-    displaySuccessMessage("Text deleted successfully");
   }
   saveTasksToLocalStorage();
 }
@@ -263,7 +259,6 @@ function clearAllTasks() {
     // Hide the button after the task list is cleared
     document.querySelector(".clear_btn").style.display = "none";
     document.querySelector(".dropdown").style.display = "none";
-    console.log("task cleared");
 
     // Hide the tasks heading since there are no tasks left
     tasksHeading.classList.add("hidden");
@@ -276,20 +271,7 @@ function clearAllTasks() {
   confirmCancelButtonAll.addEventListener("click", () => {
     confirmationBoxAll.style.display = "none";
   });
-
-  confirmationBoxAll.style.display = "flex";
-  while (taskList.firstChild) {
-    taskList.removeChild(taskList.firstChild);
-  }
-
-  // Hide the button after the task list is cleared
-  document.querySelector(".clear_btn").style.display = "none";
-  document.querySelector(".dropdown").style.display = "none";
-  console.log("task cleared");
-
-  // Hide the tasks heading since there are no tasks left
-  tasksHeading.classList.add("hidden");
-  saveTasksToLocalStorage();
+  confirmationBoxAll.style.display = "flex";q
 }
 //Function to sort task list by due date
 function sortByDueDate(order) {
