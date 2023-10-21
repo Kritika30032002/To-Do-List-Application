@@ -112,12 +112,16 @@ body.dark-mode::before {
   left: 0;
   width: 100vw;
   height: 100vh;
+  background-image: url('https://wallpapers.com/images/high/dark-laptop-five-hanging-light-bulbs-3arhaiwviqlagxoo.webp');
   background-color: rgba(1,
       1,
       1,
       0.9);
+      background-size: cover; /* This ensures the image covers the entire viewport */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  background-position: center;
   /* Adjust the alpha (last) value to control darkness */
-  z-index: -1;
+  z-index: -3;
 }
 
 /* Rest of your CSS styles remain unchanged */
