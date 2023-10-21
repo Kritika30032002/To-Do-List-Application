@@ -106,7 +106,22 @@
 
         <div class="text-center">
           <h3 class="mt-4 text-center" id="heading-tasks">Tasks</h3>
-
+          <div class="dropdown">
+            <button  class="btn btn-warning dropbtn d-flex align-items-center text-light ml-2"
+            onclick="myFunction();">
+                <ion-icon class="dropbtn" name="funnel-outline"
+                style="font-size: 25px; margin-right: 6px"
+                ></ion-icon>  
+                Sort By
+                <ion-icon class="dropbtn" name="chevron-down-outline"
+                style="font-size: 25px; margin-left: 6px"
+                ></ion-icon>
+            </button>
+            <div id="myDropdown" class="dropdown-content ml-2 mt-0.5">
+              <a onclick="sortByDueDate('early');">Early To Do</a>
+              <a onclick="sortByDueDate('late');">Lately To Do</a>
+            </div>
+          </div>
           <form id="newTaskForm">
             <ul class="list-group" id="taskList"></ul>
           </form>

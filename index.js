@@ -40,6 +40,7 @@ function tasksCheck() {
   if (tasks.length === 0) {
     tasksHeading.classList.toggle("hidden");
     document.querySelector(".clear_btn").style.display = "none";
+    document.querySelector(".dropdown").style.display = "none";
   }
 }
 
@@ -81,12 +82,27 @@ function addItem(e) {
   const dueDateObj = new Date(dueDate);
 
   const tasks = taskList.children;
+  console.log(newTaskTitle);
 
-  if (dueDateObj < currentDate && tasks.length === 0) {
-    displayErrorMessage("Due date has already passed");
-    tasksHeading.classList.add("hidden");
+  
+  // if (dueDateObj < currentDate && tasks.length === 0) {
+  //   displayErrorMessage("Due date has already passed");
+  //   tasksHeading.classList.add("hidden");
+  //   return false;
+  // } else if (dueDateObj < currentDate && tasks.length > 0) {
+  //   displayErrorMessage("Due date has already passed");
+  //   return false;
+  // } else {
+  //   tasksHeading.classList.remove("hidden");
+  // }
+
+  // Added new logic to check conditions whether Task and Date are entered
+
+  if ( !newTaskTitle) {
+    displayErrorMessage("Task not entered");
+    taskeading.classList.add("hidden");
     return false;
-  } else if (dueDateObj < currentDate && tasks.length > 0) {
+  } else if (dueDateObj < currentDate) {
     displayErrorMessage("Due date has already passed");
     return false;
   } else {
@@ -97,6 +113,7 @@ function addItem(e) {
   else {
     document.getElementById("item").value = "";
     document.querySelector(".clear_btn").style.display = "inline";
+    document.querySelector(".dropdown").style.display = "inline";
   }
 
   const creationDateTime = new Date().toLocaleString();
@@ -202,8 +219,16 @@ function loadTasksFromLocalStorage() {
     const tasksHeading = document.getElementById("heading-tasks");
     tasksHeading.classList.remove("hidden");
     document.querySelector(".clear_btn").style.display = "inline";
+    document.querySelector(".dropdown").style.display = "inline";
     tasks.forEach((task) => {
-      createNewTask(task.text, task.createdAt, task.dueDate);
+      console.log(task.text, "taskText");
+      console.log(task.createdAt.slice(8), "taskCreateAt");
+      console.log(task.dueDate.split(":")[1], "testDuedate");
+      createNewTask(
+        task.text,
+        task.createdAt.slice(8),
+        task.dueDate.split(":")[1]
+      );
     });
   }
 }
@@ -237,6 +262,7 @@ function clearAllTasks() {
     }
     // Hide the button after the task list is cleared
     document.querySelector(".clear_btn").style.display = "none";
+    document.querySelector(".dropdown").style.display = "none";
     console.log("task cleared");
 
     // Hide the tasks heading since there are no tasks left
@@ -258,12 +284,53 @@ function clearAllTasks() {
 
   // Hide the button after the task list is cleared
   document.querySelector(".clear_btn").style.display = "none";
+  document.querySelector(".dropdown").style.display = "none";
   console.log("task cleared");
 
   // Hide the tasks heading since there are no tasks left
   tasksHeading.classList.add("hidden");
   saveTasksToLocalStorage();
 }
+//Function to sort task list by due date
+function sortByDueDate(order) {
+  const sortTaskList = JSON.parse(localStorage.getItem("tasks"));
+  if (order === "early") {
+    sortTaskList.sort((a, b) => {
+      return new Date(a.dueDate) - new Date(b.dueDate);
+    });
+  } else if (order === "late") {
+    sortTaskList.sort((a, b) => {
+      return new Date(b.dueDate) - new Date(a.dueDate);
+    });
+  }
+
+  while (taskList.firstChild) {
+    taskList.removeChild(taskList.firstChild);
+  }
+  tasksHeading.classList.add("hidden");
+  localStorage.setItem("tasks", JSON.stringify(sortTaskList));
+  loadTasksFromLocalStorage();
+}
+/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+  console.log("func called");
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function (event) {
+  if (!event.target.matches(".dropbtn")) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains("show")) {
+        openDropdown.classList.remove("show");
+      }
+    }
+  }
+};
 
 function createNewTask(taskTitle, createdDate, dueDate) {
   const li = document.createElement("li");
