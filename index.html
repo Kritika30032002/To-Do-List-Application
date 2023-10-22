@@ -32,7 +32,7 @@
     <input type="checkbox" id="modeToggle" class="mode-toggle" />
     <!-- Confirmation dialog -->
     <div id="custom-confirm" class="custom-confirm">
-      <div class="confirm-content">
+      <div class="confirm-content shadow">
         <div>
           <i id="confirm-cancel" class="fas fa-times close-button"></i>
         </div>
@@ -55,20 +55,9 @@
         <button id="confirm-no-all">No</button>
       </div>
     </div>
-    <!-- ------------------- -->
-    <div class="container">
-      <!-- <header class="text-center">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 text-center">
-             
-            </div>
-          </div>
-        </div>
-      </header> -->
       <h1 class="text-center text-primary"><span id="element"></span></h2>
       <p class="text-center text-secondary">Simply add your tasks here</p>
-      <div class="container main shadow mt-5 w-80">
+      <div class="container main shadow mt-5">
         <h3 class="text-center mb-4">Add your tasks below</h3>
         <form
           id="addForm"
@@ -90,14 +79,14 @@
           </div>
           <input
             type="submit"
-            class="btn btn-success shadow col-md-2 col-sm-12"
+            class="btn btn-success btn-shadow"
             id="submitBtn"
             value="Add"
             disabled
           />
           <button
             id="editTask"
-            class="form_btn btn btn-primary shadow col-md-2 col-sm-6"
+            class="form_btn btn btn-primary btn-shadow"
             style="display: none"
           >
             Edit
@@ -107,14 +96,14 @@
         <div class="text-center">
           <h3 class="mt-4 text-center" id="heading-tasks">Tasks</h3>
           <div class="dropdown">
-            <button  class="btn btn-sort shadow dropbtn d-flex align-items-center text-light ml-2"
+            <button  class="btn btn-sort btn-shadow dropbtn d-flex align-items-center ml-2"
             onclick="myFunction();">
                 <ion-icon class="dropbtn" name="funnel-outline"
-                style="font-size: 25px; margin-right: 6px"
+                style="margin-right: 6px"
                 ></ion-icon>  
-                Sort By
+                Sort by
                 <ion-icon class="dropbtn" name="chevron-down-outline"
-                style="font-size: 25px; margin-left: 6px"
+                style="margin-left: 6px"
                 ></ion-icon>
             </button>
             <div id="myDropdown" class="dropdown-content ml-2 mt-0.5">
@@ -127,7 +116,7 @@
           </form>
           <button
             id="clearAllTasks"
-            class="btn btn-danger shadow clear_btn"
+            class="btn btn-danger btn-shadow clear_btn"
             onclick="clearAllTasks();"
           >
             <span class="d-flex align-items-center">
@@ -140,7 +129,6 @@
           </button>
         </div>
       </div>
-    </div>
     <br /><br />
     <h2 style="text-align: center" class="mb-3">Why SimplyTasked?</h2>
     <p style="text-align: center" class="mb-5">

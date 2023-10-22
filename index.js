@@ -130,7 +130,6 @@ function handleItemClick(e) {
     e.preventDefault();
     const li = e.target.parentElement;
     const confirmationBox = document.getElementById("custom-confirm");
-    document.getElementById("confirm-msg").style.backgroundColor = "White";
     document.getElementById("confirm-msg").style.color = "Black";
     document.getElementById("confirm-msg").innerText =
       "Are you sure you want to delete this task?";
@@ -336,7 +335,7 @@ window.onclick = function (event) {
 
 function createNewTask(taskTitle, createdDate, dueDate) {
   const li = document.createElement("li");
-  li.className = "list-group-item card shadow bg-transparent";
+  li.className = "list-group-item card shadow";
 
   const completeCheckbox = document.createElement("input");
   completeCheckbox.type = "checkbox";
@@ -344,13 +343,13 @@ function createNewTask(taskTitle, createdDate, dueDate) {
   completeCheckbox.addEventListener("change", markAsComplete);
 
   const deleteButton = document.createElement("button");
-  deleteButton.className = "btn btn-danger shadow float-right delete";
+  deleteButton.className = "btn btn-danger btn-shadow float-right delete";
   // deleteButton.appendChild(document.createTextNode("Delete"));
   deleteButton.innerHTML =
     '<ion-icon name="trash-outline" style="font-size: 20px"></ion-icon>';
 
   const editButton = document.createElement("button");
-  editButton.className = "btn btn-success shadow btn-sm float-right edit";
+  editButton.className = "btn btn-success btn-shadow btn-sm float-right edit";
   //   editButton.appendChild(document.createTextNode("Edit"));
   editButton.innerHTML =
     '<ion-icon name="create-outline" style="font-size: 20px"></ion-icon>';
@@ -367,7 +366,7 @@ function createNewTask(taskTitle, createdDate, dueDate) {
   dateTimeParagraph.style.fontSize = "15px";
   dateTimeParagraph.style.margin = "0 19px";
   dateTimeParagraph.appendChild(
-    document.createTextNode("Created:" + createdDate)
+    document.createTextNode("Created: " + createdDate)
   );
 
   // Create a paragraph element for the due date
@@ -376,7 +375,7 @@ function createNewTask(taskTitle, createdDate, dueDate) {
   dueDateParagraph.id = "task-dueDate";
   dueDateParagraph.style.fontSize = "15px";
   dueDateParagraph.style.margin = "0 19px";
-  dueDateParagraph.appendChild(document.createTextNode("Due Date:" + dueDate));
+  dueDateParagraph.appendChild(document.createTextNode("Due Date: " + dueDate));
 
   li.appendChild(completeCheckbox);
   li.appendChild(document.createTextNode(taskTitle));
