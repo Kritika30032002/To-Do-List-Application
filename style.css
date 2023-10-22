@@ -66,7 +66,7 @@ body.dark-mode::before {
 }
 
 .light-mode .main {
-  background: #f0f0f0;
+  background: #f5f5f5;
 }
 
 .dark-mode .main {
@@ -74,13 +74,12 @@ body.dark-mode::before {
 }
 
 .light-mode .shadow {
-  box-shadow: -3px -3px 10px 0px rgba(255, 255, 255, 0.87),
+  box-shadow: -2px -2px 6px 0px rgba(198, 198, 198, 0.11),
     4px 4px 10px 0px rgba(0, 0, 0, 0.17) !important;
 }
 
 .dark-mode .shadow {
-  box-shadow: -3px -3px 9px 0px rgba(255, 255, 255, 0.15),
-    6px 6px 18px 0px #1e1e1e !important;
+  box-shadow: 6px 6px 18px 0px #1e1e1e !important;
 }
 
 .btn {
@@ -90,7 +89,7 @@ body.dark-mode::before {
   font-size: 16px;
   transition: none;
   padding: 5px 25px;
-  background: linear-gradient(145deg, #cacaca, #f0f0f0);
+  background: linear-gradient(145deg, #cecdcd, #f1f1f1 65%);
   border: none;
   cursor: pointer;
 }
@@ -198,7 +197,7 @@ body.dark-mode::before {
   word-break: break-all;
   word-wrap: break-word;
   padding: 0.8rem;
-  background-color: #f7f7f7;
+  background-color: #fbfbfb;
 }
 
 .dark-mode .list-group-item {
@@ -305,7 +304,7 @@ h3 {
 }
 
 .dark-mode .text-muted {
-  color: #999;
+  color: #999 !important;
 }
 
 input[type="checkbox"]:not(.task-completed) {
@@ -446,15 +445,19 @@ body::-webkit-scrollbar-thumb {
 
   .main {
     width: 100%;
-    padding: 2rem;
+    padding: 2rem 1rem;
   }
 
   .task-form {
     flex-direction: column;
   }
 
+  .group {
+    width: 80%;
+  }
+
   .task-form .btn {
-    width: 100%;
+    width: 80%;
   }
 
   .list-group {
@@ -462,7 +465,7 @@ body::-webkit-scrollbar-thumb {
   }
 
   .list-group-item {
-    padding: 0.3rem;
+    padding: 1rem;
   }
 
   .list-group {
@@ -470,7 +473,14 @@ body::-webkit-scrollbar-thumb {
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 540px) {
+  .group {
+    flex-direction: column;
+  }
+  #dueDate {
+    width: 100%;
+    border-radius: 0 0 0.5rem 0.5rem;
+  }
   .mode-toggle {
   }
 }

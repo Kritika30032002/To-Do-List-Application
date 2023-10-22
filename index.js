@@ -15,7 +15,6 @@ editTaskBtn.addEventListener("click", (e) => {
 submitBtn.addEventListener("click", (e) => {
   addItem(e);
 });
-taskList.addEventListener("click", handleItemClick);
 modeToggleBtn.addEventListener("click", toggleMode);
 checkboxes.forEach((checkbox) => {
   checkbox.addEventListener("change", markAsComplete);
@@ -50,9 +49,9 @@ function handleEditItem(e) {
   editTaskBtn.style.display = "inline";
   submitBtn.style.display = "none";
 
-  const taskTitle = e.target.parentElement.childNodes[1].textContent.trim();
+  editItem = e.currentTarget;
+  const taskTitle = editItem.parentElement.childNodes[1].textContent.trim();
   document.getElementById("item").value = taskTitle;
-  editItem = e.target;
 }
 
 function handleEditClick(e) {
@@ -125,39 +124,31 @@ function addItem(e) {
   document.getElementById("dueDate").value = "";
 }
 
-function handleItemClick(e) {
-  if (e.target.classList.contains("delete")) {
-    e.preventDefault();
-    const li = e.target.parentElement;
-    const confirmationBox = document.getElementById("custom-confirm");
-    document.getElementById("confirm-msg").style.color = "Black";
-    document.getElementById("confirm-msg").innerText =
-      "Are you sure you want to delete this task?";
-    const confirmYesButton = document.getElementById("confirm-yes");
-    const confirmNoButton = document.getElementById("confirm-no");
-    const confirmCancelButton = document.getElementById("confirm-cancel");
+function handleDeleteItem(e) {
+  const li = e.currentTarget.parentElement;
+  const confirmationBox = document.getElementById("custom-confirm");
+  document.getElementById("confirm-msg").style.color = "Black";
+  const confirmYesButton = document.getElementById("confirm-yes");
+  const confirmNoButton = document.getElementById("confirm-no");
+  const confirmCancelButton = document.getElementById("confirm-cancel");
 
-    confirmYesButton.addEventListener("click", () => {
-      confirmationBox.style.display = "none";
-      li.parentElement.removeChild(li);
-      tasksCheck();
-      displaySuccessMessage("Task deleted successfully");
-      saveTasksToLocalStorage();
-    });
+  confirmationBox.style.display = "flex";
 
-    confirmNoButton.addEventListener("click", () => {
-      confirmationBox.style.display = "none";
-    });
-    confirmCancelButton.addEventListener("click", () => {
-      confirmationBox.style.display = "none";
-    });
-
-    confirmationBox.style.display = "flex";
+  confirmYesButton.addEventListener("click", () => {
+    confirmationBox.style.display = "none";
+    console.log("TO delete" + li);
     li.parentElement.removeChild(li);
     tasksCheck();
-    displaySuccessMessage("Text deleted successfully");
-  }
-  saveTasksToLocalStorage();
+    displaySuccessMessage("Task deleted successfully");
+    saveTasksToLocalStorage();
+  });
+
+  confirmNoButton.addEventListener("click", () => {
+    confirmationBox.style.display = "none";
+  });
+  confirmCancelButton.addEventListener("click", () => {
+    confirmationBox.style.display = "none";
+  });
 }
 
 
@@ -244,13 +235,8 @@ function toggleMode() {
 }
 
 function clearAllTasks() {
-  // Removes all tasks from the task list
-  //changing confirmation message
   const confirmationBoxAll = document.getElementById("custom-confirm-all");
-  document.getElementById("confirm-msg-all").style.backgroundColor = "Red";
-  document.getElementById("confirm-msg-all").style.color = "White";
-  document.getElementById("confirm-msg-all").innerText =
-    "Are you sure you want to delete all tasks?";
+  document.getElementById("confirm-msg-all").style.color = "Red";
 
   const confirmYesButtonAll = document.getElementById("confirm-yes-all");
   const confirmNoButtonAll = document.getElementById("confirm-no-all");
@@ -279,19 +265,8 @@ function clearAllTasks() {
   });
 
   confirmationBoxAll.style.display = "flex";
-  while (taskList.firstChild) {
-    taskList.removeChild(taskList.firstChild);
-  }
-
-  // Hide the button after the task list is cleared
-  document.querySelector(".clear_btn").style.display = "none";
-  document.querySelector(".dropdown").style.display = "none";
-  console.log("task cleared");
-
-  // Hide the tasks heading since there are no tasks left
-  tasksHeading.classList.add("hidden");
-  saveTasksToLocalStorage();
 }
+
 //Function to sort task list by due date
 function sortByDueDate(order) {
   const sortTaskList = JSON.parse(localStorage.getItem("tasks"));
@@ -358,6 +333,10 @@ function createNewTask(taskTitle, createdDate, dueDate) {
   // Create a click event listener for the edit button
   editButton.addEventListener("click", function (e) {
     handleEditItem(e);
+  });
+
+  deleteButton.addEventListener("click", function(e) {
+    handleDeleteItem(e);
   });
 
   const dateTimeParagraph = document.createElement("p");
