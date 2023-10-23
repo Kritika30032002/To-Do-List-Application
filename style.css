@@ -96,11 +96,11 @@ body {
 /* } */
 
 body.dark-mode {
-  background: #0f0000;
+  background: #161616;
 
   /* background-image: url("https://cdn.pixabay.com/photo/2022/07/31/08/03/to-do-7355222_1280.jpg"); Dark mode background image (same as light mode) */
 
-  color: #fff;
+  color: #f2f2f2;
   /* background-repeat: no-repeat;
   background-size: cover; */
 }
@@ -163,12 +163,14 @@ body.dark-mode::before {
 }
 
 .dark-mode .main {
-  background: rgba(255, 255, 255, 0.25);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(4px);
+  background: #1d1d1d;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+  border-radius: 10px;
+  border: 1px solid #414141;
+  /*backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.18);*/
 }
 
 .main {
@@ -466,7 +468,6 @@ h2 {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 10px;
-  color: #000;
 }
 
 h4 {
