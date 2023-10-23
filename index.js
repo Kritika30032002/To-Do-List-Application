@@ -285,7 +285,7 @@ function clearAllTasks() {
   confirmCancelButtonAll.addEventListener("click", () => {
     confirmationBoxAll.style.display = "none";
   });
-  confirmationBoxAll.style.display = "flex";q
+  confirmationBoxAll.style.display = "flex";
 }
 //Function to sort task list by due date
 function sortByDueDate(order) {
