@@ -1,5 +1,6 @@
 /* @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"); */
 @import url("https://fonts.googleapis.com/css2?family=Lora:ital@1&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=Hanken+Grotesk&family=Montserrat&family=Patua+One&family=Pixelify+Sans&family=Roboto+Slab:wght@400;500&family=Slabo+27px&family=Young+Serif&display=swap');
 
 * {
   margin: 0;
@@ -597,6 +598,12 @@ h4 {
     padding: 0.7rem 1rem;
     margin: auto;
   }
+
+  .card:hover{
+    background-color: rgb(139, 97, 198);
+    box-shadow: 10px 15px 80px rgb(247, 240, 240);
+    
+  }
 }
 
 @media screen and (max-width: 390px) {
@@ -620,5 +627,26 @@ h4 {
     margin: auto;
     padding: 0;
   }
+  
+}
+
+
+.card:hover{
+  background-color: rgb(139, 97, 198);
+  box-shadow: 10px 15px 80px rgb(247, 240, 240);
+  
+}
+
+.task{
+  font-family: 'Roboto Slab', serif;
+  font-size: 35px;
+
+}
+
+.simply{
+  font-family: 'Roboto Slab', serif;
+  font-size: 35px;
+  font-weight: 4px;
+  color: blanchedalmond;
 }
 
