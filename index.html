@@ -66,7 +66,7 @@
           </div>
         </div>
       </header> -->
-      <h2 class="text-center text-primary">To Do List</h2>
+      <h1 class="text-center text-primary"><span id="element"></span></h2>
       <p class="text-center text-secondary">Simply add your tasks here</p>
       <div class="container main mt-5 w-80">
         <h3 class="text-center mb-4">Add your tasks below</h3>
@@ -161,6 +161,14 @@
     <script
       nomodule
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
-    ></script>
+    >
+  </script>
+  <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+  <script>
+      var typed = new Typed('#element', {
+          strings: ['To-Do List 📝', 'Organize tasks, boost daily productivity! 🚀.', 'Achieve Your Goals One Task at a Time 📃', 'Plan, Act, Achieve: Get Started Now! 😉..'],
+          typeSpeed: 50,
+      });
+  </script>
   </body>
 </html>
