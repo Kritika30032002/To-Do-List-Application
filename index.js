@@ -56,11 +56,31 @@ function handleEditItem(e) {
 
 function handleEditClick(e) {
   e.preventDefault();
-  editItem.parentElement.childNodes[1].textContent =
-    document.getElementById("item").value;
+
+  const itemInput = document.getElementById("item");
+  const dueDateInput = document.getElementById("dueDate");
+
+  const editedItemText = itemInput.value;
+  const editedDueDate = new Date(dueDateInput.value);
+  const currentDate = new Date().toISOString().split("T")[0];
+
+  if (editedDueDate < new Date(currentDate)) {
+    displayErrorMessage("Due date has already passed");
+    return false;
+  }
+
+  const listItem = editItem.parentElement;
+  listItem.childNodes[1].textContent = editedItemText;
+
+  if (editedDueDate >= new Date(currentDate)) {
+    listItem.childNodes[5].textContent = `Due Date:${dueDateInput.value}
+      `;
+  }
+
   displaySuccessMessage("Task edited successfully");
   editItem = null;
-  document.getElementById("item").value = "";
+  itemInput.value = "";
+  dueDateInput.value = "";
 
   editTaskBtn.style.display = "none";
   submitBtn.style.display = "inline";
