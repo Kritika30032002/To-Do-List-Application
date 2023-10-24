@@ -18,9 +18,7 @@
 } */
 
 body {
-  font-family: "Young Serif";
-  font-weight: 400;
-  margin: 30px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   padding: 0;
   box-sizing: border-box;
   display: flex;
@@ -37,6 +35,47 @@ body {
   background-size: cover;
   background-position: center;
 }
+.nav{
+  margin-bottom: 50px;
+  padding: 5px 5%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: 75px;
+  width: 100%;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  box-shadow: 5px 5px 20px #35353540;
+}
+.logo{
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1.5;
+  margin: 0;
+  font-weight: bold;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+.underline {
+  position: relative;
+  white-space: nowrap;
+  &:after {
+    --deco-height: 0.3125em;
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: calc(var(--deco-height) * -0.625);
+    height: var(--deco-height);
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='64' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23a)'%3E%3Cpath d='M-17 30.5C-1 22 72-4 54 13 37.9 28.2-2.5 57.5 16 55.5s72-29 104-40' stroke='%2300FDCF' stroke-width='10'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='a'%3E%3Cpath fill='%23fff' d='M0 0h100v64H0z'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E%0A");
+    background-size: auto 100%;
+    background-repeat: round;
+    background-position: 0em;
+  }
+}
+
 
 .switch {
   font-size: 17px;
@@ -44,6 +83,7 @@ body {
   display: inline-block;
   width: 64px;
   height: 34px;
+  margin-bottom: 0;
 }
 
 .switch input {
@@ -191,7 +231,7 @@ body {
 /* } */
 
 body.dark-mode {
-  background: #0f0000;
+  background: #121212;
 
   /* background-image: url("https://cdn.pixabay.com/photo/2022/07/31/08/03/to-do-7355222_1280.jpg"); Dark mode background image (same as light mode) */
 
@@ -207,10 +247,6 @@ body.dark-mode::before {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(1,
-      1,
-      1,
-      0.9);
   /* Adjust the alpha (last) value to control darkness */
   z-index: -1;
 }
@@ -240,41 +276,20 @@ body.dark-mode::before {
   height: 100%;
   text-align: center;
   padding: 4rem;
-  /* background: rgba(0, 0, 0, 0.2); */
-  border-radius: 2em;
-  backdrop-filter: blur(45px);
-  /* border: 10px solid rgba(0, 0, 0, 0.05); */
+  border-radius: 10px;
   background-clip: padding-box;
-  /* box-shadow: 10px 10px 10px rgba(46, 54, 68, 0.03); */
 }
 
 .light-mode .main {
-  background: rgba(255, 255, 255, 0.25);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: #e0e0e0;
+  box-shadow:  20px 20px 60px #bebebe,
+               -20px -20px 60px #ffffff;
 }
 
 .dark-mode .main {
-  background: rgba(255, 255, 255, 0.25);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-}
+  border: 1px solid rgb(36, 36, 36);
 
-.main {
-  position: relative;
-  width: 48rem;
-  height: 100%;
-  text-align: center;
-  padding: 4rem;
-  border-radius: 2em;
-  backdrop-filter: blur(45px);
-  background-clip: padding-box;
+  background: #171717;
 }
 
 /* .main_form {
@@ -561,12 +576,8 @@ h2 {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 10px;
-  color: #000;
 }
 
-h4 {
-  color: #000;
-}
 
 .confirm-content,
 .confirm-content-all p {
