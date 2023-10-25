@@ -198,7 +198,6 @@ body.dark-mode::before {
   font-size: 1.3rem;
   margin: 0.4rem;
   text-align: left;
-  color: #0275d8;
   border-radius: 1rem !important;
   word-break: break-all;
   word-wrap: break-word;
