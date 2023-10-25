@@ -16,7 +16,16 @@ submitBtn.addEventListener("click", (e) => {
   addItem(e);
 });
 taskList.addEventListener("click", handleItemClick);
-modeToggleBtn.addEventListener("click", toggleMode);
+//modeToggleBtn.addEventListener("click", toggleMode);
+modeToggleBtn.addEventListener('click', () => {
+  const isDarkMode = document.body.classList.toggle('dark-mode');
+
+  if (isDarkMode) {
+    document.documentElement.style.setProperty('--light-mode-background', '#211042');
+  } else {
+    document.documentElement.style.setProperty('--light-mode-background', '#0bbff1');
+  }
+});
 checkboxes.forEach((checkbox) => {
   checkbox.addEventListener("change", markAsComplete);
 });
