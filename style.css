@@ -44,7 +44,104 @@ body {
   flex: 1;
   /* Take remaining vertical space */
 }
+.container-1{
+  padding-left: 40px;
+}
 
+.container-1 h3{
+  position: absolute;
+  font-size: 4em;
+  color: #444;
+  line-height: 1em;
+  text-shadow: -2px 2px 0 #222,
+  -4px 4px 0 #222,
+  -6px 6px 0 #222,
+  -8px 8px 0 #222,
+  -10px 10px 0 #222,
+  -10px 10px 0 #222,
+  -12px 12px 0 #222,
+  -14px 14px 0 #222,
+  -16px 16px 0 #222,
+  -18px 18px 20px #000,
+  -18px 18px 30px #000,
+  -18px 18px 50px #000,
+  -18px 18px 150px #000;
+}
+.container-1 h3:nth-child(2){
+  color: #03a9f4;
+  text-shadow: -2px 2px 0 #0375a9,
+  -4px 4px 0 #0375a9,
+  -6px 6px 0 #0375a9,
+  -8px 8px 0 #0375a9,
+  -10px 10px 0 #0375a9,
+  -10px 10px 0 #0375a9,
+  -12px 12px 0 #0375a9,
+  -14px 14px 0 #0375a9,
+  -16px 16px 0 #0375a9,
+  -18px 18px 20px #000,
+  -18px 18px 30px #000,
+  -18px 18px 50px #000,
+  -18px 18px 150px #000;
+  clip-path: circle(20% at 50% 100%);
+  transition: clip-path 2.5s;
+}
+
+.container-1 h3:hover:nth-child(2){
+  clip-path: circle(50% at 50% 100%);
+  z-index: 100;
+}
+
+.container-1 h3:nth-child(3){
+  color: #2cff37;
+  text-shadow: -2px 2px 0 #08a010,
+  -4px 4px 0 #08a010,
+  -6px 6px 0 #08a010,
+  -8px 8px 0 #08a010,
+  -10px 10px 0 #08a010,
+  -10px 10px 0 #08a010,
+  -12px 12px 0 #08a010,
+  -14px 14px 0 #08a010,
+  -16px 16px 0 #08a010,
+  -18px 18px 20px #000,
+  -18px 18px 30px #000,
+  -18px 18px 50px #000,
+  -18px 18px 150px #000;
+  clip-path: circle(20% at 0% 10%);
+  transition: clip-path 2.5s;
+}
+
+.container-1 h3:hover:nth-child(3){
+  clip-path: circle(120% at 0% 10%);
+  z-index: 100;
+}
+
+.container-1 h3:nth-child(4){
+  color: #e91e63;
+  text-shadow: -2px 2px 0 #ae0840,
+  -4px 4px 0 #ae0840,
+  -6px 6px 0 #ae0840,
+  -8px 8px 0 #ae0840,
+  -10px 10px 0 #ae0840,
+  -10px 10px 0 #ae0840,
+  -12px 12px 0 #ae0840,
+  -14px 14px 0 #ae0840,
+  -16px 16px 0 #ae0840,
+  -18px 18px 20px #000,
+  -18px 18px 30px #000,
+  -18px 18px 50px #000,
+  -18px 18px 150px #000;
+  clip-path: circle(20% at 100% 50%);
+  transition: clip-path 2.5s;
+}
+
+.container-1 h3:hover:nth-child(4){
+  clip-path: circle(120% at 100% 50%);
+  z-index: 100;
+}
+
+.row{
+  padding-top: 140px;
+}
 .text {
   font-size: 40px;
   color: rgb(255, 255, 255);
@@ -169,6 +266,9 @@ body.dark-mode::before {
   -webkit-backdrop-filter: blur(4px);
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
+}
+.dark-mode .mb-3{
+  color: white;
 }
 
 .main {
@@ -326,7 +426,53 @@ h3 {
   .main_form #item {
     font-size: 1rem;
   }
+  .container-1{
+    padding-left: 0;
+  }
+  .container-1 h3{
+    width: 184px;
+    font-size: 26px;
 }
+.row{
+  padding-top: 50px;
+}
+
+.container-1 h3{
+  text-shadow: none;
+}
+.container-1 h3:nth-child(2){
+  color: #03a9f4;
+  text-shadow: none;
+}
+
+.container-1 h3:hover:nth-child(2){
+  clip-path: circle(50% at 50% 100%);
+  z-index: 100;
+}
+
+.container-1 h3:nth-child(3){
+  color: #2cff37;
+  text-shadow: none;
+}
+
+.container-1 h3:hover:nth-child(3){
+  clip-path: circle(120% at 0% 10%);
+  z-index: 100;
+}
+
+.container-1 h3:nth-child(4){
+  color: #e91e63;
+  text-shadow: none;
+  clip-path: circle(20% at 83% 27%);
+  transition: clip-path 2.5s;
+}
+
+.container-1 h3:hover:nth-child(4){
+  clip-path: circle(80% at 83% 27%);
+  z-index: 100;
+}
+  }
+
 
 @media (max-width: 960px) {
   .main {
