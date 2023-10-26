@@ -1,0 +1,19 @@
+{
+  "name": "to-do-list-hacktoberfest",
+  "version": "1.0.0",
+  "description": "to-do-list",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nikaishere/To-Do-List-HacktoberFest.git"
+  },
+  "author": "Nika Franck",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nikaishere/To-Do-List-HacktoberFest/issues"
+  },
+  "homepage": "https://github.com/Nikaishere/To-Do-List-HacktoberFest#readme"
+}
