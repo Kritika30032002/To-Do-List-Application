@@ -162,12 +162,12 @@ function handleItemClick(e) {
       tasksCheck();
       displaySuccessMessage("Task deleted successfully");
       saveTasksToLocalStorage();
-       confirmYesButton.removeEventListener("click", handleYesClick);
+      confirmYesButton.removeEventListener("click", handleYesClick);
       confirmNoButton.removeEventListener("click", handleNoClick);
       confirmCancelButton.removeEventListener("click", handleCancelClick);
     };
 
-     const handleNoClick = () => {
+    const handleNoClick = () => {
       confirmationBox.style.display = "none";
       confirmYesButton.removeEventListener("click", handleYesClick);
       confirmNoButton.removeEventListener("click", handleNoClick);
@@ -403,3 +403,10 @@ function createNewTask(taskTitle, createdDate, dueDate) {
 }
 
 init();
+
+// Preloader function
+document.addEventListener("DOMContentLoaded", function () {
+  setTimeout(function () {
+    document.querySelector(".preloader").style.display = "none";
+  }, 2000);
+});
