@@ -15,14 +15,28 @@
       href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
     />
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-/>
+<link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <link rel="stylesheet" href="style.css" />
     <title>To-Do List</title>
   </head>
   <body>
+    <!-- Preloader Starts -->
+    <div class="preloader">
+      <div class="writing-loader">
+        <i class="fa-regular fa-clipboard"></i>
+        <i class="file-text fa-solid fa-clipboard-check"></i>
+        <div class="pen-container">
+          <i class="pen fas fa-pencil"></i>
+        </div>
+      </div>
+    </div>
+    <!-- Preloader Ends -->
     <div
       id="lblsuccess"
       class="message success-message"
@@ -75,7 +89,7 @@
           </div>
         </div>
       </header> -->
-      <h1 class="text-center text-primary"><span id="element"></span></h2>
+      <h1 class="text-center text-primary"><span id="element"></span></h1>
       <p class="text-center text-secondary">Simply add your tasks here</p>
       <div class="container main mt-5 w-80">
         <h3 class="text-center mb-4">Add your tasks below</h3>
