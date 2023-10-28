@@ -59,8 +59,8 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #73C0FC;
-  transition: .4s;
+  background-color: #73c0fc;
+  transition: 0.4s;
   border-radius: 30px;
 }
 
@@ -74,7 +74,7 @@ body {
   bottom: 2px;
   z-index: 2;
   background-color: #e8e8e8;
-  transition: .4s;
+  transition: 0.4s;
 }
 
 .sun svg {
@@ -87,7 +87,7 @@ body {
 }
 
 .moon svg {
-  fill: #73C0FC;
+  fill: #73c0fc;
   position: absolute;
   top: 5px;
   left: 5px;
@@ -96,12 +96,12 @@ body {
   height: 24px;
 }
 
-/* .switch:hover */.sun svg {
+/* .switch:hover */
+.sun svg {
   animation: rotate 15s linear infinite;
 }
 
 @keyframes rotate {
- 
   0% {
     transform: rotate(0);
   }
@@ -111,15 +111,24 @@ body {
   }
 }
 
-/* .switch:hover */.moon svg {
+/* .switch:hover */
+.moon svg {
   animation: tilt 5s linear infinite;
 }
 
 @keyframes tilt {
-  0% { transform: rotate(0deg); }
-  25% { transform: rotate(-10deg);}
-  75% { transform: rotate(10deg); }
-  100% { transform: rotate(0deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-10deg);
+  }
+  75% {
+    transform: rotate(10deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
 
 .input:checked + .slider {
@@ -207,10 +216,7 @@ body.dark-mode::before {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(1,
-      1,
-      1,
-      0.9);
+  background-color: rgba(1, 1, 1, 0.9);
   /* Adjust the alpha (last) value to control darkness */
   z-index: -1;
 }
@@ -560,7 +566,6 @@ h2 {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 10px;
-  
 }
 
 h4 {
@@ -699,9 +704,112 @@ body::-webkit-scrollbar-track {
 
 body::-webkit-scrollbar-thumb {
   background: rgb(2, 0, 36);
-  background: linear-gradient(90deg,
-      rgba(2, 0, 36, 1) 0%,
-      rgba(9, 9, 121, 1) 35%,
-      rgba(0, 212, 255, 1) 100%);
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(9, 9, 121, 1) 35%,
+    rgba(0, 212, 255, 1) 100%
+  );
   border-radius: 5px;
 }
+
+/* Preloader Starts */
+.preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.writing-loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 5rem;
+  position: absolute;
+}
+.writing-loader * {
+  position: absolute;
+  color: #0081a7;
+}
+.writing-loader .file-text {
+  color: #0081a7;
+  opacity: 0;
+  animation: fileAppear-1 8s 0s linear infinite;
+  position: absolute;
+}
+@keyframes fileAppear-1 {
+  10% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  30% {
+    opacity: 1;
+  }
+  33% {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.writing-loader .pen-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: -50px;
+  left: -25px;
+  width: 40px;
+  height: 40px;
+  animation: writing 3s linear infinite;
+}
+@keyframes writing {
+  from {
+    transform: translate(0, 0);
+  }
+  5% {
+    transform: translate(100%, 0);
+  }
+  15% {
+    transform: translate(0%, 25%);
+  }
+  20% {
+    transform: translate(100%, 25%);
+  }
+  25% {
+    transform: translate(0%, 50%);
+  }
+  30% {
+    transform: translate(100%, 50%);
+  }
+  35% {
+    transform: translate(0%, 75%);
+  }
+  40% {
+    transform: translate(100%, 75%);
+  }
+  45% {
+    transform: translate(0%, 100%);
+  }
+  50% {
+    transform: translate(100%, 100%);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(100%, 100%);
+    opacity: 0;
+  }
+}
+.writing-loader .pen-container .pen {
+  color: #000000;
+  font-size: 2.5rem;
+}
+/* Preloader Ends */

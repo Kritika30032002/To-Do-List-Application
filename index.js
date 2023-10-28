@@ -308,15 +308,25 @@ function clearAllTasks() {
   confirmationBoxAll.style.display = "flex";
 }
 //Function to sort task list by due date
-function sortByDueDate(order) {
+function sortByDueDateAndPriority(order) {
   const sortTaskList = JSON.parse(localStorage.getItem("tasks"));
   if (order === "early") {
     sortTaskList.sort((a, b) => {
-      return new Date(a.dueDate) - new Date(b.dueDate);
+
+      const dueDateComparison = new Date(a.dueDate) - new Date(b.dueDate);
+
+      if (dueDateComparison !== 0){
+        return dueDateComparison;
+      }
+       return comaprePriorities(a.priority, b.priority);
     });
   } else if (order === "late") {
     sortTaskList.sort((a, b) => {
-      return new Date(b.dueDate) - new Date(a.dueDate);
+      const dueDateComparison =  new Date(b.dueDate) - new Date(a.dueDate);
+      if (dueDateComparison !== 0){
+        return dueDateComparison;
+      }
+      return comaprePriorities(a.priority, b.priority);
     });
   }
 
@@ -326,6 +336,15 @@ function sortByDueDate(order) {
   tasksHeading.classList.add("hidden");
   localStorage.setItem("tasks", JSON.stringify(sortTaskList));
   loadTasksFromLocalStorage();
+}
+
+function comaprePriorities(priorityA, priorityB){
+  const priorityValues = {
+    top : 3,
+    middle : 2,
+    low : 1,
+  }
+  return priorityValues[priorityA] - priorityValues[priorityB];
 }
 /* When the user clicks on the button,
 toggle between hiding and showing the dropdown content */
@@ -403,3 +422,10 @@ function createNewTask(taskTitle, createdDate, dueDate) {
 }
 
 init();
+
+// Preloader function
+document.addEventListener("DOMContentLoaded", function () {
+  setTimeout(function () {
+    document.querySelector(".preloader").style.display = "none";
+  }, 2000);
+});
