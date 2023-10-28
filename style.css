@@ -705,3 +705,11 @@ body::-webkit-scrollbar-thumb {
       rgba(0, 212, 255, 1) 100%);
   border-radius: 5px;
 }
+#footer{
+  background-color: #ed2a2a;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  gap: 10px;
+}

@@ -8,6 +8,7 @@ const modeToggleBtn = document.getElementById("modeToggle");
 const checkboxes = document.querySelectorAll(".form-check-input");
 let editItem = null;
 
+
 // Adding Event Listeners
 editTaskBtn.addEventListener("click", (e) => {
   handleEditClick(e);
@@ -403,3 +404,4 @@ function createNewTask(taskTitle, createdDate, dueDate) {
 }
 
 init();
+
