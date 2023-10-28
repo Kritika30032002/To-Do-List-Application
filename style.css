@@ -706,8 +706,7 @@ body::-webkit-scrollbar-thumb {
   border-radius: 5px;
 }
 #footer{
-  background-color: #ed2a2a;
-  color: #fff;
+  color: black;
   display: flex;
   align-items: center;
   justify-content:center;
