@@ -293,7 +293,6 @@ body.dark-mode::before {
   font-size: 1.3rem;
   margin: 0.4rem;
   text-align: left;
-  color: #000;
   border-radius: 1rem !important;
   word-break: break-all;
   word-wrap: break-word;
@@ -565,7 +564,7 @@ h2 {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 10px;
-  color: #000;
+  
 }
 
 h4 {
@@ -744,3 +743,4 @@ body::-webkit-scrollbar-thumb {
   left: 55px;
   top:62px;
 }
+
