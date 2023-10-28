@@ -403,3 +403,10 @@ function createNewTask(taskTitle, createdDate, dueDate) {
 }
 
 init();
+
+// Preloader function
+document.addEventListener("DOMContentLoaded", function () {
+  setTimeout(function () {
+    document.querySelector(".preloader").style.display = "none";
+  }, 2000);
+});
