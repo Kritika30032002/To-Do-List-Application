@@ -411,6 +411,8 @@ window.onclick = function (event) {
 function createNewTask(taskTitle, createdDate, dueDate, priority) {
   const li = document.createElement("li");
   li.className = `list-group-item card shadow mb-4 bg-transparent ${priorityColors[priority]}`;
+
+
   console.log(priority)
   const completeCheckbox = document.createElement("input");
   completeCheckbox.type = "checkbox";

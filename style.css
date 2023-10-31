@@ -813,15 +813,16 @@ body::-webkit-scrollbar-thumb {
   font-size: 2.5rem;
 }
 /* Preloader Ends */
-
-.task-priority-High{
-  background-color: #ff4d4d;
+.task-priority-High {
+  border-left: 6px solid red; /* Adjust styles for high priority */
 }
 
-.task-priority-Medium{
-  background-color: #ffbe42;
+.task-priority-Medium {
+  border-left: 6px solid orange; /* Adjust styles for medium priority */
 }
 
-.task-priority-Low{
-  background-color: #98ff98;
+.task-priority-Low {
+  border-left: 6px solid green; /* Adjust styles for low priority */
 }
+
+
