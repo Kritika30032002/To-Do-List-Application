@@ -105,6 +105,11 @@
               id="item"
               placeholder="Write your task here..."
             />
+            <select id = "priority">
+              <option value = "Low"> Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+            </select>
             <input
               class="btn btn-warning text-light col-2"
               id="dueDate"
@@ -141,6 +146,8 @@
                 ></ion-icon>
             </button>
             <div id="myDropdown" class="dropdown-content ml-2 mt-0.5">
+              <a onclick="sortByPriority('highToLow');">High to Low Priority</a>
+              <a onclick="sortByPriority('lowToHigh');">Low to High Priority</a>
               <a onclick="sortByDueDate('early');">Early To Do</a>
               <a onclick="sortByDueDate('late');">Lately To Do</a>
             </div>
