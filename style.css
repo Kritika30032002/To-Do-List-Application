@@ -813,3 +813,15 @@ body::-webkit-scrollbar-thumb {
   font-size: 2.5rem;
 }
 /* Preloader Ends */
+
+.task-priority-High{
+  background-color: #ff4d4d;
+}
+
+.task-priority-Medium{
+  background-color: #ffbe42;
+}
+
+.task-priority-Low{
+  background-color: #98ff98;
+}
