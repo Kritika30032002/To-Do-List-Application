@@ -358,6 +358,7 @@ function createNewTask(taskTitle, createdDate, dueDate) {
   completeCheckbox.addEventListener("change", markAsComplete);
 
   const deleteButton = document.createElement("button");
+  deleteButton.type = "button";
   deleteButton.className = "btn btn-danger float-right delete";
   // deleteButton.appendChild(document.createTextNode("Delete"));
   deleteButton.innerHTML =
