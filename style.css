@@ -817,3 +817,16 @@ body::-webkit-scrollbar-thumb {
   font-size: 2.5rem;
 }
 /* Preloader Ends */
+.task-priority-High {
+  border-left: 6px solid red; /* Adjust styles for high priority */
+}
+
+.task-priority-Medium {
+  border-left: 6px solid orange; /* Adjust styles for medium priority */
+}
+
+.task-priority-Low {
+  border-left: 6px solid green; /* Adjust styles for low priority */
+}
+
+

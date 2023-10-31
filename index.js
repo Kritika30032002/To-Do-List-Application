@@ -1,6 +1,7 @@
 // Elements reference
 const taskList = document.getElementById("taskList");
 const dueDateInput = document.getElementById("dueDate");
+const priorityInput = document.getElementById("priority");
 const submitBtn = document.getElementById("submitBtn");
 const editTaskBtn = document.getElementById("editTask");
 const tasksHeading = document.getElementById("heading-tasks");
@@ -8,6 +9,19 @@ const modeToggleBtn = document.getElementById("modeToggle");
 const checkboxes = document.querySelectorAll(".form-check-input");
 let editItem = null;
 
+const tasksWithPriority = [];
+
+const priorityColors = {
+  'High' : 'task-priority-High',
+  'Medium' : 'task-priority-Medium',
+  'Low' : 'task-priority-Low',
+};
+
+const priorityValues = {
+  'High' : 3,
+  'Medium' : 2,
+  'Low' : 1,
+}
 // Adding Event Listeners
 editTaskBtn.addEventListener("click", (e) => {
   handleEditClick(e);
@@ -93,6 +107,7 @@ function addItem(e) {
 
   const newTaskTitle = document.getElementById("item").value;
   let dueDate = document.getElementById("dueDate").value;
+  const priority = document.getElementById('priority').value;
   if (!dueDate) {
     dueDate = DefaultDate();
   }
@@ -137,10 +152,11 @@ function addItem(e) {
 
   const creationDateTime = new Date().toLocaleString();
 
-  createNewTask(newTaskTitle, creationDateTime, dueDate);
+  createNewTask(newTaskTitle, creationDateTime, dueDate,priority);
 
   saveTasksToLocalStorage();
   document.getElementById("dueDate").value = "";
+  document.getElementById("priority").value = "";
 }
 
 function handleItemClick(e) {
@@ -228,12 +244,13 @@ function saveTasksToLocalStorage() {
     const isCompleted = task.classList.contains("completed");
     const createdAt = task.querySelector("#created-at").textContent;
     const dueDate = task.querySelector("#task-dueDate").textContent;
-
+    const priority = task.querySelector("#task-priority").textContent;
     const taskObj = {
       text: taskText,
       completed: isCompleted,
       createdAt: createdAt,
       dueDate: dueDate,
+      priority : priority,
     };
     tasksArray.push(taskObj);
   });
@@ -254,10 +271,11 @@ function loadTasksFromLocalStorage() {
       console.log(task.text, "taskText");
       console.log(task.createdAt.slice(8), "taskCreateAt");
       console.log(task.dueDate.split(":")[1], "testDuedate");
+      
       createNewTask(
         task.text,
         task.createdAt.slice(8),
-        task.dueDate.split(":")[1]
+        task.dueDate.split(":")[1], task.priority
       );
     });
   }
@@ -318,21 +336,62 @@ function sortByDueDate(order) {
     sortTaskList.sort((a, b) => {
       return new Date(b.dueDate) - new Date(a.dueDate);
     });
+
   }
 
   while (taskList.firstChild) {
     taskList.removeChild(taskList.firstChild);
   }
+  
   tasksHeading.classList.add("hidden");
   localStorage.setItem("tasks", JSON.stringify(sortTaskList));
   loadTasksFromLocalStorage();
 }
+
+function sortByPriority(order) {
+  const sortTaskList = JSON.parse(localStorage.getItem("tasks"));
+
+  sortTaskList.sort((a, b) => {
+    if (order === 'highToLow') {
+      // Sort tasks from high priority to low priority
+      return priorityValues[b.priority] - priorityValues[a.priority];
+    } else if (order === 'lowToHigh') {
+      // Sort tasks from low priority to high priority
+      return priorityValues[a.priority] - priorityValues[b.priority];
+    } else {
+      // Default sorting (e.g., no sorting)
+      return 0;
+    }
+  });
+
+  while (taskList.firstChild) {
+    taskList.removeChild(taskList.firstChild);
+  }
+
+ 
+  
+  tasksHeading.classList.add("hidden");
+  localStorage.setItem("tasks", JSON.stringify(sortTaskList));
+  loadTasksFromLocalStorage();
+}
+
 /* When the user clicks on the button,
 toggle between hiding and showing the dropdown content */
 function myFunction() {
   console.log("func called");
   document.getElementById("myDropdown").classList.toggle("show");
 }
+
+// function sortTasks(order){
+//   if (order === 'highToLow'){
+//     sortByPriority('highToLow');
+
+//   }
+//   else if (order === 'lowToHigh'){
+//     sortByPriority('lowToHigh');
+//   }
+//   document.getElementById("myDropdown").classList.remove("show");
+// }
 
 // Close the dropdown menu if the user clicks outside of it
 window.onclick = function (event) {
@@ -348,10 +407,13 @@ window.onclick = function (event) {
   }
 };
 
-function createNewTask(taskTitle, createdDate, dueDate) {
-  const li = document.createElement("li");
-  li.className = "list-group-item card shadow mb-4 bg-transparent";
 
+function createNewTask(taskTitle, createdDate, dueDate, priority) {
+  const li = document.createElement("li");
+  li.className = `list-group-item card shadow mb-4 bg-transparent ${priorityColors[priority]}`;
+
+
+  console.log(priority)
   const completeCheckbox = document.createElement("input");
   completeCheckbox.type = "checkbox";
   completeCheckbox.className = "form-check-input task-completed";
@@ -393,12 +455,21 @@ function createNewTask(taskTitle, createdDate, dueDate) {
   dueDateParagraph.style.margin = "0 19px";
   dueDateParagraph.appendChild(document.createTextNode("Due Date:" + dueDate));
 
+  const priorityParagraph = document.createElement("p");
+  priorityParagraph.className = "text-muted";
+  priorityParagraph.id = "task-priority";
+  priorityParagraph.style.fontSize = "15px";
+  priorityParagraph.style.margin = "0 19px";
+  priorityParagraph.appendChild(document.createTextNode(priority));
+
+
   li.appendChild(completeCheckbox);
   li.appendChild(document.createTextNode(taskTitle));
   li.appendChild(deleteButton);
   li.appendChild(editButton);
   li.appendChild(dateTimeParagraph);
   li.appendChild(dueDateParagraph);
+  li.appendChild(priorityParagraph);
 
   taskList.appendChild(li);
 }
