@@ -16,6 +16,12 @@ const priorityColors = {
   'Medium' : 'task-priority-Medium',
   'Low' : 'task-priority-Low',
 };
+
+const priorityValues = {
+  'High' : 3,
+  'Medium' : 2,
+  'Low' : 1,
+}
 // Adding Event Listeners
 editTaskBtn.addEventListener("click", (e) => {
   handleEditClick(e);
@@ -336,6 +342,7 @@ function sortByDueDate(order) {
   while (taskList.firstChild) {
     taskList.removeChild(taskList.firstChild);
   }
+  
   tasksHeading.classList.add("hidden");
   localStorage.setItem("tasks", JSON.stringify(sortTaskList));
   loadTasksFromLocalStorage();
@@ -347,10 +354,10 @@ function sortByPriority(order) {
   sortTaskList.sort((a, b) => {
     if (order === 'highToLow') {
       // Sort tasks from high priority to low priority
-      return priorityColors[b.priority] - priorityColors[a.priority];
+      return priorityValues[b.priority] - priorityValues[a.priority];
     } else if (order === 'lowToHigh') {
       // Sort tasks from low priority to high priority
-      return priorityColors[a.priority] - priorityColors[b.priority];
+      return priorityValues[a.priority] - priorityValues[b.priority];
     } else {
       // Default sorting (e.g., no sorting)
       return 0;
@@ -360,6 +367,8 @@ function sortByPriority(order) {
   while (taskList.firstChild) {
     taskList.removeChild(taskList.firstChild);
   }
+
+ 
   
   tasksHeading.classList.add("hidden");
   localStorage.setItem("tasks", JSON.stringify(sortTaskList));
