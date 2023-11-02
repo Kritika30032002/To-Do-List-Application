@@ -2,6 +2,7 @@
 const taskList = document.getElementById("taskList");
 const dueDateInput = document.getElementById("dueDate");
 const priorityInput = document.getElementById("priority");
+
 const submitBtn = document.getElementById("submitBtn");
 const editTaskBtn = document.getElementById("editTask");
 const tasksHeading = document.getElementById("heading-tasks");
@@ -23,6 +24,10 @@ const priorityValues = {
   'Medium' : 2,
   'Low' : 1,
 }
+
+
+
+
 // Adding Event Listeners
 editTaskBtn.addEventListener("click", (e) => {
   handleEditClick(e);
@@ -40,7 +45,6 @@ flatpickr(dueDateInput, {
   enableTime: false, // If you want to enable time selection as well
   dateFormat: "Y-m-d", // Adjust the date format as needed
 });
-
 
 
 
@@ -160,7 +164,7 @@ function addItem(e) {
 
   saveTasksToLocalStorage();
   document.getElementById("dueDate").value = "";
-  // document.getElementById("priority").value = "";
+  document.getElementById("priority").value = "";
 }
 
 function handleItemClick(e) {
