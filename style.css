@@ -829,4 +829,16 @@ body::-webkit-scrollbar-thumb {
   border-left: 6px solid green; /* Adjust styles for low priority */
 }
 
+option:hover {
+  background-color: white;
+  color: white;
+}
+
+select {
+  width: 150px;
+}
+
+select option {
+  width: 150px;
+}
 

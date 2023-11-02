@@ -2,12 +2,14 @@
 const taskList = document.getElementById("taskList");
 const dueDateInput = document.getElementById("dueDate");
 const priorityInput = document.getElementById("priority");
+
 const submitBtn = document.getElementById("submitBtn");
 const editTaskBtn = document.getElementById("editTask");
 const tasksHeading = document.getElementById("heading-tasks");
 const modeToggleBtn = document.getElementById("modeToggle");
 const checkboxes = document.querySelectorAll(".form-check-input");
 let editItem = null;
+
 
 const tasksWithPriority = [];
 
@@ -22,6 +24,10 @@ const priorityValues = {
   'Medium' : 2,
   'Low' : 1,
 }
+
+
+
+
 // Adding Event Listeners
 editTaskBtn.addEventListener("click", (e) => {
   handleEditClick(e);
@@ -39,6 +45,8 @@ flatpickr(dueDateInput, {
   enableTime: false, // If you want to enable time selection as well
   dateFormat: "Y-m-d", // Adjust the date format as needed
 });
+
+
 
 function init() {
   const body = document.getElementsByTagName("body")[0];
@@ -411,7 +419,7 @@ window.onclick = function (event) {
 function createNewTask(taskTitle, createdDate, dueDate, priority) {
   const li = document.createElement("li");
   li.className = `list-group-item card shadow mb-4 bg-transparent ${priorityColors[priority]}`;
-
+ 
 
   console.log(priority)
   const completeCheckbox = document.createElement("input");
