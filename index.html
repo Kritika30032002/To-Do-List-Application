@@ -106,12 +106,13 @@
               placeholder="Write your task here..."
             />
             
-            <select id = "priority">
-              
-              <option value="Low" style="background:green">Low</option>
-              <option value="Medium" style="background:yellow">Medium</option>
-              <option value="High" style="background:red">High</option>
+            <select id="priority">
+              <option value="" selected disabled hidden>select priority</option>
+              <option value="Low" style="background:green" onfocus="this.size=3">Low</option>
+              <option value="Medium" style="background:yellow" onfocus="this.size=3">Medium</option>
+              <option value="High" style="background:red" onfocus="this.size=3">High</option>
             </select>
+            
             <input
               class="btn btn-warning text-light col-2"
               id="dueDate"
