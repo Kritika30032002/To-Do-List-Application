@@ -9,6 +9,7 @@ const modeToggleBtn = document.getElementById("modeToggle");
 const checkboxes = document.querySelectorAll(".form-check-input");
 let editItem = null;
 
+
 const tasksWithPriority = [];
 
 const priorityColors = {
@@ -39,6 +40,9 @@ flatpickr(dueDateInput, {
   enableTime: false, // If you want to enable time selection as well
   dateFormat: "Y-m-d", // Adjust the date format as needed
 });
+
+
+
 
 function init() {
   const body = document.getElementsByTagName("body")[0];
@@ -156,7 +160,7 @@ function addItem(e) {
 
   saveTasksToLocalStorage();
   document.getElementById("dueDate").value = "";
-  document.getElementById("priority").value = "";
+  // document.getElementById("priority").value = "";
 }
 
 function handleItemClick(e) {
@@ -411,7 +415,7 @@ window.onclick = function (event) {
 function createNewTask(taskTitle, createdDate, dueDate, priority) {
   const li = document.createElement("li");
   li.className = `list-group-item card shadow mb-4 bg-transparent ${priorityColors[priority]}`;
-
+ 
 
   console.log(priority)
   const completeCheckbox = document.createElement("input");
@@ -420,6 +424,7 @@ function createNewTask(taskTitle, createdDate, dueDate, priority) {
   completeCheckbox.addEventListener("change", markAsComplete);
 
   const deleteButton = document.createElement("button");
+  deleteButton.type = "button";
   deleteButton.className = "btn btn-danger float-right delete";
   // deleteButton.appendChild(document.createTextNode("Delete"));
   deleteButton.innerHTML =
