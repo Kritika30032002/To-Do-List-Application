@@ -311,6 +311,10 @@ body.dark-mode::before {
   border-radius: 5rem;
 }
 
+.list-group-item button ion-icon {
+  pointer-events: none;
+}
+
 /* .main_form #item {
   font-size: 1.3rem;
   width: 100%;
