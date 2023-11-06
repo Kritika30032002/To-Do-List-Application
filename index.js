@@ -11,6 +11,7 @@ const checkboxes = document.querySelectorAll(".form-check-input");
 let editItem = null;
 
 
+
 const tasksWithPriority = [];
 
 const priorityColors = {
@@ -46,7 +47,14 @@ flatpickr(dueDateInput, {
   dateFormat: "Y-m-d", // Adjust the date format as needed
 });
 
-
+microphone.addEventListener("click", () => {
+  if (!isListening){
+    startVoiceRecognition();
+  }
+  else{
+    stopVoiceRecognition();
+  }
+})
 
 function init() {
   const body = document.getElementsByTagName("body")[0];
@@ -109,40 +117,32 @@ function handleEditClick(e) {
   saveTasksToLocalStorage();
 }
 
-function addItem(e) {
-  e.preventDefault();
+function addItem(taskDetails) {
+  // Destructure the taskDetails object
+  const { taskTitle, dueDate, priority } = taskDetails;
+
   tasksCheck();
 
-  const newTaskTitle = document.getElementById("item").value;
-  let dueDate = document.getElementById("dueDate").value;
-  const priority = document.getElementById('priority').value;
-  if (!dueDate) {
-    dueDate = DefaultDate();
+  let newTaskTitle = taskTitle;
+  let dueDateValue = dueDate;
+  if (!dueDateValue) {
+    dueDateValue = DefaultDate();
   }
 
   // Check if the due date has already passed
   const currentDate = new Date();
-  const dueDateObj = new Date(dueDate);
+  const dueDateObj = new Date(dueDateValue);
 
   const tasks = taskList.children;
   console.log(newTaskTitle);
-
-  // if (dueDateObj < currentDate && tasks.length === 0) {
-  //   displayErrorMessage("Due date has already passed");
-  //   tasksHeading.classList.add("hidden");
-  //   return false;
-  // } else if (dueDateObj < currentDate && tasks.length > 0) {
-  //   displayErrorMessage("Due date has already passed");
-  //   return false;
-  // } else {
-  //   tasksHeading.classList.remove("hidden");
-  // }
-
-  // Added new logic to check conditions whether Task and Date are entered
+  // console.log("Processing speech:", speech);
+  console.log("Task title:", taskDetails.taskTitle);
+  console.log("Due date:", taskDetails.dueDate);
+  console.log("Priority:", taskDetails.priority);
 
   if (!newTaskTitle) {
     displayErrorMessage("Task not entered");
-    taskeading.classList.add("hidden");
+    tasksHeading.classList.add("hidden");
     return false;
   } else if (dueDateObj < currentDate) {
     displayErrorMessage("Due date has already passed");
@@ -160,12 +160,13 @@ function addItem(e) {
 
   const creationDateTime = new Date().toLocaleString();
 
-  createNewTask(newTaskTitle, creationDateTime, dueDate,priority);
+  createNewTask(newTaskTitle, creationDateTime, dueDateValue, priority);
 
   saveTasksToLocalStorage();
   document.getElementById("dueDate").value = "";
   document.getElementById("priority").value = "";
 }
+
 
 function handleItemClick(e) {
   if (e.target.classList.contains("delete")) {
@@ -416,6 +417,7 @@ window.onclick = function (event) {
 };
 
 
+
 function createNewTask(taskTitle, createdDate, dueDate, priority) {
   const li = document.createElement("li");
   li.className = `list-group-item card shadow mb-4 bg-transparent ${priorityColors[priority]}`;
@@ -481,6 +483,76 @@ function createNewTask(taskTitle, createdDate, dueDate, priority) {
 
   taskList.appendChild(li);
 }
+
+if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
+  const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+  recognition.continuous = true;
+  recognition.interimResults = false;
+
+  recognition.onresult = (event) => {
+    const result = event.results[event.results.length - 1][0].transcript;
+    processSpeech(result);
+  };
+
+  recognition.start();
+} else {
+  console.log('Speech recognition not supported');
+}
+
+
+
+  // Stop recognition after one result (change to your preference)
+
+
+  // Process the speech result
+ 
+
+
+
+
+function processSpeech(speech){
+  console.log("Processing speech:", speech);
+  
+ 
+  if (speech.includes('add')){
+    const taskDetails = extractTaskDetails(speech);
+    console.log(taskDetails);
+    addItem(taskDetails);
+  }
+  else if (speech.includes('edit')){
+    const taskDetails = extractTaskDetails(speech);
+    
+    handleEditClick(taskDetails);
+  }
+  else if (speech.includes('complete')){
+    const taskDetails = extractTaskDetails(speech);
+    markAsComplete(taskDetails);
+  }
+  else if (speech.includes('sort by due date')){
+    sortByDueDate('early');
+  }
+  else if (speech.includes('sort by priority')){
+    sortByPriority('highToLow');
+  }
+}
+
+function extractTaskDetails(speech) {
+  const taskTitleMatches = speech.match(/add\s(.*?)\sdue date/i);
+  const dueDateMatches = speech.match(/due date\s(.*?)(?:\slow priority|\shigh priority|$)/i);
+  const priorityMatches = speech.match(/(low priority|high priority)$/i);
+
+  const taskTitle = taskTitleMatches ? taskTitleMatches[1].trim() : '';
+  const dueDate = dueDateMatches ? dueDateMatches[1].trim() : '';
+  const priority = priorityMatches ? priorityMatches[1].trim() : '';
+
+  return {
+    taskTitle,
+    dueDate,
+    priority,
+  };
+}
+
+
 
 init();
 
