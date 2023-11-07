@@ -11,7 +11,6 @@ const checkboxes = document.querySelectorAll(".form-check-input");
 let editItem = null;
 
 
-
 const tasksWithPriority = [];
 
 const priorityColors = {
@@ -42,19 +41,79 @@ checkboxes.forEach((checkbox) => {
   checkbox.addEventListener("change", markAsComplete);
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+  const recognition = new webkitSpeechRecognition();
+  let isListening = false;
+  recognition.onstart = (function(){
+    isListening = true;
+    console.log('Listening for speech...')
+  })
+
+  recognition.onresult = function (event) {
+    const spokenText = event.results[0][0].transcript;
+    console.log('Recognized speech: ' + spokenText);
+    // You can handle the recognized speech here, e.g., execute commands or display it on the UI.
+};
+  recognition.onend = function(){
+    isListening = false;
+    console.log('Speech recognition ended.')
+  } 
+
+  
+  recognition.onerror = function (event) {
+    console.error('Speech recognition error:', event.error);
+  };
+
+  const voiceCommandButton = document.getElementById("voice-command-button");
+  voiceCommandButton.addEventListener('click', startVoiceRecognition);
+
+function startVoiceRecognition(){
+  
+  
+  if (isListening) {
+    recognition.stop();
+} else {
+    recognition.start();
+}
+}
+})
+
+
+function executeVoiceCommand(spokenText) {
+  // Define regular expressions to match specific commands.
+  const addTaskPattern = /Add a new task:(.+)/i;
+  const editTaskPattern = /Edit task:(.+) to (.+)/i;
+  const completeTaskPattern = /Complete task:(.+)/i;
+ 
+  const showTasksPattern = /Show tasks with (.+) priority/i;
+
+  if (addTaskPattern.test(spokenText)) {
+      const taskName = spokenText.match(addTaskPattern)[1].trim();
+      addItem(taskName);
+  } else if (editTaskPattern.test(spokenText)) {
+      const match = spokenText.match(editTaskPattern);
+      const oldTaskName = match[1].trim();
+      const newTaskName = match[2].trim();
+      handleEditClick(oldTaskName, newTaskName);
+  } else if (completeTaskPattern.test(spokenText)) {
+      const taskName = spokenText.match(completeTaskPattern)[1].trim();
+      markAsComplete(taskName);
+  } 
+    else if (showTasksPattern.test(spokenText)) {
+      const priorityLevel = showTasksPattern.exec(spokenText)[1].trim();
+      sortByPriority(priorityLevel);
+  }
+}
+
+// You can define functions like createTask, editTask, completeTask, setPriority, and filterTasksByPriority to handle the respective actions.
+
+
 flatpickr(dueDateInput, {
   enableTime: false, // If you want to enable time selection as well
   dateFormat: "Y-m-d", // Adjust the date format as needed
 });
 
-microphone.addEventListener("click", () => {
-  if (!isListening){
-    startVoiceRecognition();
-  }
-  else{
-    stopVoiceRecognition();
-  }
-})
+
 
 function init() {
   const body = document.getElementsByTagName("body")[0];
@@ -117,32 +176,40 @@ function handleEditClick(e) {
   saveTasksToLocalStorage();
 }
 
-function addItem(taskDetails) {
-  // Destructure the taskDetails object
-  const { taskTitle, dueDate, priority } = taskDetails;
-
+function addItem(e) {
+  e.preventDefault();
   tasksCheck();
 
-  let newTaskTitle = taskTitle;
-  let dueDateValue = dueDate;
-  if (!dueDateValue) {
-    dueDateValue = DefaultDate();
+  const newTaskTitle = document.getElementById("item").value;
+  let dueDate = document.getElementById("dueDate").value;
+  const priority = document.getElementById('priority').value;
+  if (!dueDate) {
+    dueDate = DefaultDate();
   }
 
   // Check if the due date has already passed
   const currentDate = new Date();
-  const dueDateObj = new Date(dueDateValue);
+  const dueDateObj = new Date(dueDate);
 
   const tasks = taskList.children;
   console.log(newTaskTitle);
-  // console.log("Processing speech:", speech);
-  console.log("Task title:", taskDetails.taskTitle);
-  console.log("Due date:", taskDetails.dueDate);
-  console.log("Priority:", taskDetails.priority);
+
+  // if (dueDateObj < currentDate && tasks.length === 0) {
+  //   displayErrorMessage("Due date has already passed");
+  //   tasksHeading.classList.add("hidden");
+  //   return false;
+  // } else if (dueDateObj < currentDate && tasks.length > 0) {
+  //   displayErrorMessage("Due date has already passed");
+  //   return false;
+  // } else {
+  //   tasksHeading.classList.remove("hidden");
+  // }
+
+  // Added new logic to check conditions whether Task and Date are entered
 
   if (!newTaskTitle) {
     displayErrorMessage("Task not entered");
-    tasksHeading.classList.add("hidden");
+    taskeading.classList.add("hidden");
     return false;
   } else if (dueDateObj < currentDate) {
     displayErrorMessage("Due date has already passed");
@@ -160,13 +227,12 @@ function addItem(taskDetails) {
 
   const creationDateTime = new Date().toLocaleString();
 
-  createNewTask(newTaskTitle, creationDateTime, dueDateValue, priority);
+  createNewTask(newTaskTitle, creationDateTime, dueDate,priority);
 
   saveTasksToLocalStorage();
   document.getElementById("dueDate").value = "";
   document.getElementById("priority").value = "";
 }
-
 
 function handleItemClick(e) {
   if (e.target.classList.contains("delete")) {
@@ -417,7 +483,6 @@ window.onclick = function (event) {
 };
 
 
-
 function createNewTask(taskTitle, createdDate, dueDate, priority) {
   const li = document.createElement("li");
   li.className = `list-group-item card shadow mb-4 bg-transparent ${priorityColors[priority]}`;
@@ -483,76 +548,6 @@ function createNewTask(taskTitle, createdDate, dueDate, priority) {
 
   taskList.appendChild(li);
 }
-
-if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
-  const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-  recognition.continuous = true;
-  recognition.interimResults = false;
-
-  recognition.onresult = (event) => {
-    const result = event.results[event.results.length - 1][0].transcript;
-    processSpeech(result);
-  };
-
-  recognition.start();
-} else {
-  console.log('Speech recognition not supported');
-}
-
-
-
-  // Stop recognition after one result (change to your preference)
-
-
-  // Process the speech result
- 
-
-
-
-
-function processSpeech(speech){
-  console.log("Processing speech:", speech);
-  
- 
-  if (speech.includes('add')){
-    const taskDetails = extractTaskDetails(speech);
-    console.log(taskDetails);
-    addItem(taskDetails);
-  }
-  else if (speech.includes('edit')){
-    const taskDetails = extractTaskDetails(speech);
-    
-    handleEditClick(taskDetails);
-  }
-  else if (speech.includes('complete')){
-    const taskDetails = extractTaskDetails(speech);
-    markAsComplete(taskDetails);
-  }
-  else if (speech.includes('sort by due date')){
-    sortByDueDate('early');
-  }
-  else if (speech.includes('sort by priority')){
-    sortByPriority('highToLow');
-  }
-}
-
-function extractTaskDetails(speech) {
-  const taskTitleMatches = speech.match(/add\s(.*?)\sdue date/i);
-  const dueDateMatches = speech.match(/due date\s(.*?)(?:\slow priority|\shigh priority|$)/i);
-  const priorityMatches = speech.match(/(low priority|high priority)$/i);
-
-  const taskTitle = taskTitleMatches ? taskTitleMatches[1].trim() : '';
-  const dueDate = dueDateMatches ? dueDateMatches[1].trim() : '';
-  const priority = priorityMatches ? priorityMatches[1].trim() : '';
-
-  return {
-    taskTitle,
-    dueDate,
-    priority,
-  };
-}
-
-
 
 init();
 
