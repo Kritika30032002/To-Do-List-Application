@@ -41,73 +41,6 @@ checkboxes.forEach((checkbox) => {
   checkbox.addEventListener("change", markAsComplete);
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-  const recognition = new webkitSpeechRecognition();
-  let isListening = false;
-  recognition.onstart = (function(){
-    isListening = true;
-    console.log('Listening for speech...')
-  })
-
-  recognition.onresult = function (event) {
-    const spokenText = event.results[0][0].transcript;
-    console.log('Recognized speech: ' + spokenText);
-    // You can handle the recognized speech here, e.g., execute commands or display it on the UI.
-};
-  recognition.onend = function(){
-    isListening = false;
-    console.log('Speech recognition ended.')
-  } 
-
-  
-  recognition.onerror = function (event) {
-    console.error('Speech recognition error:', event.error);
-  };
-
-  const voiceCommandButton = document.getElementById("voice-command-button");
-  voiceCommandButton.addEventListener('click', startVoiceRecognition);
-
-function startVoiceRecognition(){
-  
-  
-  if (isListening) {
-    recognition.stop();
-} else {
-    recognition.start();
-}
-}
-})
-
-
-function executeVoiceCommand(spokenText) {
-  // Define regular expressions to match specific commands.
-  const addTaskPattern = /Add a new task:(.+)/i;
-  const editTaskPattern = /Edit task:(.+) to (.+)/i;
-  const completeTaskPattern = /Complete task:(.+)/i;
- 
-  const showTasksPattern = /Show tasks with (.+) priority/i;
-
-  if (addTaskPattern.test(spokenText)) {
-      const taskName = spokenText.match(addTaskPattern)[1].trim();
-      addItem(taskName);
-  } else if (editTaskPattern.test(spokenText)) {
-      const match = spokenText.match(editTaskPattern);
-      const oldTaskName = match[1].trim();
-      const newTaskName = match[2].trim();
-      handleEditClick(oldTaskName, newTaskName);
-  } else if (completeTaskPattern.test(spokenText)) {
-      const taskName = spokenText.match(completeTaskPattern)[1].trim();
-      markAsComplete(taskName);
-  } 
-    else if (showTasksPattern.test(spokenText)) {
-      const priorityLevel = showTasksPattern.exec(spokenText)[1].trim();
-      sortByPriority(priorityLevel);
-  }
-}
-
-// You can define functions like createTask, editTask, completeTask, setPriority, and filterTasksByPriority to handle the respective actions.
-
-
 flatpickr(dueDateInput, {
   enableTime: false, // If you want to enable time selection as well
   dateFormat: "Y-m-d", // Adjust the date format as needed
@@ -176,6 +109,64 @@ function handleEditClick(e) {
   saveTasksToLocalStorage();
 }
 
+document.addEventListener('DOMContentLoaded', function(){
+  const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+  recognition.lang = 'en-US';
+  recognition.interimResults = false;
+
+  let isListening = false;
+  const voiceCommandButton = document.getElementById('voice-command-button');
+  voiceCommandButton.addEventListener('click', function(){
+
+    if (isListening){
+      recognition.stop();
+      isListening = false;
+      voiceCommandButton.textContent = "start voice command";
+    
+    }
+    else{
+      recognition.start();
+      isListening = true;
+      voiceCommandButton.textContent = "stop voice command";
+    }
+    
+  })
+
+  recognition.onresult = function(event){
+    const transcript = event.results[0][0].transcript;
+    handleVoiceCommand(transcript);
+  }
+
+  function handleVoiceCommand(command){
+    if (command.toLowerCase().includes('add')){
+      const task = command.replace('add','').trim();
+      addTask(task);
+    }
+    else if (command.toLowerCase().includes('remove')){
+      const task = command.replace('remove','').trim();
+      removeTask(task);
+    }
+  }
+
+  function addTask(task){
+    const todoList = document.getElementById('taskList');
+    const li = document.createElement('li');
+    li.textContent = task;
+    todoList.appendChild(li);
+  }
+
+  function removeTask(task){
+    const todoListItems = document.querySelectorAll('#taskList li');
+    todoListItems.forEach(item => {
+      if (item.textContent.toLowerCase() === task.toLowerCase()){
+        item.remove();
+      }
+    })
+  }
+  // recognition.start();
+})
+
+
 function addItem(e) {
   e.preventDefault();
   tasksCheck();
@@ -209,7 +200,7 @@ function addItem(e) {
 
   if (!newTaskTitle) {
     displayErrorMessage("Task not entered");
-    taskeading.classList.add("hidden");
+    tasksHeading.classList.add("hidden");
     return false;
   } else if (dueDateObj < currentDate) {
     displayErrorMessage("Due date has already passed");
