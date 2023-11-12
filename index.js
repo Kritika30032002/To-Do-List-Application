@@ -174,40 +174,35 @@ document.addEventListener('DOMContentLoaded', function(){
 }
 
 
+function handleVoiceCommand(command) {
+  const commandParts = command.split(' ');
 
-  function handleVoiceCommand(command){
-    const commandParts = command.split(' ');
-    if (
-      commandParts.length < 6 ||
-      !commandParts.includes('due') ||
-      !commandParts.includes('date') ||
-      !commandParts.includes('priority')
+  if (
+    commandParts.length < 6 ||
+    !commandParts.includes('due') ||
+    !commandParts.includes('date') ||
+    !commandParts.includes('priority')
   ) {
-      displayErrorMessage('Invalid voice command format.');
-      return;
-    }
-
-
-
-    
-    if (command.toLowerCase().includes('add')){
-      const dueIndex = commandParts.indexOf('due');
-      const dateIndex = commandParts.indexOf('date');
-      const priorityIndex = commandParts.indexOf('priority');
-
-      // Extract task title, due date, and priority
-      const taskTitle = commandParts.slice(2, dueIndex).join(' '); // Combine parts between 'add' and 'due'
-      const dueDate = commandParts.slice(dateIndex + 1, priorityIndex).join(' '); // Combine parts between 'date' and 'priority'
-      const priority = commandParts[priorityIndex + 1]; // Get the priority after 'priority'
-
-      addTask(taskTitle, dueDate, priority);
-    }
-    
-    else if (command.toLowerCase().includes('remove')){
-      const task = command.replace('remove','').trim();
-      removeTask(task);
-    }
+    displayErrorMessage('Invalid voice command format.');
+    return;
   }
+
+  if (command.toLowerCase().includes('add')) {
+    const titleIndex = commandParts.indexOf('due') - 1;
+    const dueIndex = commandParts.indexOf('due');
+    const dateIndex = commandParts.indexOf('date');
+    const priorityIndex = commandParts.indexOf('priority');
+
+    // Extract task title, due date, and priority
+    const taskTitle = commandParts.slice(titleIndex, dueIndex).join(' ');
+    const dueDate = commandParts.slice(dateIndex + 1, priorityIndex).join(' ');
+    const priority = commandParts[priorityIndex + 1];
+
+    addTask(taskTitle, dueDate, priority);
+  }
+  
+}
+
 
   function addTask(taskTitle, dueDate, priority) {
     const todoList = document.getElementById('taskList');
@@ -224,7 +219,16 @@ document.addEventListener('DOMContentLoaded', function(){
     }
 
     const li = document.createElement('li');
-    li.className = `list-group-item card shadow mb-4 bg-transparent ${priorityColors[priority]}`;
+    const capitalizedPriority = priority.charAt(0).toUpperCase() + priority.slice(1);
+    console.log('Priority:', priority);
+    console.log('Priority Class:', priorityColors[capitalizedPriority]);
+
+    li.className = `list-group-item card shadow mb-4 bg-transparent ${priorityColors[capitalizedPriority]}`;
+
+
+    
+    
+
     const completeCheckbox = document.createElement("input");
     completeCheckbox.type = "checkbox";
     completeCheckbox.className = "form-check-input task-completed";
@@ -242,7 +246,12 @@ document.addEventListener('DOMContentLoaded', function(){
         '<ion-icon name="create-outline" style="font-size: 20px"></ion-icon>';
       editButton.style.marginRight = "8px";
       editButton.addEventListener("click", handleEditItem);
-    
+
+      // const titleParagraph = document.createElement("p");
+      // titleParagraph.style.fontSize = "18px";
+      // titleParagraph.style.margin = "0 19px";
+      // titleParagraph.appendChild(document.createTextNode(taskTitle));
+
       const dateTimeParagraph = document.createElement("p");
       dateTimeParagraph.className = "text-muted";
       dateTimeParagraph.id = "created-at";
@@ -267,17 +276,17 @@ document.addEventListener('DOMContentLoaded', function(){
       priorityParagraph.appendChild(document.createTextNode(priority));
    
       li.appendChild(completeCheckbox);
-    li.appendChild(document.createTextNode(taskTitle));
-    li.appendChild(deleteButton);
-    li.appendChild(editButton);
-    li.appendChild(dateTimeParagraph);
-    li.appendChild(dueDateParagraph);
-    li.appendChild(priorityParagraph);
-    todoList.appendChild(li);
-    saveTasksToLocalStorage();
+      li.appendChild(document.createTextNode(taskTitle));
+      li.appendChild(deleteButton);
+      li.appendChild(editButton);
+      li.appendChild(dateTimeParagraph);
+      li.appendChild(dueDateParagraph);
+      li.appendChild(priorityParagraph);
+      todoList.appendChild(li);
+      saveTasksToLocalStorage();
 
     // Display task details after adding
-    displayTaskDetails(li);
+      displayTaskDetails(li);
 }
 
 
@@ -293,13 +302,18 @@ document.addEventListener('DOMContentLoaded', function(){
 })
 
 function displayTaskDetails(taskElement) {
-  // Display task details logic...
   if (taskElement) {
-      const dueDate = taskElement.getAttribute('data-dueDate');
-      const priority = taskElement.getAttribute('data-priority');
-      console.log(`Task Details - Due Date: ${dueDate}, Priority: ${priority}`);
+    const dueDateElement = taskElement.querySelector("#task-dueDate");
+    const priorityElement = taskElement.querySelector("#task-priority");
+
+    const dueDate = dueDateElement ? dueDateElement.textContent.split(":")[1].trim() : null;
+    const priority = priorityElement ? priorityElement.textContent.trim() : null;
+
+    console.log(`Task Details - Due Date: ${dueDate}, Priority: ${priority}`);
   }
 }
+
+
 
 function addItem(e) {
   e.preventDefault();
@@ -637,6 +651,8 @@ function createNewTask(taskTitle, createdDate, dueDate, priority) {
   editButton.addEventListener("click", function (e) {
     handleEditItem(e);
   });
+
+  
 
   const dateTimeParagraph = document.createElement("p");
   dateTimeParagraph.className = "text-muted";
