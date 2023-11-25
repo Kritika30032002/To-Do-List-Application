@@ -10,7 +10,6 @@ const modeToggleBtn = document.getElementById("modeToggle");
 const checkboxes = document.querySelectorAll(".form-check-input");
 let editItem = null;
 
-
 const tasksWithPriority = [];
 
 const priorityColors = {
@@ -24,9 +23,6 @@ const priorityValues = {
   'Medium' : 2,
   'Low' : 1,
 }
-
-
-
 
 // Adding Event Listeners
 editTaskBtn.addEventListener("click", (e) => {
@@ -45,8 +41,6 @@ flatpickr(dueDateInput, {
   enableTime: false, // If you want to enable time selection as well
   dateFormat: "Y-m-d", // Adjust the date format as needed
 });
-
-
 
 function init() {
   const body = document.getElementsByTagName("body")[0];
@@ -178,7 +172,6 @@ document.addEventListener('DOMContentLoaded', function(){
     saveTasksToLocalStorage();
 }
 
-
 function handleVoiceCommand(command) {
   const commandParts = command.split(' ');
 
@@ -214,7 +207,7 @@ function handleVoiceCommand(command) {
     const existingTasks = todoList.querySelectorAll('li');
 
     // Use taskTitle instead of task in the comparison
-    console.log("Exusting tasks: ");
+    console.log("Existing tasks: ");
     existingTasks.forEach(item => console.log(item.textContent.trim().toLowerCase()));
     const taskExists = Array.from(existingTasks).some(item => item.textContent.trim().toLowerCase() === taskTitle.trim().toLowerCase());
 
@@ -224,15 +217,11 @@ function handleVoiceCommand(command) {
     }
 
     const li = document.createElement('li');
-    const capitalizedPriority = priority.charAt(0).toUpperCase() + priority.slice(1);
+    const capitalizedPriority = priority.charAt(0).toUpperCase() + priority.slice(1).toLowerCase();
     console.log('Priority:', priority);
     console.log('Priority Class:', priorityColors[capitalizedPriority]);
 
     li.className = `list-group-item card shadow mb-4 bg-transparent ${priorityColors[capitalizedPriority]}`;
-
-
-    
-    
 
     const completeCheckbox = document.createElement("input");
     completeCheckbox.type = "checkbox";
@@ -278,7 +267,7 @@ function handleVoiceCommand(command) {
       priorityParagraph.id = "task-priority";
       priorityParagraph.style.fontSize = "15px";
       priorityParagraph.style.margin = "0 19px";
-      priorityParagraph.appendChild(document.createTextNode(priority));
+      priorityParagraph.appendChild(document.createTextNode(capitalizedPriority));
    
       li.appendChild(completeCheckbox);
       li.appendChild(document.createTextNode(taskTitle));
@@ -293,7 +282,6 @@ function handleVoiceCommand(command) {
     // Display task details after adding
       displayTaskDetails(li);
 }
-
 
   function removeTask(task){
     const todoListItems = document.querySelectorAll('#taskList li');
@@ -317,8 +305,6 @@ function displayTaskDetails(taskElement) {
     console.log(`Task Details - Due Date: ${dueDate}, Priority: ${priority}`);
   }
 }
-
-
 
 function addItem(e) {
   e.preventDefault();
