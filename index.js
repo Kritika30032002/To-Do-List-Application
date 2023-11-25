@@ -137,6 +137,11 @@ document.addEventListener('DOMContentLoaded', function(){
     handleVoiceCommand(transcript);
   }
 
+  recognition.onend = function () {
+    isListening = false;
+    voiceCommandButton.textContent = 'Start Voice Command';
+  };
+
   function handleEditClick(e) {
     e.preventDefault();
 
