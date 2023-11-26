@@ -10,23 +10,19 @@ const modeToggleBtn = document.getElementById("modeToggle");
 const checkboxes = document.querySelectorAll(".form-check-input");
 let editItem = null;
 
-
 const tasksWithPriority = [];
 
 const priorityColors = {
-  'High' : 'task-priority-High',
-  'Medium' : 'task-priority-Medium',
-  'Low' : 'task-priority-Low',
+  High: "task-priority-High",
+  Medium: "task-priority-Medium",
+  Low: "task-priority-Low",
 };
 
 const priorityValues = {
-  'High' : 3,
-  'Medium' : 2,
-  'Low' : 1,
-}
-
-
-
+  High: 3,
+  Medium: 2,
+  Low: 1,
+};
 
 // Adding Event Listeners
 editTaskBtn.addEventListener("click", (e) => {
@@ -45,8 +41,6 @@ flatpickr(dueDateInput, {
   enableTime: false, // If you want to enable time selection as well
   dateFormat: "Y-m-d", // Adjust the date format as needed
 });
-
-
 
 function init() {
   const body = document.getElementsByTagName("body")[0];
@@ -115,7 +109,7 @@ function addItem(e) {
 
   const newTaskTitle = document.getElementById("item").value;
   let dueDate = document.getElementById("dueDate").value;
-  const priority = document.getElementById('priority').value;
+  const priority = document.getElementById("priority").value;
   if (!dueDate) {
     dueDate = DefaultDate();
   }
@@ -160,7 +154,7 @@ function addItem(e) {
 
   const creationDateTime = new Date().toLocaleString();
 
-  createNewTask(newTaskTitle, creationDateTime, dueDate,priority);
+  createNewTask(newTaskTitle, creationDateTime, dueDate, priority);
 
   saveTasksToLocalStorage();
   document.getElementById("dueDate").value = "";
@@ -186,12 +180,12 @@ function handleItemClick(e) {
       tasksCheck();
       displaySuccessMessage("Task deleted successfully");
       saveTasksToLocalStorage();
-       confirmYesButton.removeEventListener("click", handleYesClick);
+      confirmYesButton.removeEventListener("click", handleYesClick);
       confirmNoButton.removeEventListener("click", handleNoClick);
       confirmCancelButton.removeEventListener("click", handleCancelClick);
     };
 
-     const handleNoClick = () => {
+    const handleNoClick = () => {
       confirmationBox.style.display = "none";
       confirmYesButton.removeEventListener("click", handleYesClick);
       confirmNoButton.removeEventListener("click", handleNoClick);
@@ -258,7 +252,7 @@ function saveTasksToLocalStorage() {
       completed: isCompleted,
       createdAt: createdAt,
       dueDate: dueDate,
-      priority : priority,
+      priority: priority,
     };
     tasksArray.push(taskObj);
   });
@@ -279,11 +273,12 @@ function loadTasksFromLocalStorage() {
       console.log(task.text, "taskText");
       console.log(task.createdAt.slice(8), "taskCreateAt");
       console.log(task.dueDate.split(":")[1], "testDuedate");
-      
+
       createNewTask(
         task.text,
         task.createdAt.slice(8),
-        task.dueDate.split(":")[1], task.priority
+        task.dueDate.split(":")[1],
+        task.priority
       );
     });
   }
@@ -344,13 +339,12 @@ function sortByDueDate(order) {
     sortTaskList.sort((a, b) => {
       return new Date(b.dueDate) - new Date(a.dueDate);
     });
-
   }
 
   while (taskList.firstChild) {
     taskList.removeChild(taskList.firstChild);
   }
-  
+
   tasksHeading.classList.add("hidden");
   localStorage.setItem("tasks", JSON.stringify(sortTaskList));
   loadTasksFromLocalStorage();
@@ -360,10 +354,10 @@ function sortByPriority(order) {
   const sortTaskList = JSON.parse(localStorage.getItem("tasks"));
 
   sortTaskList.sort((a, b) => {
-    if (order === 'highToLow') {
+    if (order === "highToLow") {
       // Sort tasks from high priority to low priority
       return priorityValues[b.priority] - priorityValues[a.priority];
-    } else if (order === 'lowToHigh') {
+    } else if (order === "lowToHigh") {
       // Sort tasks from low priority to high priority
       return priorityValues[a.priority] - priorityValues[b.priority];
     } else {
@@ -376,8 +370,6 @@ function sortByPriority(order) {
     taskList.removeChild(taskList.firstChild);
   }
 
- 
-  
   tasksHeading.classList.add("hidden");
   localStorage.setItem("tasks", JSON.stringify(sortTaskList));
   loadTasksFromLocalStorage();
@@ -415,13 +407,11 @@ window.onclick = function (event) {
   }
 };
 
-
 function createNewTask(taskTitle, createdDate, dueDate, priority) {
   const li = document.createElement("li");
   li.className = `list-group-item card shadow mb-4 bg-transparent ${priorityColors[priority]}`;
- 
 
-  console.log(priority)
+  console.log(priority);
   const completeCheckbox = document.createElement("input");
   completeCheckbox.type = "checkbox";
   completeCheckbox.className = "form-check-input task-completed";
@@ -469,7 +459,6 @@ function createNewTask(taskTitle, createdDate, dueDate, priority) {
   priorityParagraph.style.fontSize = "15px";
   priorityParagraph.style.margin = "0 19px";
   priorityParagraph.appendChild(document.createTextNode(priority));
-
 
   li.appendChild(completeCheckbox);
   li.appendChild(document.createTextNode(taskTitle));
