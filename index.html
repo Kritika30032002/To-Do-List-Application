@@ -93,15 +93,6 @@
     </div>
     <!-- ------------------- -->
     <div class="container">
-      <!-- <header class="text-center">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 text-center">
-             
-            </div>
-          </div>
-        </div>
-      </header> -->
       <h1
         class="text-center text-primary"
         style="font-size: 25px; height: 75px"
@@ -111,109 +102,250 @@
       <p class="text-center text-secondary mt-sm-0 mt-5">
         Simply add your tasks here
       </p>
-      <div class="container main mt-5 " >
-        <h3 class="text-center mb-4">Add your tasks below</h3>
-        <form
-          id="addForm"
-          class="row w-100 d-flex flex-wrap justify-content-between align-items-center m-auto"
-        >
-          <div class="container my-2">
-            <div class="row">
-              <div class="col-12 col-sm-8">
-                <input
-                  class="form-control"
-                  type="text"
-                  onkeyup="enableSubmit(this, 'submitBtn')"
-                  id="item"
-                  placeholder="Write your task here..."
-                />
+      <div class="border border-primary mt-5 p-2">
+        <div class="row">
+          <div class="col-lg-6 col-12">
+            <h3 class="text-center mb-4">Add your tasks below</h3>
+            <form
+              id="addForm"
+              class="row w-100 d-flex flex-wrap justify-content-between align-items-center m-auto"
+            >
+              <div class="container my-2">
+                <div class="row">
+                  <div class="col-12">
+                    <textarea
+                      class="form-control"
+                      type="text"
+                      onkeyup="enableSubmit(this, 'submitBtn')"
+                      id="item"
+                      placeholder="Write your task here..."
+                      style="height: 300px"
+                    ></textarea>
+                  </div>
+                </div>
               </div>
-              <div class="col-12 col-sm-4 mt-sm-0 mt-1">
-                <select id="priority" class="form-control">
-                  <option value="" selected disabled hidden>
-                    select priority
-                  </option>
-                  <option value="Low" style="background: rgb(116, 223, 116)">
-                    Low
-                  </option>
-                  <option value="Medium" style="background: rgb(238, 238, 107)">
-                    Medium
-                  </option>
-                  <option value="High" style="background: rgb(255, 107, 107)">
-                    High
-                  </option>
-                </select>
+              <div class="container my-3">
+                <div class="row">
+                  <div class="col-md-4 col-12 my-1">
+                    <select id="priority" class="form-control">
+                      <option value="" selected disabled hidden>
+                        select priority
+                      </option>
+                      <option
+                        value="Low"
+                        style="background: rgb(116, 223, 116)"
+                      >
+                        Low
+                      </option>
+                      <option
+                        value="Medium"
+                        style="background: rgb(238, 238, 107)"
+                      >
+                        Medium
+                      </option>
+                      <option
+                        value="High"
+                        style="background: rgb(255, 107, 107)"
+                      >
+                        High
+                      </option>
+                    </select>
+                  </div>
+                  <input
+                    class="btn btn-warning text-light col-md-4 col-12 my-1"
+                    id="dueDate"
+                    placeholder="Date"
+                  />
+                  <input
+                    type="submit"
+                    class="btn btn-success col-md-4 col-12 my-1"
+                    id="submitBtn"
+                    value="Add"
+                    disabled
+                  />
+                  <button
+                    id="editTask"
+                    class="btn btn-primary col-md-4 col-12 my-1"
+                    style="display: none"
+                  >
+                    Edit
+                  </button>
+                </div>
               </div>
+            </form>
+          </div>
+          <div class="col-lg-6 col-12">
+            <div class="text-center">
+              <h3 class="mt-4 text-center" id="heading-tasks">Tasks</h3>
+              <div class="dropdown">
+                <button
+                  class="btn btn-warning dropbtn d-flex align-items-center text-light ml-2"
+                  onclick="myFunction();"
+                >
+                  <ion-icon
+                    class="dropbtn"
+                    name="funnel-outline"
+                    style="font-size: 25px; margin-right: 6px"
+                  ></ion-icon>
+                  Sort By
+                  <ion-icon
+                    class="dropbtn"
+                    name="chevron-down-outline"
+                    style="font-size: 25px; margin-left: 6px"
+                  ></ion-icon>
+                </button>
+                <div id="myDropdown" class="dropdown-content ml-2 mt-0.5">
+                  <a onclick="sortByPriority('highToLow');"
+                    >High to Low Priority</a
+                  >
+                  <a onclick="sortByPriority('lowToHigh');"
+                    >Low to High Priority</a
+                  >
+                  <a onclick="sortByDueDate('early');">Early To Do</a>
+                  <a onclick="sortByDueDate('late');">Lately To Do</a>
+                </div>
+              </div>
+              <form id="newTaskForm">
+                <ul class="list-group" id="taskList"></ul>
+              </form>
+              <button
+                id="clearAllTasks"
+                class="btn btn-danger clear_btn"
+                onclick="clearAllTasks();"
+              >
+                <span class="d-flex align-items-center">
+                  <ion-icon
+                    name="trash-outline"
+                    style="font-size: 25px; margin-right: 6px"
+                  ></ion-icon
+                  >Clear All Tasks</span
+                >
+              </button>
             </div>
           </div>
-
-          <div class="container">
-            <input
-              class="btn btn-warning text-light col-sm-4 col-12 mx-auto my-1"
-              id="dueDate"
-              placeholder="Date"
-            />
-            <input
-              type="submit"
-              class="btn btn-success col-sm-4 col-12 mx-auto my-1"
-              id="submitBtn"
-              value="Add"
-              disabled
-            />
-            <button
-              id="editTask"
-              class="btn btn-primary col-sm-4 col-12 mx-auto my-1"
-              style="display: none"
-            >
-              Edit
-            </button>
-          </div>
-        </form>
-
-        <div class="text-center">
-          <h3 class="mt-4 text-center" id="heading-tasks">Tasks</h3>
-          <div class="dropdown">
-            <button
-              class="btn btn-warning dropbtn d-flex align-items-center text-light ml-2"
-              onclick="myFunction();"
-            >
-              <ion-icon
-                class="dropbtn"
-                name="funnel-outline"
-                style="font-size: 25px; margin-right: 6px"
-              ></ion-icon>
-              Sort By
-              <ion-icon
-                class="dropbtn"
-                name="chevron-down-outline"
-                style="font-size: 25px; margin-left: 6px"
-              ></ion-icon>
-            </button>
-            <div id="myDropdown" class="dropdown-content ml-2 mt-0.5">
-              <a onclick="sortByPriority('highToLow');">High to Low Priority</a>
-              <a onclick="sortByPriority('lowToHigh');">Low to High Priority</a>
-              <a onclick="sortByDueDate('early');">Early To Do</a>
-              <a onclick="sortByDueDate('late');">Lately To Do</a>
-            </div>
-          </div>
-          <form id="newTaskForm">
-            <ul class="list-group" id="taskList"></ul>
-          </form>
-          <button
-            id="clearAllTasks"
-            class="btn btn-danger clear_btn"
-            onclick="clearAllTasks();"
-          >
-            <span class="d-flex align-items-center">
-              <ion-icon
-                name="trash-outline"
-                style="font-size: 25px; margin-right: 6px"
-              ></ion-icon
-              >Clear All Tasks</span
-            >
-          </button>
         </div>
       </div>
+      <!-- <div class="container main mt-5 border border-danger">
+        <h3 class="text-center mb-4">Add your tasks below</h3>
+        <div class="container border border-primary">
+          <div class="col-6 border border-primary">
+            <form
+              id="addForm"
+              class="row w-100 d-flex flex-wrap justify-content-between align-items-center m-auto"
+            >
+              <div class="container my-2">
+                <div class="row">
+                  <div class="col-12 col-sm-8">
+                    <input
+                      class="form-control"
+                      type="text"
+                      onkeyup="enableSubmit(this, 'submitBtn')"
+                      id="item"
+                      placeholder="Write your task here..."
+                    />
+                  </div>
+                  <div class="col-12 col-sm-4 mt-sm-0 mt-1">
+                    <select id="priority" class="form-control">
+                      <option value="" selected disabled hidden>
+                        select priority
+                      </option>
+                      <option
+                        value="Low"
+                        style="background: rgb(116, 223, 116)"
+                      >
+                        Low
+                      </option>
+                      <option
+                        value="Medium"
+                        style="background: rgb(238, 238, 107)"
+                      >
+                        Medium
+                      </option>
+                      <option
+                        value="High"
+                        style="background: rgb(255, 107, 107)"
+                      >
+                        High
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="container">
+                <input
+                  class="btn btn-warning text-light col-sm-4 col-12 mx-auto my-1"
+                  id="dueDate"
+                  placeholder="Date"
+                />
+                <input
+                  type="submit"
+                  class="btn btn-success col-sm-4 col-12 mx-auto my-1"
+                  id="submitBtn"
+                  value="Add"
+                  disabled
+                />
+                <button
+                  id="editTask"
+                  class="btn btn-primary col-sm-4 col-12 mx-auto my-1"
+                  style="display: none"
+                >
+                  Edit
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <div class="col-6 border border-primary">
+            <div class="text-center">
+              <h3 class="mt-4 text-center" id="heading-tasks">Tasks</h3>
+              <div class="dropdown">
+                <button
+                  class="btn btn-warning dropbtn d-flex align-items-center text-light ml-2"
+                  onclick="myFunction();"
+                >
+                  <ion-icon
+                    class="dropbtn"
+                    name="funnel-outline"
+                    style="font-size: 25px; margin-right: 6px"
+                  ></ion-icon>
+                  Sort By
+                  <ion-icon
+                    class="dropbtn"
+                    name="chevron-down-outline"
+                    style="font-size: 25px; margin-left: 6px"
+                  ></ion-icon>
+                </button>
+                <div id="myDropdown" class="dropdown-content ml-2 mt-0.5">
+                  <a onclick="sortByPriority('highToLow');"
+                    >High to Low Priority</a
+                  >
+                  <a onclick="sortByPriority('lowToHigh');"
+                    >Low to High Priority</a
+                  >
+                  <a onclick="sortByDueDate('early');">Early To Do</a>
+                  <a onclick="sortByDueDate('late');">Lately To Do</a>
+                </div>
+              </div>
+              <form id="newTaskForm">
+                <ul class="list-group" id="taskList"></ul>
+              </form>
+              <button
+                id="clearAllTasks"
+                class="btn btn-danger clear_btn"
+                onclick="clearAllTasks();"
+              >
+                <span class="d-flex align-items-center">
+                  <ion-icon
+                    name="trash-outline"
+                    style="font-size: 25px; margin-right: 6px"
+                  ></ion-icon
+                  >Clear All Tasks</span
+                >
+              </button>
+            </div>
+          </div>
+        </div>
+      </div> -->
     </div>
     <br /><br />
     <h2 style="text-align: center" class="mb-3">Why SimplyTasked?</h2>
@@ -222,11 +354,13 @@
       efficiently.
     </p>
     <br />
-    <div class="container text-center ">
+    <div class="container text-center">
       <div class="row">
         <div class="col-sm-4 col-12"><p>=> Intuitive task management</p></div>
         <div class="col-sm-4 col-12"><p>=> Seamless due date tracking</p></div>
-        <div class="col-sm-4 col-12"><p>=> Beautiful and user-friendly design</p></div>
+        <div class="col-sm-4 col-12">
+          <p>=> Beautiful and user-friendly design</p>
+        </div>
       </div>
     </div>
     <script src="index.js"></script>
