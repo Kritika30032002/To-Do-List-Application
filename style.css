@@ -844,4 +844,9 @@ select {
 select option {
   width: 150px;
 }
-
+ #voice-command-button{
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+ }
