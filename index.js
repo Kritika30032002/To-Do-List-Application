@@ -115,13 +115,13 @@ document.addEventListener('DOMContentLoaded', function(){
     if (isListening){
       recognition.stop();
       isListening = false;
-      voiceCommandButton.textContent = "start voice command";
+      voiceCommandButton.textContent = "Start Voice Command";
     
     }
     else{
       recognition.start();
       isListening = true;
-      voiceCommandButton.textContent = "stop voice command";
+      voiceCommandButton.textContent = "Stop Voice Command";
     }
     
   })

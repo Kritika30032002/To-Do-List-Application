@@ -841,9 +841,21 @@ select {
 select option {
   width: 150px;
 }
- #voice-command-button{
-  position: fixed;
+#voice-command-button {
+  position: relative;
+  overflow: hidden;
   bottom: 20px;
   right: 20px;
   z-index: 1000;
- }
+  height: 4rem;
+  width: 12rem;
+  padding: 0 1rem; /* Adjusted padding to shorten the length */
+  border-radius: 1.5rem;
+  background: #3d3a4e;
+  background-size: 400%;
+  color: #fff;
+  border: none;
+}
+
+
+
