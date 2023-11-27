@@ -31,7 +31,19 @@ Open the index.html file in your web browser to start using the application.
  2. Edit task names by double-clicking on them.
  3. Mark tasks as completed by clicking on the checkbox.
  4. Delete tasks by clicking on the trash icon.
+ 5. Using voice command feature to add task 
 
+Our to-do list application supports voice command for adding tasks effortlessly. Here's how you can use it :
+ 1. Click on the "Start Voice Command" button
+ 2. Wait for the application to start listening
+ 3. Clearly state your task, due date and priority.
+
+Example prompt for adding task using voice command :
+ "Add asignment due date 16th Nov priority High" 
+
+ Watch our video for detailed demonstration. 
+ 
+https://github.com/AishaAgarwal/To-Do-List-Application/assets/107138192/832814c7-cd21-4c85-81ed-e7192c720710
 
 ## Contributing
 Feel free to contribute to this project by creating a pull request. We welcome any improvements, bug fixes, or new features.
@@ -40,6 +52,9 @@ Feel free to contribute to this project by creating a pull request. We welcome a
 - If you find any bugs then please report them by creating an issue. 
 - If you can make a website look good by modifying then go ahead and describe it in issue and create pull request. 
 - If you can add more functionality, then create an issue and contribute by making pull request.
+
+
+
 
 ## Thanks to all Contributors 💪
 
