@@ -173,33 +173,97 @@ document.addEventListener('DOMContentLoaded', function(){
 }
 
 function handleVoiceCommand(command) {
+  console.log('Recognized Command:', command);
   const commandParts = command.split(' ');
 
-  if (
-    commandParts.length < 6 ||
-    !commandParts.includes('due') ||
-    !commandParts.includes('date') ||
-    !commandParts.includes('priority')
-  ) {
-    displayErrorMessage('Invalid voice command format.');
-    return;
+  if (command.length >= 4){
+    if (command.toLowerCase().includes('add')){
+      const titleIndex = commandParts.indexOf('add') + 1;
+      const dueIndex = commandParts.indexOf('due');
+      const dateIndex = commandParts.indexOf('date');
+      const priorityIndex = commandParts.indexOf('priority');
+      if (titleIndex < dueIndex && dueIndex < dateIndex && dateIndex < priorityIndex) {
+        const taskTitle = commandParts.slice(titleIndex, dueIndex).join(' ');
+        const dueDate = commandParts.slice(dateIndex + 1, priorityIndex).join(' ');
+        const priority = commandParts[priorityIndex + 1];
+        addTask(taskTitle, dueDate, priority);
+        return;
+    }
   }
-
-  if (command.toLowerCase().includes('add')) {
-    const titleIndex = commandParts.indexOf('due') - 1;
-    const dueIndex = commandParts.indexOf('due');
-    const dateIndex = commandParts.indexOf('date');
-    const priorityIndex = commandParts.indexOf('priority');
-
-    // Extract task title, due date, and priority
-    const taskTitle = commandParts.slice(titleIndex, dueIndex).join(' ');
-    const dueDate = commandParts.slice(dateIndex + 1, priorityIndex).join(' ');
-    const priority = commandParts[priorityIndex + 1];
-
-    addTask(taskTitle, dueDate, priority);
-  }
+  else if (commandParts.includes('edit') && commandParts.includes('task')){
+    // const editIndex = commandParts.indexOf('edit');
+    const editIndex = commandParts.indexOf('edit');
+    const taskIndex = commandParts.indexOf('task');
+    const toIndex = commandParts.indexOf('to');
+    if (editIndex !== -1 && taskIndex !== -1 && toIndex !== -1 && toIndex > taskIndex && toIndex < commandParts.length - 1) {
+      const oldTitle = commandParts.slice(taskIndex + 1, toIndex).join(' ');
+      const newTitle = commandParts.slice(toIndex + 1).join(' ');
   
+      console.log('Old Title:', oldTitle);
+      console.log('New Title:', newTitle);
+  
+      editTask(oldTitle, newTitle);
+      return;
+    }
+   
+  }
+  else if (command.toLowerCase().includes('delete')){
+    const titleIndex = commandParts.indexOf('task') + 1;
+    const taskTitle = commandParts.slice(titleIndex).join(' ');
+    deleteTask(taskTitle);
+  }
+  else{
+    displayErrorMessage('Invalid voice command format.');
+  }
 }
+}
+
+
+function deleteTask(taskTitle) {
+  const taskElement = findTaskElement(taskTitle);
+
+  if (taskElement) {
+    taskElement.remove();
+    saveTasksToLocalStorage();
+    displaySuccessMessage(`Task "${taskTitle}" deleted successfully.`);
+  } else {
+    displayErrorMessage(`Task "${taskTitle}" not found.`);
+  }
+}
+
+function editTask(oldTitle, newTitle) {
+  const taskElement = findTaskElement(oldTitle);
+
+  if (taskElement) {
+    const dueDateElement = taskElement.querySelector("#task-dueDate");
+    const priorityElement = taskElement.querySelector("#task-priority");
+
+    const titleTextNode = taskElement.childNodes[1];
+    titleTextNode.textContent = titleTextNode.textContent.replace(oldTitle, newTitle);
+
+    // Call displayTaskDetails with the appropriate argument
+    displayTaskDetails(taskElement);
+
+    saveTasksToLocalStorage();
+    displaySuccessMessage(`Task "${oldTitle}" edited successfully.`);
+  } else {
+    displayErrorMessage(`Task "${oldTitle}" not found.`);
+  }
+}
+
+function findTaskElement(taskTitle) {
+  const tasks = document.querySelectorAll('.list-group-item');
+
+  for (const task of tasks) {
+    const title = task.childNodes[1].textContent.trim().toLowerCase();
+    if (title === taskTitle.toLowerCase()) {
+      return task;
+    }
+  }
+
+  return null;
+}
+
 
 
   function addTask(taskTitle, dueDate, priority) {
@@ -283,16 +347,10 @@ function handleVoiceCommand(command) {
       displayTaskDetails(li);
 }
 
-  function removeTask(task){
-    const todoListItems = document.querySelectorAll('#taskList li');
-    todoListItems.forEach(item => {
-      if (item.textContent.toLowerCase() === task.toLowerCase()){
-        item.remove();
-      }
-    })
-  }
+  
   // recognition.start();
 })
+
 
 function displayTaskDetails(taskElement) {
   if (taskElement) {
