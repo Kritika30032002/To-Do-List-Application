@@ -845,5 +845,10 @@ select option {
   position: fixed;
   bottom: 20px;
   right: 20px;
+  padding: 7px;
   z-index: 1000;
+  border-radius: 12px;
+  background-color: #010101;
+  color:whitesmoke;
+  box-shadow: 4px 4px #05EDCA;
  }
