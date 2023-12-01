@@ -190,19 +190,26 @@ function handleVoiceCommand(command) {
         return;
     }
   }
-  else if (commandParts.includes('edit') && commandParts.includes('task')){
+  else if (command.toLowerCase().includes('edit') && command.toLowerCase().includes('task')){
     // const editIndex = commandParts.indexOf('edit');
     const editIndex = commandParts.indexOf('edit');
     const taskIndex = commandParts.indexOf('task');
     const toIndex = commandParts.indexOf('to');
-    if (editIndex !== -1 && taskIndex !== -1 && toIndex !== -1 && toIndex > taskIndex && toIndex < commandParts.length - 1) {
+    const dueDateIndex = commandParts.indexOf('due');
+    const priorityIndex = commandParts.indexOf('priority');
+    if (editIndex !== -1 && taskIndex !== -1 && toIndex !== -1 && dueDateIndex !== -1 && priorityIndex !== -1 && toIndex > taskIndex &&  dueDateIndex > toIndex && priorityIndex > dueDateIndex && priorityIndex < commandParts.length -1) {
       const oldTitle = commandParts.slice(taskIndex + 1, toIndex).join(' ');
-      const newTitle = commandParts.slice(toIndex + 1).join(' ');
+      
+      const newTitle = commandParts.slice(toIndex + 1, dueDateIndex).join(' ');
+      const newdueDate = commandParts[dueDateIndex + 1];
+      const newpriority = commandParts[priorityIndex + 1];
   
       console.log('Old Title:', oldTitle);
       console.log('New Title:', newTitle);
+      console.log('Due Date:', newdueDate);
+      console.log('Priority:', newpriority);
   
-      editTask(oldTitle, newTitle);
+      editTask(oldTitle, newTitle, newdueDate, newpriority);
       return;
     }
    
@@ -231,7 +238,7 @@ function deleteTask(taskTitle) {
   }
 }
 
-function editTask(oldTitle, newTitle) {
+function editTask(oldTitle, newTitle, newdueDate, newpriority) {
   const taskElement = findTaskElement(oldTitle);
 
   if (taskElement) {
@@ -240,8 +247,17 @@ function editTask(oldTitle, newTitle) {
 
     const titleTextNode = taskElement.childNodes[1];
     titleTextNode.textContent = titleTextNode.textContent.replace(oldTitle, newTitle);
-
-    // Call displayTaskDetails with the appropriate argument
+    console.log('New Due Date:', newdueDate);
+    if (dueDateElement){
+      dueDateElement.textContent = `Due Date: ${newdueDate}`;
+      dueDateElement.id = "task-dueDate";
+    }
+    if (priorityElement){
+      priorityElement.textContent = newpriority;
+      priorityElement.id = "task-priority";
+    }
+    
+    // Call displayTaskDaetails with the appropriate argument
     displayTaskDetails(taskElement);
 
     saveTasksToLocalStorage();
