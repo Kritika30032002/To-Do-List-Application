@@ -199,11 +199,14 @@ function handleVoiceCommand(command) {
     const priorityIndex = commandParts.indexOf('priority');
     if (editIndex !== -1 && taskIndex !== -1 && toIndex !== -1 && dueDateIndex !== -1 && priorityIndex !== -1 && toIndex > taskIndex &&  dueDateIndex > toIndex && priorityIndex > dueDateIndex && priorityIndex < commandParts.length -1) {
       const oldTitle = commandParts.slice(taskIndex + 1, toIndex).join(' ');
-      
       const newTitle = commandParts.slice(toIndex + 1, dueDateIndex).join(' ');
-      const newdueDate = commandParts[dueDateIndex + 1];
-      const newpriority = commandParts[priorityIndex + 1];
+      const newdueDate = commandParts.slice(dueDateIndex + 2, dueDateIndex + 4);
+      const newpriority = capitalizeFirstLetter(commandParts[priorityIndex + 1]);
   
+      function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+      }
+      
       console.log('Old Title:', oldTitle);
       console.log('New Title:', newTitle);
       console.log('Due Date:', newdueDate);
