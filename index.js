@@ -272,7 +272,10 @@ document.addEventListener("DOMContentLoaded", function () {
         newTitle
       );
       console.log("New Due Date:", newdueDate);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0db4970dea9a1979a3a15e02554a987b332089ae
       if (dueDateElement) {
         dueDateElement.textContent = `Due Date: ${newdueDate}`;
         dueDateElement.id = "task-dueDate";
@@ -518,6 +521,17 @@ function handleItemClick(e) {
   saveTasksToLocalStorage();
 }
 
+<<<<<<< HEAD
+=======
+// function DefaultDate() {
+//   const today = new Date();
+//   const year = today.getFullYear();
+//   const month = today.getMonth() + 1;
+//   const day = today.getDate();
+//   return `${year}-${month}-${day}`;
+// }
+
+>>>>>>> 0db4970dea9a1979a3a15e02554a987b332089ae
 function markAsComplete(e) {
   const li = e.target.parentElement;
   li.classList.toggle("completed");
