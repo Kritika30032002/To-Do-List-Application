@@ -33,7 +33,8 @@ body {
     rgba(126, 64, 246, 1),
     rgba(80, 139, 252, 1)
   ); */
-  /* background-image: url('https://cdn.pixabay.com/photo/2022/07/31/08/03/to-do-7355222_1280.jpg');  */
+  background-image: url("./images/paper.png");
+  background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
 }
@@ -149,6 +150,27 @@ body {
   /* Take remaining vertical space */
 }
 
+.text-primary {
+  color: #fbfef9 !important;
+  font-weight: bold;
+  text-align: center;
+}
+
+.text-secondary {
+  color: #b2b2b2 !important;
+  text-align: center;
+}
+
+.mb-3 {
+  color: #fbfef9 !important;
+  text-align: center;
+}
+
+.mb-5 {
+  color: #fbfef9 !important;
+  text-align: center;
+}
+
 .text {
   font-size: 40px;
   color: rgb(255, 255, 255);
@@ -200,13 +222,12 @@ body {
 /* } */
 
 body.dark-mode {
-  background: #0f0000;
-
-  /* background-image: url("https://cdn.pixabay.com/photo/2022/07/31/08/03/to-do-7355222_1280.jpg"); Dark mode background image (same as light mode) */
-
+  background: rgba(0, 0, 4, 0.126);
+  background-image: url("./images/paper.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
   color: #fff;
-  /* background-repeat: no-repeat;
-  background-size: cover; */
 }
 
 body.dark-mode::before {
@@ -216,7 +237,7 @@ body.dark-mode::before {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(1, 1, 1, 0.9);
+  background-color: rgb(0 9 16 / 51%);
   /* Adjust the alpha (last) value to control darkness */
   z-index: -1;
 }
@@ -412,6 +433,8 @@ body.dark-mode::before {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+  color: #fbfef9 !important;
+  text-align: center;
 }
 
 .main h2,
