@@ -66,7 +66,10 @@ function handleEditItem(e) {
   submitBtn.style.display = "none";
 
   const taskTitle = e.target.parentElement.childNodes[1].textContent.trim();
+  console.log(e.target.parentElement.childNodes)
+  const taskDescription = e.target.parentElement.childNodes[4].textContent.trim().replace("Description:","");
   document.getElementById("item").value = taskTitle;
+  document.getElementById("description").value = taskDescription;
   editItem = e.target;
 }
 
@@ -75,8 +78,10 @@ function handleEditClick(e) {
 
   const itemInput = document.getElementById("item");
   const dueDateInput = document.getElementById("dueDate");
+  const descriptionInput = document.getElementById("description");
 
   const editedItemText = itemInput.value;
+  const editedDescriptionText = descriptionInput.value;
   const editedDueDate = new Date(dueDateInput.value);
   const currentDate = new Date().toISOString().split("T")[0];
 
@@ -86,16 +91,17 @@ function handleEditClick(e) {
   }
 
   const listItem = editItem.parentElement;
+  console.log(listItem.childNodes[1].textContent)
   listItem.childNodes[1].textContent = editedItemText;
-
+  listItem.childNodes[4].textContent = "Description:"+editedDescriptionText;
   if (editedDueDate >= new Date(currentDate)) {
-    listItem.childNodes[5].textContent = `Due Date:${dueDateInput.value}
-      `;
+    listItem.childNodes[6].textContent = `Due Date:${dueDateInput.value}`;
   }
 
   displaySuccessMessage("Task edited successfully");
   editItem = null;
   itemInput.value = "";
+  descriptionInput.value="";
   dueDateInput.value = "";
 
   editTaskBtn.style.display = "none";
@@ -234,7 +240,7 @@ document.addEventListener("DOMContentLoaded", function () {
           console.log("Due Date:", newdueDate);
           console.log("Priority:", newpriority);
 
-          editTask(oldTitle, newTitle, newdueDate, newpriority);
+          editTask(oldTitle, newTitle, newdueDate, newpriority,);
           return;
         }
       } else if (command.toLowerCase().includes("delete")) {
@@ -259,12 +265,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  function editTask(oldTitle, newTitle, newdueDate, newpriority) {
+  function editTask(oldTitle, newTitle, newdueDate, newpriority,newDescription) {
     const taskElement = findTaskElement(oldTitle);
 
     if (taskElement) {
       const dueDateElement = taskElement.querySelector("#task-dueDate");
       const priorityElement = taskElement.querySelector("#task-priority");
+      const descElement = taskElement.querySelector("#description-at");
 
       const titleTextNode = taskElement.childNodes[1];
       titleTextNode.textContent = titleTextNode.textContent.replace(
@@ -279,6 +286,9 @@ document.addEventListener("DOMContentLoaded", function () {
       if (priorityElement) {
         priorityElement.textContent = newpriority;
         priorityElement.id = "task-priority";
+      }if (descElement) {
+        descElement.textContent = newDescription;
+        descElement.id = "task-description";
       }
 
       // Call displayTaskDaetails with the appropriate argument
@@ -305,6 +315,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function addTask(taskTitle, dueDate, priority) {
+    
     const todoList = document.getElementById("taskList");
     const existingTasks = todoList.querySelectorAll("li");
 
@@ -417,6 +428,7 @@ function addItem(e) {
   tasksCheck();
 
   const newTaskTitle = document.getElementById("item").value;
+  const description = document.getElementById("description").value;
   let dueDate = document.getElementById("dueDate").value;
   const priority = document.getElementById("priority").value;
 
@@ -463,10 +475,11 @@ function addItem(e) {
 
   const creationDateTime = new Date().toLocaleString();
 
-  createNewTask(newTaskTitle, creationDateTime, dueDate, priority);
+  createNewTask(newTaskTitle, creationDateTime, dueDate, priority,description);
 
   saveTasksToLocalStorage();
   document.getElementById("dueDate").value = "";
+  document.getElementById("description").value = "";
   document.getElementById("priority").value = "";
 }
 
@@ -554,6 +567,7 @@ function saveTasksToLocalStorage() {
     const taskText = task.childNodes[1].textContent;
     const isCompleted = task.classList.contains("completed");
     const createdAt = task.querySelector("#created-at").textContent;
+    const descriptAt = task.querySelector("#description-at").textContent;
     const dueDate = task.querySelector("#task-dueDate").textContent;
     const priority = task.querySelector("#task-priority").textContent;
     const taskObj = {
@@ -562,6 +576,7 @@ function saveTasksToLocalStorage() {
       createdAt: createdAt,
       dueDate: dueDate,
       priority: priority,
+      description:descriptAt,
     };
     tasksArray.push(taskObj);
   });
@@ -582,12 +597,15 @@ function loadTasksFromLocalStorage() {
       console.log(task.text, "taskText");
       console.log(task.createdAt.slice(8), "taskCreateAt");
       console.log(task.dueDate.split(":")[1], "testDuedate");
+      console.log(task.description, "test description");
 
       createNewTask(
         task.text,
         task.createdAt.slice(8),
         task.dueDate.split(":")[1],
-        task.priority
+        task.priority,
+        task.description
+
       );
     });
   }
@@ -716,7 +734,7 @@ window.onclick = function (event) {
   }
 };
 
-function createNewTask(taskTitle, createdDate, dueDate, priority) {
+function createNewTask(taskTitle, createdDate, dueDate, priority,description) {
   const li = document.createElement("li");
   li.className = `list-group-item card shadow mb-4 bg-transparent ${priorityColors[priority]}`;
 
@@ -744,6 +762,15 @@ function createNewTask(taskTitle, createdDate, dueDate, priority) {
   editButton.addEventListener("click", function (e) {
     handleEditItem(e);
   });
+  
+  const descriptionParagraph = document.createElement("p");
+  descriptionParagraph.className = "text-muted";
+  descriptionParagraph.id = "description-at";
+  descriptionParagraph.style.fontSize = "15px";
+  descriptionParagraph.style.margin = "0 19px";
+  descriptionParagraph.appendChild(
+    document.createTextNode("Description:" + description)
+  );
 
   const dateTimeParagraph = document.createElement("p");
   dateTimeParagraph.className = "text-muted";
@@ -773,6 +800,7 @@ function createNewTask(taskTitle, createdDate, dueDate, priority) {
   li.appendChild(document.createTextNode(taskTitle));
   li.appendChild(deleteButton);
   li.appendChild(editButton);
+  li.appendChild(descriptionParagraph);
   li.appendChild(dateTimeParagraph);
   li.appendChild(dueDateParagraph);
   li.appendChild(priorityParagraph);
