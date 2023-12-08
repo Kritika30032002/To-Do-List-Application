@@ -46,8 +46,26 @@ function init() {
   const body = document.getElementsByTagName("body")[0];
   body.classList.add("light-mode");
 
+  const searchBar = document.getElementById("searchBar");
+  searchBar.addEventListener("input", handleSearch);
+
   loadTasksFromLocalStorage();
   tasksCheck();
+}
+
+function handleSearch() {
+  const searchTerm = searchBar.value.toLowerCase();
+  const tasks = document.querySelectorAll(".list-group-item");
+
+  tasks.forEach((task) => {
+    const taskTitle = task.childNodes[1].textContent.trim().toLowerCase();
+
+    if (taskTitle.includes(searchTerm)) {
+      task.style.display = "block";
+    } else {
+      task.style.display = "none";
+    }
+  });
 }
 
 function tasksCheck() {
