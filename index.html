@@ -92,63 +92,60 @@
       </header> -->
       <h1 class="text-center text-primary"><span id="element"></span></h1>
       <p class="text-center text-secondary">Simply add your tasks here</p>
-      <div class="container main mt-5 w-80">
+      <div class="container main">
         <h3 class="text-center mb-4">Add your tasks below</h3>
         <form
           id="addForm"
-          class="row w-100 d-flex flex-wrap justify-content-between align-items-center"
+          class=""
         >
-          <span class="col-md-10 col-sm-12 input-group mt-3">
+          <span class="">
             <input
-              class="col-10 form-control"
+              class=""
               type="text"
               onkeyup="enableSubmit(this, 'submitBtn')"
               id="item"
               placeholder="Write your task here..."
             />
-            
+            <span class="">
+              <textarea style="overflow-y: scroll;
+              resize: none;width:100%;" placeholder="Write Description (optional)" id="description"></textarea>
+              </span>
+              <input
+              class="btn btn-warning text-light"
+              id="dueDate"
+              placeholder="Date"
+            />
             <select id="priority">
-              <option value="" selected disabled hidden>select priority</option>
+              <option value="" selected disabled hidden>Select priority</option>
               <option value="Low" style="background:green" onfocus="this.size=3">Low</option>
               <option value="Medium" style="background:yellow" onfocus="this.size=3">Medium</option>
               <option value="High" style="background:red" onfocus="this.size=3">High</option>
             </select>
-            
-            <input
-              class="btn btn-warning text-light col-2"
-              id="dueDate"
-              placeholder="Date"
-            />
           </span>
           <input
             type="submit"
-            class="btn btn-success col-md-2 col-sm-12 mt-3"
+            class=""
             id="submitBtn"
             value="Add"
             disabled
           />
           <button
             id="editTask"
-            class="form_btn btn btn-primary col-md-2 col-sm-6 mt-3"
+            class=""
             style="display: none"
           >
             Edit
           </button>
-          <span class="col-md-10 col-sm-12 input-group mt-3">
-          <textarea style="overflow-y: scroll;
-          resize: none;width:100%;" placeholder="Write Description(optional)" id="description"></textarea>
-          </span>
+         
         </form>
        
         
         <div class="text-center">
-          <h3 class="mt-4 text-center" id="heading-tasks">Tasks</h3>
+          <h3 class="" id="heading-tasks">Tasks</h3>
           <div class="dropdown">
             <button  class="btn btn-warning dropbtn d-flex align-items-center text-light ml-2"
             onclick="myFunction();">
-                <ion-icon class="dropbtn" name="funnel-outline"
-                style="font-size: 25px; margin-right: 6px"
-                ></ion-icon>  
+                <ion-icon class="dropbtn" name="funnel-outline" style="font-size: 25px; margin-right: 6px"></ion-icon>  
                 Sort By
                 <ion-icon class="dropbtn" name="chevron-down-outline"
                 style="font-size: 25px; margin-left: 6px"
