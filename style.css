@@ -617,7 +617,58 @@ h4 {
 /* input[type="checkbox"]:not(.task-completed):checked {
     background: linear-gradient(to right, rgba(126, 64, 246, 1), rgba(80, 139, 252, 1));
 } */
+#addForm{
+  display: flex;
+  flex-direction: column;
+  align-items: cneter;
+  justify-content: center;
+  padding: 0;
 
+
+}
+#addForm>span{
+  /* border: 2px solid blue ; */
+  width: 100%;
+  display: ;
+  justify-content: space-between;
+  align-items: center;
+}
+#addForm>span>:first-child{
+  width: 100%;
+  background: #f1f1f1;
+  padding: 5px;
+  box-shadow: 0 0 4px #5cb85c;
+  border: none;
+  text-align: center;
+  height: 4rem;
+  border-radius: 5px;
+}
+#addForm>span>:nth-child(2){
+  text-align: center;
+  box-shadow: 0 0 5px black;
+  width: 60%;
+  margin: 15px 20%;
+  border: none;
+  border-radius: 15px;
+  
+}
+#addForm>span>:nth-child(3){
+  border-radius: 10px;
+  width: 60%;
+  font-size: 1.5rem;
+  font-weight: bold;
+  
+  color: black;
+  box-shadow: 0 0 4px green;
+}
+#addForm>input{
+  border-radius: 10px;
+  /* border: 2px solid blue ; */
+  width: 40%;
+  margin: auto;
+  font-size: 1.5rem;
+  box-shadow: 0 0 4px orange;
+}
 @media screen and (max-width: 768px) {
   .mode-toggle {
     margin-left: 20px;
@@ -632,6 +683,10 @@ h4 {
     font-size: 1rem;
     padding: 0.5rem 1rem;
     width: auto;
+  }
+  #addForm{
+    display: flex;
+
   }
 }
 
@@ -653,6 +708,16 @@ h4 {
 
   .list-group {
     margin-top: 1rem;
+  }
+  #addForm>span>:nth-child(3){
+    border-radius: 10px;
+    width: 100%;
+    margin: 0;
+    font-size: 1.0rem;
+    font-weight: bold;
+    padding: 0;
+    color: black;
+    box-shadow: 0 0 4px green;
   }
 }
 
@@ -679,6 +744,17 @@ h4 {
   #dueDate {
     padding: 0.7rem 1rem;
     margin: auto;
+  }
+  #addForm>span>:nth-child(3){
+    border-radius: 10px;
+    width: 100%;
+    margin: 0;
+    font-size: 1.0rem;
+    padding: 0;
+    font-weight: bold;
+    
+    color: black;
+    box-shadow: 0 0 4px green;
   }
 }
 
