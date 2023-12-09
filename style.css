@@ -39,17 +39,20 @@ body {
 }
 
 .switch {
-  font-size: 17px;
+  font-size: 15px;
   position: relative;
   display: inline-block;
-  width: 64px;
+  width: 60px;
   height: 34px;
+  /* box-shadow: inset 0px 5px 15px rgba(0,0,0,0.4), inset 0px -5px 15px rgba(255,255,255,0.4); */
+	cursor: pointer;
+	transition: transform .4s cubic-bezier(.7, 0, .7, 1);
 }
 
 .switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
+	width: 0;
+	height: 0;
+	visibility: hidden;
 }
 
 .slider {
@@ -60,7 +63,7 @@ body {
   right: 0;
   bottom: 0;
   background-color: #73c0fc;
-  transition: 0.4s;
+  transition: transform .2s cubic-bezier(.7, 0, .7, 1);
   border-radius: 30px;
 }
 
@@ -74,10 +77,11 @@ body {
   bottom: 2px;
   z-index: 2;
   background-color: #e8e8e8;
-  transition: 0.4s;
+  transition: transform .2s cubic-bezier(.7, 0, .7, 1);
 }
 
 .sun svg {
+  fill:#fff;
   position: absolute;
   top: 6px;
   left: 36px;
