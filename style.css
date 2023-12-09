@@ -854,4 +854,7 @@ select option {
   bottom: 20px;
   right: 20px;
   z-index: 1000;
+  /* border-radius: 20%; */
+  /* color: #fff; */
 }
+
