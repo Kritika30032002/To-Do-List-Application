@@ -34,8 +34,8 @@ body {
     rgba(80, 139, 252, 1)
   ); */
   /* background-image: url('https://cdn.pixabay.com/photo/2022/07/31/08/03/to-do-7355222_1280.jpg');  */
-  background-size: cover;
-  background-position: center;
+  /* background-size: cover; */
+  /* background-position: center; */
 }
 
 .switch {
@@ -142,6 +142,11 @@ body {
 .input:checked + .slider:before {
   transform: translateX(30px);
 }
+
+.list:checked + .slider{
+  background-color:#f1f1f1;
+}
+
 .container-xl {
   position: relative;
   width: 100%;
@@ -651,6 +656,10 @@ h4 {
     margin: 0.5rem;
   }
 
+ footer{
+  background-color: #000000;
+ }
+
   .list-group {
     margin-top: 1rem;
   }
@@ -854,4 +863,7 @@ select option {
   bottom: 20px;
   right: 20px;
   z-index: 1000;
+}
+footer.dark-mode{
+  background-color: white;
 }
