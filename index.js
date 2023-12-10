@@ -75,6 +75,7 @@ function handleEditItem(e) {
   editTaskBtn.style.display = "inline";
   submitBtn.style.display = "none";
   const taskTitle = e.target.parentElement.childNodes[1].textContent.trim();
+  console.log(e.target.parentElement.childNodes)
   const taskDescription = e.target.parentElement.childNodes[4].textContent.trim().replace("Description:","");
   document.getElementById("item").value = taskTitle;
   document.getElementById("description").value = taskDescription;
@@ -96,7 +97,7 @@ function handleEditClick(e) {
   const listItem = editItem.parentElement;
   console.log(listItem.childNodes[1].textContent)
   listItem.childNodes[1].textContent = editedItemText;
-  listItem.childNodes[4].textContent = "Description:"+editedDescriptionText;
+  listItem.childNodes[5].textContent = "Description:"+editedDescriptionText;
   if (editedDueDate >= new Date(currentDate)) {
     listItem.childNodes[6].textContent = `Due Date:${dueDateInput.value}`;
   }
@@ -537,7 +538,7 @@ function loadTasksFromLocalStorage() {
         task.createdAt.slice(8),
         task.dueDate.split(":")[1],
         task.priority,
-        task.description
+        task.description.split(12)
 
       );
     });
