@@ -855,3 +855,25 @@ select option {
   right: 20px;
   z-index: 1000;
 }
+footer {
+  /* border: 2px solid blue; */
+  /* background-color: #333; */
+  color: black;
+  /* color: #fff; */
+  text-align: center;
+  padding: 0px;
+  /* position: ; */
+  bottom: 0;
+  width: 100%;
+  margin-top: 100px;
+}
+
+footer a {
+  color: black;
+  /* color: #fff; */
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
