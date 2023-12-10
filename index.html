@@ -88,27 +88,13 @@
       <p class="text-center text-secondary">Simply add your tasks here</p>
       <div class="container main">
         <h3 class="text-center mb-4">Add your tasks below</h3>
-        <form
-          id="addForm"
-          class=""
-        >
+        <form id="addForm" class="">
           <span class="">
-            <input
-              class=""
-              type="text"
-              onkeyup="enableSubmit(this, 'submitBtn')"
-              id="item"
-              placeholder="Write your task here..."
-            />
+            <input class="" type="text" onkeyup="enableSubmit(this, 'submitBtn')" id="item" placeholder="Write your task here..." />
             <span class="">
-              <textarea style="overflow-y: scroll;
-              resize: none;width:100%;" placeholder="Write Description (optional)" id="description"></textarea>
+              <textarea style="overflow-y: scroll; resize: none;width:100%;" placeholder="Write Description (optional)" id="description"></textarea>
               </span>
-              <input
-              class="btn btn-warning text-light"
-              id="dueDate"
-              placeholder="Date"
-            />
+              <input class="btn btn-warning text-light" id="dueDate" placeholder="Date" />
             <select id="priority">
               <option value="" selected disabled hidden>Select priority</option>
               <option value="Low" style="background:green" onfocus="this.size=3">Low</option>
@@ -116,24 +102,16 @@
               <option value="High" style="background:red" onfocus="this.size=3">High</option>
             </select>
           </span>
-          <input
-            type="submit"
-            class=""
-            id="submitBtn"
-            value="Add"
-            disabled
-          />
-          <button
-            id="editTask"
-            class=""
-            style="display: none"
-          >
+          <input type="submit" class="" id="submitBtn" value="Add" disabled/>
+          <button id="editTask"class="" style="display: none">
             Edit
           </button>
          
         </form>
        
-        
+        <div class="search-container">
+          <input type="text" id="searchBar" placeholder="Search tasks..." class="form-control w-75 mx-auto mt-3">
+        </div>
         <div class="text-center">
           <h3 class="" id="heading-tasks">Tasks</h3>
           <div class="dropdown">
@@ -155,18 +133,9 @@
           <form id="newTaskForm">
             <ul class="list-group" id="taskList"></ul>
           </form>
-          <button
-            id="clearAllTasks"
-            class="btn btn-danger clear_btn"
-            onclick="clearAllTasks();"
-          >
+          <button id="clearAllTasks" class="btn btn-danger clear_btn" onclick="clearAllTasks();" >
             <span class="d-flex align-items-center">
-              <ion-icon
-                name="trash-outline"
-                style="font-size: 25px; margin-right: 6px"
-              ></ion-icon
-              >Clear All Tasks</span
-            >
+              <ion-icon name="trash-outline" style="font-size: 25px; margin-right: 6px" ></ion-icon>Clear All Tasks</span>
           </button>
         </div>
       </div>
