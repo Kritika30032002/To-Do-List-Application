@@ -95,9 +95,10 @@ function handleEditClick(e) {
     return false;
   }
   const listItem = editItem.parentElement;
+  console.log(listItem.childNodes)
   console.log(listItem.childNodes[1].textContent)
   listItem.childNodes[1].textContent = editedItemText;
-  listItem.childNodes[5].textContent = "Description:"+editedDescriptionText;
+  listItem.childNodes[4].textContent = "Description:"+editedDescriptionText;
   if (editedDueDate >= new Date(currentDate)) {
     listItem.childNodes[6].textContent = `Due Date:${dueDateInput.value}`;
   }
@@ -527,18 +528,18 @@ function loadTasksFromLocalStorage() {
     tasksHeading.classList.remove("hidden");
     document.querySelector(".clear_btn").style.display = "inline";
     document.querySelector(".dropdown").style.display = "inline";
+    console.log(tasks);
     tasks.forEach((task) => {
-      console.log(task.text, "taskText");
-      console.log(task.createdAt.slice(8), "taskCreateAt");
-      console.log(task.dueDate.split(":")[1], "testDuedate");
-      console.log(task.description, "test description");
+      // console.log(task.createdAt.slice(8), "taskCreateAt");
+      // console.log(task.dueDate.split(":")[1], "testDuedate");
+      // console.log(task.description, "test description");
 
       createNewTask(
         task.text,
         task.createdAt.slice(8),
         task.dueDate.split(":")[1],
         task.priority,
-        task.description.split(12)
+        task.description.slice(12)
 
       );
     });
