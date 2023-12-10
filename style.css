@@ -480,26 +480,11 @@ h3 {
   margin-right: 5px;
 }
 
-/* #dueDate {
-  outline: none;
-  border: 2px solid rgba(0, 0, 0, 0.2);
-  border-radius: 50px;
-  text-align: center;
-  text-transform: uppercase;
-  font-weight: bold;
-  width: 156px;
-  height: 50px;
-  margin-right: 0.8rem;
-} */
 
 #dueDate::placeholder {
   color: #fff;
 }
 
-/* 
-#dueDate:hover {
-  border-color: rgba(1, 110, 225);
-} */
 
 #dueDate:hover::placeholder {
   color: #fff;
@@ -854,4 +839,102 @@ select option {
   bottom: 20px;
   right: 20px;
   z-index: 1000;
+}
+
+
+/* new css for form */
+#item,
+#priority,
+#dueDate {
+  width: calc(33.33% - 10px); /* Adjust width as needed */
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+/* Style for the task input */
+#item {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid #03A9F4; /* Light green */
+  border-radius: 8px;
+}
+
+/* Style for the priority select */
+#priority {
+  padding: 15px;
+  border: 1px solid #03A9F4; /* Yellow */
+  border-radius: 8px;
+}
+
+#dueDate {
+  color: #000;
+  padding: 15px;
+  border: 1px solid #03A9F4; 
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#description {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid #03A9F4; 
+  border-radius: 8px;
+  height: 80px;
+  resize: none;
+  overflow-y: scroll;
+}
+
+/* Style for the submit button form */
+#submitBtn,
+#editTask {
+  width: 100%;
+  padding: 15px;
+  background-color: #03A9F4;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+#item:hover,
+#priority:hover,
+#dueDate:hover,
+#description:hover,
+#item:focus,
+#priority:focus,
+#dueDate:focus,
+#description:focus {
+  box-shadow: 0 0 10px #448AFF; 
+}
+
+#submitBtn:disabled {
+  background-color: #b0bec5;
+}
+#priority option {
+  padding: 10px;
+  color: black;
+  border-radius: 5px;
+}
+
+
+#submitBtn:hover:enabled,
+#editTask:hover {
+  background-color:  #448AFF;
+}
+
+@media screen and (max-width: 600px) {
+  #addForm {
+    padding: 20px;
+  }
+
+  #item,
+  #priority,
+  #dueDate,
+  #description {
+    width: 100%;
+  }
+
+  #submitBtn,
+  #editTask {
+    width: 100%;
+  }
 }
