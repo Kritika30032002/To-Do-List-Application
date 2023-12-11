@@ -90,6 +90,10 @@ function handleEditClick(e) {
   const editedDescriptionText = descriptionInput.value;
   const editedDueDate = new Date(dueDateInput.value);
   const currentDate = new Date().toISOString().split("T")[0];
+  if(!editedItemText ||!editedDescriptionText){
+    displayErrorMessage("Title or description must not be empty!!!.");
+    return false;
+  }
   if (editedDueDate < new Date(currentDate)) {
     displayErrorMessage("Due date has already passed");
     return false;
@@ -403,8 +407,8 @@ function addItem(e) {
   //   tasksHeading.classList.remove("hidden");
   // }
   // Added new logic to check conditions whether Task and Date are entered
-  if (!newTaskTitle) {
-    displayErrorMessage("Task not entered");
+  if (!newTaskTitle||!description) {
+    displayErrorMessage("Task and Description should be filled!!!");
     tasksHeading.classList.add("hidden");
     return false;
   } else if (!dueDate) {
