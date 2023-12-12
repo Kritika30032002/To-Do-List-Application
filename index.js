@@ -85,6 +85,10 @@ function handleEditClick(e) {
   const editedItemText = itemInput.value;
   const editedDueDate = new Date(dueDateInput.value);
   const currentDate = new Date().toISOString().split("T")[0];
+  if (!editedItemText.trim()) {
+    displayErrorMessage("Task not entered");
+    return false;
+}
   if (editedDueDate < new Date(currentDate)) {
     displayErrorMessage("Due date has already passed");
     return false;
