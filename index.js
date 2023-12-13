@@ -12,6 +12,9 @@ const checkboxes = document.querySelectorAll(".form-check-input");
 let editItem = null;
 
 const tasksWithPriority = [];
+var storedValue = sessionStorage.getItem("modeToggleValue")
+modeToggleBtn.checked=(storedValue==="true");
+toggleMode();
 
 const priorityColors = {
   High: "task-priority-High",
@@ -669,8 +672,14 @@ function enableSubmit(ref, btnID) {
 
 function toggleMode() {
   const body = document.body;
-  body.classList.toggle("dark-mode");
-  body.classList.toggle("light-mode");
+  sessionStorage.setItem("modeToggleValue", modeToggleBtn.checked);
+  if (modeToggleBtn.checked) {
+    body.classList.add("dark-mode");
+    body.classList.remove("light-mode");
+  } else {
+    body.classList.add("light-mode");
+    body.classList.remove("dark-mode");
+  }
   
 }
 
