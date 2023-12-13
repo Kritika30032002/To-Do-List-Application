@@ -90,10 +90,12 @@ function handleEditClick(e) {
   const editedDescriptionText = descriptionInput.value;
   const editedDueDate = new Date(dueDateInput.value);
   const currentDate = new Date().toISOString().split("T")[0];
+
   if(!editedItemText ||!editedDescriptionText){
     displayErrorMessage("Title or description must not be empty!!!.");
     return false;
   }
+
   if (editedDueDate < new Date(currentDate)) {
     displayErrorMessage("Due date has already passed");
     return false;
