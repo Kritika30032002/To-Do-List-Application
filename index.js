@@ -75,33 +75,43 @@ function handleEditItem(e) {
   editTaskBtn.style.display = "inline";
   submitBtn.style.display = "none";
   const taskTitle = e.target.parentElement.childNodes[1].textContent.trim();
+  console.log(e.target.parentElement.childNodes)
+  const taskDescription = e.target.parentElement.childNodes[4].textContent.trim().replace("Description:","");
   document.getElementById("item").value = taskTitle;
+  document.getElementById("description").value = taskDescription;
   editItem = e.target;
 }
 function handleEditClick(e) {
   e.preventDefault();
   const itemInput = document.getElementById("item");
   const dueDateInput = document.getElementById("dueDate");
+  const descriptionInput = document.getElementById("description");
   const editedItemText = itemInput.value;
+  const editedDescriptionText = descriptionInput.value;
   const editedDueDate = new Date(dueDateInput.value);
   const currentDate = new Date().toISOString().split("T")[0];
-  if (!editedItemText.trim()) {
-    displayErrorMessage("Task not entered");
+
+  if(!editedItemText ||!editedDescriptionText){
+    displayErrorMessage("Title or description must not be empty!!!.");
     return false;
-}
+  }
+
   if (editedDueDate < new Date(currentDate)) {
     displayErrorMessage("Due date has already passed");
     return false;
   }
   const listItem = editItem.parentElement;
+  console.log(listItem.childNodes)
+  console.log(listItem.childNodes[1].textContent)
   listItem.childNodes[1].textContent = editedItemText;
+  listItem.childNodes[4].textContent = "Description:"+editedDescriptionText;
   if (editedDueDate >= new Date(currentDate)) {
-    listItem.childNodes[5].textContent = `Due Date:${dueDateInput.value}
-      `;
+    listItem.childNodes[6].textContent = `Due Date:${dueDateInput.value}`;
   }
   displaySuccessMessage("Task edited successfully");
   editItem = null;
   itemInput.value = "";
+  descriptionInput.value="";
   dueDateInput.value = "";
   editTaskBtn.style.display = "none";
   submitBtn.style.display = "inline";
@@ -220,7 +230,7 @@ document.addEventListener("DOMContentLoaded", function () {
           console.log("New Title:", newTitle);
           console.log("Due Date:", newdueDate);
           console.log("Priority:", newpriority);
-          editTask(oldTitle, newTitle, newdueDate, newpriority);
+          editTask(oldTitle, newTitle, newdueDate, newpriority,);
           return;
         }
       } else if (command.toLowerCase().includes("delete")) {
@@ -242,11 +252,14 @@ document.addEventListener("DOMContentLoaded", function () {
       displayErrorMessage(`Task "${taskTitle}" not found.`);
     }
   }
-  function editTask(oldTitle, newTitle, newdueDate, newpriority) {
+
+  function editTask(oldTitle, newTitle, newdueDate, newpriority,newDescription) {
     const taskElement = findTaskElement(oldTitle);
     if (taskElement) {
       const dueDateElement = taskElement.querySelector("#task-dueDate");
       const priorityElement = taskElement.querySelector("#task-priority");
+      const descElement = taskElement.querySelector("#description-at");
+
       const titleTextNode = taskElement.childNodes[1];
       titleTextNode.textContent = titleTextNode.textContent.replace(
         oldTitle,
@@ -260,6 +273,9 @@ document.addEventListener("DOMContentLoaded", function () {
       if (priorityElement) {
         priorityElement.textContent = newpriority;
         priorityElement.id = "task-priority";
+      }if (descElement) {
+        descElement.textContent = newDescription;
+        descElement.id = "task-description";
       }
       // Call displayTaskDaetails with the appropriate argument
       displayTaskDetails(taskElement);
@@ -280,6 +296,7 @@ document.addEventListener("DOMContentLoaded", function () {
     return null;
   }
   function addTask(taskTitle, dueDate, priority) {
+    
     const todoList = document.getElementById("taskList");
     const existingTasks = todoList.querySelectorAll("li");
     // Use taskTitle instead of task in the comparison
@@ -373,6 +390,7 @@ function addItem(e) {
   e.preventDefault();
   tasksCheck();
   const newTaskTitle = document.getElementById("item").value;
+  const description = document.getElementById("description").value;
   let dueDate = document.getElementById("dueDate").value;
   const priority = document.getElementById("priority").value;
   // Check if the due date has already passed
@@ -391,8 +409,8 @@ function addItem(e) {
   //   tasksHeading.classList.remove("hidden");
   // }
   // Added new logic to check conditions whether Task and Date are entered
-  if (!newTaskTitle) {
-    displayErrorMessage("Task not entered");
+  if (!newTaskTitle||!description) {
+    displayErrorMessage("Task and Description should be filled!!!");
     tasksHeading.classList.add("hidden");
     return false;
   } else if (!dueDate) {
@@ -411,9 +429,12 @@ function addItem(e) {
     document.querySelector(".dropdown").style.display = "inline";
   }
   const creationDateTime = new Date().toLocaleString();
-  createNewTask(newTaskTitle, creationDateTime, dueDate, priority);
+
+  createNewTask(newTaskTitle, creationDateTime, dueDate, priority,description);
+
   saveTasksToLocalStorage();
   document.getElementById("dueDate").value = "";
+  document.getElementById("description").value = "";
   document.getElementById("priority").value = "";
 }
 function handleItemClick(e) {
@@ -490,6 +511,7 @@ function saveTasksToLocalStorage() {
     const taskText = task.childNodes[1].textContent;
     const isCompleted = task.classList.contains("completed");
     const createdAt = task.querySelector("#created-at").textContent;
+    const descriptAt = task.querySelector("#description-at").textContent;
     const dueDate = task.querySelector("#task-dueDate").textContent;
     const priority = task.querySelector("#task-priority").textContent;
     const taskObj = {
@@ -498,6 +520,7 @@ function saveTasksToLocalStorage() {
       createdAt: createdAt,
       dueDate: dueDate,
       priority: priority,
+      description:descriptAt,
     };
     tasksArray.push(taskObj);
   });
@@ -511,15 +534,19 @@ function loadTasksFromLocalStorage() {
     tasksHeading.classList.remove("hidden");
     document.querySelector(".clear_btn").style.display = "inline";
     document.querySelector(".dropdown").style.display = "inline";
+    console.log(tasks);
     tasks.forEach((task) => {
-      console.log(task.text, "taskText");
-      console.log(task.createdAt.slice(8), "taskCreateAt");
-      console.log(task.dueDate.split(":")[1], "testDuedate");
+      // console.log(task.createdAt.slice(8), "taskCreateAt");
+      // console.log(task.dueDate.split(":")[1], "testDuedate");
+      // console.log(task.description, "test description");
+
       createNewTask(
         task.text,
         task.createdAt.slice(8),
         task.dueDate.split(":")[1],
-        task.priority
+        task.priority,
+        task.description.slice(12)
+
       );
     });
   }
@@ -631,7 +658,8 @@ window.onclick = function (event) {
     }
   }
 };
-function createNewTask(taskTitle, createdDate, dueDate, priority) {
+
+function createNewTask(taskTitle, createdDate, dueDate, priority,description) {
   const li = document.createElement("li");
   li.className = `list-group-item card shadow mb-4 bg-transparent ${priorityColors[priority]}`;
   console.log(priority);
@@ -655,6 +683,16 @@ function createNewTask(taskTitle, createdDate, dueDate, priority) {
   editButton.addEventListener("click", function (e) {
     handleEditItem(e);
   });
+  
+  const descriptionParagraph = document.createElement("p");
+  descriptionParagraph.className = "text-muted";
+  descriptionParagraph.id = "description-at";
+  descriptionParagraph.style.fontSize = "15px";
+  descriptionParagraph.style.margin = "0 19px";
+  descriptionParagraph.appendChild(
+    document.createTextNode("Description:" + description)
+  );
+
   const dateTimeParagraph = document.createElement("p");
   dateTimeParagraph.className = "text-muted";
   dateTimeParagraph.id = "created-at";
@@ -680,6 +718,7 @@ function createNewTask(taskTitle, createdDate, dueDate, priority) {
   li.appendChild(document.createTextNode(taskTitle));
   li.appendChild(deleteButton);
   li.appendChild(editButton);
+  li.appendChild(descriptionParagraph);
   li.appendChild(dateTimeParagraph);
   li.appendChild(dueDateParagraph);
   li.appendChild(priorityParagraph);

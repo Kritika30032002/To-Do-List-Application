@@ -84,74 +84,83 @@
           </div>
         </div>
       </header> -->
-    <h1 class="text-center text-primary"><span id="element"></span></h1>
-    <p class="text-center text-secondary">Simply add your tasks here</p>
-    <div class="container main mt-5 w-80">
-      <h3 class="text-center mb-4">Add your tasks below</h3>
-      <form id="addForm" class="row w-100 d-flex flex-wrap justify-content-between align-items-center">
-        <span class="col-md-10 col-sm-12 input-group mt-3">
-          <input class="col-10 form-control" type="text" onkeyup="enableSubmit(this, 'submitBtn')" id="item"
-            placeholder="Write your task here..." />
-
-          <select id="priority">
-            <option value="" selected disabled hidden>select priority</option>
-            <option value="Low" style="background:green" onfocus="this.size=3">Low</option>
-            <option value="Medium" style="background:yellow" onfocus="this.size=3">Medium</option>
-            <option value="High" style="background:red" onfocus="this.size=3">High</option>
-          </select>
-
-          <input class="btn btn-warning text-light col-2" id="dueDate" placeholder="Date" />
-        </span>
-        <input type="submit" class="btn btn-success col-md-2 col-sm-12 mt-3" id="submitBtn" value="Add" disabled />
-        <button id="editTask" class="form_btn btn btn-primary col-md-2 col-sm-6 mt-3" style="display: none">
-          Edit
-        </button>
-      </form>
-
-      <div class="search-container">
-        <input type="text" id="searchBar" placeholder="Search tasks..." class="form-control w-75 mx-auto mt-3">
-      </div>
-
-      <div class="text-center">
-        <h3 class="mt-4 text-center" id="heading-tasks">Tasks</h3>
-        <div class="dropdown">
-          <button class="btn btn-warning dropbtn d-flex align-items-center text-light ml-2" onclick="myFunction();">
-            <ion-icon class="dropbtn" name="funnel-outline" style="font-size: 25px; margin-right: 6px"></ion-icon>
-            Sort By
-            <ion-icon class="dropbtn" name="chevron-down-outline" style="font-size: 25px; margin-left: 6px"></ion-icon>
+      <h1 class="text-center text-primary"><span id="element"></span></h1>
+      <p class="text-center text-secondary">Simply add your tasks here</p>
+      <div class="container main">
+        <h3 class="text-center mb-4">Add your tasks below</h3>
+        <form id="addForm" class="">
+          <span class="">
+            <input class="" type="text" onkeyup="enableSubmit(this, 'submitBtn')" id="item" placeholder="Write your task here..." />
+            <span class="">
+              <textarea style="overflow-y: scroll; resize: none;width:100%;" placeholder="Write Description " id="description"></textarea>
+              </span>
+              <input class="btn btn-warning text-light" id="dueDate" placeholder="Date" />
+            <select id="priority">
+              <option value="" selected disabled hidden>Select priority</option>
+              <option value="Low" style="background:green" onfocus="this.size=3">Low</option>
+              <option value="Medium" style="background:yellow" onfocus="this.size=3">Medium</option>
+              <option value="High" style="background:red" onfocus="this.size=3">High</option>
+            </select>
+          </span>
+          <input type="submit" class="" id="submitBtn" value="Add" disabled/>
+          <button id="editTask"class="" style="display: none">
+            Edit
           </button>
-          <div id="myDropdown" class="dropdown-content ml-2 mt-0.5">
-            <a onclick="sortByPriority('highToLow');">High to Low Priority</a>
-            <a onclick="sortByPriority('lowToHigh');">Low to High Priority</a>
-            <a onclick="sortByDueDate('early');">Early To Do</a>
-            <a onclick="sortByDueDate('late');">Lately To Do</a>
-          </div>
-        </div>
-        <form id="newTaskForm">
-          <ul class="list-group" id="taskList"></ul>
+         
         </form>
-        <button id="clearAllTasks" class="btn btn-danger clear_btn" onclick="clearAllTasks();">
-          <span class="d-flex align-items-center">
-            <ion-icon name="trash-outline" style="font-size: 25px; margin-right: 6px"></ion-icon>Clear All Tasks</span>
-        </button>
+       
+        <div class="search-container">
+          <input type="text" id="searchBar" placeholder="Search tasks..." class="form-control w-75 mx-auto mt-3">
+        </div>
+        <div class="text-center">
+          <h3 class="" id="heading-tasks">Tasks</h3>
+          <div class="dropdown">
+            <button  class="btn btn-warning dropbtn d-flex align-items-center text-light ml-2"
+            onclick="myFunction();">
+                <ion-icon class="dropbtn" name="funnel-outline" style="font-size: 25px; margin-right: 6px"></ion-icon>  
+                Sort By
+                <ion-icon class="dropbtn" name="chevron-down-outline"
+                style="font-size: 25px; margin-left: 6px"
+                ></ion-icon>
+            </button>
+            <div id="myDropdown" class="dropdown-content ml-2 mt-0.5">
+              <a onclick="sortByPriority('highToLow');">High to Low Priority</a>
+              <a onclick="sortByPriority('lowToHigh');">Low to High Priority</a>
+              <a onclick="sortByDueDate('early');">Early To Do</a>
+              <a onclick="sortByDueDate('late');">Lately To Do</a>
+            </div>
+          </div>
+          <form id="newTaskForm">
+            <ul class="list-group" id="taskList"></ul>
+          </form>
+          <button id="clearAllTasks" class="btn btn-danger clear_btn" onclick="clearAllTasks();" >
+            <span class="d-flex align-items-center">
+              <ion-icon name="trash-outline" style="font-size: 25px; margin-right: 6px" ></ion-icon>Clear All Tasks</span>
+          </button>
+        </div>
       </div>
     </div>
-  </div>
-  <br /><br />
-  <h2 style="text-align: center" class="mb-3">Why SimplyTasked?</h2>
-  <p style="text-align: center" class="mb-5">
-    Simply, because it is a SIMPLE To-Do List Tool to organize your tasks
-    efficiently.
-  </p>
-  <br />
-  <div class="list" style="text-align: center">
-    <p>=> Intuitive task management</p>
-    <p>=> Seamless due date tracking</p>
-    <p>=> Beautiful and user-friendly design</p>
-  </div>
-  <script src="index.js"></script>
-  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js">
+    <br /><br />
+    <h2 style="text-align: center" class="mb-3">Why SimplyTasked?</h2>
+    <p style="text-align: center" class="mb-5">
+      Simply, because it is a SIMPLE To-Do List Tool to organize your tasks
+      efficiently.
+    </p>
+    <br />
+    <div class="list" style="text-align: center">
+      <p>=> Intuitive task management</p>
+      <p>=> Seamless due date tracking</p>
+      <p>=> Beautiful and user-friendly design</p>
+    </div>
+    <script src="index.js"></script>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    >
   </script>
   <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
   <script>
