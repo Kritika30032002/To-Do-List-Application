@@ -979,11 +979,14 @@ ul {
   list-style-type: disc;
   padding: 0;
   display: flex; /* Use flexbox to make the list items horizontal */
-  justify-content: center; /* Center the list items horizontally */
+  justify-content: space-evenly; /* Center the list items horizontally */
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100vw;
 }
 
 li {
-  margin: 0 100px; /* Add some spacing between list items */
+  margin:10px;
 }
 
 .voice-input{
