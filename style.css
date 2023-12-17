@@ -351,6 +351,7 @@ body.dark-mode::before {
   word-break: break-all;
   word-wrap: break-word;
   padding: 0.75rem;
+  width:80%;
 }
 
 .list-group-item button {
