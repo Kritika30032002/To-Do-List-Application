@@ -1005,6 +1005,9 @@ ul {
   flex-wrap: wrap;
   width: 100vw;
 }
+ul.list-group {
+  width: auto;
+}
 
 li {
   margin:10px;
