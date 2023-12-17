@@ -108,6 +108,7 @@ function handleEditClick(e) {
   const editedDescriptionText = descriptionInput.value;
   const editedDueDate = new Date(dueDateInput.value);
   const currentDate = new Date().toISOString().split("T")[0];
+  const editedPriority=document.getElementById("priority").value;
 
   if (!editedItemText.trim()) {
     displayErrorMessage("Task not entered");
@@ -123,15 +124,23 @@ function handleEditClick(e) {
     displayErrorMessage("Due date has already passed !!!");
     return false;
   }
+  if(!editedPriority){
+    displayErrorMessage("Please select priority")
+    return false
+  }
 
   const listItem = editItem.parentElement;
   console.log(listItem.childNodes)
   console.log(listItem.childNodes[1].textContent)
   listItem.childNodes[1].textContent = editedItemText;
   listItem.childNodes[4].textContent = "Description:"+editedDescriptionText;
+  listItem.childNodes[7].textContent = editedPriority;
   if (editedDueDate >= new Date(currentDate)) {
     listItem.childNodes[6].textContent = `Due Date:${dueDateInput.value}`;
   }
+  const capitalizedPriority =editedPriority.charAt(0).toUpperCase() + editedPriority.slice(1).toLowerCase();
+console.log(editedPriority)
+    listItem.className = `list-group-item card shadow mb-4 bg-transparent ${priorityColors[capitalizedPriority]}`;
 
   displaySuccessMessage("Task edited successfully !!!");
   editItem = null;
