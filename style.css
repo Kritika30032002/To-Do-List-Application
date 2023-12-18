@@ -8,15 +8,6 @@
   font-family: Roboto Slab;
 }
 
-/* body {
-  position: relative;
-  width: 100%;
-  background-image: url('https://cdn.pixabay.com/photo/2022/07/31/08/03/to-do-7355222_1280.jpg');
-
-  background: linear-gradient(to right, rgba(126, 64, 246, 1), rgba(80, 139, 252, 1));
-  font-family: 'Montserrat', sans-serif;
-} */
-
 body {
   
   font-weight: 400;
@@ -29,12 +20,6 @@ body {
   min-height: 100vh;
 
   background: radial-gradient(2224px at 10.6% 8.8%, rgb(255, 255, 255) 0%, rgb(153, 202, 251) 100.2%);
-  /* background: linear-gradient(
-    to right,
-    rgba(126, 64, 246, 1),
-    rgba(80, 139, 252, 1)
-  ); */
-  /* background-image: url('https://cdn.pixabay.com/photo/2022/07/31/08/03/to-do-7355222_1280.jpg');  */
 
 }
 
@@ -69,20 +54,19 @@ html{
 
 }
 #myBtn {
-  display: none; /* Hidden by default */
-  position: fixed; /* Fixed/sticky position */
-  bottom: 50px; /* Place the button at the bottom of the page */
-  left: 30px; /* Place the button 30px from the left */
-  z-index: 99; /* Make sure it does not overlap */
-  border: none; /* Remove borders */
-  outline: none; /* Remove outline */
-  cursor: pointer; /* Add a mouse pointer on hover */
+  display: none; 
+  position: fixed; 
+  bottom: 50px;
+  left: 30px; 
+  z-index: 99;
+  border: none; 
+  outline: none; 
+  cursor: pointer; 
   width: 30px;
-  height: 30px;
-}
+  height: 30px;}
 
 #myBtn:hover {
-  background-color: #06d1f5; /* Add a dark-grey background on hover */
+  background-color: #06d1f5; 
 }
 
 .slider:before {
@@ -205,32 +189,10 @@ html{
   margin-right: auto;
 }
 
-/* .container.main.mt-3{
-  padding-top: 10%;
-} */
-
-/* body.light-mode { */
-/* background: linear-gradient(
-    to right,
-    rgba(1, 110, 225),
-    rgba(80, 139, 252, 1)
-  ); */
-/* background-image: url("https://cdn.pixabay.com/photo/2022/07/31/08/03/to-do-7355222_1280.jpg"); Light mode background image
-  background-repeat: no-repeat;
-  background-size: cover; */
-/* } */
-
 body.dark-mode {
   background: linear-gradient(112.1deg, rgba(0, 60, 255, 0.756) 11.4%, rgb(63, 76, 119) 70.2%);
-
-  /* background-image: url("https://cdn.pixabay.com/photo/2022/07/31/08/03/to-do-7355222_1280.jpg"); Dark mode background image (same as light mode) */
-
   color: #c0a5ff;
-  /* background-repeat: no-repeat;
-  background-size: cover; */
 }
-
-
 
 body.dark-mode::before {
   content: "";
@@ -240,28 +202,8 @@ body.dark-mode::before {
   width: 100vw;
   height: 100vh;
   background-color: rgba(1, 1, 1, 0.9);
-  /* Adjust the alpha (last) value to control darkness */
   z-index: -1;
 }
-
-/* Rest of your CSS styles remain unchanged */
-
-/* Rest of your CSS remains unchanged */
-
-/* body.light-mode {
-  background: linear-gradient(to right, rgba(126, 64, 246, 1), rgba(80, 139, 252, 1));
-} */
-
-/* body.dark-mode {
-  background: #232323;
-  color: #fff;
-} */
-
-/* .container-xl {
-  position: relative;
-  width: 100%;
-  height: 100%;
-} */
 
 .main {
   position: relative;
@@ -269,16 +211,11 @@ body.dark-mode::before {
   height: 100%;
   text-align: center;
   padding: 4rem;
-  /* background: rgba(0, 0, 0, 0.2); */
   border-radius: 2em;
-  /*backdrop-filter: blur(45px);*/
-  /* border: 10px solid rgba(0, 0, 0, 0.05); */
   background-clip: padding-box;
-  /* box-shadow: 10px 10px 10px rgba(46, 54, 68, 0.03); */
 }
 
 .light-mode .main {
-  /*background: rgba(247, 247, 247, 0.25);*/
   background: rgba(255, 255, 255, 0.447);
   box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
   backdrop-filter: blur(4px);
@@ -331,17 +268,6 @@ body.dark-mode::before {
   background-clip: padding-box;
 }
 
-/* .main_form {
-  position: relative;
-  width: 100%;
-  align-items: center;
-  background: #fff;
-  border-radius: 5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-} */
 
 .list-group-item {
   font-size: 1.3rem;
@@ -363,61 +289,6 @@ body.dark-mode::before {
 .list-group-item button ion-icon {
   pointer-events: none;
 }
-
-/* .main_form #item {
-  font-size: 1.3rem;
-  width: 100%;
-  background: transparent;
-  border: none;
-  outline: none;
-} */
-
-/* .main_form .form_btn {
-  color: #fff;
-  letter-spacing: 0.11rem;
-  border: none;
-  background: linear-gradient(to right,
-      rgba(1, 110, 225),
-      rgba(80, 139, 252, 1));
-  padding: 0.6rem 2rem;
-  border-radius: 5rem;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: opacity 0.3s;
-  border: 1px solid #4687f9;
-} */
-
-/* .form_btn:hover,
-.clear_btn:hover {
-  opacity: 0.9;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-} */
-
-/* .clear_btn { */
-/* color: #fff;
-  letter-spacing: 0.11rem;
-  border: none;
-  background: linear-gradient(to right, rgb(225, 1, 1), rgb(236, 70, 70));
-  padding: 0.6rem 2rem;
-  border-radius: 5rem;
-  cursor: pointer;
-  transition: opacity 0.3s;
-  margin: 1rem 0;
-  display: none; */
-/* } */
-/* 
-.opacity {
-  opacity: 0.8;
-  outline: auto;
-} */
-
-/* .main_form #item::placeholder {
-  color: #000000;
-  letter-spacing: 0.11rem;
-  font-size: 1.2rem;
-} */
-
-/* Dropdown Button */
 
 .dropdown {
   position: relative;
@@ -444,10 +315,6 @@ body.dark-mode::before {
 
 .main h2,
 h3 {
-  /* width: 20rem;
-
-  margin: auto;
-  border-bottom: 2px solid #ffffff; */
   font-weight: 600;
 }
 
@@ -475,8 +342,6 @@ h3 {
     padding: 1rem;
   }
 }
-
-
 
 .message {
   width: 300px;
@@ -508,8 +373,6 @@ h3 {
   margin-left: 10px;
   margin-right: 5px;
 }
-
-
 
 #dueDate::placeholder {
   color: #fff;
@@ -555,7 +418,6 @@ input[type="checkbox"]:not(.task-completed):checked::before {
   background: #fff;
 }
 
-/* CSS for styling the confirmation dialog */
 .custom-confirm,
 .custom-confirm-all {
   display: none;
@@ -615,13 +477,6 @@ h4 {
   border-radius: 5px;
 }
 
-
-
-/* Rest of your CSS styles remain unchanged */
-
-/* input[type="checkbox"]:not(.task-completed):checked {
-    background: linear-gradient(to right, rgba(126, 64, 246, 1), rgba(80, 139, 252, 1));
-} */
 
 @media screen and (max-width: 768px) {
   .mode-toggle {
@@ -841,37 +696,37 @@ body.dark-mode::-webkit-scrollbar-thumb {
 
 /*Task priority indicator*/
 .light-mode .task-priority-High {
-  border-left: 6px solid rgba(255, 0, 0, 0.474); /* Adjust styles for high priority */
+  border-left: 6px solid rgba(255, 0, 0, 0.474); 
 }
 
 .light-mode .task-priority-Medium {
-  border-left: 6px solid rgba(255, 166, 0, 0.447); /* Adjust styles for medium priority */
+  border-left: 6px solid rgba(255, 166, 0, 0.447); 
 }
 
 .light-mode .task-priority-Low {
-  border-left: 6px solid rgba(0, 128, 0, 0.474); /* Adjust styles for low priority */
+  border-left: 6px solid rgba(0, 128, 0, 0.474);
 }
 
 .light-mode .task-completed {
   text-decoration: line-through;
-  border-left: 6px solid rgba(8, 0, 255, 0.474); /* Adjust styles for high priority */
+  border-left: 6px solid rgba(8, 0, 255, 0.474); 
 }
 
 .dark-mode .task-priority-High {
-  border-left: 6px solid rgba(255, 0, 0, 0.737); /* Adjust styles for high priority */
+  border-left: 6px solid rgba(255, 0, 0, 0.737); 
 }
 
 .dark-mode .task-priority-Medium {
-  border-left: 6px solid rgba(255, 166, 0, 0.871); /* Adjust styles for medium priority */
+  border-left: 6px solid rgba(255, 166, 0, 0.871); 
 }
 
 .dark-mode .task-priority-Low {
-  border-left: 6px solid rgba(0, 189, 0, 0.795); /* Adjust styles for low priority */
+  border-left: 6px solid rgba(0, 189, 0, 0.795); 
 }
 
 .dark-mode .task-completed {
   text-decoration: line-through;
-  border-left: 6px solid rgba(174, 75, 255, 0.914); /* Adjust styles for high priority */
+  border-left: 6px solid rgba(174, 75, 255, 0.914); 
 }
 
 /*Task priority indicator end*/
@@ -900,19 +755,15 @@ select option {
 #item,
 #priority,
 #dueDate {
-  width: calc(33.33% - 10px); /* Adjust width as needed */
-  margin-right: 10px;
+  width: calc(33.33% - 10px); 
   margin-bottom: 10px;
 }
-/* Style for the task input */
 #item {
   width: 100%;
   padding: 15px;
 
 }
-
-/* Style for the priority select */
-
+/* css for the priority selection */
 
 #dueDate {
   cursor: pointer;
@@ -926,7 +777,7 @@ select option {
   height: 80px;
   resize: none;
   overflow: auto;
-  -ms-overflow-style: none;  /* IE and Edge */
+  -ms-overflow-style: none;  
   scrollbar-width: none;
 }
 
@@ -935,7 +786,7 @@ select option {
   display: none;
 }
 
-/* Style for the submit button form */
+/* css for the submit button addForm */
 
 .dark-mode #submitBtn:disabled {
   border-color: #27272790;
@@ -1000,8 +851,8 @@ select option {
 ul {
   list-style-type: disc;
   padding: 0;
-  display: flex; /* Use flexbox to make the list items horizontal */
-  justify-content: space-evenly; /* Center the list items horizontally */
+  display: flex; 
+  justify-content: space-evenly;
   align-items: center;
   flex-wrap: wrap;
   width: 100vw;
@@ -1130,7 +981,6 @@ li {
   justify-content: center;
 }
 
-
 .dark-mode .confirm-content, 
 .dark-mode .confirm-content-all {
   background: rgb(24, 24, 24);
@@ -1140,7 +990,6 @@ li {
   text-align: center;
   position: relative;
 }
-
 .light-mode #myDropdown .a1{ background:#00bfffd5; }
 .light-mode #myDropdown .a2{ background:#0091dfd8; }
 .light-mode #myDropdown .a3{ background:#006dcdcc; }
@@ -1150,7 +999,6 @@ li {
 .dark-mode #myDropdown .a2{ background:#8d00dfd8; }
 .dark-mode #myDropdown .a3{ background:#8c00cdcc; }
 .dark-mode #myDropdown .a4{ background:#8d00cea5; }
-
   
 .light-mode #myDropdown {
 color: rgba(1, 63, 97, 0.967);
