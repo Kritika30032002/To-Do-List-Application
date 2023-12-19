@@ -180,6 +180,21 @@
       typeSpeed: 50,
     });
   </script>
+  <!----alarm clock-- add css and js as per your design-------->
+<!--alerts -->
+<div class = 'Alert'>
+  <div class='alertContaner'>
+  <input id="alarmTime" type="datetime-local">
+  <button id="alarmButton" onclick="setAlarm(this);">Set Alarm</button>
+  
+  <div id="alarmOptions" style="display: none;">
+      <button onclick="snooze();">Snooze 5 minutes</button>
+      <button onclick="stopAlarm();">Stop Alarm</button>
+  </div>
+  
+  </div>
+  </div>
+  <!---alarm clock ends-->
   <!---------------------------------------------------voice command not working-------------------------fix this bug----------------------------->
   <button id="voice-command-button" title="Voice Command Format:
   - To Add Task: 'Add [task] due [date] priority [priority]'
