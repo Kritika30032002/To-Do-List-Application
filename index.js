@@ -1,8 +1,7 @@
-// Elements reference
+// Creating instances of document objects
 const taskList = document.getElementById("taskList");
 const dueDateInput = document.getElementById("dueDate");
 const priorityInput = document.getElementById("priority");
-
 const submitBtn = document.getElementById("submitBtn");
 const editTaskBtn = document.getElementById("editTask");
 const tasksHeading = document.getElementById("heading-tasks");
@@ -10,12 +9,10 @@ const searchBar = document.getElementById("searchBar");
 const modeToggleBtn = document.getElementById("modeToggle");
 const checkboxes = document.querySelectorAll(".form-check-input");
 let editItem = null;
-
 const tasksWithPriority = [];
 var storedValue = sessionStorage.getItem("modeToggleValue")
 modeToggleBtn.checked=(storedValue==="true");
 toggleMode();
-
 const priorityColors = {
   High: "task-priority-High",
   Medium: "task-priority-Medium",
@@ -29,7 +26,7 @@ const priorityValues = {
   Low: 1,
 };
 
-// Adding Event Listeners
+// Adding Event Listeners to Document Objects [buttons, text fields, dropdown lists]
 editTaskBtn.addEventListener("click", (e) => {
   handleEditClick(e);
 });
@@ -43,10 +40,11 @@ checkboxes.forEach((checkbox) => {
 });
 
 flatpickr(dueDateInput, {
-  enableTime: false, // If you want to enable time selection as well
-  dateFormat: "Y-m-d", // Adjust the date format as needed
+  enableTime: false, 
+  dateFormat: "Y-m-d", 
 });
 
+//settibng up default theme
 function init() {
   const body = document.getElementsByTagName("body")[0];
   body.classList.add("light-mode");
@@ -57,13 +55,12 @@ function init() {
   tasksCheck();
 }
 
+//search logic
 function handleSearch() {
   const searchTerm = searchBar.value.toLowerCase();
   const tasks = document.querySelectorAll(".list-group-item");
-
   tasks.forEach((task) => {
     const taskTitle = task.childNodes[1].textContent.trim().toLowerCase();
-
     if (taskTitle.includes(searchTerm)) {
       task.style.display = "block";
     } else {
@@ -72,10 +69,9 @@ function handleSearch() {
   });
 }
 
-
+//logic to check whether no task is present and hide some buttons
 function tasksCheck() {
   const tasks = taskList.children;
-
   if (tasks.length === 0) {
     tasksHeading.classList.toggle("hidden");
     searchBar.classList.toggle("hidden");
@@ -84,11 +80,11 @@ function tasksCheck() {
   }
 }
 
+//this gets called after 'edit' button, fills text fields with data to be edited
 function handleEditItem(e) {
   e.preventDefault();
   editTaskBtn.style.display = "inline";
   submitBtn.style.display = "none";
-
   const taskTitle = e.target.parentElement.childNodes[1].textContent.trim();
   console.log(e.target.parentElement.childNodes)
   const taskDescription = e.target.parentElement.childNodes[4].textContent.trim().replace("Description:","");
@@ -98,9 +94,9 @@ function handleEditItem(e) {
   editItem = e.target;
 }
 
+//actual logic after editing a task and for adding a task   (gets called after edit button click, onChnage text fileds, date, priority)
 function handleEditClick(e) {
   e.preventDefault();
-
   const itemInput = document.getElementById("item");
   const dueDateInput = document.getElementById("dueDate");
   const descriptionInput = document.getElementById("description");
@@ -110,10 +106,11 @@ function handleEditClick(e) {
   const currentDate = new Date().toISOString().split("T")[0];
   const editedPriority=document.getElementById("priority").value;
 
+  //check if all fields are filled [basic validation]
   if (!editedItemText.trim()) {
     displayErrorMessage("Task not entered");
     return false;
-}
+  }
 
   if(!editedItemText ||!editedDescriptionText){
     displayErrorMessage("Title or description must not be empty!!!.");
@@ -124,14 +121,16 @@ function handleEditClick(e) {
     displayErrorMessage("Due date has already passed !!!");
     return false;
   }
+
   if(!editedPriority){
     displayErrorMessage("Please select priority")
     return false
   }
+  //[basic validation ends]
 
+
+  //actual manuplation of data
   const listItem = editItem.parentElement;
-  console.log(listItem.childNodes)
-  console.log(listItem.childNodes[1].textContent)
   listItem.childNodes[1].textContent = editedItemText;
   listItem.childNodes[4].textContent = "Description:"+editedDescriptionText;
   listItem.childNodes[7].textContent = editedPriority;
@@ -139,9 +138,7 @@ function handleEditClick(e) {
     listItem.childNodes[6].textContent = `Due Date:${dueDateInput.value}`;
   }
   const capitalizedPriority =editedPriority.charAt(0).toUpperCase() + editedPriority.slice(1).toLowerCase();
-console.log(editedPriority)
-    listItem.className = `list-group-item card shadow mb-4 bg-transparent ${priorityColors[capitalizedPriority]}`;
-
+  listItem.className = `list-group-item card shadow mb-4 bg-transparent ${priorityColors[capitalizedPriority]}`;
   displaySuccessMessage("Task edited successfully !!!");
   editItem = null;
   itemInput.value = "";
@@ -153,9 +150,9 @@ console.log(editedPriority)
   saveTasksToLocalStorage();
 }
 
+//Voice handled adding task logic   [start]
 document.addEventListener("DOMContentLoaded", function () {
-  const recognition = new (window.SpeechRecognition ||
-    window.webkitSpeechRecognition)();
+  const recognition = new (window.SpeechRecognition ||window.webkitSpeechRecognition)();
   recognition.lang = "en-US";
   recognition.interimResults = false;
 
@@ -182,42 +179,6 @@ document.addEventListener("DOMContentLoaded", function () {
     isListening = false;
     voiceCommandButton.innerHTML = '<i class="fas fa-microphone"></i>';
   };
-
-  function handleEditClick(e) {
-    e.preventDefault();
-
-    const itemInput = document.getElementById("item");
-    const dueDateInput = document.getElementById("dueDate");
-
-    const editedItemText = itemInput.value;
-    const editedDueDate = new Date(dueDateInput.value);
-    const currentDate = new Date().toISOString().split("T")[0];
-
-    if (editedDueDate < new Date(currentDate)) {
-      displayErrorMessage("Due date has already passed !!!");
-      return false;
-    }
-
-    const listItem = editItem.parentElement;
-    listItem.childNodes[1].textContent = editedItemText;
-
-    if (editedDueDate >= new Date(currentDate)) {
-      listItem.childNodes[5].textContent = `Due Date:${dueDateInput.value}`;
-    }
-
-    displaySuccessMessage("Task edited successfully !!!");
-    editItem = null;
-    itemInput.value = "";
-    dueDateInput.value = "";
-
-    editTaskBtn.style.display = "none";
-    submitBtn.style.display = "inline";
-
-    // Call displayTaskDetails with the appropriate argument
-    displayTaskDetails(listItem);
-
-    saveTasksToLocalStorage();
-  }
 
   function handleVoiceCommand(command) {
     console.log("Recognized Command:", command);
@@ -246,44 +207,22 @@ document.addEventListener("DOMContentLoaded", function () {
         command.toLowerCase().includes("edit") &&
         command.toLowerCase().includes("task")
       ) {
-        // const editIndex = commandParts.indexOf('edit');
         const editIndex = commandParts.indexOf("edit");
         const taskIndex = commandParts.indexOf("task");
         const toIndex = commandParts.indexOf("to");
         const dueDateIndex = commandParts.indexOf("due");
         const priorityIndex = commandParts.indexOf("priority");
-        if (
-          editIndex !== -1 &&
-          taskIndex !== -1 &&
-          toIndex !== -1 &&
-          dueDateIndex !== -1 &&
-          priorityIndex !== -1 &&
-          toIndex > taskIndex &&
-          dueDateIndex > toIndex &&
-          priorityIndex > dueDateIndex &&
-          priorityIndex < commandParts.length - 1
-        ) {
+        if (editIndex !== -1 &&taskIndex !== -1 && toIndex !== -1 && dueDateIndex !== -1 && priorityIndex !== -1 && 
+          toIndex > taskIndex &&dueDateIndex > toIndex && priorityIndex > dueDateIndex && 
+          priorityIndex < commandParts.length - 1) {
           const oldTitle = commandParts.slice(taskIndex + 1, toIndex).join(" ");
-          const newTitle = commandParts
-            .slice(toIndex + 1, dueDateIndex)
-            .join(" ");
-          const newdueDate = commandParts.slice(
-            dueDateIndex + 2,
-            dueDateIndex + 4
-          );
-          const newpriority = capitalizeFirstLetter(
-            commandParts[priorityIndex + 1]
-          );
+          const newTitle = commandParts.slice(toIndex + 1, dueDateIndex).join(" ");
+          const newdueDate = commandParts.slice(dueDateIndex + 2,dueDateIndex + 4);
+          const newpriority = capitalizeFirstLetter(commandParts[priorityIndex + 1]);
 
           function capitalizeFirstLetter(string) {
             return string.charAt(0).toUpperCase() + string.slice(1);
           }
-
-          console.log("Old Title:", oldTitle);
-          console.log("New Title:", newTitle);
-          console.log("Due Date:", newdueDate);
-          console.log("Priority:", newpriority);
-
           editTask(oldTitle, newTitle, newdueDate, newpriority,);
           return;
         }
@@ -296,10 +235,10 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
   }
+//Voice handled adding task logic   [end]
 
   function deleteTask(taskTitle) {
     const taskElement = findTaskElement(taskTitle);
-
     if (taskElement) {
       taskElement.remove();
       saveTasksToLocalStorage();
@@ -309,19 +248,17 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+
+  //Setting edited data to below cards components
   function editTask(oldTitle, newTitle, newdueDate, newpriority,newDescription) {
     const taskElement = findTaskElement(oldTitle);
-
     if (taskElement) {
       const dueDateElement = taskElement.querySelector("#task-dueDate");
       const priorityElement = taskElement.querySelector("#task-priority");
       const descElement = taskElement.querySelector("#description-at");
       const titleTextNode = taskElement.childNodes[1];
-      titleTextNode.textContent = titleTextNode.textContent.replace(
-        oldTitle,
-        newTitle
-      );
-      console.log("New Due Date:", newdueDate);
+      titleTextNode.textContent = titleTextNode.textContent.replace(oldTitle,newTitle);
+      //updating fields data
       if (dueDateElement) {
         dueDateElement.textContent = `Due Date: ${newdueDate}`;
         dueDateElement.id = "task-dueDate";
@@ -334,9 +271,8 @@ document.addEventListener("DOMContentLoaded", function () {
         descElement.id = "task-description";
       }
 
-      // Call displayTaskDaetails with the appropriate argument
+      //redesplaying task data in cards
       displayTaskDetails(taskElement);
-
       saveTasksToLocalStorage();
       displaySuccessMessage(`Task "${oldTitle}" edited successfully.`);
     } else {
@@ -344,31 +280,28 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  //returns the instance of task to be deleted or edited
   function findTaskElement(taskTitle) {
     const tasks = document.querySelectorAll(".list-group-item");
-
     for (const task of tasks) {
       const title = task.childNodes[1].textContent.trim().toLowerCase();
       if (title === taskTitle.toLowerCase()) {
         return task;
       }
     }
-
     return null;
   }
 
+
+    //logic to add task, can be used for voice commands only, (need to be update this function!)
   function addTask(taskTitle, dueDate, priority) {
     const todoList = document.getElementById("taskList");
     const existingTasks = todoList.querySelectorAll("li");
-
-    // Use taskTitle instead of task in the comparison
-    console.log("Existing tasks: ");
     existingTasks.forEach((item) =>
       console.log(item.textContent.trim().toLowerCase())
     );
-    const taskExists = Array.from(existingTasks).some(
-      (item) =>
-        item.textContent.trim().toLowerCase() === taskTitle.trim().toLowerCase()
+    const taskExists = Array.from(existingTasks).some((item) =>
+    item.textContent.trim().toLowerCase() === taskTitle.trim().toLowerCase()
     );
 
     if (taskExists) {
@@ -377,8 +310,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     const li = document.createElement("li");
-    const capitalizedPriority =
-      priority.charAt(0).toUpperCase() + priority.slice(1).toLowerCase();
+    const capitalizedPriority =priority.charAt(0).toUpperCase() + priority.slice(1).toLowerCase();
     console.log("Priority:", priority);
     console.log("Priority Class:", priorityColors[capitalizedPriority]);
 
@@ -392,20 +324,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const deleteButton = document.createElement("button");
     deleteButton.type = "button";
     deleteButton.className = "btn btn-outline-danger float-right delete";
-    deleteButton.innerHTML =
-      '<ion-icon name="trash-outline" style="font-size: 20px"></ion-icon>';
+    deleteButton.innerHTML ='<ion-icon name="trash-outline" style="font-size: 20px"></ion-icon>';
 
     const editButton = document.createElement("button");
     editButton.className = "btn btn-outline-success btn-sm float-right edit";
-    editButton.innerHTML =
-      '<ion-icon name="create-outline" style="font-size: 20px"></ion-icon>';
+    editButton.innerHTML ='<ion-icon name="create-outline" style="font-size: 20px"></ion-icon>';
     editButton.style.marginRight = "8px";
     editButton.addEventListener("click", handleEditItem);
-
-    // const titleParagraph = document.createElement("p");
-    // titleParagraph.style.fontSize = "18px";
-    // titleParagraph.style.margin = "0 19px";
-    // titleParagraph.appendChild(document.createTextNode(taskTitle));
 
     const dateTimeParagraph = document.createElement("p");
     dateTimeParagraph.className = "text-muted";
@@ -442,33 +367,28 @@ document.addEventListener("DOMContentLoaded", function () {
     todoList.appendChild(li);
     saveTasksToLocalStorage();
 
-    // Display task details after adding
     displayTaskDetails(li);
   }
-
-  // recognition.start();
 });
+//adding tasks through voice command ends here
 
+
+//logging task details for debugging purpose, does nothing change in UI.
 function displayTaskDetails(taskElement) {
   if (taskElement) {
     const dueDateElement = taskElement.querySelector("#task-dueDate");
     const priorityElement = taskElement.querySelector("#task-priority");
-
-    const dueDate = dueDateElement
-      ? dueDateElement.textContent.split(":")[1].trim()
-      : null;
-    const priority = priorityElement
-      ? priorityElement.textContent.trim()
-      : null;
-
+    const dueDate = dueDateElement? dueDateElement.textContent.split(":")[1].trim() : null;
+    const priority = priorityElement? priorityElement.textContent.trim()  : null;
     console.log(`Task Details - Due Date: ${dueDate}, Priority: ${priority}`);
   }
 }
 
+
+//adding tasks through form manually-logic
 function addItem(e) {
   e.preventDefault();
   tasksCheck();
-
   const newTaskTitle = document.getElementById("item").value;
   const description = document.getElementById("description").value;
   let dueDate = document.getElementById("dueDate").value;
@@ -478,29 +398,15 @@ function addItem(e) {
   const currentDate = new Date();
   const dueDateObj = new Date(dueDate);
 
-  const tasks = taskList.children;
-  console.log(newTaskTitle);
 
-  // if (dueDateObj < currentDate && tasks.length === 0) {
-  //   displayErrorMessage("Due date has already passed");
-  //   tasksHeading.classList.add("hidden");
-  //   return false;
-  // } else if (dueDateObj < currentDate && tasks.length > 0) {
-  //   displayErrorMessage("Due date has already passed");
-  //   return false;
-  // } else {
-  //   tasksHeading.classList.remove("hidden");
-  // }
-
-  // Added new logic to check conditions whether Task and Date are entered
-
+  //form validation code
   if (!newTaskTitle||!description) {
     displayErrorMessage("Task and Description should be filled!!!");
     tasksHeading.classList.add("hidden");
     searchBar.classList.add("hidden");
     return false;
   } else if (!dueDate) {
-    displayErrorMessage("Please specify a due date !!!"); // Check if the due date is specified or not
+    displayErrorMessage("Please specify a due date !!!"); 
     return false;
   } else if (dueDateObj < currentDate) {
     displayErrorMessage("Due date has already passed !!!");
@@ -516,23 +422,25 @@ function addItem(e) {
     document.querySelector(".clear_btn").style.display = "inline";
     document.querySelector(".dropdown").style.display = "inline";
   }
-
   const creationDateTime = new Date().toLocaleString();
-
   createNewTask(newTaskTitle, creationDateTime, dueDate, priority,description);
-
   saveTasksToLocalStorage();
+
+  //clearing form fields after 'add' button
   document.getElementById("dueDate").value = "";
   document.getElementById("description").value = "";
   document.getElementById("priority").value = "";
 }
 
+
+//logic for various item click events
 function handleItemClick(e) {
   if (e.target.classList.contains("delete")) {
     e.preventDefault();
     const li = e.target.parentElement;
     const confirmationBox = document.getElementById("custom-confirm");
  
+    //display confirmination message
     delalert_title=document.getElementById("confirm-msg");
     delalert_title.innerHTML ="&#9888; Are you sure you want to delete this task?";
     delalert_title.className="alert alert-danger";
@@ -542,6 +450,7 @@ function handleItemClick(e) {
     const confirmNoButton = document.getElementById("confirm-no");
     const confirmCancelButton = document.getElementById("confirm-cancel");
 
+    //conform message controls click logic
     const handleYesClick = () => {
       confirmationBox.style.display = "none";
       li.parentElement.removeChild(li);
@@ -576,31 +485,17 @@ function handleItemClick(e) {
   saveTasksToLocalStorage();
 }
 
-// function DefaultDate() {
-//   const today = new Date();
-//   const year = today.getFullYear();
-//   const month = today.getMonth() + 1;
-//   const day = today.getDate();
-//   return `${year}-${month}-${day}`;
-// }
 
 function markAsComplete(e) {
   const li = e.target.parentElement;
- /* li.classList.toggle("completed ")*/
- /* li.className = `list-group-item card shadow mb-4 bg-transparent completed task-completed`;*/
- const originalClassList = li.dataset.originalClassList;
-  
-   // Select the button with class "edit" from the parent li
-   const editButton = li.querySelector('.edit');
-
+  const originalClassList = li.dataset.originalClassList;
+  const editButton = li.querySelector('.edit');
    // Toggle the visibility of the button
-   if (editButton) {
-     editButton.style.display = (editButton.style.display === 'none') ? 'block' : 'none';
-   }
+   if (editButton) editButton.style.display = (editButton.style.display === 'none') ? 'block' : 'none';
   // If the original class list is stored, toggle it back
   if (originalClassList) {
     li.className = originalClassList;
-    li.removeAttribute("data-original-class-list"); // Remove the stored data
+    li.removeAttribute("data-original-class-list"); 
   } else {
     // If the original class list is not stored, store it and toggle "task-completed"
     li.dataset.originalClassList = li.className;
@@ -608,6 +503,7 @@ function markAsComplete(e) {
   }
 }
 
+// message box for success
 function displaySuccessMessage(message) {
   document.getElementById("lblsuccess").innerHTML = message;
   document.getElementById("lblsuccess").style.display = "block";
@@ -616,6 +512,7 @@ function displaySuccessMessage(message) {
   }, 3000);
 }
 
+// message box for error
 function displayErrorMessage(message) {
   document.getElementById("lblerror").innerHTML = message;
   document.getElementById("lblerror").style.display = "block";
@@ -623,62 +520,99 @@ function displayErrorMessage(message) {
     document.getElementById("lblerror").style.display = "none";
   }, 3000);
 }
+
 // Function to save tasks to local storage
 function saveTasksToLocalStorage() {
   const tasks = document.querySelectorAll(".list-group-item");
+  const tasksArray = extractTasksData(tasks);
+  storeTasksInLocalStorage(tasksArray);
+}
+
+// Function to extract task data from DOM elements
+function extractTasksData(tasks) {
   const tasksArray = [];
 
   tasks.forEach((task) => {
     const taskText = task.childNodes[1].textContent;
     const isCompleted = task.classList.contains("completed");
     const createdAt = task.querySelector("#created-at").textContent;
-    const descriptAt = task.querySelector("#description-at").textContent;
+    const description = task.querySelector("#description-at").textContent;
     const dueDate = task.querySelector("#task-dueDate").textContent;
     const priority = task.querySelector("#task-priority").textContent;
-    const taskObj = {
-      text: taskText,
-      completed: isCompleted,
-      createdAt: createdAt,
-      dueDate: dueDate,
-      priority: priority,
-      description:descriptAt,
-    };
+
+    const taskObj = createTaskObject(
+      taskText,
+      isCompleted,
+      createdAt,
+      dueDate,
+      priority,
+      description
+    );
+
     tasksArray.push(taskObj);
   });
 
+  return tasksArray;
+}
+
+// Function to create a task object
+function createTaskObject(text, completed, createdAt, dueDate, priority, description) {
+  return {
+    text: text,
+    completed: completed,
+    createdAt: createdAt,
+    dueDate: dueDate,
+    priority: priority,
+    description: description,
+  };
+}
+
+// Function to store tasks in local storage
+function storeTasksInLocalStorage(tasksArray) {
   localStorage.setItem("tasks", JSON.stringify(tasksArray));
 }
 
-// Function to retrieve tasks from local storage and display them
-function loadTasksFromLocalStorage() {
-  const tasks = JSON.parse(localStorage.getItem("tasks"));
 
-  if (tasks && tasks.length > 0) {
+
+// Function to retrieve tasks from local storage
+function getTasksFromLocalStorage() {
+  return JSON.parse(localStorage.getItem("tasks")) || [];
+}
+
+// Function to display tasks
+function loadTasksFromLocalStorage() {
+  const tasks = getTasksFromLocalStorage();
+
+  if (tasks.length > 0) {
     const tasksHeading = document.getElementById("heading-tasks");
     tasksHeading.classList.remove("hidden");
     searchBar.classList.remove("hidden");
     document.querySelector(".clear_btn").style.display = "inline";
     document.querySelector(".dropdown").style.display = "inline";
-    console.log(tasks);
-    tasks.forEach((task) => {
-     // console.log(task.createdAt.slice(8), "taskCreateAt");
-      // console.log(task.dueDate.split(":")[1], "testDuedate");
-      // console.log(task.description, "test description");
 
-      createNewTask(
-        task.text,
-        task.createdAt.slice(8),
-        task.dueDate.split(":")[1],
-        task.priority,
-        task.description.slice(12)
-      );
+    tasks.forEach((task) => {
+      displayTask(task);
     });
   }
 }
+
+// Function to create and display a single task
+function displayTask(task) {
+  createNewTask(
+    task.text,
+    task.createdAt.slice(8),
+    task.dueDate.split(":")[1],
+    task.priority,
+    task.description.slice(12)
+  );
+}
+
+
 function enableSubmit(ref, btnID) {
   document.getElementById(btnID).disabled = false;
 }
 
+//function to chhnage the icon of light/dark mode
 function toggleMode() {
   const body = document.body;
   sessionStorage.setItem("modeToggleValue", modeToggleBtn.checked);
@@ -693,16 +627,14 @@ function toggleMode() {
 }
 
 function clearAllTasks() {
-  // Removes all tasks from the task list
-  //changing confirmation message
+  // Removes all tasks from the task list and changing confirmation message
   const confirmationBoxAll = document.getElementById("custom-confirm-all");
 
+  //setting up confirm message
   const alert_title=document.getElementById("confirm-msg-all");
-  alert_title.innerHTML =
-    '&#9888; Are you sure you want to delete all tasks?';
+  alert_title.innerHTML ='&#9888; Are you sure you want to delete all tasks?';
   alert_title.className="alert alert-danger";
   alert_title.role="alert";
-
   const confirmYesButtonAll = document.getElementById("confirm-yes-all");
   const confirmNoButtonAll = document.getElementById("confirm-no-all");
   const confirmCancelButtonAll = document.getElementById("confirm-cancel-all");
@@ -730,7 +662,9 @@ function clearAllTasks() {
   });
   confirmationBoxAll.style.display = "flex";
 }
-//Function to sort task list by due date
+
+
+//logic to sort task list by due date
 function sortByDueDate(order) {
   const sortTaskList = JSON.parse(localStorage.getItem("tasks"));
   if (order === "early") {
@@ -753,9 +687,9 @@ function sortByDueDate(order) {
   loadTasksFromLocalStorage();
 }
 
+//logic to sort task list by priority
 function sortByPriority(order) {
   const sortTaskList = JSON.parse(localStorage.getItem("tasks"));
-
   sortTaskList.sort((a, b) => {
     if (order === "highToLow") {
       // Sort tasks from high priority to low priority
@@ -764,40 +698,24 @@ function sortByPriority(order) {
       // Sort tasks from low priority to high priority
       return priorityValues[a.priority] - priorityValues[b.priority];
     } else {
-      // Default sorting (e.g., no sorting)
       return 0;
     }
   });
-
   while (taskList.firstChild) {
     taskList.removeChild(taskList.firstChild);
   }
-
   tasksHeading.classList.add("hidden");
   searchBar.classList.add("hidden");
   localStorage.setItem("tasks", JSON.stringify(sortTaskList));
   loadTasksFromLocalStorage();
 }
 
-/* When the user clicks on the button,
-toggle between hiding and showing the dropdown content */
+//this is used somewhere in index.html
 function myFunction() {
-  console.log("func called");
   document.getElementById("myDropdown").classList.toggle("show");
 }
 
-// function sortTasks(order){
-//   if (order === 'highToLow'){
-//     sortByPriority('highToLow');
-
-//   }
-//   else if (order === 'lowToHigh'){
-//     sortByPriority('lowToHigh');
-//   }
-//   document.getElementById("myDropdown").classList.remove("show");
-// }
-
-// Close the dropdown menu if the user clicks outside of it
+//if anywhere user clicks on window, the dropdown closes by this code
 window.onclick = function (event) {
   if (!event.target.matches(".dropbtn")) {
     var dropdowns = document.getElementsByClassName("dropdown-content");
@@ -811,42 +729,36 @@ window.onclick = function (event) {
   }
 };
 
+//function that entirely creates new task
 function createNewTask(taskTitle, createdDate, dueDate, priority,description) {
+
+  //dynamically creating new card for newly added task
   const li = document.createElement("li");
   li.className = `list-group-item card shadow mb-4 bg-transparent ${priorityColors[priority]}`;
-
-  console.log(priority);
   const completeCheckbox = document.createElement("input");
   completeCheckbox.type = "checkbox";
   completeCheckbox.className = "form-check-input task-completed";
   completeCheckbox.addEventListener("change", markAsComplete);
-
-  
-
   const deleteButton = document.createElement("button");
   deleteButton.type = "button";
   deleteButton.className = "btn btn-outline-danger float-right delete";
-  // deleteButton.appendChild(document.createTextNode("Delete"));
-  deleteButton.innerHTML =
-    '<ion-icon name="trash-outline" style="font-size: 20px"></ion-icon>';
+  deleteButton.innerHTML ='<ion-icon name="trash-outline" style="font-size: 20px"></ion-icon>';
   deleteButton.style.paddingTop = "10px";
   deleteButton.style.PaddingRight = "10px";
 
 
   const editButton = document.createElement("button");
   editButton.className = "btn btn-outline-secondary btn-sm float-right edit";
-  //   editButton.appendChild(document.createTextNode("Edit"));
-  editButton.innerHTML =
-    '<ion-icon name="create-outline" style="font-size: 20px"></ion-icon>';
+  editButton.innerHTML ='<ion-icon name="create-outline" style="font-size: 20px"></ion-icon>';
   editButton.style.marginRight = "8px";
   editButton.style.paddingTop = "10px";
-  editButton.style.PaddingRight = "10px";
-  
+  editButton.style.PaddingRight = "10px";  
   // Create a click event listener for the edit button
   editButton.addEventListener("click", function (e) {
     handleEditItem(e);
   });
 
+  //setting up the fields of card for newly added taks
   const descriptionParagraph = document.createElement("p");
   descriptionParagraph.className = "text-muted";
   descriptionParagraph.id = "description-at";
@@ -855,7 +767,6 @@ function createNewTask(taskTitle, createdDate, dueDate, priority,description) {
   descriptionParagraph.appendChild(
     document.createTextNode("Description:" + description)
   );
-
 
   const dateTimeParagraph = document.createElement("p");
   dateTimeParagraph.className = "text-muted";
@@ -881,6 +792,8 @@ function createNewTask(taskTitle, createdDate, dueDate, priority,description) {
   priorityParagraph.style.margin = "0 19px";
   priorityParagraph.appendChild(document.createTextNode(priority));
 
+
+  //appending all elements to <li> tag
   li.appendChild(completeCheckbox);
   li.appendChild(document.createTextNode(taskTitle));
   li.appendChild(deleteButton);
