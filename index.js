@@ -10,8 +10,9 @@ const modeToggleBtn = document.getElementById("modeToggle");
 const checkboxes = document.querySelectorAll(".form-check-input");
 let editItem = null;
 const tasksWithPriority = [];
+let tasksTitleArray = [];
 var storedValue = sessionStorage.getItem("modeToggleValue")
-modeToggleBtn.checked=(storedValue==="true");
+modeToggleBtn.checked = (storedValue === "true");
 toggleMode();
 const priorityColors = {
   High: "task-priority-High",
@@ -40,8 +41,8 @@ checkboxes.forEach((checkbox) => {
 });
 
 flatpickr(dueDateInput, {
-  enableTime: false, 
-  dateFormat: "Y-m-d", 
+  enableTime: false,
+  dateFormat: "Y-m-d",
 });
 
 //settibng up default theme
@@ -87,7 +88,7 @@ function handleEditItem(e) {
   submitBtn.style.display = "none";
   const taskTitle = e.target.parentElement.childNodes[1].textContent.trim();
   console.log(e.target.parentElement.childNodes)
-  const taskDescription = e.target.parentElement.childNodes[4].textContent.trim().replace("Description:","");
+  const taskDescription = e.target.parentElement.childNodes[4].textContent.trim().replace("Description:", "");
   document.getElementById("item").value = taskTitle;
   document.getElementById("description").value = taskDescription;
   document.getElementById("maintitle").innerText = "Edit your tasks below :";
@@ -104,7 +105,7 @@ function handleEditClick(e) {
   const editedDescriptionText = descriptionInput.value;
   const editedDueDate = new Date(dueDateInput.value);
   const currentDate = new Date().toISOString().split("T")[0];
-  const editedPriority=document.getElementById("priority").value;
+  const editedPriority = document.getElementById("priority").value;
 
   //check if all fields are filled [basic validation]
   if (!editedItemText.trim()) {
@@ -112,7 +113,7 @@ function handleEditClick(e) {
     return false;
   }
 
-  if(!editedItemText ||!editedDescriptionText){
+  if (!editedItemText || !editedDescriptionText) {
     displayErrorMessage("Title or description must not be empty!!!.");
     return false;
   }
@@ -122,7 +123,7 @@ function handleEditClick(e) {
     return false;
   }
 
-  if(!editedPriority){
+  if (!editedPriority) {
     displayErrorMessage("Please select priority")
     return false
   }
@@ -132,17 +133,17 @@ function handleEditClick(e) {
   //actual manuplation of data
   const listItem = editItem.parentElement;
   listItem.childNodes[1].textContent = editedItemText;
-  listItem.childNodes[4].textContent = "Description:"+editedDescriptionText;
+  listItem.childNodes[4].textContent = "Description:" + editedDescriptionText;
   listItem.childNodes[7].textContent = editedPriority;
   if (editedDueDate >= new Date(currentDate)) {
     listItem.childNodes[6].textContent = `Due Date:${dueDateInput.value}`;
   }
-  const capitalizedPriority =editedPriority.charAt(0).toUpperCase() + editedPriority.slice(1).toLowerCase();
+  const capitalizedPriority = editedPriority.charAt(0).toUpperCase() + editedPriority.slice(1).toLowerCase();
   listItem.className = `list-group-item card shadow mb-4 bg-transparent ${priorityColors[capitalizedPriority]}`;
   displaySuccessMessage("Task edited successfully !!!");
   editItem = null;
   itemInput.value = "";
-  descriptionInput.value="";
+  descriptionInput.value = "";
   dueDateInput.value = "";
   document.getElementById("maintitle").innerText = "Add your tasks below :";
   editTaskBtn.style.display = "none";
@@ -152,7 +153,7 @@ function handleEditClick(e) {
 
 //Voice handled adding task logic   [start]
 document.addEventListener("DOMContentLoaded", function () {
-  const recognition = new (window.SpeechRecognition ||window.webkitSpeechRecognition)();
+  const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
   recognition.lang = "en-US";
   recognition.interimResults = false;
 
@@ -212,12 +213,12 @@ document.addEventListener("DOMContentLoaded", function () {
         const toIndex = commandParts.indexOf("to");
         const dueDateIndex = commandParts.indexOf("due");
         const priorityIndex = commandParts.indexOf("priority");
-        if (editIndex !== -1 &&taskIndex !== -1 && toIndex !== -1 && dueDateIndex !== -1 && priorityIndex !== -1 && 
-          toIndex > taskIndex &&dueDateIndex > toIndex && priorityIndex > dueDateIndex && 
+        if (editIndex !== -1 && taskIndex !== -1 && toIndex !== -1 && dueDateIndex !== -1 && priorityIndex !== -1 &&
+          toIndex > taskIndex && dueDateIndex > toIndex && priorityIndex > dueDateIndex &&
           priorityIndex < commandParts.length - 1) {
           const oldTitle = commandParts.slice(taskIndex + 1, toIndex).join(" ");
           const newTitle = commandParts.slice(toIndex + 1, dueDateIndex).join(" ");
-          const newdueDate = commandParts.slice(dueDateIndex + 2,dueDateIndex + 4);
+          const newdueDate = commandParts.slice(dueDateIndex + 2, dueDateIndex + 4);
           const newpriority = capitalizeFirstLetter(commandParts[priorityIndex + 1]);
 
           function capitalizeFirstLetter(string) {
@@ -235,7 +236,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
   }
-//Voice handled adding task logic   [end]
+  //Voice handled adding task logic   [end]
 
   function deleteTask(taskTitle) {
     const taskElement = findTaskElement(taskTitle);
@@ -250,14 +251,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   //Setting edited data to below cards components
-  function editTask(oldTitle, newTitle, newdueDate, newpriority,newDescription) {
+  function editTask(oldTitle, newTitle, newdueDate, newpriority, newDescription) {
     const taskElement = findTaskElement(oldTitle);
     if (taskElement) {
       const dueDateElement = taskElement.querySelector("#task-dueDate");
       const priorityElement = taskElement.querySelector("#task-priority");
       const descElement = taskElement.querySelector("#description-at");
       const titleTextNode = taskElement.childNodes[1];
-      titleTextNode.textContent = titleTextNode.textContent.replace(oldTitle,newTitle);
+      titleTextNode.textContent = titleTextNode.textContent.replace(oldTitle, newTitle);
       //updating fields data
       if (dueDateElement) {
         dueDateElement.textContent = `Due Date: ${newdueDate}`;
@@ -266,7 +267,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (priorityElement) {
         priorityElement.textContent = newpriority;
         priorityElement.id = "task-priority";
-      }if (descElement) {
+      } if (descElement) {
         descElement.textContent = newDescription;
         descElement.id = "task-description";
       }
@@ -293,7 +294,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
 
-    //logic to add task, can be used for voice commands only, (need to be update this function!)
+  //logic to add task, can be used for voice commands only, (need to be update this function!)
   function addTask(taskTitle, dueDate, priority) {
     const todoList = document.getElementById("taskList");
     const existingTasks = todoList.querySelectorAll("li");
@@ -301,7 +302,7 @@ document.addEventListener("DOMContentLoaded", function () {
       console.log(item.textContent.trim().toLowerCase())
     );
     const taskExists = Array.from(existingTasks).some((item) =>
-    item.textContent.trim().toLowerCase() === taskTitle.trim().toLowerCase()
+      item.textContent.trim().toLowerCase() === taskTitle.trim().toLowerCase()
     );
 
     if (taskExists) {
@@ -310,7 +311,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     const li = document.createElement("li");
-    const capitalizedPriority =priority.charAt(0).toUpperCase() + priority.slice(1).toLowerCase();
+    const capitalizedPriority = priority.charAt(0).toUpperCase() + priority.slice(1).toLowerCase();
     console.log("Priority:", priority);
     console.log("Priority Class:", priorityColors[capitalizedPriority]);
 
@@ -324,11 +325,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const deleteButton = document.createElement("button");
     deleteButton.type = "button";
     deleteButton.className = "btn btn-outline-danger float-right delete";
-    deleteButton.innerHTML ='<ion-icon name="trash-outline" style="font-size: 20px"></ion-icon>';
+    deleteButton.innerHTML = '<ion-icon name="trash-outline" style="font-size: 20px"></ion-icon>';
 
     const editButton = document.createElement("button");
     editButton.className = "btn btn-outline-success btn-sm float-right edit";
-    editButton.innerHTML ='<ion-icon name="create-outline" style="font-size: 20px"></ion-icon>';
+    editButton.innerHTML = '<ion-icon name="create-outline" style="font-size: 20px"></ion-icon>';
     editButton.style.marginRight = "8px";
     editButton.addEventListener("click", handleEditItem);
 
@@ -378,10 +379,43 @@ function displayTaskDetails(taskElement) {
   if (taskElement) {
     const dueDateElement = taskElement.querySelector("#task-dueDate");
     const priorityElement = taskElement.querySelector("#task-priority");
-    const dueDate = dueDateElement? dueDateElement.textContent.split(":")[1].trim() : null;
-    const priority = priorityElement? priorityElement.textContent.trim()  : null;
+    const dueDate = dueDateElement ? dueDateElement.textContent.split(":")[1].trim() : null;
+    const priority = priorityElement ? priorityElement.textContent.trim() : null;
     console.log(`Task Details - Due Date: ${dueDate}, Priority: ${priority}`);
   }
+}
+
+
+function showComfirmboxForDuplicateTasks(){
+  const confirmationBox = document.getElementById("duplicate-task");
+
+  //display confirmination message
+  delalert_title = document.getElementById("duplicate-msg");
+  delalert_title.innerHTML = "&#9888; This task is already present";
+  delalert_title.className = "alert alert-danger";
+  delalert_title.role = "alert";
+
+  const confirmYesButton = document.getElementById("duplicate-ok");
+  const confirmCancelButton = document.getElementById("duplicate-cancel");
+
+  //conform message controls click logic
+  const handleYesClick = () => {
+    confirmationBox.style.display = "none";
+    confirmYesButton.removeEventListener("click", handleYesClick);
+    confirmCancelButton.removeEventListener("click", handleCancelClick);
+  };
+
+
+  const handleCancelClick = () => {
+    confirmationBox.style.display = "none";
+    confirmYesButton.removeEventListener("click", handleYesClick);
+    confirmCancelButton.removeEventListener("click", handleCancelClick);
+  };
+
+  confirmYesButton.addEventListener("click", handleYesClick);
+  confirmCancelButton.addEventListener("click", handleCancelClick);
+
+  confirmationBox.style.display = "flex";
 }
 
 
@@ -398,15 +432,20 @@ function addItem(e) {
   const currentDate = new Date();
   const dueDateObj = new Date(dueDate);
 
+  //check if the tasks are duplicate
+  if(checkForDuplicateTasks(newTaskTitle)){
+    showComfirmboxForDuplicateTasks();
+    return false;
+  }
 
   //form validation code
-  if (!newTaskTitle||!description) {
+  if (!newTaskTitle || !description) {
     displayErrorMessage("Task and Description should be filled!!!");
     tasksHeading.classList.add("hidden");
     searchBar.classList.add("hidden");
     return false;
   } else if (!dueDate) {
-    displayErrorMessage("Please specify a due date !!!"); 
+    displayErrorMessage("Please specify a due date !!!");
     return false;
   } else if (dueDateObj < currentDate) {
     displayErrorMessage("Due date has already passed !!!");
@@ -423,7 +462,7 @@ function addItem(e) {
     document.querySelector(".dropdown").style.display = "inline";
   }
   const creationDateTime = new Date().toLocaleString();
-  createNewTask(newTaskTitle, creationDateTime, dueDate, priority,description);
+  createNewTask(newTaskTitle, creationDateTime, dueDate, priority, description);
   saveTasksToLocalStorage();
 
   //clearing form fields after 'add' button
@@ -432,6 +471,27 @@ function addItem(e) {
   document.getElementById("priority").value = "";
 }
 
+//check for duplicate tasks
+function checkForDuplicateTasks(newTaskTitle) {
+  var taskList = document.getElementById('taskList');
+  var listItems = taskList.querySelectorAll('li');
+  var textArray = [];
+
+  listItems.forEach(function (li) {
+    // Get the text and extract the text content
+    var textContent = li.textContent.trim();
+    // Push the text content into the array
+    textArray.push(textContent);
+  });
+  TitleArray = textArray.map(function (element) {
+    // Use regular expression to match and capture the substring before "Description"
+    var match = element.match(/^(.*?)Description/);
+    // Check if there is a match and extract the captured group
+    return match ? match[1] : null;
+  });
+  let isnewTitlepresent=TitleArray.includes(newTaskTitle);
+  return isnewTitlepresent;
+}
 
 //logic for various item click events
 function handleItemClick(e) {
@@ -439,13 +499,13 @@ function handleItemClick(e) {
     e.preventDefault();
     const li = e.target.parentElement;
     const confirmationBox = document.getElementById("custom-confirm");
- 
+
     //display confirmination message
-    delalert_title=document.getElementById("confirm-msg");
-    delalert_title.innerHTML ="&#9888; Are you sure you want to delete this task?";
-    delalert_title.className="alert alert-danger";
-    delalert_title.role="alert";
-    
+    delalert_title = document.getElementById("confirm-msg");
+    delalert_title.innerHTML = "&#9888; Are you sure you want to delete this task?";
+    delalert_title.className = "alert alert-danger";
+    delalert_title.role = "alert";
+
     const confirmYesButton = document.getElementById("confirm-yes");
     const confirmNoButton = document.getElementById("confirm-no");
     const confirmCancelButton = document.getElementById("confirm-cancel");
@@ -490,12 +550,12 @@ function markAsComplete(e) {
   const li = e.target.parentElement;
   const originalClassList = li.dataset.originalClassList;
   const editButton = li.querySelector('.edit');
-   // Toggle the visibility of the button
-   if (editButton) editButton.style.display = (editButton.style.display === 'none') ? 'block' : 'none';
+  // Toggle the visibility of the button
+  if (editButton) editButton.style.display = (editButton.style.display === 'none') ? 'block' : 'none';
   // If the original class list is stored, toggle it back
   if (originalClassList) {
     li.className = originalClassList;
-    li.removeAttribute("data-original-class-list"); 
+    li.removeAttribute("data-original-class-list");
   } else {
     // If the original class list is not stored, store it and toggle "task-completed"
     li.dataset.originalClassList = li.className;
@@ -623,7 +683,7 @@ function toggleMode() {
     body.classList.add("light-mode");
     body.classList.remove("dark-mode");
   }
-  
+
 }
 
 function clearAllTasks() {
@@ -631,14 +691,14 @@ function clearAllTasks() {
   const confirmationBoxAll = document.getElementById("custom-confirm-all");
 
   //setting up confirm message
-  const alert_title=document.getElementById("confirm-msg-all");
-  alert_title.innerHTML ='&#9888; Are you sure you want to delete all tasks?';
-  alert_title.className="alert alert-danger";
-  alert_title.role="alert";
+  const alert_title = document.getElementById("confirm-msg-all");
+  alert_title.innerHTML = '&#9888; Are you sure you want to delete all tasks?';
+  alert_title.className = "alert alert-danger";
+  alert_title.role = "alert";
   const confirmYesButtonAll = document.getElementById("confirm-yes-all");
   const confirmNoButtonAll = document.getElementById("confirm-no-all");
   const confirmCancelButtonAll = document.getElementById("confirm-cancel-all");
-  
+
   confirmYesButtonAll.addEventListener("click", () => {
     confirmationBoxAll.style.display = "none";
     while (taskList.firstChild) {
@@ -730,7 +790,7 @@ window.onclick = function (event) {
 };
 
 //function that entirely creates new task
-function createNewTask(taskTitle, createdDate, dueDate, priority,description) {
+function createNewTask(taskTitle, createdDate, dueDate, priority, description) {
 
   //dynamically creating new card for newly added task
   const li = document.createElement("li");
@@ -742,17 +802,17 @@ function createNewTask(taskTitle, createdDate, dueDate, priority,description) {
   const deleteButton = document.createElement("button");
   deleteButton.type = "button";
   deleteButton.className = "btn btn-outline-danger float-right delete";
-  deleteButton.innerHTML ='<ion-icon name="trash-outline" style="font-size: 20px"></ion-icon>';
+  deleteButton.innerHTML = '<ion-icon name="trash-outline" style="font-size: 20px"></ion-icon>';
   deleteButton.style.paddingTop = "10px";
   deleteButton.style.PaddingRight = "10px";
 
 
   const editButton = document.createElement("button");
   editButton.className = "btn btn-outline-secondary btn-sm float-right edit";
-  editButton.innerHTML ='<ion-icon name="create-outline" style="font-size: 20px"></ion-icon>';
+  editButton.innerHTML = '<ion-icon name="create-outline" style="font-size: 20px"></ion-icon>';
   editButton.style.marginRight = "8px";
   editButton.style.paddingTop = "10px";
-  editButton.style.PaddingRight = "10px";  
+  editButton.style.PaddingRight = "10px";
   // Create a click event listener for the edit button
   editButton.addEventListener("click", function (e) {
     handleEditItem(e);
@@ -792,7 +852,7 @@ function createNewTask(taskTitle, createdDate, dueDate, priority,description) {
   priorityParagraph.style.margin = "0 19px";
   priorityParagraph.appendChild(document.createTextNode(priority));
 
-
+  tasksTitleArray += taskTitle;
   //appending all elements to <li> tag
   li.appendChild(completeCheckbox);
   li.appendChild(document.createTextNode(taskTitle));
