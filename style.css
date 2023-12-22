@@ -61,21 +61,52 @@ html{
   scroll-behavior: smooth;
 
 }
-#myBtn {
+.light-mode #myBtn {
+  scale:1.25;
+  margin:10px;
   display: none; 
   position: fixed; 
-  bottom: 50px;
-  left: 30px; 
+  bottom: 75px;
+  left: 25px; 
   z-index: 99;
   border: none; 
   outline: none; 
   cursor: pointer; 
-  width: 30px;
-  height: 30px;}
+  width: 45px;
+  padding: 13px;
+  height: 45px;
+  filter: invert(100%);
+  border-radius: 50%;
+  background-color: rgb(255, 255, 255);
+ 
+}
 
 #myBtn:hover {
-  background-color: #06d1f5; 
+  filter: invert(0%);
 }
+
+.dark-mode #myBtn {
+  scale:1.25;
+  margin:10px;
+  display: none; 
+  position: fixed; 
+  bottom: 75px;
+  left: 25px; 
+  z-index: 99;
+  border: none; 
+  outline: none; 
+  cursor: pointer; 
+  width: 45px;
+  padding: 13px;
+  height: 45px;
+  filter: invert(0%);
+  border-radius: 50%;
+  background-color: rgb(255, 255, 255);
+  box-shadow: #6c6c6c 0px 0px 10px 0px;}
+
+.dark-mode  #myBtn:hover {
+    filter: invert(100%);
+  }
 
 .slider:before {
   position: absolute;
@@ -752,13 +783,38 @@ select {
 select option {
   width: 150px;
 }
-#voice-command-button {
+.light-mode #voice-command-button {
+  filter:invert(100%);
+  scale:1.2;
+  margin:10px;
+  background-color: #ffffff;
   position: fixed;
-  bottom: 70px;
+  bottom: 72px;
   right: 20px;
   z-index: 1000;
+  
 }
 
+.light-mode #voice-command-button:hover {
+  filter:invert(0%);
+}
+
+.dark-mode #voice-command-button {
+  filter:invert(0%);
+  scale:1.2;
+  margin:10px;
+  background-color: #ffffff;
+  position: fixed;
+  bottom: 72px;
+  right: 22px;
+  z-index: 1000;
+  transition: background-color 0.5s ease; 
+  box-shadow: #6c6c6c 0px 0px 10px 0px;
+}
+.dark-mode #voice-command-button:hover{
+  filter:invert(100%);
+  
+}
 /* new css for form */
 #item,
 #priority,
