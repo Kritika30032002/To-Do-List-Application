@@ -11,20 +11,19 @@
 
 
 body {
-  
   font-weight: 400;
-min-height: 100vh;
+  margin: 0px;
+ 
   padding: 0;
   box-sizing: border-box;
   display: flex;
   position: relative;
   margin-bottom: -90px;
   flex-direction: column;
- 
-}
+  min-height: 100vh;
 
-.dark-mode .content-container{
-  min-height: 95vh;
+  background: radial-gradient(2224px at 10.6% 8.8%, rgb(255, 255, 255) 0%, rgb(153, 202, 251) 100.2%);
+
 }
 
 .light-mode .content-container{
@@ -823,6 +822,7 @@ select option {
 
 
 #addForm input{
+  border-radius: 30px;
   max-height: 60px;
   margin-right: 10px;
 }
@@ -853,7 +853,6 @@ select option {
 #item{
   max-width: 200px;
 }
-
 
 
 ul {
@@ -993,6 +992,7 @@ li {
   text-align: center;
   position: relative;
 }
+
 .light-mode #myDropdown .a1{ background:#00bfffd5; }
 .light-mode #myDropdown .a2{ background:#0091dfd8; }
 .light-mode #myDropdown .a3{ background:#006dcdcc; }
@@ -1014,5 +1014,3 @@ color: rgba(1, 63, 97, 0.967);
 #myDropdown a:hover{
   color:white;
 }
-
-

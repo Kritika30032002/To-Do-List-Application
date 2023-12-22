@@ -1,24 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="shortcut icon" href="images/todoWhite.png" type="image/x-icon" />
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="To-Do-List Application" content="Plan, Act, Achieve: Get Started Now! 😉..">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="images/todoWhite.png" type="image/x-icon">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link rel="stylesheet" href="style.css">
+
+  <title>To-Do List</title>
+
+  <!-- Scripts at the end for better performance -->
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Web-Speech-API/0.3.1/web-speech-api.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-  <link rel="stylesheet" href="style.css" />
-  <title>To-Do List</title>
+  
 </head>
 
 <body>
-  <div class ="content-container">
   <!-- Preloader Starts -->
   <div class="preloader">
     <div class="writing-loader">
@@ -51,6 +57,7 @@
     <input type="checkbox" id="modeToggle" class="mode-toggle input" />
     <span class="slider"></span>
   </label>
+
   <!-- Confirmation dialog -->
   <div id="custom-confirm" class="custom-confirm">
     <div class="confirm-content">
@@ -105,14 +112,14 @@
         
         <!-- task field -->
         <input class="form-control inputcss" type="text" onkeyup="enableSubmit(this, 'submitBtn')" id="item"
-          placeholder="Write your task here..." />
+          placeholder="Enter Task Name..." />
         
         <!-- description fiels -->
-        <textarea style="overflow-y: scroll; resize: none;width:100%;" class="inputcss mb-3" placeholder="Write Description " id="description"></textarea>
+        <textarea style="overflow-y: scroll; resize: none;width:100%;" class="inputcss mb-3" placeholder="Enter Description " id="description"></textarea>
         
         <!-- priority dropdown list -->
         <select id="priority">
-          <option value="" selected disabled hidden>select priority</option>
+          <option value="" selected disabled hidden>Select Priority</option>
           <option value="Low" style="background:rgba(84, 211, 0, 0.605); color:rgba(42, 105, 0, 0.395) ;" onfocus="this.size=3">Low</option>
           <option value="Medium" style="background:rgba(255, 225, 125, 0.788); color: rgba(194, 149, 0, 0.788);" onfocus="this.size=3">Medium</option>
           <option value="High" style="background:rgba(255, 120, 120, 0.786);color:rgba(191, 0, 0, 0.786);" onfocus="this.size=3">High</option>
@@ -146,6 +153,7 @@
             <a onclick="sortByDueDate('late');" class="a4" >Lately To Do</a>
           </div>
         </div>
+
         <!--Dynamic Task list-->
         <form id="newTaskForm" class="mt-3">
           <ul class="list-group " id="taskList"></ul>
