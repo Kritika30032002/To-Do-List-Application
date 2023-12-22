@@ -9,18 +9,14 @@
 }
 
 body {
-  
   font-weight: 400;
   margin: 0px;
- 
   padding: 0;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-
   background: radial-gradient(2224px at 10.6% 8.8%, rgb(255, 255, 255) 0%, rgb(153, 202, 251) 100.2%);
-
 }
 
 .switch {
@@ -990,6 +986,7 @@ li {
   text-align: center;
   position: relative;
 }
+
 .light-mode #myDropdown .a1{ background:#00bfffd5; }
 .light-mode #myDropdown .a2{ background:#0091dfd8; }
 .light-mode #myDropdown .a3{ background:#006dcdcc; }
@@ -1011,5 +1008,3 @@ color: rgba(1, 63, 97, 0.967);
 #myDropdown a:hover{
   color:white;
 }
-
-
