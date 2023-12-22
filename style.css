@@ -815,7 +815,6 @@ select option {
 
 
 #addForm input{
-  cursor: pointer;
   border-radius: 30px;
   max-height: 60px;
   margin-right: 10px;
