@@ -8,21 +8,29 @@
   font-family: Roboto Slab;
 }
 
+
+
 body {
   
   font-weight: 400;
-  margin: 0px;
- 
+min-height: 100vh;
   padding: 0;
   box-sizing: border-box;
   display: flex;
+  position: relative;
+  margin-bottom: -90px;
   flex-direction: column;
-  min-height: 100vh;
-
-  background: radial-gradient(2224px at 10.6% 8.8%, rgb(255, 255, 255) 0%, rgb(153, 202, 251) 100.2%);
-
+ 
 }
 
+.dark-mode .content-container{
+  min-height: 95vh;
+}
+
+.light-mode .content-container{
+  min-height: 95vh;
+  background: radial-gradient(2224px at 10.6% 8.8%, rgb(255, 255, 255) 0%, rgb(153, 202, 251) 100.2%);
+}
 .switch {
   font-size: 17px;
   position: relative;
@@ -874,37 +882,32 @@ li {
 }
 
 .light-mode .footer-down {
-  height: 50px;
-
+  flex-direction: column !important;
   position: -webkit-sticky;
-  position: sticky;
+  position: relative;
   bottom: 0;
+  height: 5vh;
+
   color: rgb(101, 101, 101);
   padding-top: 10px;
   padding-left: 0px;
-  z-index: 9999999;
   max-width: auto;
-
-  background: rgba( 255, 255, 255, 0.25 );
-
+  background: radial-gradient(2224px at 10.6% 8.8%, rgb(255, 255, 255) 0%, rgb(175, 215, 255) 100.2%);
   backdrop-filter: blur( 4px );
   -webkit-backdrop-filter: blur( 4px );
   border: 1px solid rgba( 255, 255, 255, 0.18 );
+  
 }
 .dark-mode .footer-down {
-  height: 50px;
-
   position: -webkit-sticky;
-  position: sticky;
+  position: relative !important;
   bottom: 0;
+  height: 5vh;
   color: rgb(255, 255, 255);
   padding-top: 10px;
   padding-left: 0px;
-  z-index: 9999999;
   max-width: auto;
-
   background: rgba(193, 99, 255, 0.25);
-
   backdrop-filter: blur( 4px );
   -webkit-backdrop-filter: blur( 4px );
   border: 1px solid rgba( 255, 255, 255, 0.18 );
