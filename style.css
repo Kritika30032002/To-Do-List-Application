@@ -1071,4 +1071,21 @@ color: rgba(1, 63, 97, 0.967);
   color:white;
 }
 
+.github-icon{
+  position: absolute;
+    cursor: pointer;
+    top: 25px;
+    right: 35px;
+    bottom: 0px;
+    transition: all 0.4s ease 0s;
+}
 
+.light-mode .github-icon a i{
+  font-size: 50px;
+  color:black !important;
+}
+
+.dark-mode .github-icon a i{
+  font-size: 50px;
+  color:rgb(227, 227, 227) !important;
+}
