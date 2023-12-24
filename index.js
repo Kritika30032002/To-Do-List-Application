@@ -5,6 +5,8 @@ const priorityInput = document.getElementById("priority");
 const submitBtn = document.getElementById("submitBtn");
 const editTaskBtn = document.getElementById("editTask");
 const tasksHeading = document.getElementById("heading-tasks");
+const email=document.getElementById("item1");
+console.log(email.value)
 const searchBar = document.getElementById("searchBar");
 const modeToggleBtn = document.getElementById("modeToggle");
 const checkboxes = document.querySelectorAll(".form-check-input");
@@ -44,6 +46,24 @@ flatpickr(dueDateInput, {
   enableTime: false,
   dateFormat: "Y-m-d",
 });
+
+function sendMail(e) {
+  e.preventDefault();
+  var params = {
+    email: localStorage.getItem("email"),
+    tasks: localStorage.getItem("tasks"),
+  };
+
+  const serviceID = "service_1iwy4iq";
+  const templateID = "template_junweh8";
+
+    emailjs.send(serviceID, templateID, params)
+    .then(res=>{
+        console.log(res);
+    })
+    .catch(err=>console.log(err));
+
+}
 
 //settibng up default theme
 function init() {
@@ -92,6 +112,7 @@ function handleEditItem(e) {
   document.getElementById("item").value = taskTitle;
   document.getElementById("description").value = taskDescription;
   document.getElementById("maintitle").innerText = "Edit your tasks below :";
+  document.getElementById("item1").value=localStorage.getItem("email");
   editItem = e.target;
 }
 
@@ -106,7 +127,6 @@ function handleEditClick(e) {
   const editedDueDate = new Date(dueDateInput.value);
   const currentDate = new Date().toISOString().split("T")[0];
   const editedPriority = document.getElementById("priority").value;
-
   //check if all fields are filled [basic validation]
   if (!editedItemText.trim()) {
     displayErrorMessage("Task not entered");
@@ -141,6 +161,7 @@ function handleEditClick(e) {
   const capitalizedPriority = editedPriority.charAt(0).toUpperCase() + editedPriority.slice(1).toLowerCase();
   listItem.className = `list-group-item card shadow mb-4 bg-transparent ${priorityColors[capitalizedPriority]}`;
   displaySuccessMessage("Task edited successfully !!!");
+  localStorage.setItem("email",email.value)
   editItem = null;
   itemInput.value = "";
   descriptionInput.value = "";
@@ -148,7 +169,9 @@ function handleEditClick(e) {
   document.getElementById("maintitle").innerText = "Add your tasks below :";
   editTaskBtn.style.display = "none";
   submitBtn.style.display = "inline";
+  email.value="";
   saveTasksToLocalStorage();
+  sendMail(e);
 }
 
 //Voice handled adding task logic   [start]
@@ -464,11 +487,14 @@ function addItem(e) {
   const creationDateTime = new Date().toLocaleString();
   createNewTask(newTaskTitle, creationDateTime, dueDate, priority, description);
   saveTasksToLocalStorage();
+  localStorage.setItem("email",document.getElementById("item1").value)
+  sendMail(e);
 
   //clearing form fields after 'add' button
   document.getElementById("dueDate").value = "";
   document.getElementById("description").value = "";
   document.getElementById("priority").value = "";
+  document.getElementById("item1").value="";
 }
 
 //check for duplicate tasks

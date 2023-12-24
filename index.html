@@ -21,7 +21,14 @@
   <!-- Scripts at the end for better performance -->
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Web-Speech-API/0.3.1/web-speech-api.min.js"></script>
-  
+  <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+  </script>
+  <script type="text/javascript">
+   (function(){
+      emailjs.init("KQ-GCHU-YUP-IAsHP");
+   })();
+</script>
 </head>
 
 <body>
@@ -114,7 +121,8 @@
         <!-- task field -->
         <input class="form-control inputcss" type="text" onkeyup="enableSubmit(this, 'submitBtn')" id="item"
           placeholder="Enter Task Name..." />
-        
+          <input class="form-control inputcss y1" type="email" onkeyup="enableSubmit(this, 'submitBtn')" id="item1" style="margin-bottom: 8px;"
+          placeholder="Enter Email..."/>
         <!-- description fiels -->
         <textarea style="overflow-y: scroll; resize: none;width:100%;" class="inputcss mb-3" placeholder="Enter Description " id="description"></textarea>
         
