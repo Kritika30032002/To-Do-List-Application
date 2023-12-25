@@ -1,72 +1,70 @@
+# Getting Started with Create React App
 
-![image](https://user-images.githubusercontent.com/83400697/207388229-b6463c21-39cb-4926-98b1-b77f3c2790a1.png)
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-![image](https://user-images.githubusercontent.com/83400697/202429157-a953dc00-f32d-4312-862a-1902a628b6ba.png)
+## Available Scripts
 
+In the project directory, you can run:
 
-Join the [discord server](https://discord.gg/JdFsJPrayj) for more discussion: 
+### `npm start`
 
-# To-Do List Application
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-This is a simple yet effective To-Do List Application built with HTML, CSS, and JavaScript. It allows you to manage your tasks and stay organized. You can add, edit, mark as completed, and delete tasks effortlessly.
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-## Tech Stack
+### `npm test`
 
-- HTML
-- CSS
-- JavaScript
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-## Installation
+### `npm run build`
 
-Clone the repository to your local machine:
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-```bash
-git clone https://github.com/Kritika30032002/To-Do-List-Application.git
-```
-Open the index.html file in your web browser to start using the application.
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-## Usage
- 1. Add tasks with a simple click.
- 2. Edit task names by double-clicking on them.
- 3. Mark tasks as completed by clicking on the checkbox.
- 4. Delete tasks by clicking on the trash icon.
- 5. Using voice command feature to add, edit and delete task 
+### `npm run eject`
 
-Our to-do list application supports voice command for adding tasks effortlessly. Here's how you can use it :
- 1. Click on the "Start Voice Command" button
- 2. Wait for the application to start listening
- 3. Clearly state your task, due date and priority.
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-Example prompt for adding task using voice command :
- "Add asignment due date 16th Nov priority High" 
-Example prompt for editing tasks : 
- "Edit task assignment to a" (will change the task title from assignment to a " 
-Example prompt for deketing a task : 
- "Delete task assignment"  
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
- Watch our video for detailed demonstration. 
- 
-https://github.com/AishaAgarwal/To-Do-List-Application/assets/107138192/832814c7-cd21-4c85-81ed-e7192c720710
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-## Contributing
-Feel free to contribute to this project by creating a pull request. We welcome any improvements, bug fixes, or new features.
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Why & How to contribute?
-- If you find any bugs then please report them by creating an issue. 
-- If you can make a website look good by modifying then go ahead and describe it in issue and create pull request. 
-- If you can add more functionality, then create an issue and contribute by making pull request.
+## Learn More
 
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
+To learn React, check out the [React documentation](https://reactjs.org/).
 
+### Code Splitting
 
-## Thanks to all Contributors 💪
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-<a href="https://github.com/Kritika30032002/To-Do-List-Application/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Kritika30032002/To-Do-List-Application"/>
-</a>  <br>
-Thanks a lot for spending your time. <br>
-Keep rocking 🍻 <br>
-Also Give it a Star 🌟, If you loved contributing to the project.
+### Analyzing the Bundle Size
 
-## [MIT Licensed](https://github.com/Kritika30032002/To-Do-List-Application/blob/main/LICENSE)
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
