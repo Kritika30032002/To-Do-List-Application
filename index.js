@@ -11,14 +11,14 @@ const checkboxes = document.querySelectorAll(".form-check-input");
 let editItem = null;
 const tasksWithPriority = [];
 let tasksTitleArray = [];
-var storedValue = sessionStorage.getItem("modeToggleValue")
-modeToggleBtn.checked = (storedValue === "true");
+var storedValue = sessionStorage.getItem("modeToggleValue");
+modeToggleBtn.checked = storedValue === "true";
 toggleMode();
 const priorityColors = {
   High: "task-priority-High",
   Medium: "task-priority-Medium",
   Low: "task-priority-Low",
-  Completed: "task-completed"
+  Completed: "task-completed",
 };
 
 const priorityValues = {
@@ -87,8 +87,10 @@ function handleEditItem(e) {
   editTaskBtn.style.display = "inline";
   submitBtn.style.display = "none";
   const taskTitle = e.target.parentElement.childNodes[1].textContent.trim();
-  console.log(e.target.parentElement.childNodes)
-  const taskDescription = e.target.parentElement.childNodes[4].textContent.trim().replace("Description:", "");
+  console.log(e.target.parentElement.childNodes);
+  const taskDescription = e.target.parentElement.childNodes[4].textContent
+    .trim()
+    .replace("Description:", "");
   document.getElementById("item").value = taskTitle;
   document.getElementById("description").value = taskDescription;
   document.getElementById("maintitle").innerText = "Edit your tasks below :";
@@ -124,11 +126,10 @@ function handleEditClick(e) {
   }
 
   if (!editedPriority) {
-    displayErrorMessage("Please select priority")
-    return false
+    displayErrorMessage("Please select priority");
+    return false;
   }
   //[basic validation ends]
-
 
   //actual manuplation of data
   const listItem = editItem.parentElement;
@@ -138,7 +139,9 @@ function handleEditClick(e) {
   if (editedDueDate >= new Date(currentDate)) {
     listItem.childNodes[6].textContent = `Due Date:${dueDateInput.value}`;
   }
-  const capitalizedPriority = editedPriority.charAt(0).toUpperCase() + editedPriority.slice(1).toLowerCase();
+  const capitalizedPriority =
+    editedPriority.charAt(0).toUpperCase() +
+    editedPriority.slice(1).toLowerCase();
   listItem.className = `list-group-item card shadow mb-4 bg-transparent ${priorityColors[capitalizedPriority]}`;
   displaySuccessMessage("Task edited successfully !!!");
   editItem = null;
@@ -153,7 +156,8 @@ function handleEditClick(e) {
 
 //Voice handled adding task logic   [start]
 document.addEventListener("DOMContentLoaded", function () {
-  const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+  const recognition = new (window.SpeechRecognition ||
+    window.webkitSpeechRecognition)();
   recognition.lang = "en-US";
   recognition.interimResults = false;
 
@@ -213,18 +217,33 @@ document.addEventListener("DOMContentLoaded", function () {
         const toIndex = commandParts.indexOf("to");
         const dueDateIndex = commandParts.indexOf("due");
         const priorityIndex = commandParts.indexOf("priority");
-        if (editIndex !== -1 && taskIndex !== -1 && toIndex !== -1 && dueDateIndex !== -1 && priorityIndex !== -1 &&
-          toIndex > taskIndex && dueDateIndex > toIndex && priorityIndex > dueDateIndex &&
-          priorityIndex < commandParts.length - 1) {
+        if (
+          editIndex !== -1 &&
+          taskIndex !== -1 &&
+          toIndex !== -1 &&
+          dueDateIndex !== -1 &&
+          priorityIndex !== -1 &&
+          toIndex > taskIndex &&
+          dueDateIndex > toIndex &&
+          priorityIndex > dueDateIndex &&
+          priorityIndex < commandParts.length - 1
+        ) {
           const oldTitle = commandParts.slice(taskIndex + 1, toIndex).join(" ");
-          const newTitle = commandParts.slice(toIndex + 1, dueDateIndex).join(" ");
-          const newdueDate = commandParts.slice(dueDateIndex + 2, dueDateIndex + 4);
-          const newpriority = capitalizeFirstLetter(commandParts[priorityIndex + 1]);
+          const newTitle = commandParts
+            .slice(toIndex + 1, dueDateIndex)
+            .join(" ");
+          const newdueDate = commandParts.slice(
+            dueDateIndex + 2,
+            dueDateIndex + 4
+          );
+          const newpriority = capitalizeFirstLetter(
+            commandParts[priorityIndex + 1]
+          );
 
           function capitalizeFirstLetter(string) {
             return string.charAt(0).toUpperCase() + string.slice(1);
           }
-          editTask(oldTitle, newTitle, newdueDate, newpriority,);
+          editTask(oldTitle, newTitle, newdueDate, newpriority);
           return;
         }
       } else if (command.toLowerCase().includes("delete")) {
@@ -249,16 +268,24 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-
   //Setting edited data to below cards components
-  function editTask(oldTitle, newTitle, newdueDate, newpriority, newDescription) {
+  function editTask(
+    oldTitle,
+    newTitle,
+    newdueDate,
+    newpriority,
+    newDescription
+  ) {
     const taskElement = findTaskElement(oldTitle);
     if (taskElement) {
       const dueDateElement = taskElement.querySelector("#task-dueDate");
       const priorityElement = taskElement.querySelector("#task-priority");
       const descElement = taskElement.querySelector("#description-at");
       const titleTextNode = taskElement.childNodes[1];
-      titleTextNode.textContent = titleTextNode.textContent.replace(oldTitle, newTitle);
+      titleTextNode.textContent = titleTextNode.textContent.replace(
+        oldTitle,
+        newTitle
+      );
       //updating fields data
       if (dueDateElement) {
         dueDateElement.textContent = `Due Date: ${newdueDate}`;
@@ -267,7 +294,8 @@ document.addEventListener("DOMContentLoaded", function () {
       if (priorityElement) {
         priorityElement.textContent = newpriority;
         priorityElement.id = "task-priority";
-      } if (descElement) {
+      }
+      if (descElement) {
         descElement.textContent = newDescription;
         descElement.id = "task-description";
       }
@@ -293,7 +321,6 @@ document.addEventListener("DOMContentLoaded", function () {
     return null;
   }
 
-
   //logic to add task, can be used for voice commands only, (need to be update this function!)
   function addTask(taskTitle, dueDate, priority) {
     const todoList = document.getElementById("taskList");
@@ -301,8 +328,9 @@ document.addEventListener("DOMContentLoaded", function () {
     existingTasks.forEach((item) =>
       console.log(item.textContent.trim().toLowerCase())
     );
-    const taskExists = Array.from(existingTasks).some((item) =>
-      item.textContent.trim().toLowerCase() === taskTitle.trim().toLowerCase()
+    const taskExists = Array.from(existingTasks).some(
+      (item) =>
+        item.textContent.trim().toLowerCase() === taskTitle.trim().toLowerCase()
     );
 
     if (taskExists) {
@@ -311,7 +339,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     const li = document.createElement("li");
-    const capitalizedPriority = priority.charAt(0).toUpperCase() + priority.slice(1).toLowerCase();
+    const capitalizedPriority =
+      priority.charAt(0).toUpperCase() + priority.slice(1).toLowerCase();
     console.log("Priority:", priority);
     console.log("Priority Class:", priorityColors[capitalizedPriority]);
 
@@ -325,11 +354,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const deleteButton = document.createElement("button");
     deleteButton.type = "button";
     deleteButton.className = "btn btn-outline-danger float-right delete";
-    deleteButton.innerHTML = '<ion-icon name="trash-outline" style="font-size: 20px"></ion-icon>';
+    deleteButton.innerHTML =
+      '<ion-icon name="trash-outline" style="font-size: 20px"></ion-icon>';
 
     const editButton = document.createElement("button");
     editButton.className = "btn btn-outline-success btn-sm float-right edit";
-    editButton.innerHTML = '<ion-icon name="create-outline" style="font-size: 20px"></ion-icon>';
+    editButton.innerHTML =
+      '<ion-icon name="create-outline" style="font-size: 20px"></ion-icon>';
     editButton.style.marginRight = "8px";
     editButton.addEventListener("click", handleEditItem);
 
@@ -373,20 +404,22 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 //adding tasks through voice command ends here
 
-
 //logging task details for debugging purpose, does nothing change in UI.
 function displayTaskDetails(taskElement) {
   if (taskElement) {
     const dueDateElement = taskElement.querySelector("#task-dueDate");
     const priorityElement = taskElement.querySelector("#task-priority");
-    const dueDate = dueDateElement ? dueDateElement.textContent.split(":")[1].trim() : null;
-    const priority = priorityElement ? priorityElement.textContent.trim() : null;
+    const dueDate = dueDateElement
+      ? dueDateElement.textContent.split(":")[1].trim()
+      : null;
+    const priority = priorityElement
+      ? priorityElement.textContent.trim()
+      : null;
     console.log(`Task Details - Due Date: ${dueDate}, Priority: ${priority}`);
   }
 }
 
-
-function showComfirmboxForDuplicateTasks(){
+function showComfirmboxForDuplicateTasks() {
   const confirmationBox = document.getElementById("duplicate-task");
 
   //display confirmination message
@@ -405,7 +438,6 @@ function showComfirmboxForDuplicateTasks(){
     confirmCancelButton.removeEventListener("click", handleCancelClick);
   };
 
-
   const handleCancelClick = () => {
     confirmationBox.style.display = "none";
     confirmYesButton.removeEventListener("click", handleYesClick);
@@ -417,7 +449,6 @@ function showComfirmboxForDuplicateTasks(){
 
   confirmationBox.style.display = "flex";
 }
-
 
 //adding tasks through form manually-logic
 function addItem(e) {
@@ -433,7 +464,7 @@ function addItem(e) {
   const dueDateObj = new Date(dueDate);
 
   //check if the tasks are duplicate
-  if(checkForDuplicateTasks(newTaskTitle)){
+  if (checkForDuplicateTasks(newTaskTitle)) {
     showComfirmboxForDuplicateTasks();
     return false;
   }
@@ -473,8 +504,8 @@ function addItem(e) {
 
 //check for duplicate tasks
 function checkForDuplicateTasks(newTaskTitle) {
-  var taskList = document.getElementById('taskList');
-  var listItems = taskList.querySelectorAll('li');
+  var taskList = document.getElementById("taskList");
+  var listItems = taskList.querySelectorAll("li");
   var textArray = [];
 
   listItems.forEach(function (li) {
@@ -489,7 +520,7 @@ function checkForDuplicateTasks(newTaskTitle) {
     // Check if there is a match and extract the captured group
     return match ? match[1] : null;
   });
-  let isnewTitlepresent=TitleArray.includes(newTaskTitle);
+  let isnewTitlepresent = TitleArray.includes(newTaskTitle);
   return isnewTitlepresent;
 }
 
@@ -502,7 +533,8 @@ function handleItemClick(e) {
 
     //display confirmination message
     delalert_title = document.getElementById("confirm-msg");
-    delalert_title.innerHTML = "&#9888; Are you sure you want to delete this task?";
+    delalert_title.innerHTML =
+      "&#9888; Are you sure you want to delete this task?";
     delalert_title.className = "alert alert-danger";
     delalert_title.role = "alert";
 
@@ -545,13 +577,14 @@ function handleItemClick(e) {
   saveTasksToLocalStorage();
 }
 
-
 function markAsComplete(e) {
   const li = e.target.parentElement;
   const originalClassList = li.dataset.originalClassList;
-  const editButton = li.querySelector('.edit');
+  const editButton = li.querySelector(".edit");
   // Toggle the visibility of the button
-  if (editButton) editButton.style.display = (editButton.style.display === 'none') ? 'block' : 'none';
+  if (editButton)
+    editButton.style.display =
+      editButton.style.display === "none" ? "block" : "none";
   // If the original class list is stored, toggle it back
   if (originalClassList) {
     li.className = originalClassList;
@@ -616,7 +649,14 @@ function extractTasksData(tasks) {
 }
 
 // Function to create a task object
-function createTaskObject(text, completed, createdAt, dueDate, priority, description) {
+function createTaskObject(
+  text,
+  completed,
+  createdAt,
+  dueDate,
+  priority,
+  description
+) {
   return {
     text: text,
     completed: completed,
@@ -631,8 +671,6 @@ function createTaskObject(text, completed, createdAt, dueDate, priority, descrip
 function storeTasksInLocalStorage(tasksArray) {
   localStorage.setItem("tasks", JSON.stringify(tasksArray));
 }
-
-
 
 // Function to retrieve tasks from local storage
 function getTasksFromLocalStorage() {
@@ -667,7 +705,6 @@ function displayTask(task) {
   );
 }
 
-
 function enableSubmit(ref, btnID) {
   document.getElementById(btnID).disabled = false;
 }
@@ -683,7 +720,6 @@ function toggleMode() {
     body.classList.add("light-mode");
     body.classList.remove("dark-mode");
   }
-
 }
 
 function clearAllTasks() {
@@ -692,7 +728,7 @@ function clearAllTasks() {
 
   //setting up confirm message
   const alert_title = document.getElementById("confirm-msg-all");
-  alert_title.innerHTML = '&#9888; Are you sure you want to delete all tasks?';
+  alert_title.innerHTML = "&#9888; Are you sure you want to delete all tasks?";
   alert_title.className = "alert alert-danger";
   alert_title.role = "alert";
   const confirmYesButtonAll = document.getElementById("confirm-yes-all");
@@ -722,7 +758,6 @@ function clearAllTasks() {
   });
   confirmationBoxAll.style.display = "flex";
 }
-
 
 //logic to sort task list by due date
 function sortByDueDate(order) {
@@ -791,7 +826,6 @@ window.onclick = function (event) {
 
 //function that entirely creates new task
 function createNewTask(taskTitle, createdDate, dueDate, priority, description) {
-
   //dynamically creating new card for newly added task
   const li = document.createElement("li");
   li.className = `list-group-item card shadow mb-4 bg-transparent ${priorityColors[priority]}`;
@@ -802,14 +836,15 @@ function createNewTask(taskTitle, createdDate, dueDate, priority, description) {
   const deleteButton = document.createElement("button");
   deleteButton.type = "button";
   deleteButton.className = "btn btn-outline-danger float-right delete";
-  deleteButton.innerHTML = '<ion-icon name="trash-outline" style="font-size: 20px"></ion-icon>';
+  deleteButton.innerHTML =
+    '<ion-icon name="trash-outline" style="font-size: 20px"></ion-icon>';
   deleteButton.style.paddingTop = "10px";
   deleteButton.style.PaddingRight = "10px";
 
-
   const editButton = document.createElement("button");
   editButton.className = "btn btn-outline-secondary btn-sm float-right edit";
-  editButton.innerHTML = '<ion-icon name="create-outline" style="font-size: 20px"></ion-icon>';
+  editButton.innerHTML =
+    '<ion-icon name="create-outline" style="font-size: 20px"></ion-icon>';
   editButton.style.marginRight = "8px";
   editButton.style.paddingTop = "10px";
   editButton.style.PaddingRight = "10px";
@@ -876,8 +911,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }, 2000);
 });
 
-
-
 //Preloader text
 document.addEventListener("DOMContentLoaded", function () {
   const headerText = "To-Do List Application";
@@ -896,4 +929,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Start the typing effect
   typeText(headerText, 0);
+});
+
+// dark mode preference
+document.addEventListener("DOMContentLoaded", function () {
+  const darkModeToggle = document.getElementById("modeToggle");
+  const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+
+  // Check if user has a preference stored, otherwise follow system preference
+  if (localStorage.getItem("dark-mode") === "enabled") {
+    document.body.classList.toggle("dark-mode", true);
+    darkModeToggle.checked = true;
+  } else if (prefersDarkScheme.matches) {
+    document.body.classList.toggle("dark-mode", true);
+  }
+
+  // Listen for the theme mode switch and update localStorage
+  darkModeToggle.addEventListener("change", function () {
+    if (darkModeToggle.checked) {
+      document.body.classList.toggle("dark-mode", true);
+      localStorage.setItem("dark-mode", "enabled");
+    } else {
+      document.body.classList.toggle("dark-mode", false);
+      localStorage.setItem("dark-mode", null);
+    }
+  });
 });
