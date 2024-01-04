@@ -206,11 +206,22 @@
   </script>
   <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
   <script>
-    var typed = new Typed('#element', {
-      strings: ['To-Do List 📝', 'Organize tasks, boost daily productivity! 🚀.', 'Achieve Your Goals One Task at a Time 📃', 'Plan, Act, Achieve: Get Started Now! 😉..'],
-      typeSpeed: 50,
-    });
-  </script>
+    var strings = ['To-Do List 📝', 'Organize tasks, boost daily productivity! 🚀.', 'Achieve Your Goals One Task at a Time 📃', 'Plan, Act, Achieve: Get Started Now! 😉..'];
+
+    function startTypedAnimation() {
+        var typed = new Typed('#element', {
+            strings: strings,
+            typeSpeed: 50,
+            onComplete: function () {
+                typed.reset(); 
+                strings.push(strings.shift());
+            },
+        });
+    }
+
+    startTypedAnimation(); 
+</script>
+
 
   <!-- button to start adding tasks by voice -->
   <button id="voice-command-button" title="Voice Command Format:
