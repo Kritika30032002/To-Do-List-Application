@@ -1,11 +1,12 @@
 /* @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"); */
 @import url("https://fonts.googleapis.com/css2?family=Lora:ital@1&display=swap");
-
+/* main title */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap");
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Roboto Slab;
+  font-family: "Noto Sans TC", sans-serif;
 }
 
 body {
@@ -16,7 +17,11 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background: radial-gradient(2224px at 10.6% 8.8%, rgb(255, 255, 255) 0%, rgb(153, 202, 251) 100.2%);
+  background: radial-gradient(
+    2224px at 10.6% 8.8%,
+    rgb(255, 255, 255) 0%,
+    rgb(153, 202, 251) 100.2%
+  );
 }
 
 .switch {
@@ -44,25 +49,24 @@ body {
   transition: 0.4s;
   border-radius: 30px;
 }
-html{
-
+html {
   scroll-behavior: smooth;
-
 }
 #myBtn {
-  display: none; 
-  position: fixed; 
+  display: none;
+  position: fixed;
   bottom: 50px;
-  left: 30px; 
+  left: 30px;
   z-index: 99;
-  border: none; 
-  outline: none; 
-  cursor: pointer; 
+  border: none;
+  outline: none;
+  cursor: pointer;
   width: 30px;
-  height: 30px;}
+  height: 30px;
+}
 
 #myBtn:hover {
-  background-color: #06d1f5; 
+  background-color: #06d1f5;
 }
 
 .slider:before {
@@ -186,7 +190,11 @@ html{
 }
 
 body.dark-mode {
-  background: linear-gradient(112.1deg, rgba(0, 60, 255, 0.756) 11.4%, rgb(63, 76, 119) 70.2%);
+  background: linear-gradient(
+    112.1deg,
+    rgba(0, 60, 255, 0.756) 11.4%,
+    rgb(63, 76, 119) 70.2%
+  );
   color: #c0a5ff;
 }
 
@@ -213,7 +221,8 @@ body.dark-mode::before {
 
 .light-mode .main {
   background: rgba(255, 255, 255, 0.447);
-  box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+  box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset,
+    rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   border-radius: 10px;
@@ -250,7 +259,6 @@ body.dark-mode::before {
   -webkit-backdrop-filter: blur(4px);
   border-radius: 10px;
   color: #e8e8e8;
- 
 }
 
 .main {
@@ -264,7 +272,6 @@ body.dark-mode::before {
   background-clip: padding-box;
 }
 
-
 .list-group-item {
   font-size: 1.3rem;
   margin: 0.4rem;
@@ -273,7 +280,7 @@ body.dark-mode::before {
   word-break: break-all;
   word-wrap: break-word;
   padding: 0.75rem;
-  width:80%;
+  width: 80%;
 }
 
 .list-group-item button {
@@ -349,7 +356,6 @@ h3 {
   z-index: 10;
   top: 20px;
   right: 20px;
-
 }
 
 .success-message {
@@ -373,7 +379,6 @@ h3 {
 #dueDate::placeholder {
   color: #fff;
 }
-
 
 #dueDate:hover::placeholder {
   color: #fff;
@@ -472,7 +477,6 @@ h4 {
   cursor: pointer;
   border-radius: 5px;
 }
-
 
 @media screen and (max-width: 768px) {
   .mode-toggle {
@@ -692,11 +696,11 @@ body.dark-mode::-webkit-scrollbar-thumb {
 
 /*Task priority indicator*/
 .light-mode .task-priority-High {
-  border-left: 6px solid rgba(255, 0, 0, 0.474); 
+  border-left: 6px solid rgba(255, 0, 0, 0.474);
 }
 
 .light-mode .task-priority-Medium {
-  border-left: 6px solid rgba(255, 166, 0, 0.447); 
+  border-left: 6px solid rgba(255, 166, 0, 0.447);
 }
 
 .light-mode .task-priority-Low {
@@ -705,28 +709,27 @@ body.dark-mode::-webkit-scrollbar-thumb {
 
 .light-mode .task-completed {
   text-decoration: line-through;
-  border-left: 6px solid rgba(8, 0, 255, 0.474); 
+  border-left: 6px solid rgba(8, 0, 255, 0.474);
 }
 
 .dark-mode .task-priority-High {
-  border-left: 6px solid rgba(255, 0, 0, 0.737); 
+  border-left: 6px solid rgba(255, 0, 0, 0.737);
 }
 
 .dark-mode .task-priority-Medium {
-  border-left: 6px solid rgba(255, 166, 0, 0.871); 
+  border-left: 6px solid rgba(255, 166, 0, 0.871);
 }
 
 .dark-mode .task-priority-Low {
-  border-left: 6px solid rgba(0, 189, 0, 0.795); 
+  border-left: 6px solid rgba(0, 189, 0, 0.795);
 }
 
 .dark-mode .task-completed {
   text-decoration: line-through;
-  border-left: 6px solid rgba(174, 75, 255, 0.914); 
+  border-left: 6px solid rgba(174, 75, 255, 0.914);
 }
 
 /*Task priority indicator end*/
-
 
 option:hover {
   background-color: white;
@@ -751,13 +754,12 @@ select option {
 #item,
 #priority,
 #dueDate {
-  width: calc(33.33% - 10px); 
+  width: calc(33.33% - 10px);
   margin-bottom: 10px;
 }
 #item {
   width: 100%;
   padding: 15px;
-
 }
 /* css for the priority selection */
 
@@ -773,10 +775,9 @@ select option {
   height: 80px;
   resize: none;
   overflow: auto;
-  -ms-overflow-style: none;  
+  -ms-overflow-style: none;
   scrollbar-width: none;
 }
-
 
 #description::-webkit-scrollbar {
   display: none;
@@ -789,7 +790,6 @@ select option {
   background-color: #47474796;
   color: #f3f1f1;
 }
-
 
 @media screen and (max-width: 600px) {
   #addForm {
@@ -809,14 +809,13 @@ select option {
   }
 }
 
-
-#addForm input{
+#addForm input {
   border-radius: 30px;
   max-height: 60px;
   margin-right: 10px;
 }
 
-#priority{
+#priority {
   padding: 7px;
   max-height: 60px;
   margin-right: 10px;
@@ -826,7 +825,7 @@ select option {
   transition: 0.3s ease-in;
 }
 
-.dark-mode #priority{
+.dark-mode #priority {
   padding: 7px;
   max-height: 60px;
   margin-right: 10px;
@@ -835,19 +834,18 @@ select option {
   border: 3px solid rgb(146, 56, 255);
   transition: 0.3s ease-in;
 }
-#dueDate{
+#dueDate {
   max-width: 150px;
 }
 
-#item{
+#item {
   max-width: 200px;
 }
-
 
 ul {
   list-style-type: disc;
   padding: 0;
-  display: flex; 
+  display: flex;
   justify-content: space-evenly;
   align-items: center;
   flex-wrap: wrap;
@@ -858,15 +856,15 @@ ul.list-group {
 }
 
 li {
-  margin:10px;
+  margin: 10px;
 }
 
-.voice-input{
+.voice-input {
   border-radius: 30px;
 }
 
-.titleText{
-  color:#79c5ff;
+.titleText {
+  color: #79c5ff;
 }
 
 .light-mode .footer-down {
@@ -881,11 +879,11 @@ li {
   z-index: 9999999;
   max-width: auto;
 
-  background: rgba( 255, 255, 255, 0.25 );
+  background: rgba(255, 255, 255, 0.25);
 
-  backdrop-filter: blur( 4px );
-  -webkit-backdrop-filter: blur( 4px );
-  border: 1px solid rgba( 255, 255, 255, 0.18 );
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 .dark-mode .footer-down {
   height: 50px;
@@ -901,15 +899,13 @@ li {
 
   background: rgba(193, 99, 255, 0.25);
 
-  backdrop-filter: blur( 4px );
-  -webkit-backdrop-filter: blur( 4px );
-  border: 1px solid rgba( 255, 255, 255, 0.18 );
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-
-
-.light-mode .inputcss{   
-   width: 100%;
+.light-mode .inputcss {
+  width: 100%;
   border-radius: 20px;
   height: 40px;
   padding: 0 20px;
@@ -917,54 +913,56 @@ li {
   background-color: rgba(255, 255, 255, 0.536);
   border: 2px solid rgba(70, 70, 70, 0.873);
   transition: 0.3s ease-in;
+  margin-left: 5px;
 }
 
-.dark-mode .inputcss{   
+.dark-mode .inputcss {
   width: 100%;
- border-radius: 20px;
- height: 40px;
- padding: 0 20px;
- border-style: none;
- background-color: rgb(255, 255, 255);
- border: 3px solid rgb(146, 56, 255);
- transition: 0.3s ease-in;
+  border-radius: 20px;
+  height: 40px;
+  padding: 0 20px;
+  border-style: none;
+  background-color: rgb(255, 255, 255);
+  border: 3px solid rgb(146, 56, 255);
+  transition: 0.3s ease-in;
 }
 
-.checkbox:checked:before{
-  background-color:green;
-  }
-
+.checkbox:checked:before {
+  background-color: green;
+}
 
 .dark-mode .btn-outline-dark {
-    color: rgb(146, 56, 255);
-    border-color: rgb(146, 56, 255);
+  color: rgb(146, 56, 255);
+  border-color: rgb(146, 56, 255);
 }
 .dark-mode .btn-outline-dark:hover {
-    color: #fff;
-    background-color: rgb(146, 56, 255);
-    border-color: rgb(146, 56, 255);
+  color: #fff;
+  background-color: rgb(146, 56, 255);
+  border-color: rgb(146, 56, 255);
 }
 
 .dark-mode .btn-dark {
   color: #fff;
-  background-color: rgb(146, 56, 255);;
-  border-color: rgb(146, 56, 255);;
-}  
+  background-color: rgb(146, 56, 255);
+  border-color: rgb(146, 56, 255);
+}
 
 .dark-mode .btn-dark:hover {
   color: #fff;
-  background-color: rgb(123, 52, 210);;
-  border-color: rgb(123, 52, 210);;
-}  
-
-.dark-mode .btn-dark:not(:disabled):not(.disabled).active, .dark-mode .btn-dark:not(:disabled):not(.disabled):active, .dark-mode .show > .dark-mode .btn-dark.dropdown-toggle {
-  color: #fff;
-  background-color: rgb(123, 52, 210);;
-  border-color: rgb(123, 52, 210);;
+  background-color: rgb(123, 52, 210);
+  border-color: rgb(123, 52, 210);
 }
 
+.dark-mode .btn-dark:not(:disabled):not(.disabled).active,
+.dark-mode .btn-dark:not(:disabled):not(.disabled):active,
+.dark-mode .show > .dark-mode .btn-dark.dropdown-toggle {
+  color: #fff;
+  background-color: rgb(123, 52, 210);
+  border-color: rgb(123, 52, 210);
+}
 
-.light-mode .custom-confirm, .light-mode .custom-confirm-all {
+.light-mode .custom-confirm,
+.light-mode .custom-confirm-all {
   display: none;
   position: fixed;
   top: 0;
@@ -977,7 +975,7 @@ li {
   justify-content: center;
 }
 
-.dark-mode .confirm-content, 
+.dark-mode .confirm-content,
 .dark-mode .confirm-content-all {
   background: rgb(24, 24, 24);
   padding: 20px;
@@ -987,24 +985,40 @@ li {
   position: relative;
 }
 
-.light-mode #myDropdown .a1{ background:#00bfffd5; }
-.light-mode #myDropdown .a2{ background:#0091dfd8; }
-.light-mode #myDropdown .a3{ background:#006dcdcc; }
-.light-mode #myDropdown .a4{ background:#0075cea5; }
+.light-mode #myDropdown .a1 {
+  background: #00bfffd5;
+}
+.light-mode #myDropdown .a2 {
+  background: #0091dfd8;
+}
+.light-mode #myDropdown .a3 {
+  background: #006dcdcc;
+}
+.light-mode #myDropdown .a4 {
+  background: #0075cea5;
+}
 
-.dark-mode #myDropdown .a1{ background:#8000ffd5; }
-.dark-mode #myDropdown .a2{ background:#8d00dfd8; }
-.dark-mode #myDropdown .a3{ background:#8c00cdcc; }
-.dark-mode #myDropdown .a4{ background:#8d00cea5; }
-  
+.dark-mode #myDropdown .a1 {
+  background: #8000ffd5;
+}
+.dark-mode #myDropdown .a2 {
+  background: #8d00dfd8;
+}
+.dark-mode #myDropdown .a3 {
+  background: #8c00cdcc;
+}
+.dark-mode #myDropdown .a4 {
+  background: #8d00cea5;
+}
+
 .light-mode #myDropdown {
-color: rgba(1, 63, 97, 0.967);
+  color: rgba(1, 63, 97, 0.967);
 }
 
 .dark-mode #myDropdown {
   color: rgba(47, 0, 65, 0.967);
-  }
+}
 
-#myDropdown a:hover{
-  color:white;
+#myDropdown a:hover {
+  color: white;
 }

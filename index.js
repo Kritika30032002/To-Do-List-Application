@@ -622,10 +622,9 @@ function saveTasksToLocalStorage() {
 }
 
 // Function to extract task data from DOM elements
+// Function to extract tasks data from the DOM
 function extractTasksData(tasks) {
-  const tasksArray = [];
-
-  tasks.forEach((task) => {
+  return Array.from(tasks).map((task) => {
     const taskText = task.childNodes[1].textContent;
     const isCompleted = task.classList.contains("completed");
     const createdAt = task.querySelector("#created-at").textContent;
@@ -633,7 +632,7 @@ function extractTasksData(tasks) {
     const dueDate = task.querySelector("#task-dueDate").textContent;
     const priority = task.querySelector("#task-priority").textContent;
 
-    const taskObj = createTaskObject(
+    return createTaskObject(
       taskText,
       isCompleted,
       createdAt,
@@ -641,11 +640,7 @@ function extractTasksData(tasks) {
       priority,
       description
     );
-
-    tasksArray.push(taskObj);
   });
-
-  return tasksArray;
 }
 
 // Function to create a task object
@@ -658,12 +653,12 @@ function createTaskObject(
   description
 ) {
   return {
-    text: text,
-    completed: completed,
-    createdAt: createdAt,
-    dueDate: dueDate,
-    priority: priority,
-    description: description,
+    text,
+    completed,
+    createdAt,
+    dueDate,
+    priority,
+    description,
   };
 }
 
@@ -680,13 +675,16 @@ function getTasksFromLocalStorage() {
 // Function to display tasks
 function loadTasksFromLocalStorage() {
   const tasks = getTasksFromLocalStorage();
+  const tasksHeading = document.getElementById("heading-tasks");
+  const searchBar = document.querySelector(".search-bar");
+  const clearButton = document.querySelector(".clear-btn");
+  const dropdown = document.querySelector(".dropdown");
 
   if (tasks.length > 0) {
-    const tasksHeading = document.getElementById("heading-tasks");
     tasksHeading.classList.remove("hidden");
     searchBar.classList.remove("hidden");
-    document.querySelector(".clear_btn").style.display = "inline";
-    document.querySelector(".dropdown").style.display = "inline";
+    clearButton.style.display = "inline";
+    dropdown.style.display = "inline";
 
     tasks.forEach((task) => {
       displayTask(task);
@@ -705,14 +703,17 @@ function displayTask(task) {
   );
 }
 
+// Function to enable submit button
 function enableSubmit(ref, btnID) {
   document.getElementById(btnID).disabled = false;
 }
 
-//function to chhnage the icon of light/dark mode
+// Function to toggle between light and dark mode
 function toggleMode() {
   const body = document.body;
+  const modeToggleBtn = document.getElementById("modeToggle");
   sessionStorage.setItem("modeToggleValue", modeToggleBtn.checked);
+
   if (modeToggleBtn.checked) {
     body.classList.add("dark-mode");
     body.classList.remove("light-mode");
@@ -722,29 +723,25 @@ function toggleMode() {
   }
 }
 
+// Function to clear all tasks
 function clearAllTasks() {
-  // Removes all tasks from the task list and changing confirmation message
   const confirmationBoxAll = document.getElementById("custom-confirm-all");
-
-  //setting up confirm message
-  const alert_title = document.getElementById("confirm-msg-all");
-  alert_title.innerHTML = "&#9888; Are you sure you want to delete all tasks?";
-  alert_title.className = "alert alert-danger";
-  alert_title.role = "alert";
+  const alertTitle = document.getElementById("confirm-msg-all");
   const confirmYesButtonAll = document.getElementById("confirm-yes-all");
   const confirmNoButtonAll = document.getElementById("confirm-no-all");
   const confirmCancelButtonAll = document.getElementById("confirm-cancel-all");
+
+  alertTitle.innerHTML = "&#9888; Are you sure you want to delete all tasks?";
+  alertTitle.className = "alert alert-danger";
+  alertTitle.role = "alert";
 
   confirmYesButtonAll.addEventListener("click", () => {
     confirmationBoxAll.style.display = "none";
     while (taskList.firstChild) {
       taskList.removeChild(taskList.firstChild);
     }
-    // Hide the button after the task list is cleared
-    document.querySelector(".clear_btn").style.display = "none";
+    document.querySelector(".clear-btn").style.display = "none";
     document.querySelector(".dropdown").style.display = "none";
-
-    // Hide the tasks heading since there are no tasks left
     tasksHeading.classList.add("hidden");
     searchBar.classList.add("hidden");
     saveTasksToLocalStorage();
@@ -753,23 +750,22 @@ function clearAllTasks() {
   confirmNoButtonAll.addEventListener("click", () => {
     confirmationBoxAll.style.display = "none";
   });
+
   confirmCancelButtonAll.addEventListener("click", () => {
     confirmationBoxAll.style.display = "none";
   });
+
   confirmationBoxAll.style.display = "flex";
 }
 
-//logic to sort task list by due date
+// Function to sort task list by due date
 function sortByDueDate(order) {
   const sortTaskList = JSON.parse(localStorage.getItem("tasks"));
+
   if (order === "early") {
-    sortTaskList.sort((a, b) => {
-      return new Date(a.dueDate) - new Date(b.dueDate);
-    });
+    sortTaskList.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
   } else if (order === "late") {
-    sortTaskList.sort((a, b) => {
-      return new Date(b.dueDate) - new Date(a.dueDate);
-    });
+    sortTaskList.sort((a, b) => new Date(b.dueDate) - new Date(a.dueDate));
   }
 
   while (taskList.firstChild) {
@@ -782,40 +778,40 @@ function sortByDueDate(order) {
   loadTasksFromLocalStorage();
 }
 
-//logic to sort task list by priority
+// Function to sort task list by priority
 function sortByPriority(order) {
   const sortTaskList = JSON.parse(localStorage.getItem("tasks"));
+
   sortTaskList.sort((a, b) => {
     if (order === "highToLow") {
-      // Sort tasks from high priority to low priority
       return priorityValues[b.priority] - priorityValues[a.priority];
     } else if (order === "lowToHigh") {
-      // Sort tasks from low priority to high priority
       return priorityValues[a.priority] - priorityValues[b.priority];
     } else {
       return 0;
     }
   });
+
   while (taskList.firstChild) {
     taskList.removeChild(taskList.firstChild);
   }
+
   tasksHeading.classList.add("hidden");
   searchBar.classList.add("hidden");
   localStorage.setItem("tasks", JSON.stringify(sortTaskList));
   loadTasksFromLocalStorage();
 }
 
-//this is used somewhere in index.html
+// Function to handle dropdown menu
 function myFunction() {
   document.getElementById("myDropdown").classList.toggle("show");
 }
 
-//if anywhere user clicks on window, the dropdown closes by this code
+// Function to close dropdown menu when clicking outside
 window.onclick = function (event) {
   if (!event.target.matches(".dropbtn")) {
     var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
+    for (var i = 0; i < dropdowns.length; i++) {
       var openDropdown = dropdowns[i];
       if (openDropdown.classList.contains("show")) {
         openDropdown.classList.remove("show");
@@ -824,9 +820,8 @@ window.onclick = function (event) {
   }
 };
 
-//function that entirely creates new task
+// Function to create a new task
 function createNewTask(taskTitle, createdDate, dueDate, priority, description) {
-  //dynamically creating new card for newly added task
   const li = document.createElement("li");
   li.className = `list-group-item card shadow mb-4 bg-transparent ${priorityColors[priority]}`;
   const completeCheckbox = document.createElement("input");
@@ -848,19 +843,17 @@ function createNewTask(taskTitle, createdDate, dueDate, priority, description) {
   editButton.style.marginRight = "8px";
   editButton.style.paddingTop = "10px";
   editButton.style.PaddingRight = "10px";
-  // Create a click event listener for the edit button
   editButton.addEventListener("click", function (e) {
     handleEditItem(e);
   });
 
-  //setting up the fields of card for newly added taks
   const descriptionParagraph = document.createElement("p");
   descriptionParagraph.className = "text-muted";
   descriptionParagraph.id = "description-at";
   descriptionParagraph.style.fontSize = "15px";
   descriptionParagraph.style.margin = "0 19px";
   descriptionParagraph.appendChild(
-    document.createTextNode("Description:" + description)
+    document.createTextNode("Description: " + description)
   );
 
   const dateTimeParagraph = document.createElement("p");
@@ -872,7 +865,6 @@ function createNewTask(taskTitle, createdDate, dueDate, priority, description) {
     document.createTextNode("Created: " + createdDate)
   );
 
-  // Create a paragraph element for the due date
   const dueDateParagraph = document.createElement("p");
   dueDateParagraph.className = "text-muted";
   dueDateParagraph.id = "task-dueDate";
@@ -887,8 +879,6 @@ function createNewTask(taskTitle, createdDate, dueDate, priority, description) {
   priorityParagraph.style.margin = "0 19px";
   priorityParagraph.appendChild(document.createTextNode(priority));
 
-  tasksTitleArray += taskTitle;
-  //appending all elements to <li> tag
   li.appendChild(completeCheckbox);
   li.appendChild(document.createTextNode(taskTitle));
   li.appendChild(deleteButton);
@@ -902,41 +892,41 @@ function createNewTask(taskTitle, createdDate, dueDate, priority, description) {
   displayTaskDetails(li);
 }
 
-init();
+// Function to initialize the application
+function init() {
+  loadTasksFromLocalStorage();
+}
 
-// Preloader function
+// Function to hide preloader
 document.addEventListener("DOMContentLoaded", function () {
   setTimeout(function () {
     document.querySelector(".preloader").style.display = "none";
   }, 2000);
 });
 
-//Preloader text
+// Function to simulate typing effect for header text
 document.addEventListener("DOMContentLoaded", function () {
   const headerText = "To-Do List Application";
   const headerElement = document.getElementById("todo-header");
 
-  // Function to simulate typing effect
   function typeText(text, index) {
     headerElement.textContent = text.slice(0, index);
 
     if (index < text.length) {
       setTimeout(function () {
         typeText(text, index + 1);
-      }, 50); // Adjust the delay for the typing speed
+      }, 50);
     }
   }
 
-  // Start the typing effect
   typeText(headerText, 0);
 });
 
-// dark mode preference
+// Function to handle dark mode preference
 document.addEventListener("DOMContentLoaded", function () {
   const darkModeToggle = document.getElementById("modeToggle");
   const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
 
-  // Check if user has a preference stored, otherwise follow system preference
   if (localStorage.getItem("dark-mode") === "enabled") {
     document.body.classList.toggle("dark-mode", true);
     darkModeToggle.checked = true;
@@ -944,7 +934,6 @@ document.addEventListener("DOMContentLoaded", function () {
     document.body.classList.toggle("dark-mode", true);
   }
 
-  // Listen for the theme mode switch and update localStorage
   darkModeToggle.addEventListener("change", function () {
     if (darkModeToggle.checked) {
       document.body.classList.toggle("dark-mode", true);
