@@ -12,9 +12,8 @@
 
 
 body {
-  
   font-weight: 400;
-min-height: 100vh;
+  min-height: 100vh;
   padding: 0;
   box-sizing: border-box;
   display: flex;
@@ -22,7 +21,6 @@ min-height: 100vh;
   margin-bottom: -90px;
   flex-direction: column;
   
-  min-height: 100vh;
   background: radial-gradient(
     2224px at 10.6% 8.8%,
     rgb(255, 255, 255) 0%,
@@ -67,20 +65,27 @@ html {
   scroll-behavior: smooth;
 }
 #myBtn {
-  display: none;
-  position: fixed;
-  bottom: 50px;
-  left: 30px;
+  scale:1.25;
+  margin:10px;
+  display: none; 
+  position: fixed; 
+  bottom: 75px;
+  left: 25px; 
   z-index: 99;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  width: 30px;
-  height: 30px;
+  border: none; 
+  outline: none; 
+  cursor: pointer; 
+  width: 45px;
+  padding: 13px;
+  height: 45px;
+  filter: invert(0%);
+  border-radius: 50%;
+  background-color: rgb(255, 255, 255);
+  box-shadow: #6c6c6c 0px 0px 10px 0px;
 }
 
 #myBtn:hover {
-  background-color: #06d1f5;
+  filter: invert(100%);
 }
 
 .dark-mode #myBtn {
@@ -100,11 +105,12 @@ html {
   filter: invert(0%);
   border-radius: 50%;
   background-color: rgb(255, 255, 255);
-  box-shadow: #6c6c6c 0px 0px 10px 0px;}
+  box-shadow: #6c6c6c 0px 0px 10px 0px;
+}
 
 .dark-mode  #myBtn:hover {
     filter: invert(100%);
-  }
+}
 
 .slider:before {
   position: absolute;
@@ -197,10 +203,8 @@ html {
   letter-spacing: 10px;
   border-right: 5px solid black;
   white-space: nowrap;
-
   animation: typing 5s steps(12) infinite,
-    cursor 0.4s step-end infinite alternate;
-
+  cursor 0.4s step-end infinite alternate;
   overflow: hidden;
   animation-fill-mode: forwards;
 }
