@@ -1,4 +1,4 @@
-/* @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"); */
+/*  @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"); */
 @import url("https://fonts.googleapis.com/css2?family=Lora:ital@1&display=swap");
 /* main title */
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap");
@@ -9,14 +9,18 @@
   font-family: "Noto Sans TC", sans-serif;
 }
 
+
+
 body {
   font-weight: 400;
-  margin: 0px;
+  min-height: 100vh;
   padding: 0;
   box-sizing: border-box;
   display: flex;
+  position: relative;
+  margin-bottom: -90px;
   flex-direction: column;
-  min-height: 100vh;
+  
   background: radial-gradient(
     2224px at 10.6% 8.8%,
     rgb(255, 255, 255) 0%,
@@ -24,6 +28,14 @@ body {
   );
 }
 
+.dark-mode .content-container{
+  min-height: 95vh;
+}
+
+.light-mode .content-container{
+  min-height: 95vh;
+  background: radial-gradient(2224px at 10.6% 8.8%, rgb(255, 255, 255) 0%, rgb(153, 202, 251) 100.2%);
+}
 .switch {
   font-size: 17px;
   position: relative;
@@ -53,20 +65,50 @@ html {
   scroll-behavior: smooth;
 }
 #myBtn {
-  display: none;
-  position: fixed;
-  bottom: 50px;
-  left: 30px;
+  scale:1.25;
+  margin:10px;
+  display: none; 
+  position: fixed; 
+  bottom: 75px;
+  left: 25px; 
   z-index: 99;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  width: 30px;
-  height: 30px;
+  border: none; 
+  outline: none; 
+  cursor: pointer; 
+  width: 45px;
+  padding: 13px;
+  height: 45px;
+  border-radius: 50%;
+  background-color: rgb(255, 255, 255);
+  box-shadow: #6c6c6c 0px 0px 10px 0px;
 }
 
 #myBtn:hover {
-  background-color: #06d1f5;
+  filter: invert(100%);
+}
+
+.dark-mode #myBtn {
+  scale:1.25;
+  margin:10px;
+  display: none; 
+  position: fixed; 
+  bottom: 75px;
+  left: 25px; 
+  z-index: 99;
+  border: none; 
+  outline: none; 
+  cursor: pointer; 
+  width: 45px;
+  padding: 13px;
+  height: 45px;
+  filter: invert(0%);
+  border-radius: 50%;
+  background-color: rgb(255, 255, 255);
+  box-shadow: #6c6c6c 0px 0px 10px 0px;
+}
+
+.dark-mode  #myBtn:hover {
+    filter: invert(100%);
 }
 
 .slider:before {
@@ -160,10 +202,8 @@ html {
   letter-spacing: 10px;
   border-right: 5px solid black;
   white-space: nowrap;
-
   animation: typing 5s steps(12) infinite,
-    cursor 0.4s step-end infinite alternate;
-
+  cursor 0.4s step-end infinite alternate;
   overflow: hidden;
   animation-fill-mode: forwards;
 }
@@ -743,13 +783,48 @@ select {
 select option {
   width: 150px;
 }
-#voice-command-button {
+
+.light-mode #voice-command-button {
+  scale:1.25;
+  margin:10px;
+  background-color: #000000;
   position: fixed;
-  bottom: 70px;
+  bottom: 72px;
   right: 20px;
   z-index: 1000;
+  cursor: pointer; 
+  border: none; 
+  outline: none; 
+  transition:  0.6s ease; 
+  box-shadow: #0000008b 0px 0px 6px 0px;
 }
 
+.light-mode #voice-command-button:hover{
+  box-shadow: #000000 0px 0px 10px 0px;
+}
+.dark-mode #voice-command-button i{
+  color: rgb(0, 0, 0) ;
+}
+.light-mode #voice-command-button i{
+  color: rgb(159, 221, 255) ;
+}
+
+
+.dark-mode #voice-command-button {
+  scale:1.2;
+  margin:10px;
+  background-color: #ffffff;
+  position: fixed;
+  bottom: 72px;
+  right: 22px;
+  z-index: 1000;
+  transition:  0.4s ease; 
+  box-shadow: #b1b1b1 0px 0px 8px 0px;
+}
+.dark-mode #voice-command-button:hover{
+  background-color: #e5e5e5;
+  box-shadow: #b1b1b1 0px 0px 19px 0px;
+}
 /* new css for form */
 #item,
 #priority,
@@ -868,40 +943,35 @@ li {
 }
 
 .light-mode .footer-down {
-  height: 50px;
-
+  flex-direction: column !important;
   position: -webkit-sticky;
-  position: sticky;
+  position: relative;
   bottom: 0;
+  height: 5vh;
+
   color: rgb(101, 101, 101);
   padding-top: 10px;
   padding-left: 0px;
-  z-index: 9999999;
   max-width: auto;
-
-  background: rgba(255, 255, 255, 0.25);
-
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: radial-gradient(2224px at 10.6% 8.8%, rgb(255, 255, 255) 0%, rgb(175, 215, 255) 100.2%);
+  backdrop-filter: blur( 4px );
+  -webkit-backdrop-filter: blur( 4px );
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
+  
 }
 .dark-mode .footer-down {
-  height: 50px;
-
   position: -webkit-sticky;
-  position: sticky;
+  position: relative !important;
   bottom: 0;
+  height: 5vh;
   color: rgb(255, 255, 255);
   padding-top: 10px;
   padding-left: 0px;
-  z-index: 9999999;
   max-width: auto;
-
   background: rgba(193, 99, 255, 0.25);
-
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur( 4px );
+  -webkit-backdrop-filter: blur( 4px );
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
 }
 
 .light-mode .inputcss {
@@ -1019,6 +1089,25 @@ li {
   color: rgba(47, 0, 65, 0.967);
 }
 
-#myDropdown a:hover {
-  color: white;
+#myDropdown a:hover{
+  color:white;
+}
+
+.github-icon{
+  position: absolute;
+    cursor: pointer;
+    top: 25px;
+    right: 35px;
+    bottom: 0px;
+    transition: all 0.4s ease 0s;
+}
+
+.light-mode .github-icon a i{
+  font-size: 50px;
+  color:black !important;
+}
+
+.dark-mode .github-icon a i{
+  font-size: 50px;
+  color:rgb(227, 227, 227) !important;
 }
