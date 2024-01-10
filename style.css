@@ -78,7 +78,6 @@ html {
   width: 45px;
   padding: 13px;
   height: 45px;
-  filter: invert(0%);
   border-radius: 50%;
   background-color: rgb(255, 255, 255);
   box-shadow: #6c6c6c 0px 0px 10px 0px;
@@ -784,24 +783,34 @@ select {
 select option {
   width: 150px;
 }
+
 .light-mode #voice-command-button {
-  filter:invert(100%);
-  scale:1.2;
+  scale:1.25;
   margin:10px;
-  background-color: #ffffff;
+  background-color: #000000;
   position: fixed;
   bottom: 72px;
   right: 20px;
   z-index: 1000;
-  
+  cursor: pointer; 
+  border: none; 
+  outline: none; 
+  transition:  0.6s ease; 
+  box-shadow: #0000008b 0px 0px 6px 0px;
 }
 
-.light-mode #voice-command-button:hover {
-  filter:invert(0%);
+.light-mode #voice-command-button:hover{
+  box-shadow: #000000 0px 0px 10px 0px;
 }
+.dark-mode #voice-command-button i{
+  color: rgb(0, 0, 0) ;
+}
+.light-mode #voice-command-button i{
+  color: rgb(159, 221, 255) ;
+}
+
 
 .dark-mode #voice-command-button {
-  filter:invert(0%);
   scale:1.2;
   margin:10px;
   background-color: #ffffff;
@@ -809,12 +818,12 @@ select option {
   bottom: 72px;
   right: 22px;
   z-index: 1000;
-  transition: background-color 0.5s ease; 
-  box-shadow: #6c6c6c 0px 0px 10px 0px;
+  transition:  0.4s ease; 
+  box-shadow: #b1b1b1 0px 0px 8px 0px;
 }
 .dark-mode #voice-command-button:hover{
-  filter:invert(100%);
-  
+  background-color: #e5e5e5;
+  box-shadow: #b1b1b1 0px 0px 19px 0px;
 }
 /* new css for form */
 #item,
