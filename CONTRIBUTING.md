@@ -24,8 +24,6 @@ Thank you for considering contributing to our TODO List App. Your help is greatl
 
 Before you start contributing, ensure you have the following:
 
-- **Node.js**: You need Node.js (v14 or higher) installed. [Download Node.js](https://nodejs.org/).
-
 - **Git**: Make sure you have Git installed. [Download Git](https://git-scm.com/).
 
 - **GitHub Account**: You'll need a GitHub account to make contributions.
@@ -37,25 +35,19 @@ Before you start contributing, ensure you have the following:
 2. **Clone Your Fork**: Clone the forked repository to your local machine:
 
    ```bash
-   git clone https://github.com/your-username/todo-list-app.git
+   git clone https://github.com/your-username/To-Do-List-Application.git
    ```
 
 3. **Navigate to the Project Directory**:
 
    ```bash
-   cd todo-list-app
+   cd To-Do-List-Application
    ```
 
-4. **Install Dependencies**: Install the project dependencies:
+4. **Start the Development Server**:
 
    ```bash
-   npm install
-   ```
-
-5. **Start the Development Server**:
-
-   ```bash
-   Start it locally
+   Click on index.html file in your web browser to start using the application.
    ```
 
 Now, you have the TODO List App running locally.
