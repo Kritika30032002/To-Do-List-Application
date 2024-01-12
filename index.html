@@ -158,25 +158,30 @@
 
       <!-- form to display all tasks loaded from localstorage -->
       <div class="text-center">
+        
+      <div id="taskActions" style="display: none;">
         <h3 class="mt-4 text-center" id="heading-tasks">Tasks</h3>
         <div class="search-container mb-3">
           <input type="text" id="searchBar" placeholder=" Search tasks..."
             class="form-control w-75 mx-auto mt-3 inputcss">
         </div>
         <!-- sorting elements -->
-        <div class="dropdown">
-          <button class="btn btn-outline-dark dropbtn d-flex align-items-center  ml-2" onclick="myFunction();">
-            <ion-icon class="dropbtn" name="funnel-outline" style="font-size: 20px; margin-right: 6px"></ion-icon>
+        <div class="text-center">
+    <div class="dropdown d-inline-block">
+        <button class="btn btn-outline-dark dropbtn d-flex align-items-center ml-2" onclick="myFunction();">
+            <ion-icon class="dropbtn" name="funnel-outline" style="font-size: 30px; margin-right: 6px"></ion-icon>
             Sort By
             <ion-icon class="dropbtn" name="chevron-down-outline" style="font-size: 20px; margin-left: 6px"></ion-icon>
-          </button>
-          <div id="myDropdown" class="dropdown-content ml-2 mt-0.5">
+        </button>
+        <div id="myDropdown" class="dropdown-content ml-2 mt-0.5">
             <a onclick="sortByPriority('highToLow');" class="a1">High to Low Priority</a>
             <a onclick="sortByPriority('lowToHigh');" class="a2">Low to High Priority</a>
             <a onclick="sortByDueDate('early');" class="a3">Early To Do</a>
             <a onclick="sortByDueDate('late');" class="a4">Lately To Do</a>
-          </div>
         </div>
+    </div>
+</div>
+
 
         <!--Dynamic Task list-->
         <form id="newTaskForm" class="mt-3">
@@ -187,6 +192,7 @@
             <ion-icon name="trash-outline" style="font-size: 20px; margin-right: 6px"></ion-icon>Clear All Tasks</span>
         </button>
       </div>
+    </div>
     </div>
   </div>
 
@@ -235,6 +241,39 @@
 
     startTypedAnimation(); 
   </script>
+   <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var taskList = document.getElementById('taskList');
+    var taskActions = document.getElementById('taskActions');
+
+    // Function to check and toggle the display of taskActions
+    function checkTasksAndToggle() {
+      if (taskList && taskList.children.length > 0) {
+        // At least one task is present, show the container
+        taskActions.style.display = 'block';
+      } else {
+        // No tasks, hide the container
+        taskActions.style.display = 'none';
+      }
+    }
+
+    // Check tasks initially
+    checkTasksAndToggle();
+
+    // Use MutationObserver to detect changes in the DOM
+    var observer = new MutationObserver(function (mutations) {
+      // Check tasks whenever the content of taskList changes
+      checkTasksAndToggle();
+    });
+
+    // Configure the observer to watch for changes in the child nodes of taskList
+    var observerConfig = { childList: true };
+
+    // Start observing
+    observer.observe(taskList, observerConfig);
+  });
+</script>
+
 
 
   <!-- button to start adding tasks by voice -->
