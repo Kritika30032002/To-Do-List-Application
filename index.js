@@ -116,8 +116,8 @@ function handleEditClick(e) {
     return false;
   }
 
-  if (!editedItemText || !editedDescriptionText) {
-    displayErrorMessage("Title or description must not be empty!!!.");
+  if (!editedItemText) {
+    displayErrorMessage("Title must not be empty!!!.");
     return false;
   }
 
@@ -135,7 +135,7 @@ function handleEditClick(e) {
   //actual manuplation of data
   const listItem = editItem.parentElement;
   listItem.childNodes[1].textContent = editedItemText;
-  listItem.childNodes[4].textContent = "Description:" + editedDescriptionText;
+  listItem.childNodes[4].textContent = editedDescriptionText.trim() ? "Description: " + editedDescriptionText : "";
   listItem.childNodes[7].textContent = editedPriority;
   if (editedDueDate >= new Date(currentDate)) {
     listItem.childNodes[6].textContent = `Due Date:${dueDateInput.value}`;
@@ -470,9 +470,11 @@ function addItem(e) {
     return false;
   }
 
+  let isDescritionPresent = description.trim() === "" ? false : true;
+
   //form validation code
-  if (!newTaskTitle || !description) {
-    displayErrorMessage("Task and Description should be filled!!!");
+  if (!newTaskTitle) {
+    displayErrorMessage("Task Title should be filled!!!");
     tasksHeading.classList.add("hidden");
     searchBar.classList.add("hidden");
     return false;
@@ -494,7 +496,7 @@ function addItem(e) {
     document.querySelector(".dropdown").style.display = "inline";
   }
   const creationDateTime = new Date().toLocaleString();
-  createNewTask(newTaskTitle, creationDateTime, dueDate, priority, description);
+  createNewTask(newTaskTitle, creationDateTime, dueDate, priority, description, isDescritionPresent);
   saveTasksToLocalStorage();
 
   //clearing form fields after 'add' button
@@ -629,7 +631,7 @@ function extractTasksData(tasks) {
     const taskText = task.childNodes[1].textContent;
     const isCompleted = task.classList.contains("completed");
     const createdAt = task.querySelector("#created-at").textContent;
-    const description = task.querySelector("#description-at").textContent;
+    const description = task.querySelector("#description-at") ? task.querySelector("#description-at").textContent : "";
     const dueDate = task.querySelector("#task-dueDate").textContent;
     const priority = task.querySelector("#task-priority").textContent;
 
@@ -822,7 +824,7 @@ window.onclick = function (event) {
 };
 
 // Function to create a new task
-function createNewTask(taskTitle, createdDate, dueDate, priority, description) {
+function createNewTask(taskTitle, createdDate, dueDate, priority, description, isDescritionPresent) {
   const li = document.createElement("li");
   li.className = `list-group-item card shadow mb-4 bg-transparent ${priorityColors[priority]}`;
   const completeCheckbox = document.createElement("input");
@@ -849,13 +851,15 @@ function createNewTask(taskTitle, createdDate, dueDate, priority, description) {
   });
 
   const descriptionParagraph = document.createElement("p");
-  descriptionParagraph.className = "text-muted";
-  descriptionParagraph.id = "description-at";
-  descriptionParagraph.style.fontSize = "15px";
-  descriptionParagraph.style.margin = "0 19px";
-  descriptionParagraph.appendChild(
-    document.createTextNode("Description: " + description)
-  );
+  if(isDescritionPresent === true){
+    descriptionParagraph.className = "text-muted";
+    descriptionParagraph.id = "description-at";
+    descriptionParagraph.style.fontSize = "15px";
+    descriptionParagraph.style.margin = "0 19px";
+    descriptionParagraph.appendChild(
+      document.createTextNode("Description: " + description)
+    );
+  }
 
   const dateTimeParagraph = document.createElement("p");
   dateTimeParagraph.className = "text-muted";
