@@ -116,8 +116,8 @@ function handleEditClick(e) {
     return false;
   }
 
-  if (!editedItemText || !editedDescriptionText) {
-    displayErrorMessage("Title or description must not be empty!!!.");
+  if (!editedItemText) {
+    displayErrorMessage("Title must not be empty!!!.");
     return false;
   }
 
@@ -135,7 +135,7 @@ function handleEditClick(e) {
   //actual manuplation of data
   const listItem = editItem.parentElement;
   listItem.childNodes[1].textContent = editedItemText;
-  listItem.childNodes[4].textContent = "Description:" + editedDescriptionText;
+  listItem.childNodes[4].textContent = editedDescriptionText.trim() ? "Description: " + editedDescriptionText : "";
   listItem.childNodes[7].textContent = editedPriority;
   if (editedDueDate >= new Date(currentDate)) {
     listItem.childNodes[6].textContent = `Due Date:${dueDateInput.value}`;
@@ -888,9 +888,7 @@ function createNewTask(taskTitle, createdDate, dueDate, priority, description, i
   li.appendChild(document.createTextNode(taskTitle));
   li.appendChild(deleteButton);
   li.appendChild(editButton);
-  if(isDescritionPresent === true){
-    li.appendChild(descriptionParagraph);
-  }
+  li.appendChild(descriptionParagraph);
   li.appendChild(dateTimeParagraph);
   li.appendChild(dueDateParagraph);
   li.appendChild(priorityParagraph);
