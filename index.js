@@ -11,9 +11,6 @@ const checkboxes = document.querySelectorAll(".form-check-input");
 let editItem = null;
 const tasksWithPriority = [];
 let tasksTitleArray = [];
-var storedValue = sessionStorage.getItem("modeToggleValue");
-modeToggleBtn.checked = storedValue === "true";
-toggleMode();
 const priorityColors = {
   High: "task-priority-High",
   Medium: "task-priority-Medium",
@@ -47,9 +44,6 @@ flatpickr(dueDateInput, {
 
 //settibng up default theme
 function init() {
-  const body = document.getElementsByTagName("body")[0];
-  body.classList.add("light-mode");
-
   const searchBar = document.getElementById("searchBar");
   searchBar.addEventListener("input", handleSearch);
   loadTasksFromLocalStorage();
@@ -134,7 +128,9 @@ function handleEditClick(e) {
   //actual manuplation of data
   const listItem = editItem.parentElement;
   listItem.childNodes[1].textContent = editedItemText;
-  listItem.childNodes[4].textContent = editedDescriptionText.trim() ? "Description: " + editedDescriptionText : "";
+  listItem.childNodes[4].textContent = editedDescriptionText.trim()
+    ? "Description: " + editedDescriptionText
+    : "";
   listItem.childNodes[7].textContent = editedPriority;
   if (editedDueDate >= new Date(currentDate)) {
     listItem.childNodes[6].textContent = `Due Date:${dueDateInput.value}`;
@@ -495,7 +491,14 @@ function addItem(e) {
     document.querySelector(".dropdown").style.display = "inline";
   }
   const creationDateTime = new Date().toLocaleString();
-  createNewTask(newTaskTitle, creationDateTime, dueDate, priority, description, isDescritionPresent);
+  createNewTask(
+    newTaskTitle,
+    creationDateTime,
+    dueDate,
+    priority,
+    description,
+    isDescritionPresent
+  );
   saveTasksToLocalStorage();
 
   //clearing form fields after 'add' button
@@ -630,7 +633,9 @@ function extractTasksData(tasks) {
     const taskText = task.childNodes[1].textContent;
     const isCompleted = task.classList.contains("completed");
     const createdAt = task.querySelector("#created-at").textContent;
-    const description = task.querySelector("#description-at") ? task.querySelector("#description-at").textContent : "";
+    const description = task.querySelector("#description-at")
+      ? task.querySelector("#description-at").textContent
+      : "";
     const dueDate = task.querySelector("#task-dueDate").textContent;
     const priority = task.querySelector("#task-priority").textContent;
 
@@ -710,16 +715,12 @@ function enableSubmit(ref, btnID) {
 
 // Function to toggle between light and dark mode
 function toggleMode() {
-  const body = document.body;
-  const modeToggleBtn = document.getElementById("modeToggle");
-  sessionStorage.setItem("modeToggleValue", modeToggleBtn.checked);
-
-  if (modeToggleBtn.checked) {
-    body.classList.add("dark-mode");
-    body.classList.remove("light-mode");
+  document.body.classList.toggle("dark-mode");
+  document.body.classList.toggle("light-mode");
+  if (modeToggleBtn.checked === true) {
+    localStorage.setItem("dark-mode", "enabled");
   } else {
-    body.classList.add("light-mode");
-    body.classList.remove("dark-mode");
+    localStorage.setItem("dark-mode", null);
   }
 }
 
@@ -827,7 +828,14 @@ window.onclick = function (event) {
 };
 
 // Function to create a new task
-function createNewTask(taskTitle, createdDate, dueDate, priority, description, isDescritionPresent) {
+function createNewTask(
+  taskTitle,
+  createdDate,
+  dueDate,
+  priority,
+  description,
+  isDescritionPresent
+) {
   const li = document.createElement("li");
   li.className = `list-group-item card shadow mb-4 bg-transparent ${priorityColors[priority]}`;
   const completeCheckbox = document.createElement("input");
@@ -854,7 +862,7 @@ function createNewTask(taskTitle, createdDate, dueDate, priority, description, i
   });
 
   const descriptionParagraph = document.createElement("p");
-  if(isDescritionPresent === true){
+  if (isDescritionPresent === true) {
     descriptionParagraph.className = "text-muted";
     descriptionParagraph.id = "description-at";
     descriptionParagraph.style.fontSize = "15px";
@@ -926,24 +934,24 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // Function to handle dark mode preference
-document.addEventListener("DOMContentLoaded", function () {
-  const darkModeToggle = document.getElementById("modeToggle");
-  const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
-
-  if (localStorage.getItem("dark-mode") === "enabled") {
-    document.body.classList.toggle("dark-mode", true);
-    darkModeToggle.checked = true;
-  } else if (prefersDarkScheme.matches) {
-    document.body.classList.toggle("dark-mode", true);
-  }
-
-  darkModeToggle.addEventListener("change", function () {
-    if (darkModeToggle.checked) {
-      document.body.classList.toggle("dark-mode", true);
+function themeSwitcher() {
+  if (localStorage.length === 0) {
+    const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+    if (prefersDarkScheme.matches) {
+      document.body.classList.toggle("dark-mode");
       localStorage.setItem("dark-mode", "enabled");
+      modeToggleBtn.checked = true;
     } else {
-      document.body.classList.toggle("dark-mode", false);
+      document.body.classList.toggle("light-mode");
       localStorage.setItem("dark-mode", null);
     }
-  });
-});
+  } else {
+    if (localStorage.getItem("dark-mode") === "enabled") {
+      document.body.classList.toggle("dark-mode");
+      modeToggleBtn.checked = true;
+    } else {
+      document.body.classList.toggle("light-mode");
+    }
+  }
+}
+themeSwitcher();
