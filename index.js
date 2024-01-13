@@ -21,7 +21,6 @@ const priorityColors = {
   Completed: "task-completed",
 };
 
-
 const priorityValues = {
   High: 3,
   Medium: 2,
@@ -728,37 +727,43 @@ function toggleMode() {
 
 // Function to clear all tasks
 function clearAllTasks() {
+  const taskList = document.getElementById("taskList"); // Replace with your actual task list ID
   const confirmationBoxAll = document.getElementById("custom-confirm-all");
   const alertTitle = document.getElementById("confirm-msg-all");
   const confirmYesButtonAll = document.getElementById("confirm-yes-all");
   const confirmNoButtonAll = document.getElementById("confirm-no-all");
   const confirmCancelButtonAll = document.getElementById("confirm-cancel-all");
 
-  alertTitle.innerHTML = "&#9888; Are you sure you want to delete all tasks?";
-  alertTitle.className = "alert alert-danger";
-  alertTitle.role = "alert";
+  if (taskList.children.length > 0) {
+    alertTitle.innerHTML = "&#9888; Are you sure you want to delete all tasks?";
+    alertTitle.className = "alert alert-danger";
+    alertTitle.role = "alert";
 
-  confirmYesButtonAll.addEventListener("click", () => {
-    confirmationBoxAll.style.display = "none";
-    while (taskList.firstChild) {
-      taskList.removeChild(taskList.firstChild);
-    }
-    document.querySelector(".clear-btn").style.display = "none";
-    document.querySelector(".dropdown").style.display = "none";
-    tasksHeading.classList.add("hidden");
-    searchBar.classList.add("hidden");
-    saveTasksToLocalStorage();
-  });
+    confirmYesButtonAll.addEventListener("click", () => {
+      confirmationBoxAll.style.display = "none";
+      while (taskList.firstChild) {
+        taskList.removeChild(taskList.firstChild);
+      }
+      document.querySelector(".clear-btn").style.display = "none";
+      document.querySelector(".dropdown").style.display = "none";
+      tasksHeading.classList.add("hidden");
+      searchBar.classList.add("hidden");
+      saveTasksToLocalStorage();
+    });
 
-  confirmNoButtonAll.addEventListener("click", () => {
-    confirmationBoxAll.style.display = "none";
-  });
+    confirmNoButtonAll.addEventListener("click", () => {
+      confirmationBoxAll.style.display = "none";
+    });
 
-  confirmCancelButtonAll.addEventListener("click", () => {
-    confirmationBoxAll.style.display = "none";
-  });
+    confirmCancelButtonAll.addEventListener("click", () => {
+      confirmationBoxAll.style.display = "none";
+    });
 
-  confirmationBoxAll.style.display = "flex";
+    confirmationBoxAll.style.display = "flex";
+  } else {
+    // If there are no tasks, you may choose to show a message or take alternative action
+    // alert("No tasks to clear");
+  }
 }
 
 // Function to sort task list by due date
