@@ -245,7 +245,8 @@
   document.addEventListener('DOMContentLoaded', function () {
     var taskList = document.getElementById('taskList');
     var taskActions = document.getElementById('taskActions');
-
+    init();
+    
     // Function to check and toggle the display of taskActions
     function checkTasksAndToggle() {
       if (taskList && taskList.children.length > 0) {

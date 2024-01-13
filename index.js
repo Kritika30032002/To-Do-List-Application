@@ -677,9 +677,7 @@ function getTasksFromLocalStorage() {
 // Function to display tasks
 function loadTasksFromLocalStorage() {
   const tasks = getTasksFromLocalStorage();
-  const tasksHeading = document.getElementById("heading-tasks");
-  const searchBar = document.querySelector(".search-bar");
-  const clearButton = document.querySelector(".clear-btn");
+  const clearButton = document.querySelector(".clear_btn");
   const dropdown = document.querySelector(".dropdown");
 
   if (tasks.length > 0) {
@@ -900,11 +898,6 @@ function createNewTask(taskTitle, createdDate, dueDate, priority, description, i
 
   taskList.appendChild(li);
   displayTaskDetails(li);
-}
-
-// Function to initialize the application
-function init() {
-  loadTasksFromLocalStorage();
 }
 
 // Function to hide preloader
