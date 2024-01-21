@@ -89,6 +89,8 @@ function handleEditItem(e) {
   document.getElementById("description").value = taskDescription;
   document.getElementById("maintitle").innerText = "Edit your tasks below :";
   editItem = e.target;
+    document.documentElement.scrollTop = 0;
+  document.getElementById('item').focus();
 }
 
 //actual logic after editing a task and for adding a task   (gets called after edit button click, onChnage text fileds, date, priority)
