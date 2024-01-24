@@ -1111,3 +1111,45 @@ li {
   font-size: 50px;
   color:rgb(227, 227, 227) !important;
 }
+
+.container {
+  width: 100%;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: row !important;
+  width: 100%;
+}
+
+.flex-container {
+  width: 50%;
+  border: 1px solid #555;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px;
+  box-shadow: inset 0 0 5px #555;
+}
+
+.left-container {
+  padding-left: 40px;
+  margin-left: 0;
+}
+
+.right-container {
+  margin-right: 0;
+  overflow-y: scroll;
+  max-height: 60vh !important;
+}
+
+@media screen and (max-width: 768px) {
+  .main-container {
+    flex-direction: column !important;
+  }
+
+  .flex-container {
+    width: 100%;
+    padding: 10px;
+    margin-left: calc(50% - 40vw);
+  }
+}
