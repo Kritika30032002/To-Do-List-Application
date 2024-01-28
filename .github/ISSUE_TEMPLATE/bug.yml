@@ -1,0 +1,53 @@
+name: ​🐞 Bug
+description: Report an issue to help us improve the project.
+title: "[BUG] <write a small description here>"
+labels: ["bug", "goal: fix"]
+body:
+  - type: textarea
+    attributes:  
+      label: Description   
+      description: A brief description of the issue or bug you are facing, also include what you tried and what didn't work.
+    validations:
+      required: false
+  - type: textarea
+    attributes: 
+      label: Screenshots
+      description: Please add screenshots if applicable
+    validations:
+      required: false
+  - type: textarea
+    attributes: 
+      label: Any additional information? 
+      description: Any additional information or Is there anything we should know about this bug? 
+    validations: 
+      required: false
+  - type: dropdown
+    id: browsers
+    attributes: 
+      label: What browser are you seeing the problem on? 
+      multiple: true
+      options: 
+        - Firefox
+        - Chrome
+        - Safari
+        - Microsoft Edge      
+  - type: checkboxes
+    id: no-duplicate-issues
+    attributes:
+      label: "Checklist"
+      options:
+        - label: "I have starred the repository"
+          required: true
+
+        - label: "I have checked the existing issues"
+          required: true
+          
+        - label: "I have read the discussion tab thoroughly and got the project idea"
+          required: true
+          
+        - label: "I am willing to work on this issue (optional)"
+          required: false
+        
+        
+
+                 
