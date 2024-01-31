@@ -89,8 +89,8 @@ function handleEditItem(e) {
   document.getElementById("description").value = taskDescription;
   document.getElementById("maintitle").innerText = "Edit your tasks below :";
   editItem = e.target;
-    document.documentElement.scrollTop = 0;
-  document.getElementById('item').focus();
+  document.documentElement.scrollTop = 0;
+  document.getElementById("item").focus();
 }
 
 //actual logic after editing a task and for adding a task   (gets called after edit button click, onChnage text fileds, date, priority)
@@ -745,11 +745,13 @@ function clearAllTasks() {
       while (taskList.firstChild) {
         taskList.removeChild(taskList.firstChild);
       }
-      document.querySelector(".clear-btn").style.display = "none";
+      document.querySelector(".clear_btn").style.display = "none";
       document.querySelector(".dropdown").style.display = "none";
       tasksHeading.classList.add("hidden");
       searchBar.classList.add("hidden");
-      saveTasksToLocalStorage();
+      localStorage.clear();
+
+      // saveTasksToLocalStorage();
     });
 
     confirmNoButtonAll.addEventListener("click", () => {
