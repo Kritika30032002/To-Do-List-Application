@@ -2,297 +2,260 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="To-Do-List Application" content="Plan, Act, Achieve: Get Started Now! 😉..">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="To-Do-List Application" content="Plan, Act, Achieve: Get Started Now! 😉..">
 
-  <!-- Favicon -->
-  <link rel="shortcut icon" href="images/todoWhite.png" type="image/x-icon">
+    <link rel="shortcut icon" href="images/todoWhite.png" type="image/x-icon">
 
-  <!-- Stylesheets -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-  <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link rel="stylesheet" href="style.css">
 
-  <title>To-Do List</title>
+  <title>To-Do List</title>
 
-  <!-- Scripts at the end for better performance -->
-  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Web-Speech-API/0.3.1/web-speech-api.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Web-Speech-API/0.3.1/web-speech-api.min.js"></script>
 
 </head>
 
 <body>
-  <div class="content-container">
-  <!-- Preloader Starts -->
-  <div class="preloader">
-    <div class="writing-loader">
-      <i class="fa-regular fa-clipboard"></i>
-      <i class="file-text fa-solid fa-clipboard-check"></i>
-      <div class="pen-container">
-        <i class="pen fas fa-pencil"></i>
-      </div>
-    </div>
-    <h1 id="todo-header" style="margin-top: 10%; "></h1>
-  </div>
-  <!-- Preloader Ends -->
-  <div id="lblsuccess" class="message success-message" style="display: none"></div>
-  <div id="lblerror" class="message danger-message" style="display: none"></div>
-  <!--ThemeMode Switcher-->
-  <div>
-    <label class="switch animate__animated  animate__fadeInLeftBig animate__slow  animate__delay-2s"
-      style="margin-left: 30px; margin-top: 30px;">
-      <span class="sun"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <g fill="#ffd43b">
-            <circle r="5" cy="12" cx="12"></circle>
-            <path
-              d="m21 13h-1a1 1 0 0 1 0-2h1a1 1 0 0 1 0 2zm-17 0h-1a1 1 0 0 1 0-2h1a1 1 0 0 1 0 2zm13.66-5.66a1 1 0 0 1 -.66-.29 1 1 0 0 1 0-1.41l.71-.71a1 1 0 1 1 1.41 1.41l-.71.71a1 1 0 0 1 -.75.29zm-12.02 12.02a1 1 0 0 1 -.71-.29 1 1 0 0 1 0-1.41l.71-.66a1 1 0 0 1 1.41 1.41l-.71.71a1 1 0 0 1 -.7.24zm6.36-14.36a1 1 0 0 1 -1-1v-1a1 1 0 0 1 2 0v1a1 1 0 0 1 -1 1zm0 17a1 1 0 0 1 -1-1v-1a1 1 0 0 1 2 0v1a1 1 0 0 1 -1 1zm-5.66-14.66a1 1 0 0 1 -.7-.29l-.71-.71a1 1 0 0 1 1.41-1.41l.71.71a1 1 0 0 1 0 1.41 1 1 0 0 1 -.71.29zm12.02 12.02a1 1 0 0 1 -.7-.29l-.66-.71a1 1 0 0 1 1.36-1.36l.71.71a1 1 0 0 1 0 1.41 1 1 0 0 1 -.71.24z">
-            </path>
-          </g>
-        </svg></span>
-      <span class="moon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-          <path
-            d="m223.5 32c-123.5 0-223.5 100.3-223.5 224s100 224 223.5 224c60.6 0 115.5-24.2 155.8-63.4 5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6-96.9 0-175.5-78.8-175.5-176 0-65.8 36-123.1 89.3-153.3 6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z">
-          </path>
-        </svg></span>
-      <input type="checkbox" id="modeToggle" class="mode-toggle input" />
-      <span class="slider"></span>
-    </label>
-  </div>
+  <div class="content-container">
+    <div class="preloader">
+    <div class="writing-loader">
+      <i class="fa-regular fa-clipboard"></i>
+      <i class="file-text fa-solid fa-clipboard-check"></i>
+      <div class="pen-container">
+        <i class="pen fas fa-pencil"></i>
+      </div>
+    </div>
+    <h1 id="todo-header" style="margin-top: 10%; "></h1>
+  </div>
+    <div id="lblsuccess" class="message success-message" style="display: none"></div>
+  <div id="lblerror" class="message danger-message" style="display: none"></div>
+    <div>
+    <label class="switch animate__animated  animate__fadeInLeftBig animate__slow  animate__delay-2s"
+      style="margin-left: 30px; margin-top: 30px;">
+      <span class="sun"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <g fill="#ffd43b">
+            <circle r="5" cy="12" cx="12"></circle>
+            <path
+              d="m21 13h-1a1 1 0 0 1 0-2h1a1 1 0 0 1 0 2zm-17 0h-1a1 1 0 0 1 0-2h1a1 1 0 0 1 0 2zm13.66-5.66a1 1 0 0 1 -.66-.29 1 1 0 0 1 0-1.41l.71-.71a1 1 0 1 1 1.41 1.41l-.71.71a1 1 0 0 1 -.75.29zm-12.02 12.02a1 1 0 0 1 -.71-.29 1 1 0 0 1 0-1.41l.71-.66a1 1 0 0 1 1.41 1.41l-.71.71a1 1 0 0 1 -.7.24zm6.36-14.36a1 1 0 0 1 -1-1v-1a1 1 0 0 1 2 0v1a1 1 0 0 1 -1 1zm0 17a1 1 0 0 1 -1-1v-1a1 1 0 0 1 2 0v1a1 1 0 0 1 -1 1zm-5.66-14.66a1 1 0 0 1 -.7-.29l-.71-.71a1 1 0 0 1 1.41-1.41l.71.71a1 1 0 0 1 0 1.41 1 1 0 0 1 -.71.29zm12.02 12.02a1 1 0 0 1 -.7-.29l-.66-.71a1 1 0 0 1 1.36-1.36l.71.71a1 1 0 0 1 0 1.41 1 1 0 0 1 -.71.24z">
+            </path>
+          </g>
+        </svg></span>
+      <span class="moon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+          <path
+            d="m223.5 32c-123.5 0-223.5 100.3-223.5 224s100 224 223.5 224c60.6 0 115.5-24.2 155.8-63.4 5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6-96.9 0-175.5-78.8-175.5-176 0-65.8 36-123.1 89.3-153.3 6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z">
+          </path>
+        </svg></span>
+      <input type="checkbox" id="modeToggle" class="mode-toggle input" />
+      <span class="slider"></span>
+    </label>
+  </div>
 
 
-  <!-- Github Icon-->
-  <div class="github-icon">
-    <a href="https://github.com/Kritika30032002/To-Do-List-Application" target="_blank" title="GitHub Profile">
-      <i class="fab fa-github"></i>
-    </a>
-  </div>
+    <div class="github-icon">
+    <a href="https://github.com/Kritika30032002/To-Do-List-Application" target="_blank" title="GitHub Profile">
+      <i class="fab fa-github"></i>
+    </a>
+  </div>
 
 
-  <!-- Confirmation dialog -->
-  <div id="custom-confirm" class="custom-confirm">
-    <div class="confirm-content">
-      <div>
-        <i id="confirm-cancel" class="fas fa-times close-button"></i>
-      </div>
-      <h2>Confirmation</h2>
-      <h6 id="confirm-msg">Are you sure you want to delete this task?</h6>
-      <button id="confirm-yes" class="btn btn-outline-success">Yes</button>
-      <button id="confirm-no" class="btn btn-outline-danger">No</button>
-    </div>
-  </div>
+    <div id="custom-confirm" class="custom-confirm">
+    <div class="confirm-content">
+      <div>
+        <i id="confirm-cancel" class="fas fa-times close-button"></i>
+      </div>
+      <h2>Confirmation</h2>
+      <h6 id="confirm-msg">Are you sure you want to delete this task?</h6>
+      <button id="confirm-yes" class="btn btn-outline-success">Yes</button>
+      <button id="confirm-no" class="btn btn-outline-danger">No</button>
+    </div>
+  </div>
 
-  <!-- Confirmation dialog for duplicate tasks -->
-  <div id="duplicate-task" class="custom-confirm">
-    <div class="confirm-content">
-      <div>
-        <i id="duplicate-cancel" class="fas fa-times close-button"></i>
-      </div>
-      <h2>Alert</h2>
-      <h6 id="duplicate-msg">This task is already present</h6>
-      <button id="duplicate-ok" class="btn btn-outline-success">OK</button>
-    </div>
-  </div>
+    <div id="duplicate-task" class="custom-confirm">
+    <div class="confirm-content">
+      <div>
+        <i id="duplicate-cancel" class="fas fa-times close-button"></i>
+      </div>
+      <h2>Alert</h2>
+      <h6 id="duplicate-msg">This task is already present</h6>
+      <button id="duplicate-ok" class="btn btn-outline-success">OK</button>
+    </div>
+  </div>
 
 
-  <!-- Confirmation All- dialog -->
-  <div id="custom-confirm-all" class="custom-confirm-all">
-    <div class="confirm-content-all">
-      <div>
-        <i id="confirm-cancel-all" class="fas fa-times close-button"></i>
-      </div>
-      <h2>Confirmation</h2>
-      <h6 id="confirm-msg-all">Are you sure you want to delete this task?</h6>
-      <button id="confirm-yes-all" class="btn btn-outline-success">Yes</button>
-      <button id="confirm-no-all" class="btn btn-outline-danger">No</button>
-    </div>
-  </div>
+    <div id="custom-confirm-all" class="custom-confirm-all">
+    <div class="confirm-content-all">
+      <div>
+        <i id="confirm-cancel-all" class="fas fa-times close-button"></i>
+      </div>
+      <h2>Confirmation</h2>
+      <h6 id="confirm-msg-all">Are you sure you want to delete this task?</h6>
+      <button id="confirm-yes-all" class="btn btn-outline-success">Yes</button>
+      <button id="confirm-no-all" class="btn btn-outline-danger">No</button>
+    </div>
+  </div>
 
-  <!-- all dialogs code ends -->
+    <div class="container">
+    <img onclick="topFunction()" src="./scroll_img.svg" id="myBtn">
+    <h1 class="text-center titleText "><span id="element"></span></h1>
+    <p class="text-center animate__animated  animate__flipInX animate__slow  animate__delay-3s">Simply add
+      your tasks here</p>
+    <div class="container main mt-5 w-80 animate__animated  animate__fadeInDown animate__slow animate__delay-2s">
+      <h3 class="text-center mb-4" id="maintitle">Add your tasks below :</h3>
 
-  <div class 
-  <!-- main cintainer -->
-  <div class="container">
-    <img onclick="topFunction()" src="./scroll_img.svg" id="myBtn">
-    <h1 class="text-center titleText "><span id="element"></span></h1>
-    <p class="text-center animate__animated  animate__flipInX animate__slow  animate__delay-3s">Simply add
-      your tasks here</p>
-    <div class="container main mt-5 w-80 animate__animated  animate__fadeInDown animate__slow animate__delay-2s">
-      <h3 class="text-center mb-4" id="maintitle">Add your tasks below :</h3>
+            <form id="addForm" class="row w-100 d-flex flex-wrap justify-content-between align-items-center">
 
-      <!-- form components to add new task -->
-      <form id="addForm" class="row w-100 d-flex flex-wrap justify-content-between align-items-center">
+                <input class="form-control" type="text" id="new-task" placeholder="Enter New Task..." />
 
-        <!-- task field -->
-        <input class="form-control inputcss" type="text" onkeyup="enableSubmit(this, 'submitBtn')" id="item"
-          placeholder="Enter Task Name..." />
-
-        <!-- description fiels -->
-        <textarea style="overflow-y: scroll; resize: none;width:100%;" class="inputcss mb-3"
-          placeholder="Enter Description " id="description"></textarea>
-
-        <!-- priority dropdown list -->
-        <select id="priority">
-          <option value="" selected disabled hidden>Select Priority</option>
-          <option value="Low" style="background:rgba(84, 211, 0, 0.605); color:rgba(42, 105, 0, 0.395) ;"
-            onfocus="this.size=3">Low</option>
-          <option value="Medium" style="background:rgba(255, 225, 125, 0.788); color: rgba(194, 149, 0, 0.788);"
-            onfocus="this.size=3">Medium</option>
-          <option value="High" style="background:rgba(255, 120, 120, 0.786);color:rgba(191, 0, 0, 0.786);"
-            onfocus="this.size=3">High</option>
+        <label for="task-priority">Priority:</label>
+        <select id="task-priority">
+            <option value="low">Low</option>
+            <option value="medium" selected>Medium</option>
+            <option value="high">High</option>
         </select>
 
-        <!-- date button -->
-        <input class="btn btn-dark" id="dueDate" placeholder="Date" />
-        <input type="submit" class="btn btn-outline-success addbtn" id="submitBtn" value="Add" style="width:80px"
-          disabled />
-        <button id="editTask" class="form_btn btn btn-outline-primary " style="display: none;  width:80px;">
-          Edit
-        </button>
-      </form>
+        <button type="button" class="btn btn-outline-success addbtn" id="add-task-btn">Add Task</button>
 
-      <!-- form to display all tasks loaded from localstorage -->
-      <div class="text-center">
-        
-      <div id="taskActions" style="display: none;">
-        <h3 class="mt-4 text-center" id="heading-tasks">Tasks</h3>
-        <div class="search-container mb-3">
-          <input type="text" id="searchBar" placeholder=" Search tasks..."
-            class="form-control w-75 mx-auto mt-3 inputcss">
-        </div>
-        <!-- sorting elements -->
-        <div class="text-center">
-    <div class="dropdown d-inline-block">
-        <button class="btn btn-outline-dark dropbtn d-flex align-items-center ml-2" onclick="myFunction();">
-            <ion-icon class="dropbtn" name="funnel-outline" style="font-size: 30px; margin-right: 6px"></ion-icon>
-            Sort By
-            <ion-icon class="dropbtn" name="chevron-down-outline" style="font-size: 20px; margin-left: 6px"></ion-icon>
-        </button>
-        <div id="myDropdown" class="dropdown-content ml-2 mt-0.5">
-            <a onclick="sortByPriority('highToLow');" class="a1">High to Low Priority</a>
-            <a onclick="sortByPriority('lowToHigh');" class="a2">Low to High Priority</a>
-            <a onclick="sortByDueDate('early');" class="a3">Early To Do</a>
-            <a onclick="sortByDueDate('late');" class="a4">Lately To Do</a>
-        </div>
-    </div>
+      </form>
+
+            <div class="text-center">
+        
+      <div id="taskActions" style="display: none;">
+        <h3 class="mt-4 text-center" id="heading-tasks">Tasks</h3>
+        <div class="search-container mb-3">
+          <input type="text" id="searchBar" placeholder=" Search tasks..."
+            class="form-control w-75 mx-auto mt-3 inputcss">
+        </div>
+                <div class="text-center">
+    <div class="dropdown d-inline-block">
+        <button class="btn btn-outline-dark dropbtn d-flex align-items-center ml-2" onclick="myFunction();">
+            <ion-icon class="dropbtn" name="funnel-outline" style="font-size: 30px; margin-right: 6px"></ion-icon>
+            Sort By
+            <ion-icon class="dropbtn" name="chevron-down-outline" style="font-size: 20px; margin-left: 6px"></ion-icon>
+        </button>
+        <div id="myDropdown" class="dropdown-content ml-2 mt-0.5">
+            <a onclick="sortByPriority('highToLow');" class="a1">High to Low Priority</a>
+            <a onclick="sortByPriority('lowToHigh');" class="a2">Low to High Priority</a>
+            <a onclick="sortByDueDate('early');" class="a3">Early To Do</a>
+            <a onclick="sortByDueDate('late');" class="a4">Lately To Do</a>
+        </div>
+    </div>
 </div>
 
 
-        <!--Dynamic Task list-->
-        <form id="newTaskForm" class="mt-3">
-          <ul class="list-group " id="taskList"></ul>
-        </form>
-        <button id="clearAllTasks" class="btn btn-outline-danger clear_btn" onclick="clearAllTasks();">
-          <span class="d-flex align-items-center">
-            <ion-icon name="trash-outline" style="font-size: 20px; margin-right: 6px"></ion-icon>Clear All Tasks</span>
-        </button>
-      </div>
-    </div>
-    </div>
-  </div>
+                <form id="newTaskForm" class="mt-3">
+          <ul class="list-group " id="task-list"></ul>
+        </form>
+        <button id="clearAllTasks" class="btn btn-outline-danger clear_btn" onclick="clearAllTasks();">
+          <span class="d-flex align-items-center">
+            <ion-icon name="trash-outline" style="font-size: 20px; margin-right: 6px"></ion-icon>Clear All Tasks</span>
+        </button>
+      </div>
+    </div>
+    </div>
+  </div>
 
-  <br />
+  <br />
 
-  <div>
-    <h2 style=" text-align: center" class="mt-5 animate__animated animate__fadeInUp animate__slow  animate__delay-3s">
-      Why Simply Tasked?</h2>
-    <p style="padding: 0px 10px; text-align: center"
-      class="mb-4 animate__animated animate__fadeInUp animate__slow  animate__delay-3s">
+  <div>
+    <h2 style=" text-align: center" class="mt-5 animate__animated animate__fadeInUp animate__slow  animate__delay-3s">
+      Why Simply Tasked?</h2>
+    <p style="padding: 0px 10px; text-align: center"
+      class="mb-4 animate__animated animate__fadeInUp animate__slow  animate__delay-3s">
 
-      Simply, because it is a SIMPLE To-Do List Tool to organize your tasks
-      efficiently.
-    </p>
-    <div class="list mb-5 animate__animated animate__fadeInUp animate__slow  animate__delay-3s "
-      style="text-align: center ">
-      <ul>
-        <li>Intuitive task management</li>
-        <li>Seamless due date tracking</li>
-        <li>Beautiful and user-friendly design</li>
-      </ul>
-    </div>
-  </div>
+      Simply, because it is a SIMPLE To-Do List Tool to organize your tasks
+      efficiently.
+    </p>
+    <div class="list mb-5 animate__animated animate__fadeInUp animate__slow  animate__delay-3s "
+      style="text-align: center ">
+      <ul>
+        <li>Intuitive task management</li>
+        <li>Seamless due date tracking</li>
+        <li>Beautiful and user-friendly design</li>
+      </ul>
+    </div>
+  </div>
 </div>
-</div>
-  <!-- loading all external/internal scripts -->
-  <script src="scroll.js"></script>
-  <script src="index.js"></script>
-  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js">
-  </script>
-  <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
-  <script>
-    var strings = ['To-Do List 📝', 'Organize tasks, boost daily productivity! 🚀.', 'Achieve Your Goals One Task at a Time 📃', 'Plan, Act, Achieve: Get Started Now! 😉..'];
+    <script src="scroll.js"></script>
+  <script src="script.js"></script>
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js">
+  </script>
+  <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+  <script>
+    var strings = ['To-Do List 📝', 'Organize tasks, boost daily productivity! 🚀.', 'Achieve Your Goals One Task at a Time 📃', 'Plan, Act, Achieve: Get Started Now! 😉..'];
 
-    function startTypedAnimation() {
-      var typed = new Typed('#element', {
-        strings: strings,
-        typeSpeed: 50,
-        onComplete: function () {
-          typed.reset();
-          strings.push(strings.shift());
-        },
-      });
-    }
+    function startTypedAnimation() {
+      var typed = new Typed('#element', {
+        strings: strings,
+        typeSpeed: 50,
+        onComplete: function () {
+          typed.reset();
+          strings.push(strings.shift());
+        },
+      });
+    }
 
-    startTypedAnimation(); 
-  </script>
-   <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    var taskList = document.getElementById('taskList');
-    var taskActions = document.getElementById('taskActions');
-    init();
-    
-    // Function to check and toggle the display of taskActions
-    function checkTasksAndToggle() {
-      if (taskList && taskList.children.length > 0) {
-        // At least one task is present, show the container
-        taskActions.style.display = 'block';
-      } else {
-        // No tasks, hide the container
-        taskActions.style.display = 'none';
-      }
-    }
+    startTypedAnimation(); 
+  </script>
+   <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var taskList = document.getElementById('taskList');
+    var taskActions = document.getElementById('taskActions');
+    init();
+    
+    // Function to check and toggle the display of taskActions
+    function checkTasksAndToggle() {
+      if (taskList && taskList.children.length > 0) {
+        // At least one task is present, show the container
+        taskActions.style.display = 'block';
+      } else {
+        // No tasks, hide the container
+        taskActions.style.display = 'none';
+      }
+    }
 
-    // Check tasks initially
-    checkTasksAndToggle();
+    // Check tasks initially
+    checkTasksAndToggle();
 
-    // Use MutationObserver to detect changes in the DOM
-    var observer = new MutationObserver(function (mutations) {
-      // Check tasks whenever the content of taskList changes
-      checkTasksAndToggle();
-    });
+    // Use MutationObserver to detect changes in the DOM
+    var observer = new MutationObserver(function (mutations) {
+      // Check tasks whenever the content of taskList changes
+      checkTasksAndToggle();
+    });
 
-    // Configure the observer to watch for changes in the child nodes of taskList
-    var observerConfig = { childList: true };
+    // Configure the observer to watch for changes in the child nodes of taskList
+    var observerConfig = { childList: true };
 
-    // Start observing
-    observer.observe(taskList, observerConfig);
-  });
+    // Start observing
+    observer.observe(taskList, observerConfig);
+  });
 </script>
 
 
 
-  <!-- button to start adding tasks by voice -->
-  <button id="voice-command-button" title="Voice Command Format:
-  - To Add Task: 'Add [task] due [date] priority [priority]'
-  - To Delete Task: 'Delete task [task]'
-  - To Edit Task: 'Edit task [old task] to [new task] due date [new due date] priority [new priority]'"
+    <button id="voice-command-button" title="Voice Command Format:
+  - To Add Task: 'Add [task] due [date] priority [priority]'
+  - To Delete Task: 'Delete task [task]'
+  - To Edit Task: 'Edit task [old task] to [new task] due date [new due date] priority [new priority]'"
 
-    class="btn btn-outline-primary btn-lg voice-input animate__animated animate__fadeInRightBig animate__slow  animate__delay-2s">
-    <i class="fas fa-microphone"></i></button>
+    class="btn btn-outline-primary btn-lg voice-input animate__animated animate__fadeInRightBig animate__slow  animate__delay-2s">
+    <i class="fas fa-microphone"></i></button>
 
-  <!-- footer -->
-  <section class="footer-down">
-    <div>
-      <marquee width="100%" direction="left">Developed and Designed By <b>Kritika Gupta</b> | © All Rights Reserved
-        </marque>
-    </div>
-  </section>
+    <section class="footer-down">
+    <div>
+      <marquee width="100%" direction="left">Developed and Designed By <b>Kritika Gupta</b> | © All Rights Reserved
+        </marque>
+    </div>
+  </section>
 
 </body>
 
